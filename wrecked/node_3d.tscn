@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="2_noarx"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
-size = Vector2(10, 10)
+size = Vector2(40, 40)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a202f"]
 data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
@@ -33,6 +33,7 @@ mesh = SubResource("PlaneMesh_a0tk4")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_a202f")
 
 [node name="Player" parent="." instance=ExtResource("1_a202f")]
