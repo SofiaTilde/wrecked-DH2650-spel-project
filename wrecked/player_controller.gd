@@ -9,13 +9,18 @@ var joystick_sensitivity :=0.05
 var mouse_sensitivity :=0.001
 var twist_input := 0.0
 var pitch_input := 0.0
+@onready var model = $PlaceholderCharacter
+
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
-
+#animation player:
+var ap: AnimationPlayer
 
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	ap = $PlaceholderCharacter/AnimationPlayer
+	ap.play("Idle")  
 
 #Returnar joystick värdet om värdet är högt nog
 func apply_deadzone(value:float, deadzone:float)-> float:
@@ -36,6 +41,7 @@ func _physics_process(delta: float) -> void:
 	twist_input = 0.0
 	pitch_input = 0.0
 
+
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta *2.0
@@ -51,10 +57,17 @@ func _physics_process(delta: float) -> void:
 	var right := cam_basis.x
 	var direction := (right * input_dir.x + forward * input_dir.y).normalized()
 	
+	#För att rotera karaktären längs riktningen hen går i
+	var target_rotation = atan2(direction.x, direction.z)
+
 	if direction:
+		ap.play("Running")  
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
+
 	else:
+		ap.play("Idle")  
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 

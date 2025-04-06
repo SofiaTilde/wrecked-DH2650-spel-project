@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://g4tbrr3sfui2"]
+[gd_scene load_steps=5 format=3 uid="uid://g4tbrr3sfui2"]
 
 [ext_resource type="Script" uid="uid://uuv10ct6y602" path="res://player_controller.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://ci17mdsvxbc5j" path="res://meshes/placeholdercharacter/PlaceholderCharacter.glb" id="2_onrkg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 
@@ -12,7 +13,11 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_4flbx")
 
+[node name="PlaceholderCharacter" parent="." instance=ExtResource("2_onrkg")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, -1.00602, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_onrkg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

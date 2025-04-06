@@ -39,7 +39,6 @@ shape = SubResource("ConcavePolygonShape3D_a202f")
 [node name="Player" parent="." instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 axis_lock_angular_y = true
-linear_damp = 1.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")

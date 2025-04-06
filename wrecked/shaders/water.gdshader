@@ -25,7 +25,7 @@ void fragment() {
 
     vec3 normal_sample = texture(normal_map, distorted_uv * 100.0).rgb;
     NORMAL = normal_sample * 2.0 - 1.0;
-		
+
     ROUGHNESS = 0.0;
     METALLIC = 0.0;
 }
