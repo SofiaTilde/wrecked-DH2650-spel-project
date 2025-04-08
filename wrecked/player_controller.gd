@@ -13,6 +13,9 @@ var pitch_input := 0.0
 
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
+
+@export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
+
 #animation player:
 var ap: AnimationPlayer
 
@@ -22,48 +25,64 @@ func _ready():
 	ap = $PlaceholderCharacter/AnimationPlayer
 	ap.play("Idle")  
 
+
 #Returnar joystick värdet om värdet är högt nog
-func apply_deadzone(value:float, deadzone:float)-> float:
+func apply_deadzone(value:float, deadzone:float)-> float: #så att micro joystick rörelser ej registreras.
 		if abs(value) < CAMERA_DEADZONE:
 			return 0.0
 		return value
-#_physics då det är en Characterbody3d
+
+
+#_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
+	
+	#Camera
 	# Input för joystick kamera
-	var joy_cam_x = apply_deadzone(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), CAMERA_DEADZONE)
-	var joy_cam_y = apply_deadzone(Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y), CAMERA_DEADZONE)
-	twist_input += -joy_cam_x * joystick_sensitivity
-	pitch_input += -joy_cam_y * joystick_sensitivity
+	"""
+	var joy_cam_x = apply_deadzone(Input.get_joy_axis([player_id]-1, JOY_AXIS_RIGHT_X), CAMERA_DEADZONE)
+	var joy_cam_y = apply_deadzone(Input.get_joy_axis([player_id]-1, JOY_AXIS_RIGHT_Y), CAMERA_DEADZONE)
+	"""
+	#New: now use Input Map, Also not using apply_deadzone since Input Map apply dead_zone automatically.
+	
+	var cam_dir = Input.get_vector("camera_move_left_%s" % [player_id], "camera_move_right_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id])
+
+	twist_input += -cam_dir.x * joystick_sensitivity
+	pitch_input += -cam_dir.y * joystick_sensitivity
 
 	twist_pivot.rotate_y(twist_input)
 	pitch_pivot.rotate_x(pitch_input)
-	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -0.5, deg_to_rad(30))
+	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -0.5, deg_to_rad(30)) #så kameran ej kan flippas upp och ned
 	twist_input = 0.0
 	pitch_input = 0.0
 
-
 	# Gravity
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta *2.0
 
-	# Jump
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	# Jump	
+	# now use Input Map
+	if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+	#movement/running
+	#New: now use Input Map and Deadzone is set in Input Map
+	var input_dir := Vector2.ZERO 
+	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) #vec2 (x(L/R) och zdir(forw/backw))
 	
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var cam_basis: Basis = twist_pivot.global_transform.basis
+	var cam_basis: Basis = twist_pivot.global_transform.basis #transformera från world coords till cam coords
 	# rörelse relativt till kamera
-	var forward := cam_basis.z
+	var forward := cam_basis.z #3d vec i cams dir
 	var right := cam_basis.x
-	var direction := (right * input_dir.x + forward * input_dir.y).normalized()
+	var direction := (right * input_dir.x + forward * input_dir.y).normalized() #dir man rör sig i i cam coords
 	
 	#För att rotera karaktären längs riktningen hen går i
-	var target_rotation = atan2(direction.x, direction.z)
+	var target_rotation = atan2(direction.x, direction.z) #i radian, rotation angle
 
 	if direction:
 		ap.play("Running")  
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED #L/R
+		velocity.z = direction.z * SPEED #forw/backw
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
 
 	else:
@@ -77,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 	#
-	move_and_slide()
+	move_and_slide() #rörelse enligt velocity mm.
 
 
 func _unhandled_input(event: InputEvent) -> void:
