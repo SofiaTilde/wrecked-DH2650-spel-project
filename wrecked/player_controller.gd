@@ -13,6 +13,8 @@ var pitch_input := 0.0
 
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
+@onready var label_node = get_parent().get_node("Label")
+
 
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
 
@@ -23,7 +25,9 @@ var ap: AnimationPlayer
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
-	ap.play("Idle")  
+	ap.play("Idle")
+	label_node.text = "Player %s" % [player_id] + " Item: "
+
 
 
 #Returnar joystick värdet om värdet är högt nog
@@ -32,6 +36,10 @@ func apply_deadzone(value:float, deadzone:float)-> float: #så att micro joystic
 			return 0.0
 		return value
 
+#call this func when you pick up/use some item
+func update_item_label(item:String)-> void:
+	if label_node: #avoid crashes if node is removed/changed
+		label_node.text = "Player %s" % [player_id] + " Item: %s" % [item]
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
@@ -43,8 +51,7 @@ func _physics_process(delta: float) -> void:
 	var joy_cam_y = apply_deadzone(Input.get_joy_axis([player_id]-1, JOY_AXIS_RIGHT_Y), CAMERA_DEADZONE)
 	"""
 	#New: now use Input Map, Also not using apply_deadzone since Input Map apply dead_zone automatically.
-	
-	var cam_dir = Input.get_vector("camera_move_left_%s" % [player_id], "camera_move_right_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id])
+	var cam_dir = Input.get_vector("camera_move_left_%s" % [player_id], "camera_move_right_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
 
 	twist_input += -cam_dir.x * joystick_sensitivity
 	pitch_input += -cam_dir.y * joystick_sensitivity
@@ -64,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	# now use Input Map
 	if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		update_item_label("Bottle of Rum") #temporary for now
 		
 	#movement/running
 	#New: now use Input Map and Deadzone is set in Input Map
@@ -97,6 +105,10 @@ func _physics_process(delta: float) -> void:
 		
 	#
 	move_and_slide() #rörelse enligt velocity mm.
+	
+	#use item
+	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
+		update_item_label(" ")
 
 
 func _unhandled_input(event: InputEvent) -> void:
