@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://3f7k8dolqfhh"]
+[gd_scene load_steps=14 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="2_noarx"]
+[ext_resource type="Script" uid="uid://dwg5ycl86o41a" path="res://barrel.gd" id="3_a0tk4"]
+[ext_resource type="ArrayMesh" uid="uid://clucx84csnefa" path="res://meshes/barrel/Simple barrel.obj" id="4_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://bdvfrko7ynj1k" path="res://items/eyepatch.tscn" id="5_jka67"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
 size = Vector2(40, 40)
@@ -20,6 +23,13 @@ background_energy_multiplier = 2.5
 sky = SubResource("Sky_noarx")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_noarx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3fl7"]
+radius = 0.0005
+height = 1.338
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
+albedo_color = Color(0.443231, 0.218158, 0.012401, 1)
 
 [node name="Level" type="Node3D"]
 
@@ -59,7 +69,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
@@ -81,7 +91,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer2/SubViewport" instance=ExtResource("1_a202f")]
@@ -108,7 +118,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player3" parent="GridContainer/SubViewportContainer3/SubViewport" instance=ExtResource("1_a202f")]
@@ -135,7 +145,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player4" parent="GridContainer/SubViewportContainer4/SubViewport" instance=ExtResource("1_a202f")]
@@ -156,3 +166,22 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "[Dynamic]"
+
+[node name="Barrel" type="Area3D" parent="."]
+transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, 1.375, -8.31)
+script = ExtResource("3_a0tk4")
+eyepatch = ExtResource("5_jka67")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel"]
+transform = Transform3D(2.79, 0, 0, 0, 2.79, 0, 0, 0, 2.79, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_r3fl7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel"]
+mesh = ExtResource("4_r3fl7")
+surface_material_override/0 = SubResource("StandardMaterial3D_jka67")
+
+[node name="Items" type="Node3D" parent="."]
+
+[node name="Eyepatch" parent="Items" instance=ExtResource("5_jka67")]
+
+[connection signal="body_entered" from="Barrel" to="Barrel" method="_on_body_entered"]
