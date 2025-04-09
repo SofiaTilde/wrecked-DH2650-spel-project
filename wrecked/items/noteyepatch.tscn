@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp4hrpxst2nlb"]
+
+[ext_resource type="ArrayMesh" uid="uid://4y31ju2wpesy" path="res://meshes/barrel/simple eyepatch.obj" id="1_7wde4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qhos"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Not eyepatch" type="Node3D"]
+visible = false
+metadata/item_name = "Not eyepatch"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, 0, 0, 0)
+mesh = ExtResource("1_7wde4")
+surface_material_override/0 = SubResource("StandardMaterial3D_8qhos")

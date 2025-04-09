@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://6kx5nm2ecru"]
+
+[ext_resource type="Script" uid="uid://bni2m50ynawa3" path="res://items/items.gd" id="1_n0bbx"]
+[ext_resource type="PackedScene" uid="uid://bdvfrko7ynj1k" path="res://items/eyepatch.tscn" id="2_r844h"]
+[ext_resource type="PackedScene" uid="uid://cp4hrpxst2nlb" path="res://items/noteyepatch.tscn" id="3_r844h"]
+
+[node name="Items" type="Node3D"]
+script = ExtResource("1_n0bbx")
+eyepatch = ExtResource("2_r844h")
+noteyepatch = ExtResource("3_r844h")
+
+[node name="Eyepatch" parent="." instance=ExtResource("2_r844h")]
+
+[node name="Not eyepatch" parent="." instance=ExtResource("3_r844h")]
+visible = false
+metadata/item_name = "Not eyepatch"
