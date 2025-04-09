@@ -2,7 +2,7 @@ extends Area3D
 
 @export var itemscene: PackedScene
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(body: CharacterBody3D) -> void:
 	var item_provider = itemscene.instantiate() as ItemProvider
 	var item_packed = item_provider.get_item()
 	var item = item_packed.instantiate()
@@ -20,7 +20,6 @@ func _on_body_entered(body: Node3D) -> void:
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
 
-	#!!! bug here
-	#body.update_item_label(item.get_meta("item_name"))
+	body.update_item_label(item.get_meta("item_name"))
 	item.queue_free() # delete item
 	self.queue_free() # delete self
