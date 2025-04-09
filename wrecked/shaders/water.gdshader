@@ -12,6 +12,7 @@ void vertex() {
 	VERTEX.y += sin(VERTEX.x * 0.08 + VERTEX.y * 0.41 + TIME) * 0.13;
 	VERTEX.y += sin(VERTEX.x * 0.24 + VERTEX.y * 0.32 + TIME) * 0.11;
 	VERTEX.y += sin(VERTEX.x * 0.42 + VERTEX.y * 0.2 + TIME) * 0.12;
+
 }
 
 const float move_factor = 0.005;
