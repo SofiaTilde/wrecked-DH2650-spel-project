@@ -1,13 +1,12 @@
 extends Node3D
 
-#@onready var barrel = $Barrel
 @onready var barrel_scene = preload("res://items/barrel.tscn")
+var rng = RandomNumberGenerator.new()
 
 func _ready():
-	createBarrel(10, 10)
-	createBarrel(-10, -10)
-	createBarrel(-10, 10)
-	createBarrel(10, -10)
+	rng.randomize()
+	for n in range(20):
+		createBarrel(rng.randf_range(-20.0, 20.0), rng.randf_range(-20.0, 20.0))
 
 func createBarrel(x, z):
 	var barrel = barrel_scene.instantiate()

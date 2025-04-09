@@ -4,9 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/items.tscn" id="2_aqn5a"]
 [ext_resource type="ArrayMesh" uid="uid://clucx84csnefa" path="res://meshes/barrel/Simple barrel.obj" id="3_cw6fh"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3fl7"]
-radius = 0.0005
-height = 1.338
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7s1de"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
 albedo_color = Color(0.443231, 0.218158, 0.012401, 1)
@@ -79,11 +77,11 @@ script = ExtResource("1_7s1de")
 itemscene = ExtResource("2_aqn5a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2.79, 0, 0, 0, 2.79, 0, 0, 0, 2.79, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_r3fl7")
+transform = Transform3D(2.865, 0, 0, 0, 2.185, 0, 0, 0, 2.865, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_7s1de")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.612845, 0, -0.790203, 0, 1, 0, 0.790203, 0, 0.612845, 0, 0.142488, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("3_cw6fh")
 surface_material_override/0 = SubResource("StandardMaterial3D_jka67")
 
