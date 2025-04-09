@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 9
 const JUMP_VELOCITY = 9.5
+const PUSH_FORCE = 3.6
 const CAMERA_DEADZONE := 0.1
 var joystick_sensitivity :=0.05
 var mouse_sensitivity :=0.001
@@ -87,12 +88,35 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	#
+	
 	move_and_slide() #rörelse enligt velocity mm.
+	apply_push_to_other_players() #används för att sköta collisions
 
 	#use item
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
 		update_item_label(" ")
+
+
+
+func apply_push_to_other_players() -> void:
+	#från doc:Returns the number of times the body collided and changed direction during the last call to move_and_slide().
+	var collisions_amount = get_slide_collision_count()
+	#för varje collusion som sker
+	for i in range(collisions_amount):
+		#från doc: which contains information about a collision that occurred during the last call 
+		var collision = get_slide_collision(i)
+		var Collision_object = collision.get_collider()
+		#Om nåt med characterbody3d träffas 
+		if Collision_object is CharacterBody3D and Collision_object != self:
+			#tryck bort player
+			var push_normal = -collision.get_normal() 
+			var relative_speed = velocity.length()
+			var push_strength = relative_speed * PUSH_FORCE
+			var push_force = push_normal * push_strength
+			
+			Collision_object.velocity.x += push_force.x
+			Collision_object.velocity.z += push_force.z
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
