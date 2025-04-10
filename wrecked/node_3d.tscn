@@ -166,6 +166,7 @@ text = "[Dynamic]"
 script = ExtResource("4_jka67")
 
 [node name="Barrel" parent="Barrel generator" instance=ExtResource("5_i5arm")]
+transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, -10, 0)
 
 [node name="Platform1" parent="." instance=ExtResource("6_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.9944)
@@ -175,3 +176,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.81374, 0, -15.7738)
 
 [node name="Platform3" parent="." instance=ExtResource("6_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39385, 0, -17.5806)
+
+visible = false

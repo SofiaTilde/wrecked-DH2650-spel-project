@@ -1,6 +1,4 @@
 extends CharacterBody3D
-#Använder sig av en Characterbody3d istälelt för Rigidbody3D
-#För att använda gamla skriptet ändra nodtypen på player till Rigidbody3D
 
 const SPEED = 9
 const JUMP_VELOCITY = 9.5
@@ -29,13 +27,6 @@ func _ready():
 	label_node.text = "Player %s" % [player_id] + " Item: "
 
 
-
-#Returnar joystick värdet om värdet är högt nog
-func apply_deadzone(value:float, deadzone:float)-> float: #så att micro joystick rörelser ej registreras.
-		if abs(value) < CAMERA_DEADZONE:
-			return 0.0
-		return value
-
 #call this func when you pick up/use some item
 func update_item_label(item:String)-> void:
 	if label_node: #avoid crashes if node is removed/changed
@@ -45,14 +36,7 @@ func update_item_label(item:String)-> void:
 func _physics_process(delta: float) -> void:
 
 	#Camera
-	# Input för joystick kamera
-	"""
-	var joy_cam_x = apply_deadzone(Input.get_joy_axis([player_id]-1, JOY_AXIS_RIGHT_X), CAMERA_DEADZONE)
-	var joy_cam_y = apply_deadzone(Input.get_joy_axis([player_id]-1, JOY_AXIS_RIGHT_Y), CAMERA_DEADZONE)
-	"""
-	#New: now use Input Map, Also not using apply_deadzone since Input Map apply dead_zone automatically.
-	var cam_dir = Input.get_vector("camera_move_left_%s" % [player_id], "camera_move_right_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
-
+	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
 	twist_input += -cam_dir.x * joystick_sensitivity
 	pitch_input += -cam_dir.y * joystick_sensitivity
 

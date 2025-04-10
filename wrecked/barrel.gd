@@ -2,7 +2,9 @@ extends Area3D
 
 @export var itemscene: PackedScene
 
-func _on_body_entered(body: CharacterBody3D) -> void:
+func _on_body_entered(body) -> void:
+	if body is not CharacterBody3D:
+		return
 	var item_provider = itemscene.instantiate() as ItemProvider
 	var item_packed = item_provider.get_item()
 	var item = item_packed.instantiate()
