@@ -7,11 +7,12 @@ uniform vec4 albedo_color;
 uniform float alpha : hint_range(0,1) = 1.0;
 
 void vertex() {
-	VERTEX.y += sin(VERTEX.x * 0.1 + VERTEX.y * 0.15 + TIME) * 0.21;
-	VERTEX.y += sin(VERTEX.x * 0.23 + VERTEX.y * 0.32 + TIME) * 0.15;
-	VERTEX.y += sin(VERTEX.x * 0.08 + VERTEX.y * 0.41 + TIME) * 0.13;
-	VERTEX.y += sin(VERTEX.x * 0.24 + VERTEX.y * 0.32 + TIME) * 0.11;
-	VERTEX.y += sin(VERTEX.x * 0.42 + VERTEX.y * 0.2 + TIME) * 0.12;
+	VERTEX.y = 0.0;
+	VERTEX.y += sin(VERTEX.x * 0.21 + VERTEX.z * 0.15 + TIME * 0.5) * 0.31;
+	VERTEX.y += sin(VERTEX.x * 0.23 + VERTEX.z * 0.32 + TIME * 1.2) * 0.25;
+	VERTEX.y += sin(VERTEX.x * 0.38 + VERTEX.z * 0.41 + TIME * 0.7) * 0.33;
+	VERTEX.y += sin(VERTEX.x * 0.24 + VERTEX.z * 0.32 + TIME * 0.9) * 0.21;
+	VERTEX.y += sin(VERTEX.x * 0.42 + VERTEX.z * 0.2 + TIME * 1.5) * 0.22;
 
 }
 
