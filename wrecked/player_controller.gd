@@ -2,15 +2,15 @@ extends CharacterBody3D
 
 const SPEED = 9
 const GRAVITY = -9.8
-const JUMP_VELOCITY = 7.5
+const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
 const JUMPDEACCELERATION = 0.5
 const PUSH_FORCE = 1.6
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION =2.5
 const DEACCELERATION =1.5
-var fall_multiplier: float = 0.5
-var jump_cut_multiplier: float = 0.8
+const FALLMULTIPLIER = 0.5
+const JUMPCUTMULTIPLIER = 0.8
 
 var joystick_sensitivity :=0.05
 var mouse_sensitivity :=0.001
@@ -33,10 +33,7 @@ var ap: AnimationPlayer
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
-	ap.play("Idle")
 	label_node.text = "Player %s" % [player_id] + " Item: "
-
-
 #call this func when you pick up/use some item
 func update_item_label(item:String)-> void:
 	if label_node: #avoid crashes if node is removed/changed
@@ -45,6 +42,7 @@ func update_item_label(item:String)-> void:
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
 
+	
 	#Camera
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
 	twist_input += -cam_dir.x * joystick_sensitivity
@@ -57,7 +55,6 @@ func _physics_process(delta: float) -> void:
 	pitch_input = 0.0
 	var player_velocity = velocity
 	var jump_state_adv = player_jump_adv(player_velocity.y,delta)
-
 	#movement/running
 	#New: now use Input Map and Deadzone is set in Input Map
 	var input_dir := Vector2.ZERO
@@ -71,30 +68,27 @@ func _physics_process(delta: float) -> void:
 
 	#För att rotera karaktären längs riktningen hen går i
 	var target_rotation = atan2(direction.x, direction.z) #i radian, rotation angle
-
+	
 #acceleration case
 	if direction != Vector3.ZERO:
-		#tog bort för att tydligare visa 
-		#ap.play("Running")
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
 	
 #deacceleration case
 	else:
-		ap.play("idle")
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		
+
 	
 	velocity.x = player_velocity.x
 	velocity.z = player_velocity.z
 	# Jumping
 	velocity.y = jump_state_adv
-
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 
 	
 	move_and_slide() #rörelse enligt velocity mm.
@@ -114,9 +108,9 @@ func player_jump_adv(jump_velocity,delta)-> float:
 		jump_velocity += JUMP_VELOCITY
 	elif not is_on_floor():
 		if is_releasing_jump and jump_velocity>0:
-			jump_velocity -=  GRAVITY * JUMPDEACCELERATION * delta*fall_multiplier
+			jump_velocity -=  GRAVITY * JUMPDEACCELERATION * delta*FALLMULTIPLIER
 		else:
-			jump_velocity += GRAVITY * JUMPACCELERATION * delta *jump_cut_multiplier
+			jump_velocity += GRAVITY * JUMPACCELERATION * delta *JUMPCUTMULTIPLIER
 	return jump_velocity
 
 	
