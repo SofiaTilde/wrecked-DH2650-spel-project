@@ -10,14 +10,14 @@ shader = ExtResource("1_qi1wl")
 shader_parameter/dudv_map = ExtResource("2_dcmoc")
 shader_parameter/normal_map = ExtResource("3_qmoj4")
 shader_parameter/refraction_map = ExtResource("3_qmoj4")
-shader_parameter/albedo_color = Vector4(0.1, 0.3, 1, 0.5)
+shader_parameter/albedo_color = Vector4(0.1, 0.3, 1, 1)
 shader_parameter/alpha = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7wcun"]
 material = SubResource("ShaderMaterial_7wcun")
 size = Vector2(100, 100)
-subdivide_width = 400
-subdivide_depth = 400
+subdivide_width = 200
+subdivide_depth = 200
 
 [node name="Water" type="Node3D"]
 

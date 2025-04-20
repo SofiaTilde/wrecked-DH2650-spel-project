@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	pitch_input = 0.0
 	var player_velocity = velocity
 	var jump_state_adv = player_jump_adv(player_velocity.y,delta)
+
 	#movement/running
 	#New: now use Input Map and Deadzone is set in Input Map
 	var input_dir := Vector2.ZERO
