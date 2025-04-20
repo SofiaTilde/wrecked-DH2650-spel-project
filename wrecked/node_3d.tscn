@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://3f7k8dolqfhh"]
 
-[ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
+[ext_resource type="PackedScene" uid="uid://bdungm8aqgypi" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="2_noarx"]
 [ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/barrel_generator.gd" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel.tscn" id="5_i5arm"]
@@ -62,12 +62,13 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(958, 538)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 axis_lock_angular_y = true
+player_id = 1
 
 [node name="Label" type="Label" parent="GridContainer/SubViewportContainer/SubViewport"]
 offset_right = 199.0
@@ -84,7 +85,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(958, 538)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer2/SubViewport" instance=ExtResource("1_a202f")]
@@ -111,7 +112,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
 handle_input_locally = false
-size = Vector2i(958, 538)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Label" type="Label" parent="GridContainer/SubViewportContainer3/SubViewport"]
@@ -138,7 +139,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
 handle_input_locally = false
-size = Vector2i(958, 538)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Player4" parent="GridContainer/SubViewportContainer4/SubViewport" instance=ExtResource("1_a202f")]
