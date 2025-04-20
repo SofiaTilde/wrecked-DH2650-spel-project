@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	# now use Input Map
 	if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		
+
 
 	#movement/running
 	#New: now use Input Map and Deadzone is set in Input Map

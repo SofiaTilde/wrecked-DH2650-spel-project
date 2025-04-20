@@ -4,12 +4,33 @@ class_name ItemProvider
 @export var eyepatch: PackedScene
 @export var noteyepatch: PackedScene
 
-var itemlist: Array = []
+var copperItemlist: Array = []
+var silverItemlist: Array = []
+var goldItemlist: Array = []
+enum BarrelLevel {Copper, Silver, Gold}
 
 func _ready():
 	randomize()
 
-func get_item():
-	if itemlist.is_empty():
-		itemlist = [eyepatch, noteyepatch]
-	return itemlist.pick_random()
+func get_item(level):
+	if level == BarrelLevel.Gold:
+		return get_gold_item()
+	elif level == BarrelLevel.Silver:
+		return get_silver_item()
+	elif level == BarrelLevel.Copper:
+		return get_copper_item()
+
+func get_copper_item():
+	if copperItemlist.is_empty():
+		copperItemlist = [eyepatch, noteyepatch]
+	return copperItemlist.pick_random()
+
+func get_silver_item():
+	if silverItemlist.is_empty():
+		silverItemlist = [eyepatch, noteyepatch]
+	return silverItemlist.pick_random()
+
+func get_gold_item():
+	if goldItemlist.is_empty():
+		goldItemlist = [eyepatch, noteyepatch]
+	return goldItemlist.pick_random()
