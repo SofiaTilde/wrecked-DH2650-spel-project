@@ -4,10 +4,13 @@ const SPEED = 9
 const JUMP_VELOCITY = 9.5
 const PUSH_FORCE = 3.6
 const CAMERA_DEADZONE := 0.1
+const ACCELERATION =3.5
+const DEACCELERATION =4.5
 var joystick_sensitivity :=0.05
 var mouse_sensitivity :=0.001
 var twist_input := 0.0
 var pitch_input := 0.0
+
 @onready var model = $PlaceholderCharacter
 
 @onready var twist_pivot = $TwistPivot
@@ -39,24 +42,29 @@ func _physics_process(delta: float) -> void:
 	#Camera
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
 	twist_input += -cam_dir.x * joystick_sensitivity
-	pitch_input += -cam_dir.y * joystick_sensitivity
+	pitch_input += -cam_dir.y * joystick_sensitivity 
 
 	twist_pivot.rotate_y(twist_input)
 	pitch_pivot.rotate_x(pitch_input)
 	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -0.5, deg_to_rad(30)) #så kameran ej kan flippas upp och ned
 	twist_input = 0.0
 	pitch_input = 0.0
+	var player_velocity = velocity
+	var jump_state = player_jump(player_velocity,delta)
+
+
 
 	# Gravity
-
-	if not is_on_floor():
-		velocity += get_gravity() * delta *2.0
+	#if not is_on_floor():
+	#	velocity += get_gravity() * delta *2.0
 
 	# Jump
 	# now use Input Map
-	if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		update_item_label("Bottle of Rum") #temporary for now
+	#if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
+	#	velocity.y = JUMP_VELOCITY
+
+
+
 
 	#movement/running
 	#New: now use Input Map and Deadzone is set in Input Map
@@ -67,22 +75,34 @@ func _physics_process(delta: float) -> void:
 	# rörelse relativt till kamera
 	var forward := cam_basis.z #3d vec i cams dir
 	var right := cam_basis.x
+	#var velocity_x = Input.get_action_strength("move_left_%s" % [player_id])-Input.get_action_strength("move_right_%s" % [player_id])
 	var direction := (right * input_dir.x + forward * input_dir.y).normalized() #dir man rör sig i i cam coords
 
 	#För att rotera karaktären längs riktningen hen går i
 	var target_rotation = atan2(direction.x, direction.z) #i radian, rotation angle
+	#horizontal_velocity = horizontal_velocity.lerp(direction * max_speed, acceleration * delta)
 
-	if direction:
+#acceleration case
+	if direction != Vector3.ZERO:
 		ap.play("Running")
-		velocity.x = direction.x * SPEED #L/R
-		velocity.z = direction.z * SPEED #forw/backw
+		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
+		#player_velocity = player_velocity.lerp(input_dir*SPEED, ACCELERATION*delta)
+		#velocity.x = direction.x * SPEED #L/R
+		#velocity.z = direction.z * SPEED #forw/backw
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
-
+	
+#deacceleration case
 	else:
-		ap.play("Idle")
+		ap.play("Running")
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+		
+	
+	velocity.x = player_velocity.x
+	velocity.z = player_velocity.z
+	# Jumping
+	velocity.y = jump_state
 
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -95,6 +115,22 @@ func _physics_process(delta: float) -> void:
 	#use item
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
 		update_item_label(" ")
+
+
+func player_jump(velocity,delta) ->float:
+		# Gravity
+	if not is_on_floor():
+		velocity += get_gravity() * delta *2.0
+
+	# Jump
+	# now use Input Map
+	if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	
+	return velocity.y
+
+
+
 
 
 
