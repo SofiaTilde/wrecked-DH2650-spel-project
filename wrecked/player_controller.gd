@@ -1,11 +1,17 @@
 extends CharacterBody3D
 
 const SPEED = 9
-const JUMP_VELOCITY = 9.5
-const PUSH_FORCE = 3.6
+const GRAVITY = -9.8
+const JUMP_VELOCITY = 7.5
+const JUMPACCELERATION = 2.5
+const JUMPDEACCELERATION = 0.5
+const PUSH_FORCE = 1.6
 const CAMERA_DEADZONE := 0.1
-const ACCELERATION =3.5
-const DEACCELERATION =4.5
+const ACCELERATION =2.5
+const DEACCELERATION =1.5
+var fall_multiplier: float = 0.5
+var jump_cut_multiplier: float = 0.8
+
 var joystick_sensitivity :=0.05
 var mouse_sensitivity :=0.001
 var twist_input := 0.0
@@ -18,7 +24,7 @@ var pitch_input := 0.0
 @onready var label_node = get_parent().get_node("Label")
 
 
-@export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
+@export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 
 #animation player:
 var ap: AnimationPlayer
@@ -50,19 +56,7 @@ func _physics_process(delta: float) -> void:
 	twist_input = 0.0
 	pitch_input = 0.0
 	var player_velocity = velocity
-	var jump_state = player_jump(player_velocity,delta)
-
-
-
-	# Gravity
-	#if not is_on_floor():
-	#	velocity += get_gravity() * delta *2.0
-
-	# Jump
-	# now use Input Map
-	#if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
-	#	velocity.y = JUMP_VELOCITY
-
+	var jump_state_adv = player_jump_adv(player_velocity.y,delta)
 
 
 
@@ -84,7 +78,8 @@ func _physics_process(delta: float) -> void:
 
 #acceleration case
 	if direction != Vector3.ZERO:
-		ap.play("Running")
+		#tog bort för att tydligare visa 
+		#ap.play("Running")
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		#player_velocity = player_velocity.lerp(input_dir*SPEED, ACCELERATION*delta)
 		#velocity.x = direction.x * SPEED #L/R
@@ -93,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	
 #deacceleration case
 	else:
-		ap.play("Running")
+		ap.play("idle")
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
@@ -102,7 +97,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = player_velocity.x
 	velocity.z = player_velocity.z
 	# Jumping
-	velocity.y = jump_state
+	velocity.y = jump_state_adv
 
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -117,19 +112,21 @@ func _physics_process(delta: float) -> void:
 		update_item_label(" ")
 
 
-func player_jump(velocity,delta) ->float:
-		# Gravity
-	if not is_on_floor():
-		velocity += get_gravity() * delta *2.0
 
-	# Jump
-	# now use Input Map
-	if Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+func player_jump_adv(jump_velocity,delta)-> float:
 	
-	return velocity.y
+	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
+	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
+	if is_jumping : 
+		jump_velocity += JUMP_VELOCITY
+	elif not is_on_floor():
+		if is_releasing_jump and jump_velocity>0:
+			jump_velocity -=  GRAVITY * JUMPDEACCELERATION * delta*fall_multiplier
+		else:
+			jump_velocity += GRAVITY * JUMPACCELERATION * delta *jump_cut_multiplier
+	return jump_velocity
 
-
+	
 
 
 
