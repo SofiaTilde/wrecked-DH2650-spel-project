@@ -58,8 +58,6 @@ func _physics_process(delta: float) -> void:
 	var player_velocity = velocity
 	var jump_state_adv = player_jump_adv(player_velocity.y,delta)
 
-
-
 	#movement/running
 	#New: now use Input Map and Deadzone is set in Input Map
 	var input_dir := Vector2.ZERO
@@ -69,21 +67,16 @@ func _physics_process(delta: float) -> void:
 	# rörelse relativt till kamera
 	var forward := cam_basis.z #3d vec i cams dir
 	var right := cam_basis.x
-	#var velocity_x = Input.get_action_strength("move_left_%s" % [player_id])-Input.get_action_strength("move_right_%s" % [player_id])
 	var direction := (right * input_dir.x + forward * input_dir.y).normalized() #dir man rör sig i i cam coords
 
 	#För att rotera karaktären längs riktningen hen går i
 	var target_rotation = atan2(direction.x, direction.z) #i radian, rotation angle
-	#horizontal_velocity = horizontal_velocity.lerp(direction * max_speed, acceleration * delta)
 
 #acceleration case
 	if direction != Vector3.ZERO:
 		#tog bort för att tydligare visa 
 		#ap.play("Running")
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
-		#player_velocity = player_velocity.lerp(input_dir*SPEED, ACCELERATION*delta)
-		#velocity.x = direction.x * SPEED #L/R
-		#velocity.z = direction.z * SPEED #forw/backw
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
 	
 #deacceleration case
@@ -112,7 +105,7 @@ func _physics_process(delta: float) -> void:
 		update_item_label(" ")
 
 
-
+#hanterar jump logic, will adjust with button press sensitivity
 func player_jump_adv(jump_velocity,delta)-> float:
 	
 	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
