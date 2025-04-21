@@ -116,7 +116,6 @@ func setItem(item: Item):
 func throwItem():
 	if holdingItem == null:
 		return
-	holdingItem.activateItem()
-	holdingItem.queue_free()
+	holdingItem.throw()
 	holdingItem = null
 	update_item_label("")

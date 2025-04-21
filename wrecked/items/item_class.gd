@@ -5,10 +5,11 @@ var labelText: String
 var overlayTexture: Texture2D
 
 func throw():
-	self.global_position += Vector3(0, 1, 0)
+	self.global_position -= Vector3(0, 1, 0)
 	#do throw animation
 	self.visible = false
-	activateItem()
+	await activateItem()
+	self.queue_free()
 
 func activateItem():
 	#each item defines their own activateItem function

@@ -1,25 +1,27 @@
 extends Item
 
 var textureNode: TextureRect
-var player: CharacterBody3D
 
 func _ready():
 	labelText = "Eyepatch"
 	overlayTexture = preload("res://items/effects/textures/eyepatch.png") as Texture2D
 
 func activateItem():
-	player = detectHitPlayer()
+	var player = detectHitPlayer()
 	if player == null:
 		return
-	applyEffect()
+	await applyEffect(player)
 
-func applyEffect():
+func applyEffect(player: CharacterBody3D):
 	textureNode = player.get_node("ItemEffect/TextureRect")
 	textureNode.texture = overlayTexture
-	#add timer before remove effect
-	removeEffect()
 
-func removeEffect():
-	#textureNode.texture = null
-	player.update_item_label("removed eyepatch")
-	queue_free()
+	var timerNode = Timer.new()
+	add_child(timerNode)
+	timerNode.wait_time = 3.0
+	timerNode.one_shot = true
+	timerNode.start()
+	await timerNode.timeout
+
+	#remove effect
+	textureNode.texture = null
