@@ -13,7 +13,7 @@ func _on_body_entered(body) -> void:
 		return
 	var item_provider = itemscene.instantiate() as ItemProvider
 	var item_packed = item_provider.get_item(barrel_level)
-	var item = item_packed.instantiate()
+	var item = item_packed.instantiate() as Item
 	get_parent().add_child(item)
 
 	item.position = self.position - Vector3(0, 0.7, 0)
@@ -28,14 +28,7 @@ func _on_body_entered(body) -> void:
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
 
-	body.update_item_label(item.get_meta("item_name"))
-
-	item.visible = false
-	if is_instance_valid(item):
-		item.queue_free()
-	if is_instance_valid(item) and item.get_parent():
-		await item.tree_exited
-	await get_tree().create_timer(1).timeout
+	body.setItem(item)
 	self.queue_free()
 
 func barrelStart(x, z, level):

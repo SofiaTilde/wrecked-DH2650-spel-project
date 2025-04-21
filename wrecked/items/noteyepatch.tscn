@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cp4hrpxst2nlb"]
+[gd_scene load_steps=4 format=3 uid="uid://cp4hrpxst2nlb"]
 
 [ext_resource type="ArrayMesh" uid="uid://4y31ju2wpesy" path="res://meshes/barrel/simple eyepatch.obj" id="1_7wde4"]
+[ext_resource type="Script" uid="uid://b3gop7n7c0f8g" path="res://items/effects/scripts/noteyepatch.gd" id="1_8qhos"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qhos"]
 albedo_color = Color(1, 0, 0, 1)
 
 [node name="Not eyepatch" type="Node3D"]
 visible = false
+script = ExtResource("1_8qhos")
 metadata/item_name = "Not eyepatch"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
