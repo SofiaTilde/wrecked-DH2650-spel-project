@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://dnrtklvqut8jx"]
 
-[ext_resource type="Script" uid="uid://dwg5ycl86o41a" path="res://barrel.gd" id="1_7s1de"]
-[ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/items.tscn" id="2_aqn5a"]
-[ext_resource type="Material" uid="uid://d3yvexhmvsay1" path="res://items/barrel/barrel_copper.tres" id="3_7s1de"]
+[ext_resource type="Script" uid="uid://dwg5ycl86o41a" path="res://barrel.gd" id="1_34ndh"]
+[ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/generators/items.tscn" id="2_uax0x"]
+[ext_resource type="Material" uid="uid://q10wk3ctjypn" path="res://items/barrel/barrel_silver.tres" id="3_q6nd0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7s1de"]
 
@@ -98,8 +98,8 @@ _data = {
 
 [node name="Barrel" type="Area3D"]
 transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, 0, 0)
-script = ExtResource("1_7s1de")
-itemscene = ExtResource("2_aqn5a")
+script = ExtResource("1_34ndh")
+itemscene = ExtResource("2_uax0x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(3.04, 0, 0, 0, 3.04, 0, 0, 0, 3.04, 0, 0, 0)
@@ -110,7 +110,7 @@ shape = SubResource("CapsuleShape3D_7s1de")
 transform = Transform3D(1.44928, 0, 0, 0, 1.44928, 0, 0, 0, 1.44928, 0, 0, 0)
 mesh = SubResource("ArrayMesh_50emm")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_7s1de")
+surface_material_override/0 = ExtResource("3_q6nd0")
 
 [node name="AnimationPositionY" type="AnimationPlayer" parent="BarrelMesh"]
 libraries = {

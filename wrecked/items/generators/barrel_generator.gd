@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var barrel_scene = preload("res://items/barrel.tscn")
+@onready var barrel_scene = preload("res://items/barrel/barrel.tscn")
 var rng = RandomNumberGenerator.new()
 enum BarrelLevel {Copper, Silver, Gold}
 
