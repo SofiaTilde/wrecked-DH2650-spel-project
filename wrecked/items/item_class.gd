@@ -2,13 +2,16 @@ extends Node3D
 class_name Item
 
 var labelText: String
+var overlayTexture: Texture2D
 
 func throw():
 	self.global_position += Vector3(0, 1, 0)
 	#do throw animation
+	self.visible = false
 	activateItem()
 
 func activateItem():
+	#each item defines their own activateItem function
 	return
 
 func detectHitPlayer() -> CharacterBody3D:

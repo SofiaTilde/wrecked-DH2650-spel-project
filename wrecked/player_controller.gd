@@ -111,7 +111,7 @@ func setItem(item: Item):
 		await holdingItem.tree_exited
 	holdingItem = item
 	update_item_label(holdingItem.labelText)
-	throwItem()
+	throwItem() # temp, always "throw" to test effects
 
 func throwItem():
 	if holdingItem == null:
@@ -119,3 +119,4 @@ func throwItem():
 	holdingItem.activateItem()
 	holdingItem.queue_free()
 	holdingItem = null
+	update_item_label("")
