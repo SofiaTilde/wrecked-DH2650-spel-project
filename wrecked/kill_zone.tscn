@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://s7yk0tihyeoj" path="res://kill_zone.gd" id="1_tuh0n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aceia"]
-size = Vector3(125.445, 1, 139.217)
+size = Vector3(125.445, 24.0054, 139.217)
 
-[node name="Kill Zone" type="Area3D"]
+[node name="Kill Zone Water" type="Area3D"]
 script = ExtResource("1_tuh0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
