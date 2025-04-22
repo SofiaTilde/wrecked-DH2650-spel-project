@@ -23,8 +23,10 @@ var pitch_input := 0.0
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var label_node = get_parent().get_node("Label")
 
+@onready var lastSavePosition : Vector3 = global_transform.origin
 
-@export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
+
+@export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
 
 #animation player:
 var ap: AnimationPlayer
@@ -57,9 +59,9 @@ func _physics_process(delta: float) -> void:
 	var jump_state_adv = player_jump_adv(player_velocity.y,delta)
 
 	#movement/running
-	#New: now use Input Map and Deadzone is set in Input Map
+	#use Input Map
 	var input_dir := Vector2.ZERO
-	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) #vec2 (x(L/R) och zdir(forw/backw))
+	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) #vec2 (x(L/R) och zdir(forw/backw)) also is normalized [-1,1]
 
 	var cam_basis: Basis = twist_pivot.global_transform.basis #transformera från world coords till cam coords
 	# rörelse relativt till kamera
@@ -72,13 +74,13 @@ func _physics_process(delta: float) -> void:
 	
 #acceleration case
 	if direction != Vector3.ZERO:
-		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
+		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta) #lertp from prev player_vel-> new player_vel over (delta*acc) time
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
 	
 #deacceleration case
 	else:
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED) #redundant bcus overwritten?
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	
@@ -90,6 +92,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+	
+	if is_on_floor():
+		lastSavePosition = global_transform.origin
 
 	
 	move_and_slide() #rörelse enligt velocity mm.
@@ -149,3 +154,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
+
+
+
+#Lakitu is a character from mario that drags you back to the course if you fall off. I.E this is a respawn functino
+func lakitu():
+	global_transform.origin = lastSavePosition # reset player to lastSavePosition
