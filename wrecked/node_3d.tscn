@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="2_noarx"]
 [ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/barrel_generator.gd" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel.tscn" id="5_i5arm"]
-[ext_resource type="PackedScene" uid="uid://cavkptlfya0u2" path="res://platform.tscn" id="6_i5arm"]
+[ext_resource type="PackedScene" path="res://platform.tscn" id="6_i5arm"]
 [ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/items.tscn" id="6_wc5p8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
@@ -176,5 +176,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.81374, 0, -15.7738)
 
 [node name="Platform3" parent="." instance=ExtResource("6_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39385, 0, -17.5806)
-
 visible = false
