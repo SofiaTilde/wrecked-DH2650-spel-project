@@ -5,7 +5,7 @@ const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
 const JUMPDEACCELERATION = 0.5
-const PUSH_FORCE = 0.8
+const PUSH_FORCE = 1.4
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION =2.5
 const DEACCELERATION =1.5
@@ -33,10 +33,17 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
 	label_node.text = "Player %s" % [player_id] + " Item: "
+	
 #call this func when you pick up/use some item
 func update_item_label(item:String)-> void:
 	if label_node: #avoid crashes if node is removed/changed
 		label_node.text = "Player %s" % [player_id] + " Item: %s" % [item]
+
+
+	
+
+var recently_pushed = {}
+const PUSH_COOLDOWN = 0.2 # seconds
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
@@ -97,12 +104,18 @@ func _physics_process(delta: float) -> void:
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-
+	
 	var offset = Vector3(5.0,5.0,5.0)
 	move_and_slide() #rörelse enligt velocity mm.
 	apply_push_to_other_players() #används för att sköta collisions
-	#use item
+	for body in recently_pushed.keys():
+		recently_pushed[body] -= delta
+	for body in recently_pushed.keys():
+		if recently_pushed[body] <= 0:
+			recently_pushed.erase(body)
+
+
+
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
 		update_item_label(" ")
 
@@ -121,29 +134,29 @@ func player_jump_adv(jump_velocity,delta)-> float:
 			jump_velocity += GRAVITY * JUMPACCELERATION * delta *JUMPCUTMULTIPLIER
 	return jump_velocity
 
-	
-
-
 
 
 func apply_push_to_other_players() -> void:
-	#från doc:Returns the number of times the body collided and changed direction during the last call to move_and_slide().
 	var collisions_amount = get_slide_collision_count()
-	#för varje collusion som sker
+	
 	for i in range(collisions_amount):
-		#från doc: which contains information about a collision that occurred during the last call 
 		var collision = get_slide_collision(i)
 		var Collision_object = collision.get_collider()
-		#Om nåt med characterbody3d träffas 
+		
 		if Collision_object is CharacterBody3D and Collision_object != self:
-			#tryck bort player
+			if Collision_object in recently_pushed:
+				continue  # already pushed recently
+
 			var push_normal = -collision.get_normal() 
 			var relative_speed = velocity.length()
 			var push_strength = relative_speed * PUSH_FORCE
-			var push_force = push_normal * push_strength
+			var push_force = (push_normal * push_strength).normalized() * PUSH_FORCE
 			
 			Collision_object.velocity.x += push_force.x
 			Collision_object.velocity.z += push_force.z
+			recently_pushed[Collision_object] = PUSH_COOLDOWN
+		
+		
 
 
 
