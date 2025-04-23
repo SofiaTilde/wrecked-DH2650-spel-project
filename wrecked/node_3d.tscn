@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://3f7k8dolqfhh"]
+[gd_scene load_steps=13 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://bdungm8aqgypi" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="2_noarx"]
 [ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/barrel_generator.gd" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel.tscn" id="5_i5arm"]
+[ext_resource type="PackedScene" uid="uid://cavkptlfya0u2" path="res://platform.tscn" id="6_i5arm"]
 [ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/items.tscn" id="6_wc5p8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
-size = Vector2(40, 40)
+size = Vector2(20, 20)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a202f"]
-data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i5arm"]
+points = PackedVector3Array(10.1548, 0.158668, 10.1548, -10.1548, -0.158668, -10.1548, -10.1548, 0.158668, -10.1548, 10.1548, -0.158668, -10.1548, -10.1548, -0.158668, 10.1548, -10.1548, 0.158668, 10.1548, 10.1548, 0.158668, -10.1548, 10.1548, -0.158668, 10.1548)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_noarx"]
 
@@ -36,15 +37,14 @@ mesh = SubResource("PlaneMesh_a0tk4")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-shape = SubResource("ConcavePolygonShape3D_a202f")
+shape = SubResource("ConvexPolygonShape3D_i5arm")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")
 camera_attributes = SubResource("CameraAttributesPractical_noarx")
 
 [node name="Water" parent="." instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchors_preset = 15
@@ -167,4 +167,14 @@ script = ExtResource("4_jka67")
 
 [node name="Barrel" parent="Barrel generator" instance=ExtResource("5_i5arm")]
 transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, -10, 0)
+
+[node name="Platform1" parent="." instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.9944)
+
+[node name="Platform2" parent="." instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.81374, 0, -15.7738)
+
+[node name="Platform3" parent="." instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39385, 0, -17.5806)
+
 visible = false
