@@ -17,19 +17,18 @@ var mouse_sensitivity :=0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 
-var is_resetting: bool = false
+var is_respawning: bool = false
 var reset_timer := Timer.new()
 
 @onready var model = $PlaceholderCharacter
-
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var label_node = get_parent().get_node("Label")
-
 @onready var lastSavePosition : Vector3 = global_transform.origin
 
 
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
+@export var transitioner : Transitioner #to get transitioner: spawn.gd script
 
 #animation player:
 var ap: AnimationPlayer
@@ -52,7 +51,8 @@ func update_item_label(item:String)-> void:
 func _physics_process(delta: float) -> void:
 
 	
-	#Camera
+	# -- Camera
+	
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
 	twist_input += -cam_dir.x * joystick_sensitivity
 	pitch_input += -cam_dir.y * joystick_sensitivity 
@@ -65,7 +65,8 @@ func _physics_process(delta: float) -> void:
 	var player_velocity = velocity
 	var jump_state_adv = player_jump_adv(player_velocity.y,delta)
 
-	#movement/running
+	# -- movement/running
+	
 	#use Input Map
 	var input_dir := Vector2.ZERO
 	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) #vec2 (x(L/R) och zdir(forw/backw)) also is normalized [-1,1]
@@ -90,19 +91,17 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED) #redundant bcus overwritten?
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	if not is_resetting:
-		velocity.x = player_velocity.x
-		velocity.z = player_velocity.z
-		# Jumping
-		velocity.y = jump_state_adv
-	
+	velocity.x = player_velocity.x #update final value
+	velocity.z = player_velocity.z
+	# Jumping
+	velocity.y = jump_state_adv
+
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	
 	if is_on_floor():
-		lastSavePosition = global_transform.origin
+		lastSavePosition = global_transform.origin #for respawn
 
 	
 	move_and_slide() #rörelse enligt velocity mm.
@@ -128,10 +127,6 @@ func player_jump_adv(jump_velocity,delta)-> float:
 	return jump_velocity
 
 	
-
-
-
-
 func apply_push_to_other_players() -> void:
 	#från doc:Returns the number of times the body collided and changed direction during the last call to move_and_slide().
 	var collisions_amount = get_slide_collision_count()
@@ -152,32 +147,28 @@ func apply_push_to_other_players() -> void:
 			Collision_object.velocity.z += push_force.z
 
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			twist_input = -event.relative.x * mouse_sensitivity
 			pitch_input = -event.relative.y * mouse_sensitivity
 
-
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
 
-
+#--respawning
 
 #Lakitu is a character from mario that drags you back to the course if you fall off. I.E this is a respawn functino
 func respawn():
-	if is_resetting:
+	if is_respawning:
 		return
-	is_resetting = true
-	reset_timer.start(1.0) # delay in seconds before respawn
-	# Optionally, play sound or fade out here
-	# Example: $FadeAnimationPlayer.play("fade_out")
+	is_respawning = true
+	reset_timer.start(1.5) # delay in seconds before respawn
+	transitioner.set_next_animation(true) #fade in
 
 #Lakitu is a character from mario that drags you back to the course if you fall off. I.E this is a respawn functino
-func lakitu():
+func lakitu(): #called after reset_timer runs out.
 	global_transform.origin = lastSavePosition + Vector3(0,4,0) # reset player to lastSavePosition
 	velocity=Vector3(0,0,0)
-	is_resetting = false
-		# Optionally, fade back in here
-		# Example: $FadeAnimationPlayer.play("fade_in")
+	is_respawning = false
+	transitioner.set_next_animation(false) #fade in
