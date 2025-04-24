@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
-[ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="2_noarx"]
 [ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/barrel_generator.gd" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel.tscn" id="5_i5arm"]
 [ext_resource type="PackedScene" uid="uid://cavkptlfya0u2" path="res://platform.tscn" id="6_i5arm"]
+[ext_resource type="PackedScene" uid="uid://berc3ktdu00jq" path="res://water_grid.tscn" id="6_jsk3o"]
 [ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/items.tscn" id="6_wc5p8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
@@ -28,7 +28,7 @@ sky = SubResource("Sky_noarx")
 [node name="Level" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.804976, -0.218086, 0.551772, 0.574559, -0.518481, 0.633293, 0.147971, 0.826811, 0.542668, 8.85041, 10.0383, 7.80694)
+transform = Transform3D(-0.810811, -0.466131, 0.353989, -0.0900875, 0.696969, 0.71142, -0.578334, 0.544937, -0.607102, 2.09259, 10.0383, -12.6826)
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -42,9 +42,6 @@ shape = SubResource("ConvexPolygonShape3D_i5arm")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")
 camera_attributes = SubResource("CameraAttributesPractical_noarx")
-
-[node name="Water" parent="." instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchors_preset = 15
@@ -175,6 +172,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.9944)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.81374, 0, -15.7738)
 
 [node name="Platform3" parent="." instance=ExtResource("6_i5arm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39385, 0, -17.5806)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.42132, 0, -21.7507)
 
-visible = false
+[node name="Platform3" parent="Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="Platform3" parent="Platform3/Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="Platform3" parent="Platform3/Platform3/Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="Platform3" parent="Platform3/Platform3/Platform3/Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="Platform3" parent="Platform3/Platform3/Platform3/Platform3/Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="Platform3" parent="Platform3/Platform3/Platform3/Platform3/Platform3/Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="Platform3" parent="Platform3/Platform3/Platform3/Platform3/Platform3/Platform3/Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="Platform3" parent="Platform3/Platform3/Platform3/Platform3/Platform3/Platform3/Platform3/Platform3" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606239, 0, -5.09747)
+
+[node name="WaterGrid" parent="." instance=ExtResource("6_jsk3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
