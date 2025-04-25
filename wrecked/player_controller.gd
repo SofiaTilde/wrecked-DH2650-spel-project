@@ -168,7 +168,8 @@ func respawn():
 
 #Lakitu is a character from mario that drags you back to the course if you fall off. I.E this is a respawn functino
 func lakitu(): #called after reset_timer runs out.
+	transitioner.set_next_animation(false) #fade in
 	global_transform.origin = lastSavePosition + Vector3(0,4,0) # reset player to lastSavePosition
 	velocity=Vector3(0,0,0)
 	is_respawning = false
-	transitioner.set_next_animation(false) #fade in
+	
