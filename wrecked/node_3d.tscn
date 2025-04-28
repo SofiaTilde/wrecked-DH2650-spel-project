@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="2_noarx"]
-[ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/barrel_generator.gd" id="4_jka67"]
-[ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel.tscn" id="5_i5arm"]
+[ext_resource type="Script" path="res://items/generators/barrel_generator.gd" id="4_jka67"]
+[ext_resource type="PackedScene" path="res://items/barrel/barrel.tscn" id="5_i5arm"]
 [ext_resource type="PackedScene" uid="uid://cavkptlfya0u2" path="res://platform.tscn" id="6_i5arm"]
-[ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/items.tscn" id="6_wc5p8"]
+[ext_resource type="PackedScene" path="res://items/generators/items.tscn" id="6_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://oa4gk1w85htb" path="res://kill_zone.tscn" id="7_wc5p8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
@@ -63,7 +63,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
@@ -85,7 +85,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer2/SubViewport" instance=ExtResource("1_a202f")]
@@ -112,7 +112,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Label" type="Label" parent="GridContainer/SubViewportContainer3/SubViewport"]
@@ -139,7 +139,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player4" parent="GridContainer/SubViewportContainer4/SubViewport" instance=ExtResource("1_a202f")]

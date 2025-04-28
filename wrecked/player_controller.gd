@@ -17,14 +17,12 @@ var mouse_sensitivity :=0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 
-var is_respawning: bool = false
-var reset_timer := Timer.new()
-
 @onready var model = $PlaceholderCharacter
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var label_node = get_parent().get_node("Label")
 @onready var lastSavePosition : Vector3 = global_transform.origin
+@onready var respawn_manager = $RespawnManager
 
 
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
@@ -38,9 +36,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
 	label_node.text = "Player %s" % [player_id] + " Item: "
-	add_child(reset_timer)
-	reset_timer.one_shot = true
-	reset_timer.connect("timeout", Callable(self, "lakitu"))
+	
 
 #call this func when you pick up/use some item
 func update_item_label(item:String)-> void:
@@ -156,20 +152,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
 
-#--respawning
-
-#Lakitu is a character from mario that drags you back to the course if you fall off. I.E this is a respawn functino
+#--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
-	if is_respawning:
-		return
-	is_respawning = true
-	reset_timer.start(1.5) # delay in seconds before respawn
-	transitioner.set_next_animation(true) #fade in
+	respawn_manager.respawn()
 
-#Lakitu is a character from mario that drags you back to the course if you fall off. I.E this is a respawn functino
-func lakitu(): #called after reset_timer runs out.
-	transitioner.set_next_animation(false) #fade in
-	global_transform.origin = lastSavePosition + Vector3(0,4,0) # reset player to lastSavePosition
-	velocity=Vector3(0,0,0)
-	is_respawning = false
 	
