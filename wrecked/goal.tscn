@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bau54xbcyquty"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7sh37"]
+
+[node name="Goal" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7sh37")
+debug_color = Color(0.557609, 0.933394, 7.70092e-07, 0.42)
