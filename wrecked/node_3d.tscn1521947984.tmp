@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://3f7k8dolqfhh"]
+[gd_scene load_steps=16 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/barrel_generator.gd" id="4_jka67"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://oa4gk1w85htb" path="res://kill_zone.tscn" id="7_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="8_jsk3o"]
 [ext_resource type="PackedScene" uid="uid://bau54xbcyquty" path="res://goal.tscn" id="9_4arys"]
-[ext_resource type="FontFile" uid="uid://decj3qo5pg26d" path="res://kirifont/KiriFont.otf" id="10_6iypd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
 size = Vector2(20, 20)
@@ -28,12 +27,6 @@ background_energy_multiplier = 2.5
 sky = SubResource("Sky_noarx")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_noarx"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_6iypd"]
-font = ExtResource("10_6iypd")
-font_size = 400
-outline_size = 40
-outline_color = Color(0, 0, 0, 1)
 
 [node name="Level" type="Node3D"]
 
@@ -228,23 +221,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91648, 1.40757, -15.5032)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SharedLabel" type="Label" parent="CanvasLayer"]
-custom_minimum_size = Vector2(5000, 5000)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1137.5
-offset_top = -750.0
-offset_right = 1137.5
-offset_bottom = 750.0
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(2500, 2500)
-size_flags_vertical = 1
 text = "[Dynamic]"
-label_settings = SubResource("LabelSettings_6iypd")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [editable path="Kill Zone"]

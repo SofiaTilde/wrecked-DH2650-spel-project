@@ -13,6 +13,16 @@ size = Vector2(32, 32)
 subdivide_width = 64
 subdivide_depth = 64
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_qmoj4"]
+size = Vector2(32, 32)
+subdivide_width = 64
+subdivide_depth = 64
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x4ob8"]
+size = Vector2(32, 32)
+subdivide_width = 64
+subdivide_depth = 64
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_746c1"]
 size = Vector2(32, 32)
 subdivide_width = 64
@@ -38,16 +48,6 @@ size = Vector2(32, 32)
 subdivide_width = 64
 subdivide_depth = 64
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_qmoj4"]
-size = Vector2(32, 32)
-subdivide_width = 64
-subdivide_depth = 64
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_x4ob8"]
-size = Vector2(32, 32)
-subdivide_width = 64
-subdivide_depth = 64
-
 [node name="Water" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -69,7 +69,7 @@ script = ExtResource("4_qmoj4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -32)
 transparency = 0.5
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_746c1")
+mesh = SubResource("PlaneMesh_qmoj4")
 surface_material_override/0 = ExtResource("1_7wcun")
 script = ExtResource("4_qmoj4")
 
@@ -77,7 +77,7 @@ script = ExtResource("4_qmoj4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 0)
 transparency = 0.5
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_3g7ry")
+mesh = SubResource("PlaneMesh_x4ob8")
 surface_material_override/0 = ExtResource("1_7wcun")
 script = ExtResource("4_qmoj4")
 
@@ -85,7 +85,7 @@ script = ExtResource("4_qmoj4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 32)
 transparency = 0.5
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_wox83")
+mesh = SubResource("PlaneMesh_746c1")
 surface_material_override/0 = ExtResource("1_7wcun")
 script = ExtResource("4_qmoj4")
 
@@ -93,7 +93,7 @@ script = ExtResource("4_qmoj4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
 transparency = 0.5
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_ywqbu")
+mesh = SubResource("PlaneMesh_3g7ry")
 surface_material_override/0 = ExtResource("1_7wcun")
 script = ExtResource("4_qmoj4")
 
@@ -101,7 +101,7 @@ script = ExtResource("4_qmoj4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 32)
 transparency = 0.5
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_hn4mu")
+mesh = SubResource("PlaneMesh_wox83")
 surface_material_override/0 = ExtResource("1_7wcun")
 script = ExtResource("4_qmoj4")
 
@@ -109,7 +109,7 @@ script = ExtResource("4_qmoj4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -32)
 transparency = 0.5
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_qmoj4")
+mesh = SubResource("PlaneMesh_ywqbu")
 surface_material_override/0 = ExtResource("1_7wcun")
 script = ExtResource("4_qmoj4")
 
@@ -117,6 +117,6 @@ script = ExtResource("4_qmoj4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
 transparency = 0.5
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_x4ob8")
+mesh = SubResource("PlaneMesh_hn4mu")
 surface_material_override/0 = ExtResource("1_7wcun")
 script = ExtResource("4_qmoj4")
