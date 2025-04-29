@@ -2,6 +2,10 @@ extends Area3D
 
 @onready var count_down: Timer= $countDown
 @onready var label: Label = get_node("/root/Level/CanvasLayer/Control/SharedLabel")
+@onready var player1: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer/SubViewport/Player")
+@onready var player2: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer2/SubViewport/Player2")
+@onready var player3: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer3/SubViewport/Player3")
+@onready var player4: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer4/SubViewport/Player4")
 
 var counter = 10
 
@@ -9,7 +13,7 @@ func _ready() -> void:
 	label.visible = false
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D:# and count_down.is_stopped():  #only first person trigger
+	if body is CharacterBody3D and count_down.is_stopped():  #only first person trigger
 		winnerHUD(body.player_id)
 		count_down.start(5)
 
@@ -29,8 +33,17 @@ func _on_count_down_timeout():
 func nextStage():
 	print("new stage!")
 	label.text=" "
-	get_tree().change_scene_to_file("res://level_2.tscn")
-
+	#get_tree().change_scene_to_file("res://level_2.tscn")
+	# Load newly generated platforms
+	var new_platforms = load("res://level_2.tscn").instantiate()
+	$"..".add_child(new_platforms)
+	new_platforms.name = "oldPlatformsLevel" # So we can reuse this func on next goal
+	
+	player1.global_transform.origin= Vector3(-1,10,-1)	
+	player2.global_transform.origin= Vector3(1,10,-1)
+	player3.global_transform.origin= Vector3(-1,10,1)
+	player4.global_transform.origin= Vector3(1,10,1)
+	
 func getReadyHUD():
 	label.text = "Get ready for\n the next race.."
 	label.modulate = Color(1, 1, 1) # Back to white
