@@ -1,7 +1,7 @@
 extends Area3D
 
 @onready var count_down: Timer= $countDown
-@onready var label: Label = get_node("/root/Level/CanvasLayer/SharedLabel")
+@onready var label: Label = get_node("/root/Level/CanvasLayer/Control/SharedLabel")
 
 var counter = 10
 
@@ -28,6 +28,7 @@ func _on_count_down_timeout():
 
 func nextStage():
 	print("new stage!")
+	label.text=" "
 	get_tree().change_scene_to_file("res://level_2.tscn")
 
 func getReadyHUD():
@@ -35,7 +36,7 @@ func getReadyHUD():
 	label.modulate = Color(1, 1, 1) # Back to white
 	count_down.start(3)
 	#label.scale = Vector2(0.5,0.5)
-	label.label_settings.font_size = 100
+	label.label_settings.font_size = 80
 	counter -= 1
 
 func gameOverHUD():
@@ -45,7 +46,7 @@ func gameOverHUD():
 	#label.scale = Vector2(0.13,0.13) #0.75
 	label.label_settings.outline_color = Color(0,0,0)
 
-	label.label_settings.font_size = 300
+	label.label_settings.font_size = 200
 	counter -= 1
 
 	

@@ -167,6 +167,18 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "[Dynamic]"
 
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/SubViewportContainer4/SubViewport"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
 [node name="Items" parent="." instance=ExtResource("6_wc5p8")]
 
 [node name="Barrel generator" type="Node3D" parent="."]
@@ -227,24 +239,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91648, 1.40757, -15.5032)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SharedLabel" type="Label" parent="CanvasLayer"]
-custom_minimum_size = Vector2(5000, 5000)
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SharedLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1137.5
-offset_top = -750.0
-offset_right = 1137.5
-offset_bottom = 750.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(2500, 2500)
+pivot_offset = Vector2(960, 540)
 size_flags_vertical = 1
 text = "[Dynamic]"
 label_settings = SubResource("LabelSettings_6iypd")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [editable path="Kill Zone"]
