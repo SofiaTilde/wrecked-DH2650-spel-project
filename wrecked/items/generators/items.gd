@@ -3,6 +3,7 @@ class_name ItemProvider
 
 @export var eyepatch: PackedScene
 @export var noteyepatch: PackedScene
+@export var anchor: PackedScene
 
 var copperItemlist: Array = []
 var silverItemlist: Array = []
@@ -22,15 +23,15 @@ func get_item(level):
 
 func get_copper_item():
 	if copperItemlist.is_empty():
-		copperItemlist = [eyepatch, noteyepatch]
+		copperItemlist = [eyepatch, anchor]
 	return copperItemlist.pick_random()
 
 func get_silver_item():
 	if silverItemlist.is_empty():
-		silverItemlist = [eyepatch, noteyepatch]
+		silverItemlist = [eyepatch, anchor]
 	return silverItemlist.pick_random()
 
 func get_gold_item():
 	if goldItemlist.is_empty():
-		goldItemlist = [eyepatch, noteyepatch]
+		goldItemlist = [eyepatch, anchor]
 	return goldItemlist.pick_random()

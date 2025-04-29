@@ -123,8 +123,6 @@ func setItem(item: Item):
 		await holdingItem.tree_exited
 	holdingItem = item
 	update_item_label(holdingItem.labelText)
-	#var play=get_tree().root.get_node("Level/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
-	#throwItem(play) # temp, always "throw" to test effects
 
 func throwItem(play: CharacterBody3D = null):
 	if holdingItem == null:

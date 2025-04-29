@@ -38,3 +38,7 @@ func applyOverlay(player: CharacterBody3D, seconds):
 	await timer(seconds)
 	#remove effect
 	textureNode.texture = null
+
+func changePlayerPos(player: CharacterBody3D):
+	#each item defines their own changePlayerPos function
+	return
