@@ -126,6 +126,7 @@ theme_override_font_sizes/font_size = 36
 text = "[Dynamic]"
 
 [node name="Player3" parent="GridContainer/SubViewportContainer3/SubViewport" instance=ExtResource("1_a202f")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18954, 2, 2.40809)
 axis_lock_angular_y = true
 player_id = 3

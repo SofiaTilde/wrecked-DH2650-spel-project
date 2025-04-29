@@ -94,6 +94,18 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
 		update_item_label(" ")
 
+	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
+		throwItem(play)
+	if Input.is_action_just_pressed("use_item_right_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D
+		throwItem(play)
+	if Input.is_action_just_pressed("use_item_down_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer3/SubViewport/Player3") as CharacterBody3D
+		throwItem(play)
+	if Input.is_action_just_pressed("use_item_left_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer4/SubViewport/Player4") as CharacterBody3D
+		throwItem(play)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -111,11 +123,15 @@ func setItem(item: Item):
 		await holdingItem.tree_exited
 	holdingItem = item
 	update_item_label(holdingItem.labelText)
-	throwItem() # temp, always "throw" to test effects
+	#var play=get_tree().root.get_node("Level/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
+	#throwItem(play) # temp, always "throw" to test effects
 
-func throwItem():
+func throwItem(play: CharacterBody3D = null):
 	if holdingItem == null:
 		return
-	holdingItem.throw()
+	if play == null:
+		holdingItem.throw()
+	else:
+		holdingItem.throw(play)
 	holdingItem = null
 	update_item_label("")
