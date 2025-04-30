@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://6kx5nm2ecru"]
 
 [ext_resource type="Script" uid="uid://bni2m50ynawa3" path="res://items/generators/items.gd" id="1_n0bbx"]
-[ext_resource type="PackedScene" uid="uid://bdvfrko7ynj1k" path="res://items/eyepatch.tscn" id="2_r844h"]
+[ext_resource type="PackedScene" uid="uid://bdvfrko7ynj1k" path="res://items/eyepatch/eyepatch.tscn" id="2_r844h"]
 [ext_resource type="ArrayMesh" uid="uid://4y31ju2wpesy" path="res://meshes/barrel/simple eyepatch.obj" id="3_vxjqh"]
-[ext_resource type="PackedScene" uid="uid://blnoyjh4vh1gi" path="res://items/anchor.tscn" id="4_vxjqh"]
+[ext_resource type="PackedScene" uid="uid://blnoyjh4vh1gi" path="res://items/anchor/anchor.tscn" id="4_vxjqh"]
 
 [sub_resource type="GDScript" id="GDScript_7cxt2"]
 script/source = "extends Item
@@ -35,5 +35,7 @@ noteyepatch = SubResource("PackedScene_ujp2j")
 anchor = ExtResource("4_vxjqh")
 
 [node name="Eyepatch" parent="." instance=ExtResource("2_r844h")]
+visible = false
 
 [node name="Anchor" parent="." instance=ExtResource("4_vxjqh")]
+visible = false
