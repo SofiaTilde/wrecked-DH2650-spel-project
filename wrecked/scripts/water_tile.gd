@@ -14,6 +14,8 @@ var subdivs: int = 64:                           # ← colon
 
 func _ready():
 	_update_mesh()
+	
+	extra_cull_margin = 2.0
 
 func _update_mesh():
 	var p := PlaneMesh.new()
