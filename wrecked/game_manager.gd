@@ -12,12 +12,16 @@ extends Node
 @onready var label_animator: AnimationPlayer = get_node("/root/Level/SharedHudNextRace/Control/LabelAnimator")
 
 @onready var leaderboard_popup: Panel = $CanvasLayer/opacity
+@onready var leaderboard_menu_popup: Panel = $CanvasLayer/opacity/Leaderboard2
+
 @onready var leaderboard_labels: Array = [
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score1st"),
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score2nd"),
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score3rd"),
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score4th")
 ]
+
+
 
 var placements_dict = {1 : "1st", 2:"2nd", 3:"3rd" , 4:"4th"}
 
@@ -38,9 +42,13 @@ var state: GameState = GameState.GET_READY #first state
 var countDownLen: int = 5
 var gameSet = false
 var starting = true
+var leaderboardMenu = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+#	$CanvasLayer/Opacity/Leaderboard2/MarginContainer/HBoxContainer/StartGame.pressed.connect(start_game)
+#	$CanvasLayer/Opacity/Leaderboard2/MarginContainer/HBoxContainer/Quit.pressed.connect(quit_game)
 	
 	await get_tree().process_frame
 	
@@ -156,13 +164,17 @@ func show_leaderboard():
 
 	players.sort_custom(sort_by_points)
 	leaderboard_popup.visible = true
+	if leaderboardMenu==true:
+		leaderboard_menu_popup.visible=true
+		leaderboard_popup.get_node("Leaderboard").position=Vector2(710,150)
 	for i in range(players.size()):
 		var leaderboardText = "%s" % placements_dict.get(i+1)+"- "+str(players[i].player_data.name) + " : " + str(players[i].player_data.points)
 		update_label(leaderboard_labels[i], leaderboardText, players[i].player_data.color,30) 
-	await get_tree().create_timer(3).timeout
-	leaderboard_popup.visible=false
-	
-	get_ready()
+	if leaderboardMenu==false:
+		await get_tree().create_timer(3).timeout
+		leaderboard_popup.visible=false
+		
+		get_ready()
 
 	
 
@@ -179,11 +191,12 @@ func start_next_game():
 	for p in players:
 			p.player_data.points=0
 	gameSet=false
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(4).timeout
 	label2.label_settings.outline_color = Color(0,0,0)
 	clear_label(label2)
-
-	get_ready()
+	
+	leaderboardMenu = true
+	show_leaderboard()
 	
 # === UTILITY ===
 
@@ -203,7 +216,23 @@ func clear_label(label : Label):
 	if label:
 		label.text = ""
 		
-		
+
+func start_game():
+	leaderboardMenu=false
+	leaderboard_menu_popup.visible=false
+	leaderboard_menu_popup.visible=false
+	leaderboard_popup.get_node("Leaderboard").position=Vector2(710,290)
+
+
+	get_ready()
+
+func options():
+	#Options stuff
+	return 0
+
+func quit_game():
+	get_tree().quit()
+
 		
 #Artefact, keep for now!
 #func _process(delta):
