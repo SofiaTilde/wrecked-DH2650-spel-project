@@ -2,7 +2,7 @@ extends Area3D
 
 @onready var count_down: Timer= $countDown
 @onready var label: Label = get_node("/root/Level/GameManager/CanvasLayer/SharedLabel")
-
+@onready var GM : Node = get_node("/root/Level/GameManager")
 
 var placement = 1
 var players : Array
@@ -17,11 +17,11 @@ func _ready() -> void:
   
 #enter goal
 func _on_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D and not body.player_data.gotPoints:
+	if body is CharacterBody3D and not body.player_data.gotPoints and GM.state==GM.GameState.RACE:
 		body.player_data.gotPoints=true
 		match placement:
 			1: 
-				body.player_data.points +=3
+				body.player_data.points +=9
 				winner(body.player_data)
 				winnerHUD(body.player_data)
 				placement +=1
