@@ -27,6 +27,7 @@ var players : Array
 var state: GameState = GameState.GET_READY #first state
 var countDownLen: int = 5
 var gameSet = false
+var starting = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,21 +39,24 @@ func _ready() -> void:
 	var yellow = PlayerData.new("Yellow Yates", Color(1, 1, 0,1))
 	var green = PlayerData.new("Green Gabby", Color(0, 1, 0,1))
 	players = [player1,player2,player3,player4]
-
+	
 	player1.player_data = red
 	player2.player_data= yellow
 	player3.player_data = green
 	player4.player_data = pink
-	
+	#update_label(label2,"GET READY FOR\nTHE NEXT RACE!", Color.WHITE,80)
+
 	get_ready()
 
 func get_ready():
 	state = GameState.GET_READY
 	print("GET READY")
 	
-	update_label("GET READY FOR\nTHE NEXT RACE!", Color.WHITE,80)
+	update_label(label,"GET READY FOR\nTHE NEXT RACE!", Color.WHITE,80)
 	#label.text="YOLO"
-	
+	if(starting):
+		update_label(label2,"GET READY FOR\nTHE NEXT RACE!", Color.WHITE,80)
+
 	Goal.placement=1
 	for p in players:
 		p.player_data.gotPoints=false
@@ -70,9 +74,10 @@ func start_count_in():
 	print("COUNTIN")
 	
 	for i in range(3,0,-1):
-		update_label("%s" % i, Color.WHITE, 500)
+		update_label(label,"%s" % i, Color.WHITE, 500)
+		if(starting):
+			update_label(label2,"%s" % i, Color.WHITE, 500)
 		await get_tree().create_timer(1).timeout
-	
 	start_race()
 	
 		
@@ -84,8 +89,13 @@ func start_race(): #from process
 	player2.get_node("PointsLabel").text= " "
 	player3.get_node("PointsLabel").text= " "
 	player4.get_node("PointsLabel").text= " "
-	update_label("WRECKED!!", Color.WHITE, 300)
+	update_label(label,"WRECKED!", Color.WHITE, 300)
+	if(starting):
+			update_label(label2,"WRECKED!", Color.WHITE, 300)
+	starting=false
 	await get_tree().create_timer(1.).timeout
+	starting=false
+	clear_label(label2)
 	clear_label(label)
 	
 	print("new race-stage!")
@@ -107,9 +117,9 @@ func _on_goal_race_over() -> void:
 func start_count_down():
 	state=GameState.COUNTDOWN
 	print("COUNTDOWN")
-	update_label(" ", Color.RED, 500)
+	update_label(label," ", Color.RED, 500)
 	for i in range(5,0,-1):
-		#update_label("%s" % i, Color.RED*(i/countDownLen), 500)
+		#update_label(label,"%s" % i, Color.RED*(i/countDownLen), 500)
 		label.text="%s" % i
 		#label.label_settings.outline_color=Color.BLUE*(i/countDownLen)
 		await get_tree().create_timer(1).timeout
@@ -124,7 +134,7 @@ func race_over():
 	state=GameState.RACEOVER
 	print("RACE OVER")
 	
-	update_label("GAME OVER", Color(1/3, 0, 0), 200)
+	update_label(label,"GAME OVER", Color(1/3, 0, 0), 200)
 	label.label_settings.outline_color = Color(0,0,0)
 	await get_tree().create_timer(3).timeout
 	
@@ -136,10 +146,9 @@ func start_next_game():
 	state=GameState.GAMEOVER
 	print("GAME OVER")
 	
-	update_label("Pirate %s" % players[0].player_data.name + " totally ",players[0].player_data.color*0.5+Color(0,0,0,1), 100 ,Vector2(0,-190))
-	label2.text="WRECKED IT!"
-	label2.modulate = players[0].player_data.color
-	label2.position=Vector2(0,80)
+	update_label(label,"Pirate %s" % players[0].player_data.name + " totally ",players[0].player_data.color*0.5+Color(0,0,0,1), 100 ,Vector2(0,-250))
+	update_label(label2,"WRECKED IT!!",players[0].player_data.color, 300 ,Vector2(0,90))
+
 	
 	# Reset points
 	Goal.placement=1 #reset placements
@@ -147,13 +156,14 @@ func start_next_game():
 			p.player_data.points=0
 	gameSet=false
 	await get_tree().create_timer(5).timeout
+	label2.label_settings.outline_color = Color(0,0,0)
 	clear_label(label2)
 
 	get_ready()
 	
 # === UTILITY ===
 
-func update_label(text: String, color: Color, size: float=200,offset:  Vector2=Vector2(0,0)):
+func update_label(label : Label,text: String, color: Color, size: float=200,offset:  Vector2=Vector2(0,0)):
 	if label:
 		label.text = text
 		label.modulate = color

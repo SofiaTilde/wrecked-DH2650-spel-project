@@ -23,6 +23,7 @@ var pitch_input := 0.0
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition : Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
+@onready var label: Label = get_node("/root/Level/GameManager/CanvasLayer/SharedLabel")
 
 
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
@@ -39,6 +40,7 @@ func _ready():
 	ap = $PlaceholderCharacter/AnimationPlayer
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color 
+	#label.text="test22222222"
 
 #call this func when you pick up/use some item
 func update_item_label(item:String)-> void:
