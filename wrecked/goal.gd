@@ -17,7 +17,7 @@ func _ready() -> void:
   
 #enter goal
 func _on_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D and not body.player_data.gotPoints and GM.state==GM.GameState.RACE:
+	if body is CharacterBody3D and not body.player_data.gotPoints and (GM.state==GM.GameState.RACE or GM.state==GM.GameState.GOAL or GM.state==GM.GameState.COUNTDOWN) :
 		body.player_data.gotPoints=true
 		match placement:
 			1: 
