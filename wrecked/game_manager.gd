@@ -9,8 +9,17 @@ extends Node
 @onready var player3: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer3/SubViewport/Player3")
 @onready var player4: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer4/SubViewport/Player4")
 @onready var Goal: Area3D = get_node("/root/Level/Goal")
-
 @onready var label_animator: AnimationPlayer = get_node("/root/Level/SharedHudNextRace/Control/LabelAnimator")
+
+@onready var leaderboard_popup: Panel = $CanvasLayer/opacity
+@onready var leaderboard_labels: Array = [
+	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score1st"),
+	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score2nd"),
+	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score3rd"),
+	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score4th")
+]
+
+var placements_dict = {1 : "1st", 2:"2nd", 3:"3rd" , 4:"4th"}
 
 #README! Gameflow is generally:
 #_on_goal_race_over->COUNTDOWN->RACEOVER(/GAMEOVER)->GET_READY->COUNT_IN->RACE->repeat
@@ -21,6 +30,7 @@ enum GameState {
 	COUNTDOWN,
 	RACEOVER,
 	GAMEOVER,
+	LEADERBOARD,
 }
 
 var players : Array
@@ -137,6 +147,20 @@ func race_over():
 	update_label(label,"GAME OVER", Color(1/3, 0, 0), 200)
 	label.label_settings.outline_color = Color(0,0,0)
 	await get_tree().create_timer(3).timeout
+	
+	show_leaderboard()
+	
+func show_leaderboard():
+	state=GameState.LEADERBOARD
+	print("LEADERBOARD")
+
+	players.sort_custom(sort_by_points)
+	leaderboard_popup.visible = true
+	for i in range(players.size()):
+		var leaderboardText = "%s" % placements_dict.get(i+1)+"- "+str(players[i].player_data.name) + " : " + str(players[i].player_data.points)
+		update_label(leaderboard_labels[i], leaderboardText, players[i].player_data.color,30) 
+	await get_tree().create_timer(3).timeout
+	leaderboard_popup.visible=false
 	
 	get_ready()
 
