@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://oa4gk1w85htb" path="res://kill_zone.tscn" id="7_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://bxdelsa5s7rp2" path="res://water.tscn" id="8_jsk3o"]
 [ext_resource type="PackedScene" uid="uid://bau54xbcyquty" path="res://goal.tscn" id="9_4arys"]
+[ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/generators/barrel_generator.gd" id="4_jka67"]
+[ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel/barrel.tscn" id="5_i5arm"]
+[ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/generators/items.tscn" id="6_wc5p8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cdqbm"]
 font = ExtResource("2_cdqbm")
@@ -397,6 +400,7 @@ script = ExtResource("4_jka67")
 
 [node name="Barrel" parent="Barrel generator" instance=ExtResource("5_i5arm")]
 transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, -10, 0)
+visible = false
 
 [node name="Platform1" parent="." instance=ExtResource("6_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.9944)

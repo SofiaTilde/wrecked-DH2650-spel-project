@@ -1,0 +1,11 @@
+[gd_resource type="ORMMaterial3D" load_steps=4 format=3 uid="uid://cx7375xlkb82k"]
+
+[ext_resource type="Texture2D" uid="uid://drh2npkc3m02w" path="res://items/barrel/barrel_texture_gold.png" id="1_dssfa"]
+[ext_resource type="Texture2D" uid="uid://dmy5dmc12sylp" path="res://items/barrel/barrel_normal.png" id="2_vw7sq"]
+[ext_resource type="Texture2D" uid="uid://caatypmigyv8w" path="res://items/barrel/barrel_orm.png" id="3_wm6uw"]
+
+[resource]
+albedo_texture = ExtResource("1_dssfa")
+orm_texture = ExtResource("3_wm6uw")
+normal_enabled = true
+normal_texture = ExtResource("2_vw7sq")
