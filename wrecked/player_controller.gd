@@ -20,28 +20,30 @@ var pitch_input := 0.0
 @onready var model = $PlaceholderCharacter
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
-@onready var label_node = get_parent().get_node("Label")
+@onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition : Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 
 
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
-@export var transitioner : Transitioner #to get transitioner: spawn.gd script
-
+@export var player_data : PlayerData
 #animation player:
 var ap: AnimationPlayer
 
 
 func _ready():
+	
+	await get_tree().process_frame 
+
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
-	label_node.text = "Player %s" % [player_id] + " Item: "
-	
+	currItem_node.text = "Item: "
+	currItem_node.modulate = player_data.color 
 
 #call this func when you pick up/use some item
 func update_item_label(item:String)-> void:
-	if label_node: #avoid crashes if node is removed/changed
-		label_node.text = "Player %s" % [player_id] + " Item: %s" % [item]
+	if currItem_node: #avoid crashes if node is removed/changed
+		currItem_node.text = "Player %s" % [player_id] + " Item: %s" % [item]
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
