@@ -35,7 +35,6 @@ one_shot = true
 
 [node name="transitioner" parent="RespawnManager" instance=ExtResource("3_i3pqv")]
 
-[connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]
 [node name="ItemEffect" type="Node3D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="ItemEffect"]
@@ -45,3 +44,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]

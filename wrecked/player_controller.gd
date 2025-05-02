@@ -24,6 +24,7 @@ var pitch_input := 0.0
 @onready var lastSavePosition : Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Level/GameManager/CanvasLayer/SharedLabel")
+@onready var label_node: Label = $MarginContainer/CurrItemLabel
 
 
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!
