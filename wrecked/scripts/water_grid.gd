@@ -1,3 +1,4 @@
+@tool   # visible in editor
 extends Node3D
 
 @export var tile_scene        : PackedScene 
@@ -18,7 +19,7 @@ func _ready():
 func _spawn_grid():
 	var max_tiles = tiles_per_axis
 	for x in range(-max_tiles, max_tiles + 1):
-		for z in range(-max_tiles, max_tiles + 1):
+		for z in range(-max_tiles - int(256.0 / tile_size), max_tiles + 1):
 			var pos3 = Vector3(x * tile_size, 0.0, z * tile_size)
 			var d_tiles = tiles_per_axis - max(abs(x), abs(z))
 

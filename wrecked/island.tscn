@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck51bdne8ldwv"]
+
+[ext_resource type="PackedScene" uid="uid://c2vady34jk1gx" path="res://meshes/island/island.glb" id="1_0iamf"]
+
+[node name="Island" type="Node3D"]
+
+[node name="island" parent="." instance=ExtResource("1_0iamf")]
