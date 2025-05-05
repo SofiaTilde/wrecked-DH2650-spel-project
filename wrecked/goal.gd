@@ -1,8 +1,8 @@
 extends Area3D
 
 @onready var count_down: Timer= $countDown
-@onready var label: Label = get_node("/root/Level/GameManager/CanvasLayer/SharedLabel")
-@onready var GM : Node = get_node("/root/Level/GameManager")
+@onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
+@onready var GM : Node = get_node("/root/Game/GameManager")
 
 var placement = 1
 var players : Array

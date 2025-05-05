@@ -1,10 +1,10 @@
 extends Node
-@onready var player1 =get_node("/root/Level/GridContainer/SubViewportContainer/SubViewport/Player")
-@onready var player2: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer2/SubViewport/Player2")
-@onready var player3: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer3/SubViewport/Player3")
-@onready var player4: CharacterBody3D = get_node("/root/Level/GridContainer/SubViewportContainer4/SubViewport/Player4")
-@onready var Goal: Area3D = get_node("/root/Level/Goal")
-@onready var label_animator: AnimationPlayer = get_node("/root/Level/SharedHudNextRace/Control/LabelAnimator")
+@onready var player1 =get_node("/root/Game/GridContainer/SubViewportContainer/SubViewport/Player")
+@onready var player2: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer2/SubViewport/Player2")
+@onready var player3: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer3/SubViewport/Player3")
+@onready var player4: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer4/SubViewport/Player4")
+@onready var Goal: Area3D = get_node("/root/Game/Goal")
+@onready var label_animator: AnimationPlayer = get_node("/root/Game/SharedHudNextRace/Control/LabelAnimator")
 
 @onready var leaderboard_popup: Panel = $CanvasLayer/opacity
 @onready var leaderboard_menu_popup: Panel = $CanvasLayer/opacity/Leaderboard2
@@ -139,7 +139,7 @@ func race_over():
 	state=GameState.RACEOVER
 	print("RACE OVER")
 	
-	update_label(label,"GAME OVER", Color(1/3, 0, 0), 200)
+	update_label(label,"GAME OVER", Color(1.0/3.0, 0.0, 0.0), 200)
 	await get_tree().create_timer(3).timeout
 	show_leaderboard()
 	

@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 	var camera_pos = Camera.position
 	twist_input += -cam_dir.x * joystick_sensitivity
 	var forward := cam_basis.z #3d vec i cams dir
-  var right := cam_basis.x
+	var right := cam_basis.x
 	var direction := (right * input_dir.x + forward * input_dir.y).normalized() #dir man rör sig i i cam coords
 	var smooth_target_pos = global_transform.origin -(player_position*direction).normalized()*0.1 
 	camera_pos = smooth_target_pos
