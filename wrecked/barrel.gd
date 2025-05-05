@@ -23,5 +23,10 @@ func _on_body_entered(body) -> void:
 	await tween.finished
 
 	body.update_item_label(item.get_meta("item_name"))
+	item.visible = false
+	await get_tree().create_timer(1).timeout
 	item.queue_free() # delete item
+	#! sometimes item doesn't disappear
+	await item.tree_exited
+	await get_tree().create_timer(1).timeout
 	self.queue_free() # delete self
