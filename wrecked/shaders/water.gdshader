@@ -10,6 +10,7 @@ uniform float time;
 
 void vertex() {
 	VERTEX.y = 0.0;
+
 	VERTEX.y += sin(VERTEX.x * 0.51 + VERTEX.z * 0.56 + time * 0.6) * 0.41;
 	VERTEX.y += sin(VERTEX.x * 0.73 + VERTEX.z * 0.392 + time * 0.9) * 0.35;
 	VERTEX.y += sin(VERTEX.x * 0.398 + VERTEX.z * 0.2 + time * 0.7) * 0.43;

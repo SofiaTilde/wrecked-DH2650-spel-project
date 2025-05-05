@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcofm0418afw"]
+
+[ext_resource type="FontFile" uid="uid://decj3qo5pg26d" path="res://kirifont/KiriFont.otf" id="1_450we"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6iypd"]
+font = ExtResource("1_450we")
+font_size = 333
+outline_size = 40
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ywkqq"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_450we"]
+resource_name = "shrink_font"
+length = 1.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ikapv"]
+_data = {
+&"RESET": SubResource("Animation_ywkqq"),
+&"shrink_font": SubResource("Animation_450we")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SharedLabel" type="Label" parent="Control"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = " "
+label_settings = SubResource("LabelSettings_6iypd")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LabelAnimator" type="AnimationPlayer" parent="Control"]
+root_node = NodePath("../SharedLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_ikapv")
+}
+
+[node name="SharedLabel2" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 41.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 651.0
+offset_bottom = 516.0
+color = Color(0.425097, 0.725011, 0, 1)

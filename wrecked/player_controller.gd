@@ -22,18 +22,30 @@ var ap: AnimationPlayer
 @onready var model = $PlaceholderCharacter
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
-@onready var label_node = get_parent().get_node("Label")
+
+@onready var currItem_node = $MarginContainer/CurrItemLabel
+@onready var lastSavePosition : Vector3 = global_transform.origin
+@onready var respawn_manager = $RespawnManager
+@onready var label: Label = get_node("/root/Level/GameManager/CanvasLayer/SharedLabel")
+@onready var label_node: Label = $MarginContainer/CurrItemLabel
+
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
+@export var player_data : PlayerData
 @export var camera_smoothing_rate = 0.1
 
 var holdingItem: Item
 
 func _ready():
+	
+	await get_tree().process_frame 
+
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
-	label_node.text = "Player %s" % [player_id] + " Item: "
-	
+	currItem_node.text = "Item: "
+	currItem_node.modulate = player_data.color 
+	#label.text="test22222222"
+
 #call this func when you pick up/use some item
 func update_item_label(item: String) -> void:
 	if label_node: # avoid crashes if node is removed/changed
@@ -41,7 +53,7 @@ func update_item_label(item: String) -> void:
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-	
+
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
@@ -56,7 +68,7 @@ func _physics_process(delta: float) -> void:
 	var camera_pos = Camera.position
 	twist_input += -cam_dir.x * joystick_sensitivity
 	var forward := cam_basis.z #3d vec i cams dir
-	var right := cam_basis.x
+  var right := cam_basis.x
 	var direction := (right * input_dir.x + forward * input_dir.y).normalized() #dir man rör sig i i cam coords
 	var smooth_target_pos = global_transform.origin -(player_position*direction).normalized()*0.1 
 	camera_pos = smooth_target_pos
@@ -75,25 +87,28 @@ func _physics_process(delta: float) -> void:
 	pitch_input  = lerp(pitch_pivot.rotation.z,0.0,0.1)
 	#Player acceleration
 	if direction != Vector3.ZERO:
+
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 10.0)
 		
 	#Player deacceleration 
 
 	else:
-		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION * delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED) #redundant bcus overwritten?
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	
-	velocity.x = player_velocity.x
+	velocity.x = player_velocity.x #update final value
 	velocity.z = player_velocity.z
 	# Jumping
 	velocity.y = jump_state_adv
+
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+	if is_on_floor():
+		lastSavePosition = global_transform.origin #for respawn
 	move_and_slide() #rörelse enligt velocity mm.
 	apply_push_to_other_players() #används för att sköta collisions
 	for body in recently_pushed.keys():
@@ -164,10 +179,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			twist_input = -event.relative.x * mouse_sensitivity
 			pitch_input = -event.relative.y * mouse_sensitivity
 
-
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
 
+#--respawning, called from Kill-zone Scene script when falling into water
+func respawn():
+	respawn_manager.respawn()
+
+	
 func setItem(item: Item):
 	if holdingItem != null:
 		holdingItem.queue_free()

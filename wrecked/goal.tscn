@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bau54xbcyquty"]
+
+[ext_resource type="Script" uid="uid://5g2qhqwyy5yy" path="res://goal.gd" id="1_6k3qi"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_6k3qi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0qle8"]
+
+[node name="Goal" type="Area3D"]
+script = ExtResource("1_6k3qi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_6k3qi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0qle8")
+debug_color = Color(0.51454, 0.704358, 0, 1)
+
+[node name="countDown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="race_over" from="." to="." method="_on_race_over"]
+[connection signal="timeout" from="countDown" to="." method="_on_count_down_timeout"]

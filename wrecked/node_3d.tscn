@@ -14,6 +14,21 @@
 [ext_resource type="PackedScene" uid="uid://bi4nnrcg5pfr2" path="res://level/2x2/0.tscn" id="12_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://bdgo7wobu7xro" path="res://level/2x2/1.tscn" id="13_3v7ru"]
 [ext_resource type="PackedScene" uid="uid://ck51bdne8ldwv" path="res://island.tscn" id="14_wlxy5"]
+[ext_resource type="Script" uid="uid://b85s3xfg6xv8i" path="res://game_manager.gd" id="1_tereu"]
+[ext_resource type="FontFile" uid="uid://decj3qo5pg26d" path="res://kirifont/KiriFont.otf" id="2_cdqbm"]
+[ext_resource type="LabelSettings" uid="uid://b32jxxg8k3j45" path="res://custom.tres" id="2_tereu"]
+[ext_resource type="LabelSettings" uid="uid://c2fbmgdggtmr8" path="res://leaderboard.tres" id="4_imku0"]
+[ext_resource type="PackedScene" uid="uid://bau54xbcyquty" path="res://goal.tscn" id="9_4arys"]
+[ext_resource type="PackedScene" uid="uid://oa4gk1w85htb" path="res://kill_zone.tscn" id="7_wc5p8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cdqbm"]
+font = ExtResource("2_cdqbm")
+font_size = 300
+outline_size = 40
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdqbm"]
+bg_color = Color(7.52043e-08, 0.0590926, 0.150703, 0.411765)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_noarx"]
 
@@ -28,6 +43,183 @@ sky = SubResource("Sky_noarx")
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_noarx"]
 
 [node name="Game" type="Node3D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_tereu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
+layer = 100
+
+[node name="SharedLabel" type="Label" parent="GameManager/CanvasLayer"]
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+label_settings = ExtResource("2_tereu")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SharedLabel2" type="Label" parent="GameManager/CanvasLayer"]
+custom_minimum_size = Vector2(2000, 1200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1000.0
+offset_top = -600.0
+offset_right = 1000.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = " "
+label_settings = SubResource("LabelSettings_cdqbm")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="opacity" type="Panel" parent="GameManager/CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_cdqbm")
+
+[node name="Leaderboard" type="Panel" parent="GameManager/CanvasLayer/opacity"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameManager/CanvasLayer/opacity/Leaderboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Score1st" type="Label" parent="GameManager/CanvasLayer/opacity/Leaderboard/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+label_settings = ExtResource("4_imku0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Score2nd" type="Label" parent="GameManager/CanvasLayer/opacity/Leaderboard/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+label_settings = ExtResource("4_imku0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Score3rd" type="Label" parent="GameManager/CanvasLayer/opacity/Leaderboard/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+label_settings = ExtResource("4_imku0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Score4th" type="Label" parent="GameManager/CanvasLayer/opacity/Leaderboard/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+label_settings = ExtResource("4_imku0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Leaderboard2" type="Panel" parent="GameManager/CanvasLayer/opacity"]
+visible = false
+custom_minimum_size = Vector2(1000, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = 140.0
+offset_right = 500.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameManager/CanvasLayer/opacity/Leaderboard2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Options" type="Button" parent="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_cdqbm")
+theme_override_font_sizes/font_size = 50
+text = "Options"
+
+[node name="StartGame" type="Button" parent="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_cdqbm")
+theme_override_font_sizes/font_size = 50
+text = "Restart"
+
+[node name="Quit" type="Button" parent="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_cdqbm")
+theme_override_font_sizes/font_size = 50
+text = "quit"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.534213, -0.815404, -0.223011, -0.284691, -0.0748638, 0.955692, -0.79597, 0.574032, -0.192145, -4.2404, 11.0469, -3.46405)
@@ -60,12 +252,22 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 axis_lock_angular_y = true
 
-[node name="Label" type="Label" parent="GridContainer/SubViewportContainer/SubViewport"]
-offset_right = 199.0
-offset_bottom = 50.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = "[Dynamic]"
+[node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 79.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 61.0
+
+[node name="CurrItemLabel" type="Label" parent="GridContainer/SubViewportContainer/SubViewport/Player/MarginContainer"]
+layout_mode = 2
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
@@ -83,16 +285,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 0)
 axis_lock_angular_y = true
 player_id = 2
 
-[node name="Label" type="Label" parent="GridContainer/SubViewportContainer2/SubViewport"]
+[node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer2/SubViewport/Player2"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -41.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer2/SubViewport/Player2"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -199.0
-offset_bottom = 50.0
+offset_left = -40.0
+offset_bottom = 41.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = "[Dynamic]"
+
+[node name="CurrItemLabel" type="Label" parent="GridContainer/SubViewportContainer2/SubViewport/Player2/MarginContainer"]
+layout_mode = 2
 
 [node name="SubViewportContainer3" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
@@ -105,21 +318,29 @@ handle_input_locally = false
 size = Vector2i(958, 538)
 render_target_update_mode = 4
 
-[node name="Label" type="Label" parent="GridContainer/SubViewportContainer3/SubViewport"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -50.0
-offset_right = 199.0
-grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = "[Dynamic]"
-
 [node name="Player3" parent="GridContainer/SubViewportContainer3/SubViewport" instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
 axis_lock_angular_y = true
 player_id = 3
+
+[node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer3/SubViewport/Player3"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 79.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer3/SubViewport/Player3"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -41.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="CurrItemLabel" type="Label" parent="GridContainer/SubViewportContainer3/SubViewport/Player3/MarginContainer"]
+layout_mode = 2
 
 [node name="SubViewportContainer4" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
@@ -137,19 +358,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 2, 0)
 axis_lock_angular_y = true
 player_id = 4
 
-[node name="Label" type="Label" parent="GridContainer/SubViewportContainer4/SubViewport"]
+[node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer4/SubViewport/Player4"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -199.0
-offset_top = -50.0
+offset_left = -79.0
+offset_top = -41.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = "[Dynamic]"
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer4/SubViewport/Player4"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -41.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CurrItemLabel" type="Label" parent="GridContainer/SubViewportContainer4/SubViewport/Player4/MarginContainer"]
+layout_mode = 2
 
 [node name="Items" parent="." instance=ExtResource("6_wc5p8")]
 
@@ -164,6 +396,23 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 
 [node name="Level" parent="." instance=ExtResource("6_i5arm")]
+
+[node name="Kill Zone" parent="." instance=ExtResource("7_wc5p8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9294, 0, 0)
+gravity_space_override = 3
+gravity = 2.0
+
+[node name="CollisionShape3D" parent="Kill Zone" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10402, -14.885, -15.3879)
+
+[node name="Goal" parent="." instance=ExtResource("9_4arys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91648, 1.40757, -15.5032)
+
+[connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/StartGame" to="GameManager" method="start_game"]
+[connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/Quit" to="GameManager" method="quit_game"]
+[connection signal="race_over" from="Goal" to="GameManager" method="_on_goal_race_over"]
+
+[editable path="Kill Zone"]
 
 [node name="Node3D" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
 script = ExtResource("8_tereu")
