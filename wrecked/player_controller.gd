@@ -12,8 +12,8 @@ const DEACCELERATION = 1.5
 const FALLMULTIPLIER = 0.5
 const JUMPCUTMULTIPLIER = 0.8
 const PUSH_COOLDOWN = 0.2 # seconds
-var joystick_sensitivity :=0.05
-var mouse_sensitivity :=0.001
+var joystick_sensitivity := 0.05
+var mouse_sensitivity := 0.001
 
 var twist_input := 0.0
 var pitch_input := 0.0
@@ -24,26 +24,25 @@ var ap: AnimationPlayer
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 
 @onready var currItem_node = $MarginContainer/CurrItemLabel
-@onready var lastSavePosition : Vector3 = global_transform.origin
+@onready var lastSavePosition: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Level/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
 
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
-@export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
-@export var player_data : PlayerData
+@export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
+@export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
 
 var holdingItem: Item
 
 func _ready():
-	
-	await get_tree().process_frame 
+	await get_tree().process_frame
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
 	currItem_node.text = "Item: "
-	currItem_node.modulate = player_data.color 
+	currItem_node.modulate = player_data.color
 	#label.text="test22222222"
 
 #call this func when you pick up/use some item
@@ -53,52 +52,50 @@ func update_item_label(item: String) -> void:
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-
 	#Inputs
-	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) #normalized [-1,1] 2d vector
+	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
 	
-	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) #vec2 (x(L/R) och zdir(forw/backw))
+	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) # vec2 (x(L/R) och zdir(forw/backw))
 	#Player variables
-	var player_position = position	
+	var player_position = position
 	var player_velocity = velocity
-	var jump_state_adv = player_jump_adv(player_velocity.y,delta)
+	var jump_state_adv = player_jump_adv(player_velocity.y, delta)
 	#Camera variables
-	var cam_basis: Basis = twist_pivot.global_transform.basis #transformera från world coords till cam coords
+	var cam_basis: Basis = twist_pivot.global_transform.basis # transformera från world coords till cam coords
 	var camera_pos = Camera.position
 	twist_input += -cam_dir.x * joystick_sensitivity
-	var forward := cam_basis.z #3d vec i cams dir
+	var forward := cam_basis.z # 3d vec i cams dir
 	var right := cam_basis.x
-	var direction := (right * input_dir.x + forward * input_dir.y).normalized() #dir man rör sig i i cam coords
-	var smooth_target_pos = global_transform.origin -(player_position*direction).normalized()*0.1 
+	var direction := (right * input_dir.x + forward * input_dir.y).normalized() # dir man rör sig i i cam coords
+	var smooth_target_pos = global_transform.origin - (player_position * direction).normalized() * 0.1
 	camera_pos = smooth_target_pos
 	twist_pivot.global_transform.origin = twist_pivot.global_transform.origin.lerp(smooth_target_pos, camera_smoothing_rate)
-	pitch_input += -cam_dir.y * joystick_sensitivity 
+	pitch_input += -cam_dir.y * joystick_sensitivity
 	
 	#För att rotera karaktären längs riktningen hen går i
-	var player_rotation = atan2(direction.x, direction.z) #i radian, rotation angle
+	var player_rotation = atan2(direction.x, direction.z) # i radian, rotation angle
 	#Camera rotations
 	twist_pivot.rotate_y(twist_input)
 	pitch_pivot.rotate_x(pitch_input)
 	#Smoothing of camera
-	pitch_pivot.rotation.x = lerp_angle(clamp(pitch_pivot.rotation.x, -0.5, deg_to_rad(30)),rotation.x,0.1) 
-	twist_pivot.rotation.z = lerp_angle(clamp(twist_pivot.rotation.z, -0.5, deg_to_rad(30)),rotation.z,0.1) 
-	twist_input  = lerp(twist_pivot.rotation.x,0.0,0.1)
-	pitch_input  = lerp(pitch_pivot.rotation.z,0.0,0.1)
+	pitch_pivot.rotation.x = lerp_angle(clamp(pitch_pivot.rotation.x, -0.5, deg_to_rad(30)), rotation.x, 0.1)
+	twist_pivot.rotation.z = lerp_angle(clamp(twist_pivot.rotation.z, -0.5, deg_to_rad(30)), rotation.z, 0.1)
+	twist_input = lerp(twist_pivot.rotation.x, 0.0, 0.1)
+	pitch_input = lerp(pitch_pivot.rotation.z, 0.0, 0.1)
 	#Player acceleration
 	if direction != Vector3.ZERO:
-
-		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
+		player_velocity = player_velocity.lerp(direction * SPEED, ACCELERATION * delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 10.0)
 		
 	#Player deacceleration 
 
 	else:
-		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED) #redundant bcus overwritten?
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED) # redundant bcus overwritten?
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	velocity.x = player_velocity.x #update final value
+	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
 	# Jumping
 	velocity.y = jump_state_adv
@@ -108,9 +105,9 @@ func _physics_process(delta: float) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if is_on_floor():
-		lastSavePosition = global_transform.origin #for respawn
-	move_and_slide() #rörelse enligt velocity mm.
-	apply_push_to_other_players() #används för att sköta collisions
+		lastSavePosition = global_transform.origin # for respawn
+	move_and_slide() # rörelse enligt velocity mm.
+	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
 		recently_pushed[body] -= delta
 	for body in recently_pushed.keys():
@@ -122,16 +119,16 @@ func _physics_process(delta: float) -> void:
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
-		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
+		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
 		throwItem(play)
 	if Input.is_action_just_pressed("use_item_right_%s" % [player_id]):
-		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D
+		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D
 		throwItem(play)
 	if Input.is_action_just_pressed("use_item_down_%s" % [player_id]):
-		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer3/SubViewport/Player3") as CharacterBody3D
+		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer3/SubViewport/Player3") as CharacterBody3D
 		throwItem(play)
 	if Input.is_action_just_pressed("use_item_left_%s" % [player_id]):
-		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer4/SubViewport/Player4") as CharacterBody3D
+		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer4/SubViewport/Player4") as CharacterBody3D
 		throwItem(play)
 
 #hanterar jump logic, will adjust with button press sensitivity
@@ -157,9 +154,9 @@ func apply_push_to_other_players() -> void:
 		
 		if Collision_object is CharacterBody3D and Collision_object != self:
 			if Collision_object in recently_pushed:
-				continue  # already pushed recently
+				continue # already pushed recently
 
-			var push_normal = -collision.get_normal() 
+			var push_normal = - collision.get_normal()
 
 			var relative_speed = velocity.length()
 			var push_strength = relative_speed * PUSH_FORCE
@@ -170,14 +167,11 @@ func apply_push_to_other_players() -> void:
 			recently_pushed[Collision_object] = PUSH_COOLDOWN
 		
 		
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-
-			twist_input = -event.relative.x * mouse_sensitivity
-			pitch_input = -event.relative.y * mouse_sensitivity
+			twist_input = - event.relative.x * mouse_sensitivity
+			pitch_input = - event.relative.y * mouse_sensitivity
 
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.

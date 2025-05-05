@@ -16,4 +16,3 @@ func _process(delta: float) -> void:
 	pos.y *= clamp(1.0 - sqrt(pos.x * pos.x + pos.z * pos.z) / 128.0, 0.0, 1.0);
 	
 	global_transform.origin = pos
-	

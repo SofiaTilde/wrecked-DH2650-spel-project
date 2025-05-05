@@ -1,4 +1,4 @@
-@tool   # visible in editor
+@tool # visible in editor
 extends Node3D
 
 @export var platform_scenes: Array[PackedScene]
@@ -37,8 +37,7 @@ func _spawn_first(start):
 	stack.push_back(start)
 
 	var i = 0
-	while stack.size() > 0	&& i < 1000:
-		
+	while stack.size() > 0 && i < 1000:
 		var current = stack.pop_back()
 		
 		if !_spawn_from_pos(current):
@@ -58,7 +57,7 @@ func _spawn_first(start):
 			
 			if next_position.z > -LEVEL_LENGTH / 2.0:
 				if next_position.x < -MAX_WIDTH || next_position.x > MAX_WIDTH:
-					shift.x = -shift.x
+					shift.x = - shift.x
 					next_position = current + shift
 					
 				stack.push_back(next_position)
@@ -72,8 +71,7 @@ func _spawn_second():
 	stack.push_back(Vector3(0.0, 0.0, -LEVEL_LENGTH))
 
 	var i = 0
-	while stack.size() > 0	&& i < 1000:
-		
+	while stack.size() > 0 && i < 1000:
 		var current = stack.pop_back()
 		
 		if !_spawn_from_pos(current):
@@ -93,7 +91,7 @@ func _spawn_second():
 			
 			if next_position.z < -LEVEL_LENGTH / 2.0:
 				if next_position.x < -MAX_WIDTH || next_position.x > MAX_WIDTH:
-					shift.x = -shift.x
+					shift.x = - shift.x
 					next_position = current + shift
 					
 				stack.push_back(next_position)
@@ -102,16 +100,14 @@ func _spawn_second():
 	
 func _spawn_from_pos(position):
 	for child in get_children():
-
 		if child is Node3D:
 			var other_pos: Vector3 = (child as Node3D).global_transform.origin
 			
 			if position.distance_to(other_pos) < min_distance:
-				
 				return false
 
 	var scene: PackedScene = platform_scenes[randi() % platform_scenes.size()]
-	var platform: Node3D   = scene.instantiate()
+	var platform: Node3D = scene.instantiate()
 
 	add_child(platform)
 	platform.global_position = position

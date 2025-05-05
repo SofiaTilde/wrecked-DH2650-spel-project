@@ -1,4 +1,4 @@
-@tool   # visible in editor
+@tool # visible in editor
 extends Node3D
 
 @export var platform_scenes: Array[PackedScene]

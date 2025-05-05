@@ -1,15 +1,15 @@
 extends Node3D
 
-@export var tile_scene        : PackedScene 
-@export var tile_size         : float      = 32.0  # must match WaterTile
-@export var tiles_per_axis    : int        = 8
+@export var tile_scene: PackedScene
+@export var tile_size: float = 32.0 # must match WaterTile
+@export var tiles_per_axis: int = 8
 
-@export var water_material : ShaderMaterial
+@export var water_material: ShaderMaterial
 
 func _process(_delta: float) -> void:
 	water_material.set_shader_parameter(
 		"time",
-		Time.get_ticks_msec() / 1000.0    # same clock as TIME, and same as in platforms
+		Time.get_ticks_msec() / 1000.0 # same clock as TIME, and same as in platforms
 		)
 
 func _ready():
