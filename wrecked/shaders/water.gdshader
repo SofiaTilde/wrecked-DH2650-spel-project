@@ -10,13 +10,14 @@ uniform float time;
 
 void vertex() {
 	VERTEX.y = 0.0;
-	VERTEX.y += sin(VERTEX.x * 0.21 + VERTEX.z * 0.26 + time * 0.2) * 0.31;
-	VERTEX.y += sin(VERTEX.x * 0.33 + VERTEX.z * 0.192 + time * 0.6) * 0.25;
-	VERTEX.y += sin(VERTEX.x * 0.198 + VERTEX.z * 0.1 + time * 0.5) * 0.33;
-	VERTEX.y += sin(VERTEX.x * 0.284 + VERTEX.z * 0.42 + time * 0.82) * 0.21;
-	VERTEX.y += sin(VERTEX.x * 0.112 + VERTEX.z * 0.27 + time * 0.7) * 0.22;
 
-	VERTEX.y *= clamp(1.0 - sqrt(VERTEX.x * VERTEX.x + VERTEX.z * VERTEX.z) / 128.0, 0.0, 1.0);
+	VERTEX.y += sin(VERTEX.x * 0.51 + VERTEX.z * 0.56 + time * 0.6) * 0.41;
+	VERTEX.y += sin(VERTEX.x * 0.73 + VERTEX.z * 0.392 + time * 0.9) * 0.35;
+	VERTEX.y += sin(VERTEX.x * 0.398 + VERTEX.z * 0.2 + time * 0.7) * 0.43;
+	VERTEX.y += sin(VERTEX.x * 0.484 + VERTEX.z * 0.82 + time * 0.82) * 0.21;
+	VERTEX.y += sin(VERTEX.x * 0.212 + VERTEX.z * 0.47 + time * 0.75) * 0.32;
+
+	VERTEX.y *= clamp(1.0 - sqrt(VERTEX.x * VERTEX.x + VERTEX.z * VERTEX.z) / 128.0, 0.1, 1.0);
 }
 
 const float move_factor = 0.05;

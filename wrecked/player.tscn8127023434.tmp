@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://g4tbrr3sfui2"]
+[gd_scene load_steps=4 format=3 uid="uid://bdungm8aqgypi"]
 
 [ext_resource type="Script" uid="uid://uuv10ct6y602" path="res://player_controller.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://ci17mdsvxbc5j" path="res://meshes/placeholdercharacter/PlaceholderCharacter.glb" id="2_onrkg"]
-[ext_resource type="PackedScene" uid="uid://lw6bygjm0w6o" path="res://transitioner.tscn" id="3_i3pqv"]
-[ext_resource type="Script" uid="uid://6n2qlha5nso7" path="res://respawn_manager.gd" id="4_hqtel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 height = 2.204
@@ -28,23 +26,3 @@ debug_color = Color(0.894678, 0.000303416, 0.814324, 0.42)
 [node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.938397, 0.34556, 0, -0.34556, 0.938397, 0, 1.83717, 3.67014)
 current = true
-
-[node name="RespawnManager" type="Node" parent="."]
-script = ExtResource("4_hqtel")
-
-[node name="ResetTimer" type="Timer" parent="RespawnManager"]
-one_shot = true
-
-[node name="transitioner" parent="RespawnManager" instance=ExtResource("3_i3pqv")]
-
-[node name="ItemEffect" type="Node3D" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="ItemEffect"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-
-[connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]
