@@ -40,13 +40,9 @@ var holdingItem: Item
 
 func _ready():
 	await get_tree().process_frame
-
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#ap = $PlaceholderCharacter/AnimationPlayer
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
-	#label.text="test22222222"
-
 #call this func when you pick up/use some item
 func update_item_label(item: String) -> void:
 	if label_node: # avoid crashes if node is removed/changed
@@ -57,7 +53,6 @@ func _physics_process(delta: float) -> void:
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
-	
 	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) # vec2 (x(L/R) och zdir(forw/backw))
 	#Player variables
 	var player_position = position
@@ -99,10 +94,6 @@ func _physics_process(delta: float) -> void:
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)	
-	velocity.x = player_velocity.x
-	velocity.z = player_velocity.z
-	
-
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
 	# Jumping
@@ -124,6 +115,7 @@ func _physics_process(delta: float) -> void:
 
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
+		state_machine.travel("Throw")
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
@@ -152,7 +144,6 @@ func player_jump_adv(jump_velocity, delta) -> float:
 			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
 	if jump_velocity>0.0:
 		state_machine.travel("Jumping")
-	#print(state_machine.get_current_node())
 	return jump_velocity
 
 
@@ -189,6 +180,7 @@ func _on_area_3d_visibility_changed() -> void:
 
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
+	state_machine.travel("Drowning")
 	respawn_manager.respawn()
 
 	
