@@ -27,6 +27,8 @@ var ap: AnimationPlayer
 @export var player_id = 1 #p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 @export var camera_smoothing_rate = 0.1
 
+var holdingItem: Item
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ap = $PlaceholderCharacter/AnimationPlayer
