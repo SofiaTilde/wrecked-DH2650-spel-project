@@ -18,10 +18,11 @@ var mouse_sensitivity := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 var recently_pushed = {}
-@onready var model = $Rackham_red
-@onready var animation_player := $Rackham_red/AnimationPlayer
+
+@onready var model = Node3D
+@onready var animation_player = AnimationPlayer
 @onready var animation_tree := AnimationTree
-@onready var state_machine = $"Rackham_red/AnimationTree"["parameters/playback"]
+@onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 
@@ -34,12 +35,18 @@ var recently_pushed = {}
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 @export var player_data: PlayerData
-@export var player_mesh: MeshInstance3D
 @export var camera_smoothing_rate = 0.1
-
+var player_names = {1:"Rackham_red",2:"Pippi_pink",3:"Gully_green",4:"Yates_yellow" }
 var holdingItem: Item
 
 func _ready():
+	#@onready var model = $Rackham_red
+
+	#@onready var animation_player := $Rackham_red/AnimationPlayer
+	
+	var name = player_names.get(player_id) 
+	model = get_node(name)
+	animation_player = str(name) + "/AnimationPlayer"
 	await get_tree().process_frame
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
