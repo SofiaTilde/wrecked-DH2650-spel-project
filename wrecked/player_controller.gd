@@ -7,13 +7,14 @@ const JUMPACCELERATION = 2.5
 const JUMPDEACCELERATION = 0.5
 const PUSH_FORCE = 0.8
 const CAMERA_DEADZONE := 0.1
-const ACCELERATION =2.5
-const DEACCELERATION =1.5
+const ACCELERATION = 2.5
+const DEACCELERATION = 1.5
 const FALLMULTIPLIER = 0.5
 const JUMPCUTMULTIPLIER = 0.8
 const PUSH_COOLDOWN = 0.2 # seconds
 var joystick_sensitivity :=0.05
 var mouse_sensitivity :=0.001
+
 var twist_input := 0.0
 var pitch_input := 0.0
 var recently_pushed = {}
@@ -32,8 +33,8 @@ func _ready():
 	label_node.text = "Player %s" % [player_id] + " Item: "
 	
 #call this func when you pick up/use some item
-func update_item_label(item:String)-> void:
-	if label_node: #avoid crashes if node is removed/changed
+func update_item_label(item: String) -> void:
+	if label_node: # avoid crashes if node is removed/changed
 		label_node.text = "Player %s" % [player_id] + " Item: %s" % [item]
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
@@ -76,8 +77,9 @@ func _physics_process(delta: float) -> void:
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 10.0)
 		
 	#Player deacceleration 
+
 	else:
-		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION * delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
@@ -89,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
+
 	move_and_slide() #rörelse enligt velocity mm.
 	apply_push_to_other_players() #används för att sköta collisions
 	for body in recently_pushed.keys():
@@ -99,25 +101,34 @@ func _physics_process(delta: float) -> void:
 			recently_pushed.erase(body)
 
 
-
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
 		update_item_label(" ")
 
+	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
+		throwItem(play)
+	if Input.is_action_just_pressed("use_item_right_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D
+		throwItem(play)
+	if Input.is_action_just_pressed("use_item_down_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer3/SubViewport/Player3") as CharacterBody3D
+		throwItem(play)
+	if Input.is_action_just_pressed("use_item_left_%s" % [player_id]):
+		var play = get_tree().root.get_node("Level/GridContainer/SubViewportContainer4/SubViewport/Player4") as CharacterBody3D
+		throwItem(play)
 
 #hanterar jump logic, will adjust with button press sensitivity
-func player_jump_adv(jump_velocity,delta)-> float:
-	
+func player_jump_adv(jump_velocity, delta) -> float:
 	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
 	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
-	if is_jumping : 
+	if is_jumping:
 		jump_velocity += JUMP_VELOCITY
 	elif not is_on_floor():
-		if is_releasing_jump and jump_velocity>0:
-			jump_velocity -=  GRAVITY * JUMPDEACCELERATION * delta*FALLMULTIPLIER
+		if is_releasing_jump and jump_velocity > 0:
+			jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 		else:
-			jump_velocity += GRAVITY * JUMPACCELERATION * delta *JUMPCUTMULTIPLIER
+			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
 	return jump_velocity
-
 
 
 func apply_push_to_other_players() -> void:
@@ -132,6 +143,7 @@ func apply_push_to_other_players() -> void:
 				continue  # already pushed recently
 
 			var push_normal = -collision.get_normal() 
+
 			var relative_speed = velocity.length()
 			var push_strength = relative_speed * PUSH_FORCE
 			var push_force = (push_normal * push_strength).normalized() * PUSH_FORCE
@@ -141,7 +153,6 @@ func apply_push_to_other_players() -> void:
 			recently_pushed[Collision_object] = PUSH_COOLDOWN
 		
 		
-
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -154,3 +165,20 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
+
+func setItem(item: Item):
+	if holdingItem != null:
+		holdingItem.queue_free()
+		await holdingItem.tree_exited
+	holdingItem = item
+	update_item_label(holdingItem.labelText)
+
+func throwItem(play: CharacterBody3D = null):
+	if holdingItem == null:
+		return
+	if play == null:
+		holdingItem.throw()
+	else:
+		holdingItem.throw(play)
+	holdingItem = null
+	update_item_label("")

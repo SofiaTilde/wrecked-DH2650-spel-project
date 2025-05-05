@@ -1,23 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxdelsa5s7rp2"]
+[gd_scene load_steps=4 format=3 uid="uid://bxdelsa5s7rp2"]
 
-[ext_resource type="Shader" uid="uid://dvaag64n852it" path="res://shaders/water.gdshader" id="1_qi1wl"]
-[ext_resource type="Texture2D" uid="uid://cpr0jetichmxo" path="res://textures/waterDUDV.png" id="2_dcmoc"]
-[ext_resource type="Texture2D" uid="uid://cqac3oh6jseng" path="res://textures/waterNormals.png" id="3_qmoj4"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7wcun"]
-render_priority = 0
-shader = ExtResource("1_qi1wl")
-shader_parameter/dudv_map = ExtResource("2_dcmoc")
-shader_parameter/normal_map = ExtResource("3_qmoj4")
-shader_parameter/refraction_map = ExtResource("3_qmoj4")
-shader_parameter/albedo_color = Vector4(0.1, 0.3, 1, 1)
-shader_parameter/alpha = 1.0
+[ext_resource type="Material" uid="uid://c4aqjo7a2lq7w" path="res://materials/water_new.tres" id="1_7wcun"]
+[ext_resource type="Script" uid="uid://cedde2o3vuae8" path="res://scripts/water_tile.gd" id="4_qmoj4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7wcun"]
-material = SubResource("ShaderMaterial_7wcun")
-size = Vector2(100, 100)
-subdivide_width = 200
-subdivide_depth = 200
+size = Vector2(32, 32)
+subdivide_width = 64
+subdivide_depth = 64
 
 [node name="Water" type="Node3D"]
 
@@ -25,3 +14,5 @@ subdivide_depth = 200
 transparency = 0.5
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_7wcun")
+surface_material_override/0 = ExtResource("1_7wcun")
+script = ExtResource("4_qmoj4")
