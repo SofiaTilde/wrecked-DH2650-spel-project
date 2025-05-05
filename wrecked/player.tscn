@@ -24,3 +24,13 @@ shape = SubResource("CylinderShape3D_onrkg")
 [node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.938397, 0.34556, 0, -0.34556, 0.938397, 0, 1.83717, 3.67014)
 current = true
+
+[node name="ItemEffect" type="Node3D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ItemEffect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1

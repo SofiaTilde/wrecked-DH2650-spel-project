@@ -2,7 +2,7 @@ extends Node3D
 
 func _process(delta: float) -> void:
 	var pos = global_transform.origin
-	
+
 	pos.y = 0.0
 	
 	var time = Time.get_ticks_msec() / 1000.0
@@ -16,4 +16,3 @@ func _process(delta: float) -> void:
 	pos.y *= clamp(1.0 - sqrt(pos.x * pos.x + pos.z * pos.z) / 128.0, 0.1, 1.0);
 	
 	global_transform.origin = pos
-	

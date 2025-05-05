@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
-[ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/barrel_generator.gd" id="4_jka67"]
-[ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel.tscn" id="5_i5arm"]
+[ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/generators/barrel_generator.gd" id="4_jka67"]
+[ext_resource type="PackedScene" uid="uid://dnrtklvqut8jx" path="res://items/barrel/barrel.tscn" id="5_i5arm"]
+[ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/generators/items.tscn" id="6_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://o6nh6fno5b0d" path="res://level/level.tscn" id="6_i5arm"]
 [ext_resource type="PackedScene" uid="uid://berc3ktdu00jq" path="res://water_grid.tscn" id="6_jsk3o"]
-[ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/items.tscn" id="6_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://bgowpuve5rom4" path="res://level/1x1/1x1.tscn" id="7_6iypd"]
 [ext_resource type="Script" uid="uid://4ohwjxvwlf14" path="res://scripts/random_platform.gd" id="8_tereu"]
 [ext_resource type="PackedScene" uid="uid://bwitct3mcal0r" path="res://level/1x1/0.tscn" id="9_cdqbm"]
@@ -159,6 +159,7 @@ script = ExtResource("4_jka67")
 
 [node name="Barrel" parent="Barrel generator" instance=ExtResource("5_i5arm")]
 transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, -10, 0)
+visible = false
 
 [node name="WaterGrid" parent="." instance=ExtResource("6_jsk3o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
