@@ -18,15 +18,17 @@ var mouse_sensitivity := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 var recently_pushed = {}
-var ap: AnimationPlayer
-@onready var model = $PlaceholderCharacter
+@onready var model = $Rackham_red
+@onready var animation_player := $Rackham_red/AnimationPlayer
+@onready var animation_tree := AnimationTree
+@onready var state_machine = $"Rackham_red/AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
-@onready var label: Label = get_node("/root/Level/GameManager/CanvasLayer/SharedLabel")
+@onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
 
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
@@ -40,7 +42,7 @@ func _ready():
 	await get_tree().process_frame
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	ap = $PlaceholderCharacter/AnimationPlayer
+	#ap = $PlaceholderCharacter/AnimationPlayer
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
 	#label.text="test22222222"
@@ -85,15 +87,21 @@ func _physics_process(delta: float) -> void:
 	pitch_input = lerp(pitch_pivot.rotation.z, 0.0, 0.1)
 	#Player acceleration
 	if direction != Vector3.ZERO:
-		player_velocity = player_velocity.lerp(direction * SPEED, ACCELERATION * delta)
-		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 10.0)
+		if player_velocity.length() > 2.8 and is_on_floor():
+			state_machine.travel("Running")
+		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
+		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
 		
 	#Player deacceleration 
-
 	else:
-		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION * delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED) # redundant bcus overwritten?
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if player_velocity.length() <= 2.8 and is_on_floor():
+			state_machine.travel("Idle")
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)	
+	velocity.x = player_velocity.x
+	velocity.z = player_velocity.z
+	
 
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z

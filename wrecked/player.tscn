@@ -1,23 +1,37 @@
-[gd_scene load_steps=10 format=3 uid="uid://g4tbrr3sfui2"]
+[gd_scene load_steps=13 format=3 uid="uid://g4tbrr3sfui2"]
 
 [ext_resource type="Script" uid="uid://uuv10ct6y602" path="res://player_controller.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://ci17mdsvxbc5j" path="res://meshes/placeholdercharacter/PlaceholderCharacter.glb" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://bbfcgykisxrxu" path="res://meshes/Characters/Rackham_red.fbx" id="2_sweqy"]
 [ext_resource type="PackedScene" uid="uid://lw6bygjm0w6o" path="res://transitioner.tscn" id="3_i3pqv"]
-[ext_resource type="Script" path="res://respawn_manager.gd" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://6n2qlha5nso7" path="res://respawn_manager.gd" id="4_hqtel"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hs0m"]
 animation = &"rig_Rackham_the_red|Idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sweqy"]
+animation = &"rig_Rackham_the_red|Running"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1jxqw"]
 advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2hs0m"]
+xfade_time = 0.5
+reset = false
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dw050"]
+xfade_time = 0.75
+break_loop_at_end = true
+reset = false
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dw050"]
 states/Idle/node = SubResource("AnimationNodeAnimation_2hs0m")
 states/Idle/position = Vector2(498, 211)
+states/Running/node = SubResource("AnimationNodeAnimation_sweqy")
+states/Running/position = Vector2(230, 329)
 states/Start/position = Vector2(231, 91)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_1jxqw")]
-graph_offset = Vector2(-97, -2)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_dw050")]
+graph_offset = Vector2(-338, 87)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.32
