@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwh8e3rocu1ff"]
+
+[ext_resource type="Script" uid="uid://babqh1qo0kmfu" path="res://scripts/platform.gd" id="1_pl3sq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0803j"]
+height = 0.5
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pl3sq"]
+points = PackedVector3Array(-0.089396, 0.25, 0.477152, -0.0920301, -0.249313, -0.491212, -0.153382, -0.249152, -0.475524, 0.0921237, -0.249306, 0.491198, 0.462206, 0.25, -0.149087, -0.477152, 0.25, -0.089396, -0.45843, -0.248208, 0.198672, 0.491212, -0.249313, -0.0920301, 0.0894894, 0.25, -0.477152, 0.387663, 0.25, 0.298174, 0.304512, -0.247293, -0.395903, -0.45843, -0.248208, -0.198672, -0.298174, 0.25, -0.387663, 0.45843, -0.248208, 0.198672, -0.38757, 0.25, 0.298174, -0.229567, -0.248595, 0.443887, 0.253429, 0.25, 0.417462, 0.477152, 0.25, 0.089396, 0.387663, 0.25, -0.298174, 0.304512, -0.247293, 0.395903, -0.089396, 0.25, -0.477152, 0.0921237, -0.249306, -0.491198, -0.491212, -0.249313, 0.0920301, -0.477152, 0.25, 0.089396, -0.304512, -0.247293, -0.395903, 0.426902, -0.247627, -0.25916, -0.38757, 0.25, -0.298174, 0.253429, 0.25, -0.417462, -0.253429, 0.25, 0.417462, -0.382648, -0.248619, 0.321462, 0.0894894, 0.25, 0.477152, -0.0920301, -0.249313, 0.491212)
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_0803j")
+script = ExtResource("1_pl3sq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pl3sq")
