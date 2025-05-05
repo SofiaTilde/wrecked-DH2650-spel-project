@@ -150,6 +150,9 @@ func player_jump_adv(jump_velocity, delta) -> float:
 			jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 		else:
 			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
+	if jump_velocity>0.0:
+		state_machine.travel("Jumping")
+	#print(state_machine.get_current_node())
 	return jump_velocity
 
 

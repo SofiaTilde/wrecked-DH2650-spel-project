@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://g4tbrr3sfui2"]
+[gd_scene load_steps=15 format=3 uid="uid://g4tbrr3sfui2"]
 
 [ext_resource type="Script" uid="uid://uuv10ct6y602" path="res://player_controller.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://ci17mdsvxbc5j" path="res://meshes/placeholdercharacter/PlaceholderCharacter.glb" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://bbfcgykisxrxu" path="res://meshes/Characters/Rackham_red.fbx" id="2_sweqy"]
 [ext_resource type="PackedScene" uid="uid://lw6bygjm0w6o" path="res://transitioner.tscn" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://6n2qlha5nso7" path="res://respawn_manager.gd" id="4_hqtel"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hs0m"]
 animation = &"rig_Rackham_the_red|Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jxqw"]
+animation = &"rig_Rackham_the_red|Jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sweqy"]
 animation = &"rig_Rackham_the_red|Running"
@@ -24,14 +26,22 @@ xfade_time = 0.75
 break_loop_at_end = true
 reset = false
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b26j0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sweqy"]
+xfade_time = 0.1
+reset = false
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dw050"]
 states/Idle/node = SubResource("AnimationNodeAnimation_2hs0m")
-states/Idle/position = Vector2(498, 211)
+states/Idle/position = Vector2(499, 210)
+states/Jumping/node = SubResource("AnimationNodeAnimation_1jxqw")
+states/Jumping/position = Vector2(772, 295)
 states/Running/node = SubResource("AnimationNodeAnimation_sweqy")
 states/Running/position = Vector2(230, 329)
 states/Start/position = Vector2(231, 91)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_dw050")]
-graph_offset = Vector2(-338, 87)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "Idle", "Jumping", SubResource("AnimationNodeStateMachineTransition_b26j0"), "Jumping", "Idle", SubResource("AnimationNodeStateMachineTransition_sweqy")]
+graph_offset = Vector2(-133, 154)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.32
@@ -83,10 +93,6 @@ bones/57/rotation = Quaternion(-0.325835, 5.53001e-06, 5.72282e-05, 0.945427)
 [node name="AnimationTree" type="AnimationTree" parent="Rackham_red"]
 tree_root = SubResource("AnimationNodeStateMachine_dw050")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="PlaceholderCharacter" parent="." instance=ExtResource("2_onrkg")]
-transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, -1.00602, 0)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00671, 0)
