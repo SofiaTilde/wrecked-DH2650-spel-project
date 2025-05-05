@@ -34,6 +34,7 @@ var recently_pushed = {}
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 @export var player_data: PlayerData
+@export var player_mesh: MeshInstance3D
 @export var camera_smoothing_rate = 0.1
 
 var holdingItem: Item
