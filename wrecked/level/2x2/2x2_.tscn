@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c61jclj4w1u3q"]
+
+[ext_resource type="PackedScene" uid="uid://baipyjb2jbhc2" path="res://meshes/Platforms/plank1_2x2.glb" id="1_slyoh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="plank1_2x2" parent="." instance=ExtResource("1_slyoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.044, 0, 0)
