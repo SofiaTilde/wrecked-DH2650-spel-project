@@ -1,41 +1,44 @@
-[gd_scene load_steps=8 format=3 uid="uid://6kx5nm2ecru"]
+[gd_scene load_steps=11 format=3 uid="uid://6kx5nm2ecru"]
 
 [ext_resource type="Script" uid="uid://bni2m50ynawa3" path="res://items/generators/items.gd" id="1_n0bbx"]
 [ext_resource type="PackedScene" uid="uid://bdvfrko7ynj1k" path="res://items/eyepatch/eyepatch.tscn" id="2_r844h"]
-[ext_resource type="ArrayMesh" uid="uid://4y31ju2wpesy" path="res://meshes/barrel/simple eyepatch.obj" id="3_vxjqh"]
 [ext_resource type="PackedScene" uid="uid://blnoyjh4vh1gi" path="res://items/anchor/anchor.tscn" id="4_vxjqh"]
-
-[sub_resource type="GDScript" id="GDScript_7cxt2"]
-script/source = "extends Item
-
-func _ready():
-	labelText = \"Not eyepatch\"
-"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qhos"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="PackedScene" id="PackedScene_ujp2j"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"names": PackedStringArray("Not eyepatch", "Node3D", "visible", "script", "metadata/item_name", "MeshInstance3D", "MeshInstance3D", "transform", "mesh", "surface_material_override/0"),
-"node_count": 2,
-"node_paths": [NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0, 1073741824, 0, 6, 5, -1, 3, 7, 3, 8, 4, 9, 5, 0),
-"variants": [false, SubResource("GDScript_7cxt2"), "Not eyepatch", Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, 0, 0, 0), ExtResource("3_vxjqh"), SubResource("StandardMaterial3D_8qhos")],
-"version": 3
-}
+[ext_resource type="PackedScene" uid="uid://bsmpxxyibavdu" path="res://items/rubber_duck/rubber_duck.tscn" id="5_ujp2j"]
+[ext_resource type="PackedScene" uid="uid://uq2rss2dp8yq" path="res://items/dynamite/dynamite.tscn" id="7_7c1cb"]
+[ext_resource type="PackedScene" uid="uid://cews6ihi6h1ne" path="res://items/bottle_of_rum/bottle_of_rum.tscn" id="8_uwies"]
+[ext_resource type="PackedScene" uid="uid://wnyat63osfmj" path="res://items/molotov_cocktail/molotov_cocktail.tscn" id="9_s7v6s"]
+[ext_resource type="PackedScene" uid="uid://dimml56vb75mf" path="res://items/shroom/shroom.tscn" id="10_1b2rd"]
+[ext_resource type="PackedScene" uid="uid://dfvx5j3eomvea" path="res://items/parrot/parrot.tscn" id="11_r4p4a"]
+[ext_resource type="PackedScene" uid="uid://bxraifnjhxtxy" path="res://items/sword/sword.tscn" id="12_o1g2a"]
 
 [node name="Items" type="Node3D"]
 script = ExtResource("1_n0bbx")
 eyepatch = ExtResource("2_r844h")
-noteyepatch = SubResource("PackedScene_ujp2j")
 anchor = ExtResource("4_vxjqh")
+rubber_duck = ExtResource("5_ujp2j")
+dynamite = ExtResource("7_7c1cb")
+bottle_of_rum = ExtResource("8_uwies")
+molotov_cocktail = ExtResource("9_s7v6s")
+shroom = ExtResource("10_1b2rd")
+parrot = ExtResource("11_r4p4a")
+sword = ExtResource("12_o1g2a")
 
 [node name="Eyepatch" parent="." instance=ExtResource("2_r844h")]
 visible = false
 
 [node name="Anchor" parent="." instance=ExtResource("4_vxjqh")]
 visible = false
+
+[node name="RubberDuck" parent="." instance=ExtResource("5_ujp2j")]
+
+[node name="Dynamite" parent="." instance=ExtResource("7_7c1cb")]
+
+[node name="BottleOfRum" parent="." instance=ExtResource("8_uwies")]
+
+[node name="MolotovCocktail" parent="." instance=ExtResource("9_s7v6s")]
+
+[node name="Shroom" parent="." instance=ExtResource("10_1b2rd")]
+
+[node name="Parrot" parent="." instance=ExtResource("11_r4p4a")]
+
+[node name="Sword" parent="." instance=ExtResource("12_o1g2a")]

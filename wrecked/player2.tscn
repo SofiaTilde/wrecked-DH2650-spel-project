@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://685x3hhuvr5l"]
+[gd_scene load_steps=21 format=3 uid="uid://685x3hhuvr5l"]
 
 [ext_resource type="Script" uid="uid://uuv10ct6y602" path="res://player_controller.gd" id="1_0dk0n"]
 [ext_resource type="PackedScene" uid="uid://b4r41tj7mrx7k" path="res://meshes/Characters/Yates_yellow.fbx" id="2_qd3f5"]
 [ext_resource type="Script" uid="uid://6n2qlha5nso7" path="res://respawn_manager.gd" id="3_ih4i3"]
 [ext_resource type="PackedScene" uid="uid://lw6bygjm0w6o" path="res://transitioner.tscn" id="4_cp8eo"]
+[ext_resource type="PackedScene" uid="uid://b4t0xyhas5elu" path="res://items/effects/item_effect.tscn" id="5_bhnal"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqtel"]
 animation = &"Yayham|Drowning"
@@ -82,40 +83,40 @@ anim_player = NodePath("../Yates_yellow/AnimationPlayer")
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Yates_yellow/Yayham" index="0"]
-bones/1/rotation = Quaternion(1.9576e-08, 1.23446e-09, -0.0125934, 0.999921)
-bones/2/rotation = Quaternion(-0.000141147, 0.0108856, 0.0125926, 0.999862)
-bones/3/rotation = Quaternion(-8.75374e-09, -4.5924e-09, 0.01427, 0.999898)
-bones/5/rotation = Quaternion(-0.69547, -0.11773, 0.697006, -0.129012)
-bones/8/rotation = Quaternion(0.0966037, 0.0273843, 0.10116, 0.98979)
-bones/9/rotation = Quaternion(0.133175, -0.00207582, -0.0184461, 0.990919)
-bones/10/rotation = Quaternion(0.17093, 0.00713353, 0.0590868, 0.983484)
-bones/12/rotation = Quaternion(0.114296, 0.0181992, 0.00505278, 0.993267)
-bones/13/rotation = Quaternion(0.127406, 0.000483689, 0.00430393, 0.991841)
-bones/14/rotation = Quaternion(0.126939, 0.00481125, 0.00435857, 0.991889)
-bones/16/rotation = Quaternion(0.115841, 0.0182534, 0.00545023, 0.993085)
-bones/17/rotation = Quaternion(0.123109, 0.000350985, 0.00311332, 0.992388)
-bones/18/rotation = Quaternion(0.118275, 0.00483806, 0.00512657, 0.992956)
+bones/1/rotation = Quaternion(1.95376e-08, 1.73996e-09, 0.0132521, 0.999912)
+bones/2/rotation = Quaternion(-0.000794599, -0.0596502, -0.0132282, 0.998131)
+bones/3/rotation = Quaternion(-8.8229e-09, -5.6672e-09, 0.0258505, 0.999666)
+bones/5/rotation = Quaternion(-0.6955, -0.117892, 0.696978, -0.128852)
+bones/8/rotation = Quaternion(0.121896, 0.0299635, 0.100426, 0.986995)
+bones/9/rotation = Quaternion(0.158484, -0.00254709, -0.018387, 0.987187)
+bones/10/rotation = Quaternion(0.196037, 0.00864293, 0.058885, 0.978789)
+bones/12/rotation = Quaternion(0.139671, 0.0183225, 0.00458549, 0.990018)
+bones/13/rotation = Quaternion(0.152741, 0.000593645, 0.00429014, 0.988257)
+bones/14/rotation = Quaternion(0.152275, 0.00492119, 0.00423405, 0.988317)
+bones/16/rotation = Quaternion(0.141211, 0.0183868, 0.00498142, 0.989796)
+bones/17/rotation = Quaternion(0.148459, 0.000430522, 0.00310332, 0.988914)
+bones/18/rotation = Quaternion(0.143641, 0.00496764, 0.0050011, 0.989605)
 bones/22/rotation = Quaternion(-0.248939, 0.0898901, -0.277814, 0.923455)
 bones/23/rotation = Quaternion(-0.16697, -0.0162259, -0.132857, 0.976835)
-bones/25/rotation = Quaternion(0.21515, 0.0180345, 0.0122857, 0.976337)
-bones/27/rotation = Quaternion(0.695592, -0.118394, 0.696893, 0.128354)
-bones/30/rotation = Quaternion(0.121252, -0.0298983, -0.100445, 0.987074)
-bones/31/rotation = Quaternion(0.157841, 0.0025355, 0.0183883, 0.98729)
-bones/32/rotation = Quaternion(0.195399, -0.0086044, -0.0588905, 0.978916)
-bones/34/rotation = Quaternion(0.139025, -0.0183199, -0.00459737, 0.990109)
-bones/35/rotation = Quaternion(0.152097, -0.000590568, -0.00429059, 0.988356)
-bones/36/rotation = Quaternion(0.15163, -0.00491826, -0.00423731, 0.988416)
-bones/38/rotation = Quaternion(0.140565, -0.0183838, -0.00499332, 0.989888)
-bones/39/rotation = Quaternion(0.147814, -0.000428353, -0.00310369, 0.98901)
-bones/40/rotation = Quaternion(0.142996, -0.00496421, -0.00500436, 0.989698)
+bones/25/rotation = Quaternion(0.240059, 0.0183429, 0.0118202, 0.970513)
+bones/27/rotation = Quaternion(0.695563, -0.118237, 0.69692, 0.128512)
+bones/30/rotation = Quaternion(0.0959577, -0.0273186, -0.101178, 0.989853)
+bones/31/rotation = Quaternion(0.132529, 0.0020642, 0.0184472, 0.991005)
+bones/32/rotation = Quaternion(0.170289, -0.00709486, -0.0590913, 0.983595)
+bones/34/rotation = Quaternion(0.113647, -0.0181963, -0.00506458, 0.993342)
+bones/35/rotation = Quaternion(0.12676, -0.000480599, -0.00430429, 0.991924)
+bones/36/rotation = Quaternion(0.126292, -0.00480823, -0.00436175, 0.991972)
+bones/38/rotation = Quaternion(0.115193, -0.01825, -0.00546204, 0.99316)
+bones/39/rotation = Quaternion(0.122462, -0.000348804, -0.00311364, 0.992468)
+bones/40/rotation = Quaternion(0.117627, -0.00483455, -0.00512973, 0.993033)
 bones/43/rotation = Quaternion(-0.293472, 0.127848, 0.559124, 0.764794)
 bones/44/rotation = Quaternion(-0.248939, -0.0898902, 0.277814, 0.923455)
 bones/45/rotation = Quaternion(-0.16697, 0.016226, 0.132857, 0.976835)
-bones/47/rotation = Quaternion(0.239426, -0.0183351, -0.0118322, 0.97067)
+bones/47/rotation = Quaternion(0.214512, -0.0180264, -0.0122975, 0.976478)
 bones/49/rotation = Quaternion(0.993785, 5.98859e-05, -3.58111e-06, 0.11132)
 bones/50/rotation = Quaternion(-0.335325, 1.54786e-05, 9.9315e-05, 0.942103)
 bones/51/rotation = Quaternion(-0.325837, -5.53118e-06, -5.72298e-05, 0.945426)
-bones/53/rotation = Quaternion(2.18544e-08, 0.0108865, -2.37933e-10, 0.999941)
+bones/53/rotation = Quaternion(2.18168e-08, -0.0596555, 1.30381e-09, 0.998219)
 bones/55/rotation = Quaternion(0.993785, -5.98674e-05, 3.7464e-06, 0.11132)
 bones/57/rotation = Quaternion(-0.325837, 5.53118e-06, 5.72298e-05, 0.945426)
 
@@ -140,15 +141,7 @@ one_shot = true
 
 [node name="transitioner" parent="RespawnManager" instance=ExtResource("4_cp8eo")]
 
-[node name="ItemEffect" type="Node3D" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="ItemEffect"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
+[node name="ItemEffect" parent="." instance=ExtResource("5_bhnal")]
 
 [connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]
 

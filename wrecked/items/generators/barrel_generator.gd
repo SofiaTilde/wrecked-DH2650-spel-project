@@ -6,7 +6,7 @@ enum BarrelLevel {Copper, Silver, Gold}
 
 func _ready():
 	rng.randomize()
-	for n in range(7):
+	for n in range(10):
 		createBarrel(rng.randf_range(-10.0, 10.0), rng.randf_range(-10.0, 10.0), BarrelLevel.Copper)
 		createBarrel(rng.randf_range(-10.0, 10.0), rng.randf_range(-10.0, 10.0), BarrelLevel.Silver)
 		createBarrel(rng.randf_range(-10.0, 10.0), rng.randf_range(-10.0, 10.0), BarrelLevel.Gold)

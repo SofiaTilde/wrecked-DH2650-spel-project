@@ -4,6 +4,8 @@ class_name Item
 var labelText: String
 var overlayTexture: Texture2D
 var tempPlayer: CharacterBody3D
+var icon: Texture2D
+var rng = RandomNumberGenerator.new()
 
 func throw(play: CharacterBody3D = null):
 	if (play != null):
@@ -32,7 +34,7 @@ func timer(seconds):
 	await timerNode.timeout
 
 func applyOverlay(player: CharacterBody3D, seconds):
-	var textureNode = player.get_node("ItemEffect/TextureRect") as TextureRect
+	var textureNode = player.get_node("ItemEffect/OverlayTexture") as TextureRect
 	textureNode.texture = overlayTexture
 	#leave effect for a while
 	await timer(seconds)

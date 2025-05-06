@@ -31,6 +31,7 @@ var recently_pushed = {}
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
+@onready var icon_node: TextureRect = $IconTexture
 
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
@@ -43,8 +44,8 @@ func _ready():
 	#@onready var model = $Rackham_red
 
 	#@onready var animation_player := $Rackham_red/AnimationPlayer
-	
-	var name = player_names.get(player_id) 
+
+	var name = player_names.get(player_id)
 	model = get_node(name)
 	animation_player = str(name) + "/AnimationPlayer"
 	await get_tree().process_frame
@@ -55,6 +56,10 @@ func _ready():
 func update_item_label(item: String) -> void:
 	if label_node: # avoid crashes if node is removed/changed
 		label_node.text = "Player %s" % [player_id] + " Item: %s" % [item]
+
+func update_icon(icon: Texture2D):
+	if icon_node: # avoid crashes if node is removed/changed
+		icon_node.texture = icon
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
@@ -77,7 +82,7 @@ func _physics_process(delta: float) -> void:
 	camera_pos = smooth_target_pos
 	twist_pivot.global_transform.origin = twist_pivot.global_transform.origin.lerp(smooth_target_pos, camera_smoothing_rate)
 	pitch_input += -cam_dir.y * joystick_sensitivity
-	
+
 	#För att rotera karaktären längs riktningen hen går i
 	var player_rotation = atan2(direction.x, direction.z) # i radian, rotation angle
 	#Camera rotations
@@ -94,14 +99,14 @@ func _physics_process(delta: float) -> void:
 			state_machine.travel("Running")
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
-		
-	#Player deacceleration 
+
+	#Player deacceleration
 	else:
 		if player_velocity.length() <= 2.8 and is_on_floor():
 			state_machine.travel("Idle")
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)	
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
 	# Jumping
@@ -157,11 +162,11 @@ func player_jump_adv(jump_velocity, delta) -> float:
 
 func apply_push_to_other_players() -> void:
 	var collisions_amount = get_slide_collision_count()
-	
+
 	for i in range(collisions_amount):
 		var collision = get_slide_collision(i)
 		var Collision_object = collision.get_collider()
-		
+
 		if Collision_object is CharacterBody3D and Collision_object != self:
 			if Collision_object in recently_pushed:
 				continue # already pushed recently
@@ -171,12 +176,12 @@ func apply_push_to_other_players() -> void:
 			var relative_speed = velocity.length()
 			var push_strength = relative_speed * PUSH_FORCE
 			var push_force = (push_normal * push_strength).normalized() * PUSH_FORCE
-			
+
 			Collision_object.velocity.x += push_force.x
 			Collision_object.velocity.z += push_force.z
 			recently_pushed[Collision_object] = PUSH_COOLDOWN
-		
-		
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -191,12 +196,13 @@ func respawn():
 	state_machine.travel("Drowning")
 	respawn_manager.respawn()
 
-	
+
 func setItem(item: Item):
 	if holdingItem != null:
 		holdingItem.queue_free()
 		await holdingItem.tree_exited
 	holdingItem = item
+	update_icon(holdingItem.icon)
 	update_item_label(holdingItem.labelText)
 
 func throwItem(play: CharacterBody3D = null):
@@ -207,4 +213,5 @@ func throwItem(play: CharacterBody3D = null):
 	else:
 		holdingItem.throw(play)
 	holdingItem = null
+	update_icon(null)
 	update_item_label("")

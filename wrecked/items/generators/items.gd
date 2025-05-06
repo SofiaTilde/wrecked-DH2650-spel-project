@@ -2,8 +2,14 @@ extends Node3D
 class_name ItemProvider
 
 @export var eyepatch: PackedScene
-@export var noteyepatch: PackedScene
 @export var anchor: PackedScene
+@export var rubber_duck: PackedScene
+@export var dynamite: PackedScene
+@export var bottle_of_rum: PackedScene
+@export var molotov_cocktail: PackedScene
+@export var shroom: PackedScene
+@export var parrot: PackedScene
+@export var sword: PackedScene
 
 var copperItemlist: Array = []
 var silverItemlist: Array = []
