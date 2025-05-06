@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpulflnw0vw5l"]
+
+[ext_resource type="PackedScene" uid="uid://oib10l63qo3l" path="res://meshes/Platforms/plank_2x1.glb" id="1_8o0tr"]
+
+[node name="2x1" type="Node3D"]
+
+[node name="plank_2x1" parent="." instance=ExtResource("1_8o0tr")]
