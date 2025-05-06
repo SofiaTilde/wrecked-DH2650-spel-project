@@ -36,7 +36,7 @@ var recently_pushed = {}
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
-var player_names = {1:"Rackham_red",2:"Pippi_pink",3:"Gully_green",4:"Yates_yellow" }
+var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 var holdingItem: Item
 
 func _ready():
