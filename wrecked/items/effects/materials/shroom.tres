@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bpk701iyk52vh"]
+
+[ext_resource type="Shader" uid="uid://cmcbnxmt8jrpb" path="res://items/effects/materials/shroom.gdshader" id="1_3dcoc"]
+
+[resource]
+shader = ExtResource("1_3dcoc")
+shader_parameter/amplitude = 0.02
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 2.0

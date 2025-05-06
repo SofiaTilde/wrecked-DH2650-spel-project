@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d03r1y0hwm8xp"]
+
+[ext_resource type="Shader" uid="uid://d350p2hg0dvkv" path="res://items/effects/materials/bottle_of_rum.gdshader" id="1_u3tro"]
+
+[resource]
+shader = ExtResource("1_u3tro")
+shader_parameter/num_swirls = 2
+shader_parameter/swirl_strength = 100.0
+shader_parameter/swirl_speed = 1.0
+shader_parameter/swirl_radius = 0.2
+shader_parameter/swirl_centers = PackedVector2Array(0, 0, 0, 0)
