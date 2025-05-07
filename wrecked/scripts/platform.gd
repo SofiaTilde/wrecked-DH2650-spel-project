@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 	pos.y += sin(pos.x * 0.484 + pos.z * 0.82 + time * 0.82) * 0.21;
 	pos.y += sin(pos.x * 0.212 + pos.z * 0.47 + time * 0.75) * 0.32;
 
-	pos.y *= clamp(1.0 - sqrt(pos.x * pos.x + pos.z * pos.z) / 128.0, 0.1, 1.0);
+	pos.y *= pow(clamp(1.0 - sqrt(pos.x * pos.x + pos.z * pos.z) / 128.0, 0.05, 1.0), 0.5);
+	pos.y += 0.25
 	
 	global_transform.origin = pos

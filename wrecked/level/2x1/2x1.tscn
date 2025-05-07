@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpulflnw0vw5l"]
+[gd_scene load_steps=3 format=3 uid="uid://bpulflnw0vw5l"]
 
-[ext_resource type="PackedScene" uid="uid://oib10l63qo3l" path="res://meshes/Platforms/plank_2x1.glb" id="1_8o0tr"]
+[ext_resource type="Script" uid="uid://4ohwjxvwlf14" path="res://scripts/random_platform.gd" id="1_0tagn"]
+[ext_resource type="PackedScene" uid="uid://dviuybxhwu1ho" path="res://level/2x1/0.tscn" id="2_pxmbu"]
 
-[node name="2x1" type="Node3D"]
-
-[node name="plank_2x1" parent="." instance=ExtResource("1_8o0tr")]
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_0tagn")
+platform_scenes = Array[PackedScene]([ExtResource("2_pxmbu")])
+randomize_in_editor = true

@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwitct3mcal0r"]
+[gd_scene load_steps=4 format=3 uid="uid://evotmterwgic"]
 
-[ext_resource type="Script" uid="uid://babqh1qo0kmfu" path="res://platform.gd" id="1_d3qs7"]
+[ext_resource type="PackedScene" uid="uid://bxqsm5ocht0v7" path="res://meshes/Platforms/plank_1x1.glb" id="1_d3qs7"]
+[ext_resource type="Script" uid="uid://bb6jpqun4oyoc" path="res://scripts/platform.gd" id="2_ck50b"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_t1dvd"]
-size = Vector3(1, 0.5, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3qs7"]
+size = Vector3(1.12317, 0.260864, 1.17419)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d3qs7"]
-points = PackedVector3Array(0.477152, 0.25, 0.477152, -0.492544, -0.25, -0.492544, -0.492544, -0.25, 0.492544, 0.492544, -0.25, -0.492544, -0.477152, 0.25, -0.477152, 0.492544, -0.25, 0.492544, -0.477152, 0.25, 0.477152, 0.477152, 0.25, -0.477152)
+[node name="Node3D" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D"]
-mesh = SubResource("BoxMesh_t1dvd")
-script = ExtResource("1_d3qs7")
+[node name="plank_1x1" parent="." instance=ExtResource("1_d3qs7")]
+script = ExtResource("2_ck50b")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="plank_1x1"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_d3qs7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plank_1x1/StaticBody3D"]
+transform = Transform3D(0.963186, 0, 0.268836, 0, 1, 0, -0.268836, 0, 0.963186, 0.0171705, -0.0132446, 0.00135422)
+shape = SubResource("BoxShape3D_d3qs7")

@@ -4,7 +4,7 @@ extends Node
 @onready var player3: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer3/SubViewport/Player3")
 @onready var player4: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer4/SubViewport/Player4")
 @onready var Goal: Area3D = get_node("/root/Game/Goal")
-@onready var label_animator: AnimationPlayer = get_node("/root/Game/SharedHudNextRace/Control/LabelAnimator")
+#@onready var label_animator: AnimationPlayer = get_node("/root/Game/SharedHudNextRace/Control/LabelAnimator") What is this used for?
 
 @onready var leaderboard_popup: Panel = $CanvasLayer/opacity
 @onready var leaderboard_menu_popup: Panel = $CanvasLayer/opacity/Leaderboard2
@@ -70,10 +70,10 @@ func get_ready():
 	for p in players:
 		p.player_data.gotPoints = false
 		p.get_node("PointsLabel").text = "Points: " + str(p.player_data.points) + " /10"
-	player1.global_transform.origin = Vector3(-1, 10, -1)
-	player2.global_transform.origin = Vector3(1, 10, -1)
-	player3.global_transform.origin = Vector3(-1, 10, 1)
-	player4.global_transform.origin = Vector3(1, 10, 1)
+	player1.global_transform.origin = Vector3(0.0, 10, 0.0)
+	player2.global_transform.origin = Vector3(2.5, 10, 0.0)
+	player3.global_transform.origin = Vector3(5.0, 10, 0.0)
+	player4.global_transform.origin = Vector3(7.5, 10, 0.0)
 	await get_tree().create_timer(2.5).timeout
 	
 	start_count_in()
@@ -100,9 +100,9 @@ func start_race(): # from process
 	
 	print("new race-stage loaded!")
 	# Load newly generated platforms
-	var new_platforms = load("res://level_2.tscn").instantiate()
-	$"..".add_child(new_platforms)
-	new_platforms.name = "oldPlatformsLevel" # So we can reuse this func on next goal
+	# var new_platforms = load("res://level/level.tscn").instantiate()
+	# $"..".add_child(new_platforms)
+	# new_platforms.name = "oldPlatformsLevel" # So we can reuse this func on next goal
 	
 	await get_tree().create_timer(1.).timeout
 	label.visible = false
