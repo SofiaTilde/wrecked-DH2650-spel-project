@@ -4,11 +4,11 @@ const SPEED = 9
 const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
-const JUMPDEACCELERATION = 0.5
+const JUMPDEACCELERATION = 4.5
 const PUSH_FORCE = 0.8
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION = 2.5
-const DEACCELERATION = 1.5
+const DEACCELERATION = 8.5
 const FALLMULTIPLIER = 0.5
 const JUMPCUTMULTIPLIER = 0.8
 const PUSH_COOLDOWN = 0.2 # seconds
@@ -105,8 +105,9 @@ func _physics_process(delta: float) -> void:
 		if player_velocity.length() <= 2.8 and is_on_floor():
 			state_machine.travel("Idle")
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED*DEACCELERATION)
+		velocity.z = move_toward(velocity.z, 0, SPEED*DEACCELERATION)
+
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
 	# Jumping
@@ -118,6 +119,8 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor():
 		lastSavePosition = global_transform.origin # for respawn
+	floor_snap_length=0.05
+	apply_floor_snap()
 	move_and_slide() # rörelse enligt velocity mm.
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
