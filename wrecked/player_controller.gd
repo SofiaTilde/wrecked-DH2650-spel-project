@@ -5,7 +5,7 @@ const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
 const JUMPDEACCELERATION = 8.5
-const PUSH_FORCE = 0.8
+const PUSH_FORCE = 10.8
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION = 2.5
 const DEACCELERATION = 8.5
@@ -25,7 +25,6 @@ var recently_pushed = {}
 @onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
-@onready var coyote_timer = $CoyoteTimer
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
@@ -40,10 +39,15 @@ var recently_pushed = {}
 #used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 var holdingItem: Item
-#how many frames are allowed for coyote
-var coyote_amount = 10
-var is_coyote = false 
+#variables jump buffer
+var jump_buffered := false
+var jump_buffer_time := 0.1
+var jump_buffer_timer := 0.0
 
+#How long can you coyote
+var coyote_time := 0.3
+var coyote_timer := 0.0
+var jump_available= true
 func _ready():
 	
 	var name = player_names.get(player_id)
@@ -53,7 +57,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
-	coyote_timer.wait_time = coyote_amount / 60.0
+	#coyote_timer.wait_time = coyote_amount / 60.0
 
 
 #call this func when you pick up/use some item
@@ -69,6 +73,8 @@ func update_icon(icon: Texture2D):
 func _physics_process(delta: float) -> void:
 	#Coyote
 	var last_floor = is_on_floor()
+	#make the character snap more
+	floor_snap_length=0.05
 
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
@@ -77,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	#Player variables
 	var player_position = position
 	var player_velocity = velocity
-	var jump_state_adv = player_jump_adv(player_velocity.y,last_floor,is_coyote, delta)
+	var jump_state_adv = player_jump_adv(player_velocity.y, delta)
 	#Camera variables
 	var cam_basis: Basis = twist_pivot.global_transform.basis # transformera från world coords till cam coords
 	var camera_pos = Camera.position
@@ -127,7 +133,6 @@ func _physics_process(delta: float) -> void:
 
 	if last_floor:
 		lastSavePosition = global_transform.origin # for respawn
-	floor_snap_length=0.05
 	apply_floor_snap()
 	move_and_slide() # rörelse enligt velocity mm.
 	apply_push_to_other_players() # används för att sköta collisions
@@ -156,24 +161,62 @@ func _physics_process(delta: float) -> void:
 		throwItem(play)
 
 #hanterar jump logic, will adjust with button press sensitivity
-func player_jump_adv(jump_velocity,last_floor,is_coyote, delta) -> float:
+func jump_old(jump_velocity, delta) -> float:
 	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
 	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
+	if jump_available:
+		if is_jumping:
+			jump_velocity += JUMP_VELOCITY
+		elif not is_on_floor():
+			if is_releasing_jump and jump_velocity > 0:
+				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
+			else:
+				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
+		if jump_velocity>0.0:
+			state_machine.travel("Jumping")
+	#else:
+		#jump_buffer = true
+		#get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout) 
+	return jump_velocity
 
-	if !is_on_floor() and (!is_jumping ): #or !is_releasing_jump
-		is_coyote = true
-		coyote_timer.start()
-	if is_jumping and ( last_floor or is_coyote):
+#func player_jump_adv(jump_velocity: float, delta: float) -> float:
+func player_jump_adv(jump_velocity: float, delta: float) -> float:
+	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
+	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
 
-		jump_velocity += JUMP_VELOCITY
+	if is_on_floor():
+		coyote_timer = coyote_time
+		jump_available = false  
+	else:
+		coyote_timer -= delta
+
+	if jump_pressed:
+		jump_buffered = true
+		jump_buffer_timer = jump_buffer_time
+
+	if jump_buffered:
+		jump_buffer_timer -= delta
+		if jump_buffer_timer <= 0.0:
+			jump_buffered = false
+
+	# Check for valid buffered jump
+	if jump_buffered and not jump_available and coyote_timer > 0.0:
+		jump_velocity = JUMP_VELOCITY
+		jump_buffered = false
+		jump_available = true
+		state_machine.travel("Jumping")
 	elif not is_on_floor():
-		if is_releasing_jump and jump_velocity > 0:
+		if jump_released:
 			jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 		else:
 			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-	if jump_velocity>0.0:
-		state_machine.travel("Jumping")
+
 	return jump_velocity
+
+func handle_jump_input(delta):
+	if Input.is_action_just_pressed("jump_%s" % [player_id]):
+		jump_buffered = true
+		jump_buffer_timer = jump_buffer_time
 
 
 func apply_push_to_other_players() -> void:
@@ -207,8 +250,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
 
-func _on_coyote_timer_timeout():
-	is_coyote = false
 
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
