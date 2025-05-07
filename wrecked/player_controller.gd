@@ -25,7 +25,7 @@ var recently_pushed = {}
 @onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
 @onready var pitch_pivot = $TwistPivot/PitchPivot
-
+@onready var coyote_timer = $CoyoteTimer
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
@@ -37,14 +37,15 @@ var recently_pushed = {}
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
+#used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 var holdingItem: Item
+#how many frames are allowed for coyote
+var coyote_amount = 1
+var is_coyote = false 
 
 func _ready():
-	#@onready var model = $Rackham_red
-
-	#@onready var animation_player := $Rackham_red/AnimationPlayer
-
+	
 	var name = player_names.get(player_id)
 	model = get_node(name)
 	animation_player = str(name) + "/AnimationPlayer"
@@ -52,6 +53,9 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
+	coyote_timer.wait_time = coyote_amount / 60.0
+
+
 #call this func when you pick up/use some item
 func update_item_label(item: String) -> void:
 	if label_node: # avoid crashes if node is removed/changed
@@ -63,6 +67,9 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
+	#Coyote
+	var last_floor = is_on_floor()
+
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
@@ -70,7 +77,7 @@ func _physics_process(delta: float) -> void:
 	#Player variables
 	var player_position = position
 	var player_velocity = velocity
-	var jump_state_adv = player_jump_adv(player_velocity.y, delta)
+	var jump_state_adv = player_jump_adv(player_velocity.y,last_floor,is_coyote, delta)
 	#Camera variables
 	var cam_basis: Basis = twist_pivot.global_transform.basis # transformera från world coords till cam coords
 	var camera_pos = Camera.position
@@ -93,6 +100,7 @@ func _physics_process(delta: float) -> void:
 	twist_pivot.rotation.z = lerp_angle(clamp(twist_pivot.rotation.z, -0.5, deg_to_rad(30)), rotation.z, 0.1)
 	twist_input = lerp(twist_pivot.rotation.x, 0.0, 0.1)
 	pitch_input = lerp(pitch_pivot.rotation.z, 0.0, 0.1)
+
 	#Player acceleration
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
@@ -117,7 +125,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	if is_on_floor():
+	if last_floor:
 		lastSavePosition = global_transform.origin # for respawn
 	floor_snap_length=0.05
 	apply_floor_snap()
@@ -148,10 +156,15 @@ func _physics_process(delta: float) -> void:
 		throwItem(play)
 
 #hanterar jump logic, will adjust with button press sensitivity
-func player_jump_adv(jump_velocity, delta) -> float:
+func player_jump_adv(jump_velocity,last_floor,is_coyote, delta) -> float:
 	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
 	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
-	if is_jumping:
+
+	if !is_on_floor() and (!is_jumping or !is_releasing_jump):
+		is_coyote = true
+		coyote_timer.start()
+	if is_jumping and ( last_floor or is_coyote):
+
 		jump_velocity += JUMP_VELOCITY
 	elif not is_on_floor():
 		if is_releasing_jump and jump_velocity > 0:
@@ -193,6 +206,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
+
+func _on_coyote_timer_timeout():
+	is_coyote = false
 
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
