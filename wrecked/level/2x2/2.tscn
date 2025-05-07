@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsmlem37lo4th"]
+
+[ext_resource type="PackedScene" uid="uid://6xg4qbaq0b08" path="res://meshes/Platforms/plank4_2x2.glb" id="1_1my5s"]
+[ext_resource type="Script" uid="uid://bb6jpqun4oyoc" path="res://scripts/platform.gd" id="2_6ko2w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xahxg"]
+size = Vector3(2.1646, 0.316467, 2.19672)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="plank4_2x2" parent="." instance=ExtResource("1_1my5s")]
+script = ExtResource("2_6ko2w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="plank4_2x2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plank4_2x2/StaticBody3D"]
+transform = Transform3D(0.997937, 0, 0.0642014, 0, 1, 0, -0.0642014, 0, 0.997937, -0.0444823, 0.00888062, 0.0242532)
+shape = SubResource("BoxShape3D_xahxg")
