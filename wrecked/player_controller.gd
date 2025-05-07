@@ -143,6 +143,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("use_item_left_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer4/SubViewport/Player4") as CharacterBody3D
 		throwItem(play)
+	if holdingItem != null:
+		holdingItem.global_position = global_position + Vector3(0, 2.3, 0)
+		holdingItem.rotation.y = model.rotation.y
 
 #hanterar jump logic, will adjust with button press sensitivity
 func player_jump_adv(jump_velocity, delta) -> float:
