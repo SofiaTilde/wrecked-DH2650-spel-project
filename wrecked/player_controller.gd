@@ -4,7 +4,7 @@ const SPEED = 9
 const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
-const JUMPDEACCELERATION = 4.5
+const JUMPDEACCELERATION = 8.5
 const PUSH_FORCE = 0.8
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION = 2.5
@@ -41,7 +41,7 @@ var recently_pushed = {}
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 var holdingItem: Item
 #how many frames are allowed for coyote
-var coyote_amount = 1
+var coyote_amount = 10
 var is_coyote = false 
 
 func _ready():
@@ -160,7 +160,7 @@ func player_jump_adv(jump_velocity,last_floor,is_coyote, delta) -> float:
 	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
 	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
 
-	if !is_on_floor() and (!is_jumping or !is_releasing_jump):
+	if !is_on_floor() and (!is_jumping ): #or !is_releasing_jump
 		is_coyote = true
 		coyote_timer.start()
 	if is_jumping and ( last_floor or is_coyote):
