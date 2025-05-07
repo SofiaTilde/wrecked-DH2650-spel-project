@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bct2vsr7ymxi4"]
+[gd_scene load_steps=5 format=3 uid="uid://bct2vsr7ymxi4"]
 
 [ext_resource type="Script" uid="uid://4ohwjxvwlf14" path="res://scripts/random_platform.gd" id="1_b7djc"]
-[ext_resource type="PackedScene" uid="uid://bi4nnrcg5pfr2" path="res://level/2x2/0.tscn" id="2_y6fhh"]
-[ext_resource type="PackedScene" uid="uid://bdgo7wobu7xro" path="res://level/2x2/1.tscn" id="3_chio3"]
+[ext_resource type="PackedScene" uid="uid://l2l3mvvrqhsu" path="res://level/2x2/0.tscn" id="2_y6fhh"]
+[ext_resource type="PackedScene" uid="uid://da3dp6rlapf65" path="res://level/2x2/1.tscn" id="3_chio3"]
+[ext_resource type="PackedScene" uid="uid://bsmlem37lo4th" path="res://level/2x2/2.tscn" id="4_y6fhh"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_b7djc")
-platform_scenes = Array[PackedScene]([ExtResource("2_y6fhh"), ExtResource("3_chio3")])
+platform_scenes = Array[PackedScene]([ExtResource("2_y6fhh"), ExtResource("3_chio3"), ExtResource("4_y6fhh")])
 randomize_in_editor = true

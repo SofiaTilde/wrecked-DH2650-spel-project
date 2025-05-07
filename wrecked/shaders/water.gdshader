@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode world_vertex_coords; // add wireframe for debug
+render_mode world_vertex_coords;
 
 uniform sampler2D dudv_map;
 uniform sampler2D normal_map : hint_normal;
@@ -17,7 +17,7 @@ void vertex() {
 	VERTEX.y += sin(VERTEX.x * 0.484 + VERTEX.z * 0.82 + time * 0.82) * 0.21;
 	VERTEX.y += sin(VERTEX.x * 0.212 + VERTEX.z * 0.47 + time * 0.75) * 0.32;
 
-	VERTEX.y *= clamp(1.0 - sqrt(VERTEX.x * VERTEX.x + VERTEX.z * VERTEX.z) / 128.0, 0.1, 1.0);
+	VERTEX.y *= pow(clamp(1.0 - sqrt(VERTEX.x * VERTEX.x + VERTEX.z * VERTEX.z) / 128.0, 0.05, 1.0), 0.5);
 }
 
 const float move_factor = 0.05;

@@ -10,7 +10,7 @@ extends Node3D
 @export var max_angle := 45.0
 
 const LEVEL_LENGTH := 256.0
-const MAX_WIDTH := 16.0
+const MAX_WIDTH := 12.0
 
 func _ready() -> void:
 	_spawn_platforms()
@@ -45,7 +45,7 @@ func _spawn_first(start):
 		
 		var next_count = 1
 		
-		if randi() % 3 == 0:
+		if randi() % 2 == 0:
 			next_count = 2
 		
 		for j in range(next_count):
@@ -111,6 +111,7 @@ func _spawn_from_pos(position):
 
 	add_child(platform)
 	platform.global_position = position
+	platform.global_rotation = Vector3(0.0, randf() * 6.28, 0.0)
 	platform.owner = owner
 	
 	return true
