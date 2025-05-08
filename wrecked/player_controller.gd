@@ -46,7 +46,7 @@ var jump_buffer_time := 110.8
 var jump_buffer_timer := 0.0
 
 #How long can you coyote
-var coyote_time := 3.3
+var coyote_time := 30.3
 var coyote_timer := 0.0
 
 func _ready():
@@ -58,7 +58,6 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
-	#coyote_timer.wait_time = coyote_amount / 60.0
 
 
 #call this func when you pick up/use some item
@@ -129,6 +128,9 @@ func _physics_process(delta: float) -> void:
 	velocity.z = player_velocity.z
 	# Jumping
 	velocity.y = jump_state_adv
+	if player_position.y <-5.0:
+		state_machine.travel("Drowning")
+
 
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -169,7 +171,8 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
 	var jump_available = true
-	
+	state_machine.travel("Jumping")
+
 	if is_on_floor():
 		jump_available= true
 		coyote_timer = coyote_time
@@ -177,18 +180,15 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 		coyote_timer -= delta
 	if jump_available or coyote_time >0.0:
 		if jump_pressed  and is_on_floor():
-			state_machine.travel("Jumping")
 			jump_available = false
 			jump_buffered = true
 			jump_buffer_timer = jump_buffer_time
 		if !is_on_floor():
 			jump_available = false
-
 		if jump_buffered:
 			jump_buffer_timer -= delta
 			if jump_buffer_timer <= 0.0:
 				jump_buffered = false
-
 		if jump_buffered and coyote_timer > 0.0:
 			jump_velocity = JUMP_VELOCITY
 			jump_buffered = false
@@ -239,7 +239,6 @@ func _on_area_3d_visibility_changed() -> void:
 
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
-	state_machine.travel("Drowning")
 	respawn_manager.respawn()
 
 
