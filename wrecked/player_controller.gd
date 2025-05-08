@@ -50,7 +50,7 @@ var coyote_time := 3.3
 var coyote_timer := 0.0
 
 func _ready():
-	
+
 	var name = player_names.get(player_id)
 	model = get_node(name)
 	animation_player = str(name) + "/AnimationPlayer"
@@ -72,14 +72,14 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-	
+
 	#Uncomment this and replace variables to debug variables ingame
 	Debug_label.text = str("Coy",coyote_timer)
 
 	var last_floor = is_on_floor()
 	#make the character snap more
 	floor_snap_length=0.05
-	
+
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
@@ -135,8 +135,8 @@ func _physics_process(delta: float) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if last_floor:
-		lastSavePosition = global_transform.origin			
-				
+		lastSavePosition = global_transform.origin
+
 	apply_floor_snap()
 	move_and_slide() # rörelse enligt velocity mm.
 	apply_push_to_other_players() # används för att sköta collisions
@@ -172,7 +172,7 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
 	var jump_available = true
-	
+
 	if is_on_floor():
 		jump_available= true
 		coyote_timer = coyote_time
@@ -214,7 +214,7 @@ func apply_push_to_other_players() -> void:
 	for i in range(collisions_amount):
 		var collision = get_slide_collision(i)
 		var Collision_object = collision.get_collider()
-	
+
 		if Collision_object is CharacterBody3D and Collision_object != self:
 			if Collision_object in recently_pushed:
 				continue # already pushed recently
