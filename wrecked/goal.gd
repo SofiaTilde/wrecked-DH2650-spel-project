@@ -11,7 +11,7 @@ var placement = 1
 var player_placements = {}
 var player_keys
 var placements_dict = {
-	1: ["st", Color(1.0, 1.0, 0.5, 1.0)],
+	1: ["st!!!", Color(1.0, 1.0, 0.5, 1.0)],
 	2: ["nd", Color(0.655, 0.745, 0.690, 1.0)],
 	3: ["rd", Color(0.859, 0.631, 0.353,1.0)],
 	4: ["th", Color(0.467, 0.294, 0.086,1.0)]
@@ -79,3 +79,6 @@ func winnerHUD(player_data: PlayerData):
 	label.text = " %s" % [player_data.name] + " wins!"
 	label.modulate = player_data.color # Yellow (RGB)
 	label.label_settings.font_size = 100
+	for i in range(4):
+		placement_labels[i].visible = false
+		placement_labels_th[i].visible = false

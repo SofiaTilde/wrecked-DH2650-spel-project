@@ -10,6 +10,8 @@ extends Node
 @onready var leaderboard_menu_popup: Panel = $CanvasLayer/opacity/Leaderboard2
 @onready var label: Label = $CanvasLayer/SharedLabel
 @onready var label2: Label = $CanvasLayer/SharedLabel2
+@onready var placement_labels: Array = [get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
+@onready var placement_labels_th: Array = [get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
 @onready var platforms: Node3D = get_node("/root/Game/_Node3D_144036")
 @onready var leaderboard_labels: Array = [
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score1st"),
@@ -108,6 +110,9 @@ func start_race(): # from process
 	# new_platforms.name = "oldPlatformsLevel" # So we can reuse this func on next goal
 	await get_tree().create_timer(1.).timeout
 	label.visible = false
+	for i in range(4):
+		placement_labels[i].visible = true
+		placement_labels_th[i].visible = true
 	
 	
 func _on_goal_race_over() -> void:
@@ -167,7 +172,7 @@ func show_leaderboard():
 	leaderboard_popup.visible = true
 	players.sort_custom(sort_by_points)
 	for i in range(players.size()):
-		var leaderboardText = "%s" % placements_dict.get(i + 1) + "- " + str(players[i].player_data.name) + " : " + str(players[i].player_data.points)
+		var leaderboardText = str(i+1) +"%s" % placements_dict.get(i + 1)[0] + "- " + str(players[i].player_data.name) + " : " + str(players[i].player_data.points)
 		update_label(leaderboard_labels[i], leaderboardText, players[i].player_data.color, 30)
 	
 	#Show menu
