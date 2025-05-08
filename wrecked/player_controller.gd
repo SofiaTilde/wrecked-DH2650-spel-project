@@ -18,12 +18,13 @@ var mouse_sensitivity := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 var recently_pushed = {}
-
+var last_platform = CollisionObject3D
 @onready var model = Node3D
 @onready var animation_player = AnimationPlayer
 @onready var animation_tree := AnimationTree
 @onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
+@onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition: Vector3 = global_transform.origin
@@ -41,13 +42,13 @@ var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pi
 var holdingItem: Item
 #variables jump buffer
 var jump_buffered := false
-var jump_buffer_time := 0.1
+var jump_buffer_time := 110.8
 var jump_buffer_timer := 0.0
 
 #How long can you coyote
-var coyote_time := 0.3
+var coyote_time := 3.3
 var coyote_timer := 0.0
-var jump_available= true
+
 func _ready():
 	
 	var name = player_names.get(player_id)
@@ -71,11 +72,14 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-	#Coyote
+	
+	#Uncomment this and replace variables to debug variables ingame
+	Debug_label.text = str("Coy",coyote_timer)
+
 	var last_floor = is_on_floor()
 	#make the character snap more
 	floor_snap_length=0.05
-
+	
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
@@ -106,7 +110,6 @@ func _physics_process(delta: float) -> void:
 	twist_pivot.rotation.z = lerp_angle(clamp(twist_pivot.rotation.z, -0.5, deg_to_rad(30)), rotation.z, 0.1)
 	twist_input = lerp(twist_pivot.rotation.x, 0.0, 0.1)
 	pitch_input = lerp(pitch_pivot.rotation.z, 0.0, 0.1)
-
 	#Player acceleration
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
@@ -132,7 +135,8 @@ func _physics_process(delta: float) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if last_floor:
-		lastSavePosition = global_transform.origin # for respawn
+		lastSavePosition = global_transform.origin			
+				
 	apply_floor_snap()
 	move_and_slide() # rörelse enligt velocity mm.
 	apply_push_to_other_players() # används för att sköta collisions
@@ -161,56 +165,39 @@ func _physics_process(delta: float) -> void:
 		throwItem(play)
 
 #hanterar jump logic, will adjust with button press sensitivity
-func jump_old(jump_velocity, delta) -> float:
-	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
-	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
-	if jump_available:
-		if is_jumping:
-			jump_velocity += JUMP_VELOCITY
-		elif not is_on_floor():
-			if is_releasing_jump and jump_velocity > 0:
-				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
-			else:
-				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-		if jump_velocity>0.0:
-			state_machine.travel("Jumping")
-	#else:
-		#jump_buffer = true
-		#get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout) 
-	return jump_velocity
-
-#func player_jump_adv(jump_velocity: float, delta: float) -> float:
 func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
+	var jump_available = true
 
 	if is_on_floor():
+		jump_available= true
 		coyote_timer = coyote_time
-		jump_available = false  
 	else:
 		coyote_timer -= delta
+	if jump_available or coyote_time >0.0:
+		if jump_pressed and is_on_floor():
+			jump_available = false
+			jump_buffered = true
+			jump_buffer_timer = jump_buffer_time
+		if !is_on_floor():
+			jump_available = false
 
-	if jump_pressed:
-		jump_buffered = true
-		jump_buffer_timer = jump_buffer_time
+		if jump_buffered:
+			jump_buffer_timer -= delta
+			if jump_buffer_timer <= 0.0:
+				jump_buffered = false
 
-	if jump_buffered:
-		jump_buffer_timer -= delta
-		if jump_buffer_timer <= 0.0:
+		# Check for valid buffered jump
+		if jump_buffered and coyote_timer > 0.0:
+			jump_velocity = JUMP_VELOCITY
 			jump_buffered = false
-
-	# Check for valid buffered jump
-	if jump_buffered and not jump_available and coyote_timer > 0.0:
-		jump_velocity = JUMP_VELOCITY
-		jump_buffered = false
-		jump_available = true
-		state_machine.travel("Jumping")
-	elif not is_on_floor():
-		if jump_released:
-			jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
-		else:
-			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-
+			state_machine.travel("Jumping")
+		elif not is_on_floor():
+			if jump_released:
+				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
+			else:
+				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
 	return jump_velocity
 
 func handle_jump_input(delta):
@@ -225,7 +212,7 @@ func apply_push_to_other_players() -> void:
 	for i in range(collisions_amount):
 		var collision = get_slide_collision(i)
 		var Collision_object = collision.get_collider()
-
+	
 		if Collision_object is CharacterBody3D and Collision_object != self:
 			if Collision_object in recently_pushed:
 				continue # already pushed recently
