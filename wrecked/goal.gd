@@ -3,8 +3,8 @@ extends Area3D
 @onready var count_down: Timer = $countDown
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var GM: Node = get_node("/root/Game/GameManager")
-@onready var placement_labels: Array = [get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
-@onready var placement_labels_th: Array = [get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
+@onready var placement_labels: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
+@onready var placement_labels_th: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
 
 
 var placement = 1
@@ -22,10 +22,10 @@ signal race_over
 
 func _ready() -> void:
 	player_placements={
-	"Player": [4.0, placement_labels[0],placement_labels_th[0]],
-	"Player2": [3.0, placement_labels[1],placement_labels_th[1]],
-	"Player3": [2.0, placement_labels[2],placement_labels_th[2]],
-	"Player4": [1.0, placement_labels[3],placement_labels_th[3]]
+	"Player": [4.0, placement_labels[0],placement_labels_th[0],GM.players[0].player_data],
+	"Player2": [3.0, placement_labels[1],placement_labels_th[1],GM.players[1].player_data],
+	"Player3": [2.0, placement_labels[2],placement_labels_th[2],GM.players[2].player_data],
+	"Player4": [1.0, placement_labels[3],placement_labels_th[3],GM.players[3].player_data]
 }
 	
 	label.visible = false
@@ -38,6 +38,7 @@ func update_placements():
 		func(a,b):
 			return player_placements[a][0] < player_placements[b][0]
 	)
+	
 
 func  update_placement_labels():
 	
@@ -46,7 +47,9 @@ func  update_placement_labels():
 		player_placements[key][1].text= str(i) #ok since they are already ordered
 		player_placements[key][1].modulate = placements_dict[i][1]
 		player_placements[key][2].text=placements_dict[i][0]
-		i+=1
+		player_placements[key][3].placement=i #update player_data
+		i+=1 #next placement
+		
 	
 func _physics_process(delta: float) -> void:
 	update_placements()

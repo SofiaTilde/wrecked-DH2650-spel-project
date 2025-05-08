@@ -124,7 +124,6 @@ func _physics_process(delta: float) -> void:
 		if collision:	
 			var floor_object = collision.get_collider()
 			if floor_object is not CharacterBody3D:
-				#last_saved_position = global_transform.origin			
 				last_saved_platform = floor_object
 	
 	move_and_slide() # rörelse enligt velocity mm.
@@ -203,7 +202,7 @@ func _on_area_3d_visibility_changed() -> void:
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
 	state_machine.travel("Drowning")
-	respawn_manager.respawn()
+	respawn_manager.respawn(player_data.placement)
 
 
 func setItem(item: Item):

@@ -10,8 +10,8 @@ extends Node
 @onready var leaderboard_menu_popup: Panel = $CanvasLayer/opacity/Leaderboard2
 @onready var label: Label = $CanvasLayer/SharedLabel
 @onready var label2: Label = $CanvasLayer/SharedLabel2
-@onready var placement_labels: Array = [get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
-@onready var placement_labels_th: Array = [get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Positions/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
+@onready var placement_labels: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
+@onready var placement_labels_th: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
 @onready var platforms: Node3D = get_node("/root/Game/_Node3D_144036")
 @onready var leaderboard_labels: Array = [
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score1st"),
@@ -43,7 +43,7 @@ var placements_dict
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	
 	var red = PlayerData.new("Red Rogers", Color(1, 0, 0, 1))
 	var pink = PlayerData.new("Pink Plunderer", Color(1, 0.5, 0.7, 1))
@@ -55,9 +55,11 @@ func _ready() -> void:
 	player2.player_data = yellow
 	player3.player_data = green
 	player4.player_data = pink
+	
 
 	placements_dict = Goal.placements_dict
-	
+	await get_tree().process_frame
+
 	get_ready()
 
 func get_ready():
