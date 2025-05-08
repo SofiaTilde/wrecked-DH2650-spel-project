@@ -27,7 +27,7 @@ var recently_pushed = {}
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 
 @onready var currItem_node = $MarginContainer/CurrItemLabel
-@onready var lastSavePosition: Vector3 = global_transform.origin
+@onready var last_saved_position: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
@@ -39,6 +39,8 @@ var recently_pushed = {}
 @export var camera_smoothing_rate = 0.1
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 var holdingItem: Item
+var last_saved_platform: Node3D
+
 
 func _ready():
 	#@onready var model = $Rackham_red
@@ -116,8 +118,15 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+		
 	if is_on_floor():
-		lastSavePosition = global_transform.origin # for respawn
+		var collision = get_slide_collision(0)		
+		if collision:	
+			var floor_object = collision.get_collider()
+			if floor_object is not CharacterBody3D:
+				#last_saved_position = global_transform.origin			
+				last_saved_platform = floor_object
+	
 	move_and_slide() # rörelse enligt velocity mm.
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():

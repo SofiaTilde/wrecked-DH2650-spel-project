@@ -103,7 +103,7 @@ func start_race(): # from process
 	update_label(label, "WRECKED!", Color.WHITE, 300)
 	
 	print("new race-stage loaded!")
-	platforms.load_new_level()
+	#platforms.load_new_level()
 	# Load newly generated platforms
 	# var new_platforms = load("res://level/level.tscn").instantiate()
 	# $"..".add_child(new_platforms)
