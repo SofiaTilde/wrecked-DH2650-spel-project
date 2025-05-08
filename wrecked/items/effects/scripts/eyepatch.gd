@@ -11,5 +11,4 @@ func activateItem():
 	var player = detectHitPlayer()
 	if player == null:
 		return
-	changePlayerPos(get_tree().root.get_node("Level/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D)
 	await applyOverlay(player, rng.randf_range(5, 15))
