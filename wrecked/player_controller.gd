@@ -177,6 +177,7 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 		coyote_timer -= delta
 	if jump_available or coyote_time >0.0:
 		if jump_pressed  and is_on_floor():
+			state_machine.travel("Jumping")
 			jump_available = false
 			jump_buffered = true
 			jump_buffer_timer = jump_buffer_time
@@ -193,11 +194,9 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 			jump_buffered = false
 		elif not is_on_floor():
 			if jump_released:
-
 				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 			else:
 				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-	state_machine.travel("Jumping")
 	return jump_velocity
 
 func handle_jump_input(delta):
