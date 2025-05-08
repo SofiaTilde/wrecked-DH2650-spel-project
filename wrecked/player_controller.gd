@@ -169,15 +169,14 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
 	var jump_available = true
-
+	
 	if is_on_floor():
 		jump_available= true
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
 	if jump_available or coyote_time >0.0:
-		if jump_pressed and is_on_floor():
-			
+		if jump_pressed  and is_on_floor():
 			jump_available = false
 			jump_buffered = true
 			jump_buffer_timer = jump_buffer_time
@@ -194,6 +193,7 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 			jump_buffered = false
 		elif not is_on_floor():
 			if jump_released:
+
 				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 			else:
 				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
