@@ -24,7 +24,7 @@ var last_platform = CollisionObject3D
 @onready var animation_tree := AnimationTree
 @onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
-@onready var Debug_label = $Debub_label
+#@onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var last_saved_position: Vector3 = global_transform.origin
@@ -76,7 +76,7 @@ func update_icon(icon: Texture2D):
 func _physics_process(delta: float) -> void:
 
 	#Uncomment this and replace variables to debug variables ingame
-	Debug_label.text = str("Coy",coyote_timer)
+#	Debug_label.text = str("Coy",coyote_timer)
 
 	var last_floor = is_on_floor()
 	#make the character snap more

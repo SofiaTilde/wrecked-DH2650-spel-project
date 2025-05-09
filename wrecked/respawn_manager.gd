@@ -15,7 +15,7 @@ func _on_ResetTimer_timeout():
 	lakitu()
 
 func respawn(placement):
-	
+	player.player_data.respawning=true
 	reset_timer.start(respawntime_by_placement[placement-1]) # delay before lakitu depend on placement
 	transitioner.set_next_animation(true) # fade out
 
@@ -24,3 +24,4 @@ func lakitu(): # called after reset_timer runs out.
 	transitioner.set_next_animation(false) # fade in
 	player.global_transform.origin = player.last_saved_platform.global_transform.origin + Vector3(0, 4, 0) # reset player to lastSavePosition
 	player.velocity = Vector3(0, 0, 0)
+	player.player_data.respawning=false

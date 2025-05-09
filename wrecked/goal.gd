@@ -33,7 +33,9 @@ func _ready() -> void:
 	
 func update_placements():
 	for p in GM.players:
-		player_placements[p.name][0]=p.position.distance_to(position)
+		if not p.player_data.respawning:
+			player_placements[p.name][0]=p.position.distance_to(position)
+		
 	player_keys.sort_custom(
 		func(a,b):
 			return player_placements[a][0] < player_placements[b][0]
