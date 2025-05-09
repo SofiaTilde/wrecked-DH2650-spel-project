@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d03r1y0hwm8xp"]
+
+[ext_resource type="Shader" uid="uid://d350p2hg0dvkv" path="res://items/effects/materials/bottle_of_rum.gdshader" id="1_u3tro"]
+
+[resource]
+shader = ExtResource("1_u3tro")
+shader_parameter/amplitude = 0.01
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 2.0

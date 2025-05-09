@@ -56,6 +56,7 @@ visible = false
 script = ExtResource("1_gmkgo")
 
 [node name="Placeholder" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_tgham")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ORMMaterial3D_tpkkn")
