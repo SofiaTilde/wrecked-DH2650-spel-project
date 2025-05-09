@@ -3,7 +3,7 @@ extends Node
 #@onready transitioner : Transitioner = get_node("/root/Level/GridContainer/SubViewportContainer/SubViewport/Player/RespawnManager/transitioner")
 #var transitioner : Transitioner
 #@onready var transitioner : Transitioner = $transitioner
-@onready var aniPlayer: AnimationPlayer = $CanvasLayer/VBoxContainer/AnimationPlayer
+@onready var aniPlayer: AnimationPlayer = $CanvasLayer/AnimationPlayer
 
 #func _ready():
 	#transitioner = load("res://transitioner.tscn").instantiate()

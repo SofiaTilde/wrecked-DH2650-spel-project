@@ -5,7 +5,7 @@ extends Node
 @onready var player = get_parent()
 
 var is_respawning: bool = false
-
+var respawntime_by_placement= [3.5,2.5,1.8,1.5]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,12 +14,14 @@ func _ready() -> void:
 func _on_ResetTimer_timeout():
 	lakitu()
 
-func respawn():
-	reset_timer.start(1.5) # delay in seconds before respawn
-	transitioner.set_next_animation(true) # fade in
+func respawn(placement):
+	player.player_data.respawning=true
+	reset_timer.start(respawntime_by_placement[placement-1]) # delay before lakitu depend on placement
+	transitioner.set_next_animation(true) # fade out
 
 #Lakitu is a character from mario that drags you back to the course if you fall off. I.E this is a respawn functino
 func lakitu(): # called after reset_timer runs out.
 	transitioner.set_next_animation(false) # fade in
-	player.global_transform.origin = player.lastSavePosition + Vector3(0, 4, 0) # reset player to lastSavePosition
+	player.global_transform.origin = player.last_saved_platform.global_transform.origin + Vector3(0, 4, 0) # reset player to lastSavePosition
 	player.velocity = Vector3(0, 0, 0)
+	player.player_data.respawning=false

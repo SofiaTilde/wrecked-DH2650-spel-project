@@ -24,10 +24,10 @@ var last_platform = CollisionObject3D
 @onready var animation_tree := AnimationTree
 @onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
-@onready var Debug_label = $Debub_label
+#@onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var currItem_node = $MarginContainer/CurrItemLabel
-@onready var lastSavePosition: Vector3 = global_transform.origin
+@onready var last_saved_position: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
@@ -40,6 +40,8 @@ var last_platform = CollisionObject3D
 #used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 var holdingItem: Item
+var last_saved_platform: Node3D
+
 #variables jump buffer
 var jump_buffered := false
 var jump_buffer_time := 110.8
@@ -74,7 +76,7 @@ func update_icon(icon: Texture2D):
 func _physics_process(delta: float) -> void:
 
 	#Uncomment this and replace variables to debug variables ingame
-	Debug_label.text = str("Coy",coyote_timer)
+#	Debug_label.text = str("Coy",coyote_timer)
 
 	var last_floor = is_on_floor()
 	#make the character snap more
@@ -134,10 +136,17 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	if last_floor:
-		lastSavePosition = global_transform.origin
+		
+	if is_on_floor():
+		var collision = get_slide_collision(0)		
+		if collision:	
+			var floor_object = collision.get_collider()
+			if floor_object is not CharacterBody3D:
+				last_saved_platform = floor_object
+	
 
 	apply_floor_snap()
+
 	move_and_slide() # rörelse enligt velocity mm.
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
@@ -243,7 +252,7 @@ func _on_area_3d_visibility_changed() -> void:
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
 	state_machine.travel("Drowning")
-	respawn_manager.respawn()
+	respawn_manager.respawn(player_data.placement)
 
 
 func setItem(item: Item):
