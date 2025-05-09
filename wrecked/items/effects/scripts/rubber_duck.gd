@@ -9,13 +9,16 @@ func _ready():
 	icon = preload("res://items/rubber_duck/rubber_duck_icon.png") as Texture2D
 	overlayTexture = load("res://items/effects/textures/bubbles.png")
 	
+	
 func activateItem():
 	var player = detectHitPlayer()
 	
 	player.player_data.can_swim=true
 	print('rubberducky time')
+	player.get_node("SwimPlatform/CollisionShape3D").disabled=false
 	await applyOverlayFadeOut(player, swimtime[player.player_data.placement-1])
 	print('OVER')
+	player.get_node("SwimPlatform/CollisionShape3D").disabled=true
 	player.player_data.can_swim=false
 	
 	if player == null:
