@@ -252,14 +252,12 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 axis_lock_angular_y = true
-player_id = 1
-camera_smoothing_rate = 0.1
 
 [node name="IconTexture" type="TextureRect" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
 offset_right = 150.0
@@ -292,7 +290,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer2/SubViewport" instance=ExtResource("8_5t8nk")]
@@ -339,7 +337,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player3" parent="GridContainer/SubViewportContainer3/SubViewport" instance=ExtResource("7_dhlwf")]
@@ -383,7 +381,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player4" parent="GridContainer/SubViewportContainer4/SubViewport" instance=ExtResource("6_vxd74")]
@@ -432,884 +430,1154 @@ layout_mode = 2
 
 [node name="Level" parent="." instance=ExtResource("6_i5arm")]
 
-[node name="Node3D" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.894137, 0, 0.447794, 0, 1, 0, -0.447794, 0, -0.894137, 0, 0, 0)
+[node name="Node3D" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.0430451, 0, -0.999073, 0, 1, 0, 0.999073, 0, -0.0430451, 0, 0, 0)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59079" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.806667, 0, 0.591006, 0, 1, 0, -0.591006, 0, -0.806667, -1.87415, 0, -2.41142)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59081" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.870275, 0, -0.492567, 0, 1, 0, 0.492567, 0, 0.870275, -3.22892, 0, -7.18262)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59083" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.892366, 0, -0.451313, 0, 1, 0, 0.451313, 0, -0.892366, -5.62354, 0, -11.2702)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22337" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.969838, 0, 0.24375, 0, 1, 0, -0.24375, 0, 0.969838, 1.72851, 0, -6.44663)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22339" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.990217, 0, -0.139535, 0, 1, 0, 0.139535, 0, -0.990217, -0.335141, 0, -10.1635)
+[node name="@Node3D@59085" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.0404164, 0, 0.999183, 0, 1, 0, -0.999183, 0, 0.0404164, -7.14036, 0, -13.7896)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22341" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.791666, 0, -0.610955, 0, 1, 0, 0.610955, 0, -0.791666, -1.55027, 0, -15.4307)
+[node name="@Node3D@59087" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.392487, 0, 0.919757, 0, 1, 0, -0.919757, 0, -0.392487, -10.3893, 0, -19.8862)
 script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22343" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.393194, 0, -0.919456, 0, 1, 0, 0.919456, 0, -0.393194, 0.886702, 0, -18.4573)
+[node name="@Node3D@59089" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.137153, 0, -0.99055, 0, 1, 0, 0.99055, 0, -0.137153, -11.0516, 0, -24.8409)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22345" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.937883, 0, 0.346953, 0, 1, 0, -0.346953, 0, 0.937883, 0.933929, 0, -23.4237)
+[node name="@Node3D@59091" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.740105, 0, -0.672491, 0, 1, 0, 0.672491, 0, 0.740105, -9.31592, 0, -28.5262)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59093" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.410223, 0, -0.911985, 0, 1, 0, 0.911985, 0, 0.410223, -7.01806, 0, -35.3231)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22347" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.688343, 0, 0.725386, 0, 1, 0, -0.725386, 0, 0.688343, 2.27858, 0, -25.9811)
+[node name="@Node3D@59095" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.561126, 0, -0.82773, 0, 1, 0, 0.82773, 0, -0.561126, -10.2405, 0, -39.6296)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22349" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.95448, 0, 0.298275, 0, 1, 0, -0.298275, 0, 0.95448, 2.8314, 0, -33.1695)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22351" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.588955, 0, -0.808166, 0, 1, 0, 0.808166, 0, -0.588955, 5.12881, 0, -37.3591)
+[node name="@Node3D@59097" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.429929, 0, -0.902863, 0, 1, 0, 0.902863, 0, -0.429929, -8.78193, 0, -42.9087)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22353" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.56955, 0, 0.821956, 0, 1, 0, -0.821956, 0, -0.56955, 5.67061, 0, -43.3796)
+[node name="@Node3D@59099" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.558637, 0, -0.829413, 0, 1, 0, 0.829413, 0, 0.558637, -10.1554, 0, -48.3276)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22355" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.619208, 0, 0.785227, 0, 1, 0, -0.785227, 0, 0.619208, 5.2854, 0, -50.0047)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22357" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.99994, 0, -0.0109287, 0, 1, 0, 0.0109287, 0, 0.99994, 4.96127, 0, -52.9)
+[node name="@Node3D@59101" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.418084, 0, -0.908408, 0, 1, 0, 0.908408, 0, 0.418084, -9.5397, 0, -51.2373)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22359" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.998995, 0, 0.0448221, 0, 1, 0, -0.0448221, 0, 0.998995, 4.55984, 0, -59.8015)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22361" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.950192, 0, 0.311667, 0, 1, 0, -0.311667, 0, -0.950192, 4.30437, 0, -64.7906)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22363" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.861996, 0, -0.506916, 0, 1, 0, 0.506916, 0, -0.861996, 5.45899, 0, -69.3626)
+[node name="@Node3D@59103" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.856129, 0, -0.516762, 0, 1, 0, 0.516762, 0, -0.856129, -11.0522, 0, -54.1079)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22365" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.410493, 0, -0.911864, 0, 1, 0, 0.911864, 0, 0.410493, 6.67808, 0, -72.3898)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22367" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.735532, 0, -0.67749, 0, 1, 0, 0.67749, 0, -0.735532, 7.59209, 0, -74.8602)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22369" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.646619, 0, 0.762813, 0, 1, 0, -0.762813, 0, -0.646619, 7.22969, 0, -80.233)
+[node name="@Node3D@59105" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.999839, 0, -0.0179151, 0, 1, 0, 0.0179151, 0, -0.999839, -6.33487, 0, -59.0467)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22371" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.938419, 0, 0.345498, 0, 1, 0, -0.345498, 0, 0.938419, 3.88163, 0, -83.5963)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22373" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.862246, 0, 0.506489, 0, 1, 0, -0.506489, 0, 0.862246, 7.69557, 0, -87.9163)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22375" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.113201, 0, -0.993572, 0, 1, 0, 0.993572, 0, 0.113201, 9.64209, 0, -90.9228)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22377" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.695653, 0, 0.718378, 0, 1, 0, -0.718378, 0, -0.695653, 8.38951, 0, -95.3696)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22379" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.897294, 0, -0.441433, 0, 1, 0, 0.441433, 0, 0.897294, 7.61214, 0, -98.4377)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22381" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.113835, 0, 0.9935, 0, 1, 0, -0.9935, 0, -0.113835, 3.39502, 0, -103.176)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22383" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.187752, 0, -0.982216, 0, 1, 0, 0.982216, 0, 0.187752, 5.9525, 0, -107.323)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22385" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.876597, 0, -0.481226, 0, 1, 0, 0.481226, 0, 0.876597, 8.81446, 0, -112.422)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22387" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.905961, 0, -0.423362, 0, 1, 0, 0.423362, 0, -0.905961, 10.2376, 0, -115.031)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22389" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.998845, 0, -0.0480425, 0, 1, 0, 0.0480425, 0, -0.998845, 11.4716, 0, -117.22)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22391" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.906705, 0, -0.421766, 0, 1, 0, 0.421766, 0, -0.906705, 7.44565, 0, -122.037)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22393" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.792397, 0, -0.610006, 0, 1, 0, 0.610006, 0, -0.792397, 6.93035, 0, -127.229)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22395" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.788019, 0, 0.615651, 0, 1, 0, -0.615651, 0, -0.788019, 10.9375, 0, -93.4988)
+[node name="@Node3D@59107" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.868356, 0, -0.495941, 0, 1, 0, 0.495941, 0, 0.868356, -6.93464, 0, -62.8292)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22397" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.99891, 0, -0.0466853, 0, 1, 0, 0.0466853, 0, -0.99891, 10.8566, 0, -100.633)
+[node name="@Node3D@59109" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.624574, 0, 0.780966, 0, 1, 0, -0.780966, 0, -0.624574, -4.07055, 0, -68.4529)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59111" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.957342, 0, 0.288956, 0, 1, 0, -0.288956, 0, 0.957342, -1.15667, 0, -71.7596)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22399" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.640449, 0, 0.768001, 0, 1, 0, -0.768001, 0, 0.640449, 11.2345, 0, -103.558)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22401" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.989566, 0, -0.144083, 0, 1, 0, 0.144083, 0, 0.989566, 8.0947, 0, -109.356)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22403" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.255812, 0, -0.966727, 0, 1, 0, 0.966727, 0, 0.255812, 4.80464, 0, -86.3484)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22405" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.509972, 0, 0.860191, 0, 1, 0, -0.860191, 0, -0.509972, 2.28439, 0, -89.4584)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22407" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.885597, 0, 0.464455, 0, 1, 0, -0.464455, 0, -0.885597, -0.354155, 0, -92.1454)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22409" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.0404024, 0, -0.999183, 0, 1, 0, 0.999183, 0, 0.0404024, 4.25127, 0, -97.1515)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22411" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.994071, 0, -0.108729, 0, 1, 0, 0.108729, 0, -0.994071, 0.721213, 0, -102.532)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22413" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.901354, 0, 0.433082, 0, 1, 0, -0.433082, 0, -0.901354, 1.23097, 0, -106.724)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22415" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.0150096, 0, 0.999887, 0, 1, 0, -0.999887, 0, -0.0150096, 5.44702, 0, -112.701)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22417" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.00457856, 0, -0.99999, 0, 1, 0, 0.99999, 0, -0.00457856, 7.67301, 0, -117.132)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22419" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.806074, 0, -0.591815, 0, 1, 0, 0.591815, 0, -0.806074, -0.597582, 0, -113.752)
+[node name="@Node3D@59113" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.981984, 0, 0.188964, 0, 1, 0, -0.188964, 0, -0.981984, 0.175218, 0, -77.3815)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22421" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.994602, 0, 0.103764, 0, 1, 0, -0.103764, 0, 0.994602, -2.19324, 0, -117.563)
+[node name="@Node3D@59115" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.273232, 0, -0.961948, 0, 1, 0, 0.961948, 0, -0.273232, -0.185364, 0, -80.1838)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22423" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.646236, 0, -0.763137, 0, 1, 0, 0.763137, 0, -0.646236, 0.727319, 0, -123.972)
+[node name="@Node3D@59117" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.832901, 0, -0.553422, 0, 1, 0, 0.553422, 0, -0.832901, 3.29664, 0, -83.8506)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22425" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.899575, 0, 0.436767, 0, 1, 0, -0.436767, 0, 0.899575, -0.180496, 0, -121.244)
+[node name="@Node3D@59119" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.846039, 0, -0.533121, 0, 1, 0, 0.533121, 0, 0.846039, 6.58685, 0, -88.2472)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59121" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.840413, 0, 0.541947, 0, 1, 0, -0.541947, 0, 0.840413, 5.39369, 0, -91.5456)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22427" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.528395, 0, -0.848998, 0, 1, 0, 0.848998, 0, 0.528395, -2.86756, 0, -124.362)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22429" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.720308, 0, 0.693654, 0, 1, 0, -0.693654, 0, -0.720308, -5.0536, 0, -127.571)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22431" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.595972, 0, -0.803005, 0, 1, 0, 0.803005, 0, -0.595972, 5.96561, 0, -102.739)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22433" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.909687, 0, -0.415293, 0, 1, 0, 0.415293, 0, 0.909687, 1.3333, 0, -95.1657)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22435" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.883672, 0, 0.468108, 0, 1, 0, -0.468108, 0, 0.883672, 5.6408, 0, -89.8896)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22437" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.937366, 0, -0.348346, 0, 1, 0, 0.348346, 0, -0.937366, 5.97094, 0, -77.9026)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22439" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.373832, 0, -0.927497, 0, 1, 0, 0.927497, 0, -0.373832, 10.0168, 0, -78.0419)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22441" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.0362881, 0, 0.999341, 0, 1, 0, -0.999341, 0, -0.0362881, 10.0747, 0, -83.0127)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22443" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.997425, 0, -0.0717179, 0, 1, 0, 0.0717179, 0, 0.997425, 7.67805, 0, -55.9576)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22445" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.964806, 0, -0.262962, 0, 1, 0, 0.262962, 0, 0.964806, 1.95436, 0, -41.1984)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22447" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.561849, 0, 0.82724, 0, 1, 0, -0.82724, 0, 0.561849, 5.41453, 0, -46.6411)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22449" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.744434, 0, 0.667696, 0, 1, 0, -0.667696, 0, 0.744434, 8.99313, 0, -52.7495)
+[node name="@Node3D@59123" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.0539931, 0, 0.998541, 0, 1, 0, -0.998541, 0, -0.0539931, 4.46784, 0, -94.7354)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22451" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.604154, 0, -0.796867, 0, 1, 0, 0.796867, 0, 0.604154, 8.49364, 0, -59.3723)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22453" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.999028, 0, 0.0440841, 0, 1, 0, -0.0440841, 0, 0.999028, -0.081948, 0, -37.6839)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22455" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.0678596, 0, 0.997695, 0, 1, 0, -0.997695, 0, -0.0678596, 2.5, 0, 0)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22457" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.0981903, 0, 0.995168, 0, 1, 0, -0.995168, 0, 0.0981903, 5, 0, 0)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22459" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.232133, 0, 0.972684, 0, 1, 0, -0.972684, 0, -0.232133, 6.92339, 0, -5.78409)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22461" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.161514, 0, 0.98687, 0, 1, 0, -0.98687, 0, 0.161514, 3.21511, 0, -10.4755)
+[node name="@Node3D@59125" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.986647, 0, -0.162875, 0, 1, 0, 0.162875, 0, 0.986647, 3.05633, 0, -97.4526)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22463" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.622378, 0, -0.782717, 0, 1, 0, 0.782717, 0, -0.622378, 5.28347, 0, -16.9545)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22465" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.578326, 0, -0.815806, 0, 1, 0, 0.815806, 0, -0.578326, 5.54095, 0, -20.7276)
+[node name="@Node3D@59127" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.63993, 0, -0.768433, 0, 1, 0, 0.768433, 0, 0.63993, 6.20558, 0, -102.479)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22467" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.994153, 0, -0.107981, 0, 1, 0, 0.107981, 0, 0.994153, 8.57211, 0, -24.5919)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22469" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.853511, 0, -0.521074, 0, 1, 0, 0.521074, 0, -0.853511, 6.83481, 0, -27.4205)
+[node name="@Node3D@59129" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.936529, 0, -0.350589, 0, 1, 0, 0.350589, 0, -0.936529, 6.28823, 0, -108.983)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22471" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.856596, 0, -0.515987, 0, 1, 0, 0.515987, 0, -0.856596, 8.72961, 0, -34.117)
+[node name="@Node3D@59131" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.422632, 0, -0.906302, 0, 1, 0, 0.906302, 0, -0.422632, 8.05251, 0, -111.508)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22473" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.0161588, 0, 0.999869, 0, 1, 0, -0.999869, 0, -0.0161588, 9.28187, 0, -31.4831)
+[node name="@Node3D@59133" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.0484406, 0, -0.998826, 0, 1, 0, 0.998826, 0, 0.0484406, 7.29841, 0, -116.789)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59135" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.425434, 0, -0.904989, 0, 1, 0, 0.904989, 0, 0.425434, 6.86812, 0, -123.547)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59137" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.380512, 0, -0.924776, 0, 1, 0, 0.924776, 0, -0.380512, 7.57079, 0, -125.987)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22475" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.745218, 0, 0.666821, 0, 1, 0, -0.666821, 0, 0.745218, 8.65545, 0, -36.8449)
+[node name="@Node3D@59139" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.0855619, 0, -0.996333, 0, 1, 0, 0.996333, 0, 0.0855619, 8.33395, 0, -95.6504)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22477" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.915539, 0, -0.402229, 0, 1, 0, 0.402229, 0, -0.915539, 8.80311, 0, -41.4102)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22479" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.436079, 0, -0.899908, 0, 1, 0, 0.899908, 0, -0.436079, 10.9208, 0, -48.444)
+[node name="@Node3D@59141" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.081742, 0, -0.996653, 0, 1, 0, 0.996653, 0, -0.081742, 10.9498, 0, -102.217)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22481" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.678299, 0, -0.734786, 0, 1, 0, 0.734786, 0, -0.678299, 7.5, 0, 0)
+[node name="@Node3D@59143" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.96977, 0, -0.244021, 0, 1, 0, 0.244021, 0, -0.96977, 8.81267, 0, -107.944)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22483" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.722536, 0, -0.691333, 0, 1, 0, 0.691333, 0, -0.722536, 0, 0, -256)
+[node name="@Node3D@59145" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.244215, 0, 0.969721, 0, 1, 0, -0.969721, 0, -0.244215, 8.31904, 0, -91.8055)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22485" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.678891, 0, -0.734239, 0, 1, 0, 0.734239, 0, -0.678891, -0.676806, 0, -248.974)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22487" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.998347, 0, -0.0574676, 0, 1, 0, 0.0574676, 0, 0.998347, -1.96113, 0, -243.838)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22489" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.857707, 0, -0.514139, 0, 1, 0, 0.514139, 0, 0.857707, -2.86636, 0, -238.296)
+[node name="@Node3D@59147" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.123649, 0, -0.992326, 0, 1, 0, 0.992326, 0, -0.123649, -5.91717, 0, -71.7613)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22491" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.958684, 0, 0.284474, 0, 1, 0, -0.284474, 0, -0.958684, -0.545801, 0, -233.474)
+[node name="@Node3D@59149" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.403532, 0, -0.914966, 0, 1, 0, 0.914966, 0, 0.403532, -7.19238, 0, -75.6117)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59151" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.211392, 0, -0.977401, 0, 1, 0, 0.977401, 0, 0.211392, -5.24448, 0, -78.2692)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22493" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.983374, 0, 0.181591, 0, 1, 0, -0.181591, 0, -0.983374, 0.3975, 0, -230.413)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22495" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.545243, 0, 0.838278, 0, 1, 0, -0.838278, 0, 0.545243, -4.06292, 0, -225.219)
+[node name="@Node3D@59153" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.954668, 0, 0.297672, 0, 1, 0, -0.297672, 0, 0.954668, -7.69985, 0, -80.8566)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22497" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.986725, 0, -0.1624, 0, 1, 0, 0.1624, 0, 0.986725, -1.44829, 0, -218.872)
+[node name="@Node3D@59155" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.743962, 0, -0.668222, 0, 1, 0, 0.668222, 0, -0.743962, -9.5926, 0, -84.5585)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22499" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.372339, 0, -0.928097, 0, 1, 0, 0.928097, 0, -0.372339, -3.80817, 0, -214.985)
+[node name="@Node3D@59157" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.887473, 0, -0.460859, 0, 1, 0, 0.460859, 0, -0.887473, -10.2581, 0, -88.1182)
 script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22501" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.976627, 0, -0.214941, 0, 1, 0, 0.214941, 0, 0.976627, -5.76476, 0, -208.79)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22503" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.879858, 0, -0.475236, 0, 1, 0, 0.475236, 0, -0.879858, -6.16639, 0, -206.15)
+[node name="@Node3D@59159" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.795385, 0, 0.606104, 0, 1, 0, -0.606104, 0, -0.795385, -8.42995, 0, -91.0659)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22505" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.529641, 0, -0.848222, 0, 1, 0, 0.848222, 0, -0.529641, -2.25822, 0, -201.166)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22507" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.986435, 0, -0.164154, 0, 1, 0, 0.164154, 0, -0.986435, -2.98695, 0, -194.173)
+[node name="@Node3D@59161" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.23029, 0, -0.973122, 0, 1, 0, 0.973122, 0, -0.23029, -7.3068, 0, -93.8816)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22509" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.238991, 0, 0.971022, 0, 1, 0, -0.971022, 0, 0.238991, -4.74553, 0, -192.373)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22511" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.647631, 0, -0.761954, 0, 1, 0, 0.761954, 0, 0.647631, -2.65277, 0, -188.931)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22513" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.995158, 0, -0.0982925, 0, 1, 0, 0.0982925, 0, 0.995158, -0.794378, 0, -186.671)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22515" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.938679, 0, 0.344793, 0, 1, 0, -0.344793, 0, -0.938679, -3.54559, 0, -182.559)
+[node name="@Node3D@59163" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.951748, 0, 0.306881, 0, 1, 0, -0.306881, 0, -0.951748, -11.1898, 0, -99.5205)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22517" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.978279, 0, 0.207292, 0, 1, 0, -0.207292, 0, -0.978279, -6.66077, 0, -179.254)
+[node name="@Node3D@59165" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.431747, 0, 0.901995, 0, 1, 0, -0.901995, 0, 0.431747, -7.59847, 0, -105.694)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22519" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.842065, 0, -0.539376, 0, 1, 0, 0.539376, 0, 0.842065, -10.4552, 0, -174.1)
+[node name="@Node3D@59167" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.913622, 0, -0.406565, 0, 1, 0, 0.406565, 0, 0.913622, -10.0163, 0, -109.589)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59169" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.241804, 0, -0.970325, 0, 1, 0, 0.970325, 0, 0.241804, -7.27594, 0, -115.258)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59171" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.880459, 0, 0.474123, 0, 1, 0, -0.474123, 0, 0.880459, -9.19537, 0, -118.335)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22521" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.537163, 0, -0.843479, 0, 1, 0, 0.843479, 0, -0.537163, -8.98882, 0, -171.963)
+[node name="@Node3D@59173" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.530788, 0, -0.847505, 0, 1, 0, 0.847505, 0, 0.530788, -7.91601, 0, -123.606)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59175" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.269943, 0, 0.962876, 0, 1, 0, -0.962876, 0, -0.269943, -6.6513, 0, -126.571)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59177" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.689902, 0, -0.723903, 0, 1, 0, 0.723903, 0, -0.689902, -7.97759, 0, -98.5058)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59179" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.832988, 0, 0.55329, 0, 1, 0, -0.55329, 0, 0.832988, -10.9671, 0, -102.191)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59181" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.441914, 0, 0.897058, 0, 1, 0, -0.897058, 0, -0.441914, -10.7645, 0, -93.7384)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59183" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.97954, 0, 0.201252, 0, 1, 0, -0.201252, 0, -0.97954, -5.73884, 0, -86.1105)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59185" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.385783, 0, 0.922589, 0, 1, 0, -0.922589, 0, -0.385783, -3.28131, 0, -91.6333)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59187" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.936016, 0, 0.351958, 0, 1, 0, -0.351958, 0, 0.936016, -0.466117, 0, -96.444)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22523" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.0475113, 0, -0.998871, 0, 1, 0, 0.998871, 0, -0.0475113, -8.13459, 0, -168.556)
+[node name="@Node3D@59189" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.275719, 0, 0.961238, 0, 1, 0, -0.961238, 0, -0.275719, 0.227391, 0, -102.008)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59191" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.642028, 0, 0.766681, 0, 1, 0, -0.766681, 0, 0.642028, 2.30043, 0, -105.219)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59193" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.266997, 0, -0.963697, 0, 1, 0, 0.963697, 0, -0.266997, 4.4722, 0, -111.372)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22525" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.882783, 0, -0.46978, 0, 1, 0, 0.46978, 0, -0.882783, -4.3038, 0, -164.256)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22527" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.64307, 0, 0.765807, 0, 1, 0, -0.765807, 0, 0.64307, -2.97793, 0, -158.276)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22529" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.288488, 0, -0.957484, 0, 1, 0, 0.957484, 0, -0.288488, -4.5776, 0, -155.016)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22531" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.312928, 0, 0.949777, 0, 1, 0, -0.949777, 0, 0.312928, -2.02574, 0, -152.243)
+[node name="@Node3D@59195" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.705906, 0, 0.708306, 0, 1, 0, -0.708306, 0, 0.705906, 2.42478, 0, -118.043)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22533" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.976844, 0, -0.213953, 0, 1, 0, 0.213953, 0, -0.976844, -3.78174, 0, -147.302)
+[node name="@Node3D@59197" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.536758, 0, -0.843736, 0, 1, 0, 0.843736, 0, 0.536758, -0.329715, 0, -122.463)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59199" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.553971, 0, 0.832536, 0, 1, 0, -0.832536, 0, 0.553971, -3.2278, 0, -125.66)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22535" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.819168, 0, -0.573554, 0, 1, 0, 0.573554, 0, 0.819168, -7.16586, 0, -143.073)
+[node name="@Node3D@59201" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.508852, 0, -0.860854, 0, 1, 0, 0.860854, 0, 0.508852, 0.665394, 0, -124.835)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59203" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.53319, 0, 0.845995, 0, 1, 0, -0.845995, 0, 0.53319, -0.0729836, 0, -127.968)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59205" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.504899, 0, -0.863179, 0, 1, 0, 0.863179, 0, 0.504899, -2.07629, 0, -98.775)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59207" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.0104654, 0, -0.999945, 0, 1, 0, 0.999945, 0, 0.0104654, -1.62623, 0, -93.7346)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59209" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.986704, 0, 0.162528, 0, 1, 0, -0.162528, 0, 0.986704, -1.96339, 0, -14.4362)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59211" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.972642, 0, -0.232309, 0, 1, 0, 0.232309, 0, -0.972642, 0.879409, 0, -18.8397)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59213" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.779881, 0, 0.625928, 0, 1, 0, -0.625928, 0, -0.779881, -0.304623, 0, -24.306)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59215" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.0927881, 0, -0.995686, 0, 1, 0, 0.995686, 0, 0.0927881, 0.480269, 0, -28.1571)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59217" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.957292, 0, 0.289124, 0, 1, 0, -0.289124, 0, -0.957292, 5.62096, 0, -33.5685)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22537" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.999994, 0, -0.00353893, 0, 1, 0, 0.00353893, 0, -0.999994, -7.13821, 0, -140.228)
+[node name="@Node3D@59219" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.236516, 0, 0.971627, 0, 1, 0, -0.971627, 0, 0.236516, 4.47123, 0, -39.7879)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22539" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.611798, 0, 0.791014, 0, 1, 0, -0.791014, 0, 0.611798, -9.8865, 0, -135.711)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22541" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.0697972, 0, 0.997561, 0, 1, 0, -0.997561, 0, -0.0697972, -6.62595, 0, -131.666)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22543" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.424813, 0, 0.905281, 0, 1, 0, -0.905281, 0, 0.424813, -6.10173, 0, -159.201)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22545" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.596156, 0, 0.802868, 0, 1, 0, -0.802868, 0, -0.596156, -7.92511, 0, -157.365)
+[node name="@Node3D@59221" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.654288, 0, 0.756246, 0, 1, 0, -0.756246, 0, -0.654288, 0.899755, 0, -45.2987)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22547" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.660171, 0, -0.751115, 0, 1, 0, 0.751115, 0, 0.660171, -5.58699, 0, -150.864)
+[node name="@Node3D@59223" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.954764, 0, 0.297365, 0, 1, 0, -0.297365, 0, -0.954764, 0.548001, 0, -49.2818)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22549" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.71695, 0, -0.697124, 0, 1, 0, 0.697124, 0, -0.71695, -6.60031, 0, -183.747)
+[node name="@Node3D@59225" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.895799, 0, -0.44446, 0, 1, 0, 0.44446, 0, -0.895799, 5.06359, 0, -54.5504)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59227" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.998129, 0, -0.0611351, 0, 1, 0, 0.0611351, 0, 0.998129, 4.61381, 0, -58.2007)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22551" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.346202, 0, 0.93816, 0, 1, 0, -0.93816, 0, -0.346202, -8.66305, 0, -202.967)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22553" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.237255, 0, 0.971447, 0, 1, 0, -0.971447, 0, -0.237255, -8.82193, 0, -199.52)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22555" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.621679, 0, -0.783272, 0, 1, 0, 0.783272, 0, -0.621679, -11.1661, 0, -193.254)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22557" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.605725, 0, 0.795674, 0, 1, 0, -0.795674, 0, 0.605725, -11.7301, 0, -188.765)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22559" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.556595, 0, 0.830784, 0, 1, 0, -0.830784, 0, -0.556595, -10.7837, 0, -185.375)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22561" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.988022, 0, 0.15431, 0, 1, 0, -0.15431, 0, 0.988022, -6.24366, 0, -199.86)
+[node name="@Node3D@59229" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.870522, 0, -0.49213, 0, 1, 0, 0.49213, 0, -0.870522, 3.57991, 0, -63.7558)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22563" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.959021, 0, -0.283335, 0, 1, 0, 0.283335, 0, 0.959021, 0.618483, 0, -210.252)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22565" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.852338, 0, -0.522992, 0, 1, 0, 0.522992, 0, 0.852338, 1.55521, 0, -205.922)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22567" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.959784, 0, 0.280741, 0, 1, 0, -0.280741, 0, 0.959784, 2.60878, 0, -201.91)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22569" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.989249, 0, 0.146243, 0, 1, 0, -0.146243, 0, -0.989249, -0.730494, 0, -198.255)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22571" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.494242, 0, 0.869324, 0, 1, 0, -0.869324, 0, -0.494242, 1.99331, 0, -195.279)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22573" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.750423, 0, 0.660958, 0, 1, 0, -0.660958, 0, -0.750423, 0.860791, 0, -192.649)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22575" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.0379862, 0, -0.999278, 0, 1, 0, 0.999278, 0, -0.0379862, 4.26308, 0, -197.553)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22577" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.143368, 0, 0.989669, 0, 1, 0, -0.989669, 0, 0.143368, 5.27721, 0, -192.014)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22579" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.480176, 0, 0.877172, 0, 1, 0, -0.877172, 0, 0.480176, 5.42116, 0, -188.687)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22581" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.314244, 0, -0.949342, 0, 1, 0, 0.949342, 0, -0.314244, 6.73342, 0, -182.2)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22583" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.928902, 0, -0.370326, 0, 1, 0, 0.370326, 0, -0.928902, 9.71982, 0, -175.939)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22585" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.947925, 0, -0.318495, 0, 1, 0, 0.318495, 0, -0.947925, 7.14291, 0, -171.733)
+[node name="@Node3D@59231" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.634549, 0, 0.772882, 0, 1, 0, -0.772882, 0, -0.634549, 3.75211, 0, -66.3297)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22587" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.21625, 0, 0.976338, 0, 1, 0, -0.976338, 0, 0.21625, 5.89632, 0, -165.599)
+[node name="@Node3D@59233" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.557374, 0, 0.830262, 0, 1, 0, -0.830262, 0, 0.557374, 6.22962, 0, -73.2673)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59235" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.918202, 0, 0.396114, 0, 1, 0, -0.396114, 0, -0.918202, 7.70217, 0, -77.4092)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59237" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.979092, 0, -0.20342, 0, 1, 0, 0.20342, 0, -0.979092, 7.40375, 0, -80.2413)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22589" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.924042, 0, 0.382291, 0, 1, 0, -0.382291, 0, 0.924042, 6.80033, 0, -159.649)
+[node name="@Node3D@59239" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.783807, 0, -0.621005, 0, 1, 0, 0.621005, 0, -0.783807, 11.0656, 0, -86.1068)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59241" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.170477, 0, 0.985362, 0, 1, 0, -0.985362, 0, -0.170477, 5.66994, 0, -60.6141)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22591" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.167591, 0, -0.985857, 0, 1, 0, 0.985857, 0, -0.167591, 9.9734, 0, -154.058)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22593" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.675585, 0, -0.737282, 0, 1, 0, 0.737282, 0, -0.675585, 6.73526, 0, -148.108)
+[node name="@Node3D@59243" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.0199886, 0, -0.9998, 0, 1, 0, 0.9998, 0, -0.0199886, 1.47558, 0, -7.26179)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22595" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.857803, 0, 0.513979, 0, 1, 0, -0.513979, 0, 0.857803, 8.79084, 0, -145.311)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22597" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.172058, 0, 0.985087, 0, 1, 0, -0.985087, 0, -0.172058, 5.02574, 0, -139.422)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22599" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.235038, 0, 0.971986, 0, 1, 0, -0.971986, 0, -0.235038, 4.21132, 0, -135.515)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
-randomize_in_editor = true
-
-[node name="@Node3D@22601" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.991586, 0, 0.129447, 0, 1, 0, -0.129447, 0, 0.991586, 4.39927, 0, -131.509)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22603" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.957848, 0, -0.287277, 0, 1, 0, 0.287277, 0, 0.957848, 7.99013, 0, -130.093)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22605" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.922323, 0, 0.386421, 0, 1, 0, -0.386421, 0, -0.922323, 10.4599, 0, -138.73)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22607" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.0432517, 0, 0.999064, 0, 1, 0, -0.999064, 0, -0.0432517, 11.2139, 0, -131.549)
+[node name="@Node3D@59245" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.760056, 0, -0.649858, 0, 1, 0, 0.649858, 0, -0.760056, 6.61002, 0, -12.5767)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22609" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.0866262, 0, 0.996241, 0, 1, 0, -0.996241, 0, -0.0866262, 8.1504, 0, -134.291)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
-randomize_in_editor = true
-
-[node name="@Node3D@22611" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.843737, 0, -0.536758, 0, 1, 0, 0.536758, 0, -0.843737, 1.48538, 0, -159.741)
+[node name="@Node3D@59247" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.609098, 0, 0.793095, 0, 1, 0, -0.793095, 0, -0.609098, 8.16831, 0, -19.0889)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22613" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(0.972363, 0, 0.233474, 0, 1, 0, -0.233474, 0, 0.972363, 1.47177, 0, -155.465)
-script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
-randomize_in_editor = true
-
-[node name="@Node3D@22615" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(0.863029, 0, 0.505154, 0, 1, 0, -0.505154, 0, 0.863029, 1.48455, 0, -199.483)
+[node name="@Node3D@59249" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.912778, 0, -0.408457, 0, 1, 0, 0.408457, 0, -0.912778, 10.1181, 0, -24.543)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22617" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.237351, 0, 0.971424, 0, 1, 0, -0.971424, 0, -0.237351, -0.867719, 0, -207.582)
+[node name="@Node3D@59251" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.80477, 0, -0.593587, 0, 1, 0, 0.593587, 0, 0.80477, 9.23383, 0, -30.5057)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
 
-[node name="@Node3D@22619" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.197154, 0, 0.980373, 0, 1, 0, -0.980373, 0, 0.197154, -2.19027, 0, -222.696)
+[node name="@Node3D@59253" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.103598, 0, 0.994619, 0, 1, 0, -0.994619, 0, -0.103598, 11.8155, 0, -33.1432)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22621" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
-transform = Transform3D(-0.921811, 0, -0.387639, 0, 1, 0, 0.387639, 0, -0.921811, -4.57166, 0, -217.505)
+[node name="@Node3D@59255" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.677055, 0, 0.735933, 0, 1, 0, -0.735933, 0, 0.677055, 10.6996, 0, -35.5315)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59257" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.0413421, 0, 0.999145, 0, 1, 0, -0.999145, 0, -0.0413421, 7.16437, 0, -41.4499)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59259" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.996758, 0, 0.0804621, 0, 1, 0, -0.0804621, 0, -0.996758, 7.20393, 0, -47.7815)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59261" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.994447, 0, 0.105237, 0, 1, 0, -0.105237, 0, -0.994447, 9.39901, 0, -50.155)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59263" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.913293, 0, 0.407303, 0, 1, 0, -0.407303, 0, -0.913293, 9.64939, 0, -53.3331)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
-[node name="@Node3D@22623" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(-0.93244, 0, -0.361326, 0, 1, 0, 0.361326, 0, -0.93244, 2.00851, 0, -244.491)
+[node name="@Node3D@59265" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.450582, 0, 0.892735, 0, 1, 0, -0.892735, 0, 0.450582, 8.58573, 0, -55.6389)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59267" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.669585, 0, -0.742736, 0, 1, 0, 0.742736, 0, 0.669585, 9.27166, 0, -61.6424)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22625" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
-transform = Transform3D(0.988259, 0, -0.152788, 0, 1, 0, 0.152788, 0, 0.988259, 1.05044, 0, -240.46)
+[node name="@Node3D@59269" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.998576, 0, -0.053354, 0, 1, 0, 0.053354, 0, 0.998576, 6.63501, 0, -64.5022)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
 randomize_in_editor = true
 
-[node name="@Node3D@22627" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
-transform = Transform3D(-0.977315, 0, 0.21179, 0, 1, 0, -0.21179, 0, -0.977315, -1.9823, 0, -253.884)
+[node name="@Node3D@59271" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.995063, 0, -0.0992415, 0, 1, 0, 0.0992415, 0, -0.995063, 11.5897, 0, -69.5961)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59273" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.280323, 0, -0.959906, 0, 1, 0, 0.959906, 0, -0.280323, 11.4879, 0, -73.5461)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59275" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.998175, 0, -0.0603874, 0, 1, 0, 0.0603874, 0, 0.998175, 10.6329, 0, -79.3819)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59277" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.196398, 0, -0.980524, 0, 1, 0, 0.980524, 0, 0.196398, 3.58771, 0, -47.2863)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59279" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.905034, 0, 0.425338, 0, 1, 0, -0.425338, 0, 0.905034, -0.0900669, 0, -53.764)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59281" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.990176, 0, 0.139826, 0, 1, 0, -0.139826, 0, 0.990176, -3.23143, 0, -60.1699)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59283" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.175727, 0, -0.984439, 0, 1, 0, 0.984439, 0, 0.175727, -1.89095, 0, -67.1069)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59285" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.991441, 0, -0.130556, 0, 1, 0, 0.130556, 0, -0.991441, 9.46291, 0, -38.8166)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59287" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.674696, 0, 0.738096, 0, 1, 0, -0.738096, 0, -0.674696, 10.9787, 0, -43.9424)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59289" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.717831, 0, -0.696217, 0, 1, 0, 0.696217, 0, -0.717831, 8.29341, 0, -33.4741)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59291" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.770389, 0, -0.637574, 0, 1, 0, 0.637574, 0, -0.770389, -1.74062, 0, -11.107)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59293" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.912227, 0, -0.409685, 0, 1, 0, 0.409685, 0, 0.912227, 2.64123, 0, -16.4262)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59295" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.0825762, 0, 0.996585, 0, 1, 0, -0.996585, 0, -0.0825762, -4.71967, 0, -16.7424)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59297" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.496712, 0, 0.867916, 0, 1, 0, -0.867916, 0, -0.496712, -4.74979, 0, -22.846)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59299" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.124105, 0, 0.992269, 0, 1, 0, -0.992269, 0, -0.124105, -0.78062, 0, -21.234)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59301" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.428676, 0, 0.903458, 0, 1, 0, -0.903458, 0, 0.428676, -2.47036, 0, -27.8135)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59303" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.268174, 0, 0.96337, 0, 1, 0, -0.96337, 0, 0.268174, 2.5, 0, 0)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59305" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.197558, 0, -0.980291, 0, 1, 0, 0.980291, 0, -0.197558, 2.60379, 0, -4.52235)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59307" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.948961, 0, -0.315395, 0, 1, 0, 0.315395, 0, 0.948961, 5.2025, 0, -10.0038)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59309" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.96674, 0, 0.25576, 0, 1, 0, -0.25576, 0, -0.96674, 7.96661, 0, -15.9733)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59311" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.17237, 0, 0.985032, 0, 1, 0, -0.985032, 0, -0.17237, 5, 0, 0)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59313" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.942103, 0, -0.335324, 0, 1, 0, 0.335324, 0, -0.942103, 7.5, 0, 0)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59315" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.644406, 0, -0.764684, 0, 1, 0, 0.764684, 0, -0.644406, 9.03949, 0, -4.34852)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59317" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.558067, 0, -0.829796, 0, 1, 0, 0.829796, 0, -0.558067, 9.44908, 0, -9.31256)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59319" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.985307, 0, -0.170795, 0, 1, 0, 0.170795, 0, -0.985307, 11.8923, 0, -15.3736)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59321" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.329586, 0, 0.944125, 0, 1, 0, -0.944125, 0, -0.329586, 11.167, 0, -19.1172)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59323" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.659878, 0, -0.751373, 0, 1, 0, 0.751373, 0, -0.659878, 0, 0, -256)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59325" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.929282, 0, 0.36937, 0, 1, 0, -0.36937, 0, 0.929282, 4.33593, 0, -251.479)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59327" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.261337, 0, -0.965248, 0, 1, 0, 0.965248, 0, -0.261337, 1.33562, 0, -248.021)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59329" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.506947, 0, 0.861977, 0, 1, 0, -0.861977, 0, -0.506947, -2.34496, 0, -241.703)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59331" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.759715, 0, -0.650256, 0, 1, 0, 0.650256, 0, -0.759715, -2.00714, 0, -237.466)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59333" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.715131, 0, 0.69899, 0, 1, 0, -0.69899, 0, 0.715131, -2.55385, 0, -234.071)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59335" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.380803, 0, 0.924656, 0, 1, 0, -0.924656, 0, 0.380803, 0.926428, 0, -228.533)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59337" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.975434, 0, -0.220292, 0, 1, 0, 0.220292, 0, 0.975434, 0.0203404, 0, -222.318)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59339" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.501013, 0, -0.86544, 0, 1, 0, 0.86544, 0, 0.501013, 0.406639, 0, -214.983)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59341" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.986742, 0, 0.162295, 0, 1, 0, -0.162295, 0, -0.986742, -1.60624, 0, -210.709)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59343" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.185111, 0, -0.982718, 0, 1, 0, 0.982718, 0, 0.185111, -0.123633, 0, -206.581)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59345" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.780579, 0, -0.625057, 0, 1, 0, 0.625057, 0, 0.780579, -2.24766, 0, -203.208)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59347" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.0165612, 0, -0.999863, 0, 1, 0, 0.999863, 0, -0.0165612, -2.18015, 0, -199.91)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59349" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.495125, 0, 0.868822, 0, 1, 0, -0.868822, 0, -0.495125, -3.13864, 0, -195.933)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59351" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.699657, 0, 0.714479, 0, 1, 0, -0.714479, 0, -0.699657, -3.51326, 0, -188.718)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59353" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.493731, 0, 0.869615, 0, 1, 0, -0.869615, 0, -0.493731, -6.06539, 0, -181.929)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59355" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.99968, 0, 0.0252839, 0, 1, 0, -0.0252839, 0, 0.99968, -7.13249, 0, -179.621)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59357" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.609138, 0, -0.793064, 0, 1, 0, 0.793064, 0, -0.609138, -5.81381, 0, -175.781)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59359" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.137578, 0, -0.990491, 0, 1, 0, 0.990491, 0, -0.137578, -0.783419, 0, -170.281)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59361" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.354858, 0, 0.93492, 0, 1, 0, -0.93492, 0, 0.354858, -1.79329, 0, -167.634)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59363" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.517037, 0, -0.855963, 0, 1, 0, 0.855963, 0, 0.517037, 1.91303, 0, -162.674)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59365" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.999999, 0, -0.00170049, 0, 1, 0, 0.00170049, 0, -0.999999, 0.0636905, 0, -156.381)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59367" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.967007, 0, 0.254751, 0, 1, 0, -0.254751, 0, -0.967007, -1.34689, 0, -153.218)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59369" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.37108, 0, 0.928601, 0, 1, 0, -0.928601, 0, 0.37108, -2.52075, 0, -146.125)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59371" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.555627, 0, -0.831432, 0, 1, 0, 0.831432, 0, -0.555627, -4.92277, 0, -142.794)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59373" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.800404, 0, -0.59946, 0, 1, 0, 0.59946, 0, 0.800404, -4.46601, 0, -138.831)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59375" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.823405, 0, -0.567454, 0, 1, 0, 0.567454, 0, 0.823405, -5.25429, 0, -131.508)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59377" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.291404, 0, 0.9566, 0, 1, 0, -0.9566, 0, -0.291404, -4.33542, 0, -134.944)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59379" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.0578467, 0, -0.998325, 0, 1, 0, 0.998325, 0, 0.0578467, -0.991333, 0, -164.684)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59381" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.914277, 0, 0.40509, 0, 1, 0, -0.40509, 0, -0.914277, 0.731748, 0, -159.603)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59383" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.753712, 0, 0.657205, 0, 1, 0, -0.657205, 0, -0.753712, 3.47372, 0, -156.519)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59385" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.84585, 0, 0.533421, 0, 1, 0, -0.533421, 0, 0.84585, -3.5105, 0, -184.596)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59387" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.165272, 0, 0.986248, 0, 1, 0, -0.986248, 0, 0.165272, -3.66016, 0, -223.251)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59389" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.731235, 0, 0.682125, 0, 1, 0, -0.682125, 0, 0.731235, -4.55137, 0, -216.2)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59391" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.940101, 0, 0.340896, 0, 1, 0, -0.340896, 0, 0.940101, 4.40682, 0, -244.224)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59393" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.0415095, 0, 0.999138, 0, 1, 0, -0.999138, 0, 0.0415095, 3.89141, 0, -239.551)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59395" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.345114, 0, -0.938561, 0, 1, 0, 0.938561, 0, 0.345114, 8.17031, 0, -234.283)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59397" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.717609, 0, -0.696446, 0, 1, 0, 0.696446, 0, 0.717609, 7.25006, 0, -226.977)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59399" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.894326, 0, 0.447416, 0, 1, 0, -0.447416, 0, -0.894326, 6.50249, 0, -222.633)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59401" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.986353, 0, 0.164644, 0, 1, 0, -0.164644, 0, 0.986353, 6.46466, 0, -217.164)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59403" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.350251, 0, 0.936656, 0, 1, 0, -0.936656, 0, -0.350251, 11.1293, 0, -212.086)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59405" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.359379, 0, -0.933192, 0, 1, 0, 0.933192, 0, 0.359379, 6.32718, 0, -207.12)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59407" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.0380477, 0, -0.999276, 0, 1, 0, 0.999276, 0, -0.0380477, 4.17598, 0, -201.087)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59409" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.592647, 0, -0.805462, 0, 1, 0, 0.805462, 0, -0.592647, 5.60899, 0, -197.948)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59411" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.39379, 0, -0.919201, 0, 1, 0, 0.919201, 0, 0.39379, 7.29758, 0, -192.683)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59413" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.971794, 0, 0.23583, 0, 1, 0, -0.23583, 0, 0.971794, 6.68744, 0, -185.631)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59415" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.632865, 0, -0.774262, 0, 1, 0, 0.774262, 0, 0.632865, 8.47792, 0, -183.154)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59417" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.942622, 0, 0.333863, 0, 1, 0, -0.333863, 0, -0.942622, 7.9762, 0, -178.126)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59419" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.883286, 0, -0.468835, 0, 1, 0, 0.468835, 0, -0.883286, 4.15368, 0, -173.701)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59421" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.967128, 0, -0.25429, 0, 1, 0, 0.25429, 0, -0.967128, 7.15111, 0, -167.26)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59423" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.334018, 0, -0.942567, 0, 1, 0, 0.942567, 0, 0.334018, 6.49763, 0, -163.723)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59425" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.999526, 0, 0.0307987, 0, 1, 0, -0.0307987, 0, -0.999526, 10.8814, 0, -157.988)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59427" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.918746, 0, 0.394849, 0, 1, 0, -0.394849, 0, -0.918746, 7.15528, 0, -154.049)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59429" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(0.916709, 0, -0.399556, 0, 1, 0, 0.399556, 0, 0.916709, 5.67363, 0, -149.492)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
+randomize_in_editor = true
+
+[node name="@Node3D@59431" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.99999, 0, -0.00438433, 0, 1, 0, 0.00438433, 0, 0.99999, 4.14515, 0, -147.152)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59433" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.986613, 0, -0.163079, 0, 1, 0, 0.163079, 0, 0.986613, 5.99662, 0, -141.004)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59435" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.836218, 0, 0.548397, 0, 1, 0, -0.548397, 0, 0.836218, 6.70301, 0, -136.186)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59437" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.791571, 0, 0.611078, 0, 1, 0, -0.611078, 0, -0.791571, 9.59581, 0, -132.463)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59439" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.697635, 0, -0.716453, 0, 1, 0, 0.716453, 0, -0.697635, 11.4091, 0, -128.936)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59441" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.824347, 0, -0.566085, 0, 1, 0, 0.566085, 0, -0.824347, 4.83651, 0, -131.908)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59443" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.9451, 0, -0.326781, 0, 1, 0, 0.326781, 0, 0.9451, 5.44233, 0, -213.389)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59445" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.200209, 0, 0.979753, 0, 1, 0, -0.979753, 0, 0.200209, 3.07224, 0, -217.72)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59447" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.911565, 0, 0.411155, 0, 1, 0, -0.411155, 0, -0.911565, 3.04791, 0, -236.821)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59449" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(-0.29488, 0, -0.955534, 0, 1, 0, 0.955534, 0, -0.29488, 6.81488, 0, -248.498)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59451" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
+transform = Transform3D(0.967733, 0, 0.251976, 0, 1, 0, -0.251976, 0, 0.967733, 8.25665, 0, -243.786)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+randomize_in_editor = true
+
+[node name="@Node3D@59453" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.862593, 0, 0.505898, 0, 1, 0, -0.505898, 0, 0.862593, 10.6064, 0, -238.296)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59455" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(0.829369, 0, 0.558701, 0, 1, 0, -0.558701, 0, 0.829369, 9.1507, 0, -231.049)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59457" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
+transform = Transform3D(-0.685599, 0, -0.72798, 0, 1, 0, 0.72798, 0, -0.685599, 4.70923, 0, -225.824)
+script = ExtResource("8_tereu")
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
+randomize_in_editor = true
+
+[node name="@Node3D@59459" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
+transform = Transform3D(-0.780164, 0, -0.625575, 0, 1, 0, 0.625575, 0, -0.780164, 11.2007, 0, -228.134)
 script = ExtResource("8_tereu")
 platform_scenes = Array[PackedScene]([ExtResource("12_wlxy5"), ExtResource("13_3v7ru"), ExtResource("22_2yde8")])
 randomize_in_editor = true
@@ -1331,7 +1599,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.408, -260)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -256)
 
 [node name="Startingplatform" parent="." instance=ExtResource("24_dhlwf")]
-transform = Transform3D(-0.984808, 0.17101, -0.0301537, 0.167451, 0.981211, 0.0958355, 0.045976, 0.0893303, -0.99494, 2.89704, -0.690242, 16.7681)
+transform = Transform3D(-0.984808, 0.17101, -0.0301537, -0.0550218, -0.142603, 0.988249, 0.1647, 0.974895, 0.149845, 2.84416, -0.690242, 8.30708)
 
 [node name="Startingplatform2" parent="." instance=ExtResource("24_dhlwf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -336.598)

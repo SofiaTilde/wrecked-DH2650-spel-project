@@ -130,12 +130,9 @@ func _physics_process(delta: float) -> void:
 	#Player acceleration
 	if jump_pressed and is_on_floor():
 		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		#state_machine.travel("Jumping")
-
 	if direction != Vector3.ZERO:
-		if player_velocity.length() > 3.5 and is_on_floor():
+		if player_velocity.length() > 2.8 and is_on_floor():
 			current_anim = RUN
-			#state_machine.travel("Running")
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
 
@@ -145,11 +142,6 @@ func _physics_process(delta: float) -> void:
 		if player_velocity.length() <= 2.5 and is_on_floor():
 			if !jump_pressed:
 				current_anim = IDLE
-
-				#state_machine.travel("Idle")
-			#else:
-			#	current_anim = JUMP
-				#state_machine.travel("Jumping")
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED*DEACCELERATION)
 		velocity.z = move_toward(velocity.z, 0, SPEED*DEACCELERATION)
@@ -160,7 +152,6 @@ func _physics_process(delta: float) -> void:
 
 	if player_position.y <-5.0:
 		current_anim = DROWNING
-		#state_machine.travel("Drowning")
 
 
 	# Reset capture when closing
@@ -182,7 +173,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
 		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		#state_machine.travel("Throw")
+
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
@@ -212,7 +203,6 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 		coyote_timer -= delta
 	if jump_available or coyote_time >0.0:
 		if jump_pressed  and is_on_floor():
-			#state_machine.travel("Jumping")
 			jump_available = false
 			jump_buffered = true
 			jump_buffer_timer = jump_buffer_time
