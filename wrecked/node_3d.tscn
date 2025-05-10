@@ -282,12 +282,14 @@ offset_bottom = 150.0
 expand_mode = 1
 
 [node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
+custom_minimum_size = Vector2(300, 0)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 79.0
 grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
 visible = false
@@ -319,6 +321,7 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 10, 0)
 
 [node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer2/SubViewport/Player2"]
+custom_minimum_size = Vector2(320, 0)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -379,12 +382,14 @@ grow_vertical = 0
 expand_mode = 1
 
 [node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer3/SubViewport/Player3"]
+custom_minimum_size = Vector2(300, 0)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -41.0
 offset_right = 79.0
 grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer3/SubViewport/Player3"]
 visible = false
@@ -430,6 +435,7 @@ grow_vertical = 0
 expand_mode = 1
 
 [node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer4/SubViewport/Player4"]
+custom_minimum_size = Vector2(320, 0)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -492,7 +498,7 @@ randomize_in_editor = true
 [node name="@Node3D@22260" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
 transform = Transform3D(-0.0249732, 0, 0.999688, 0, 1, 0, -0.999688, 0, -0.0249732, 3.51635, 0, -26.8812)
 script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
 [node name="@Node3D@22262" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
@@ -876,7 +882,7 @@ randomize_in_editor = true
 [node name="@Node3D@22388" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
 transform = Transform3D(0.849297, 0, 0.527916, 0, 1, 0, -0.527916, 0, 0.849297, 5.82876, 0, -7.09122)
 script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
 [node name="@Node3D@22390" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
@@ -1110,7 +1116,7 @@ randomize_in_editor = true
 [node name="@Node3D@22466" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
 transform = Transform3D(0.470718, 0, 0.882284, 0, 1, 0, -0.882284, 0, 0.470718, 0.380426, 0, -154.706)
 script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
 [node name="@Node3D@22468" type="Node3D" parent="Level" instance=ExtResource("11_imku0")]
@@ -1164,7 +1170,7 @@ randomize_in_editor = true
 [node name="@Node3D@22484" type="Node3D" parent="Level" instance=ExtResource("17_nu31w")]
 transform = Transform3D(0.752061, 0, 0.659094, 0, 1, 0, -0.659094, 0, 0.752061, 4.2761, 0, -142.979)
 script = ExtResource("8_tereu")
-platform_scenes = Array[PackedScene]([ExtResource("18_obt1j")])
+platform_scenes = Array[PackedScene]([ExtResource("9_cdqbm"), ExtResource("10_imku0"), ExtResource("19_obt1j"), ExtResource("9_cdqbm"), ExtResource("10_imku0")])
 randomize_in_editor = true
 
 [node name="@Node3D@22486" type="Node3D" parent="Level" instance=ExtResource("7_6iypd")]
@@ -1406,6 +1412,145 @@ transform = Transform3D(-0.984808, 0.17101, -0.0301537, 0.167451, 0.981211, 0.09
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -336.598)
 
 [node name="WaterGrid" parent="." instance=ExtResource("6_jsk3o")]
+
+[node name="Placements" type="GridContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -486.5
+offset_top = -128.5
+offset_right = 486.5
+offset_bottom = 128.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Placements"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Placements/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Placements/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Placements/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "x"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 30
+text = "th"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Placements/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Placements/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "x"
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 30
+text = "th"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Placements/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Placements/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Placements/VBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "x"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 30
+text = "th"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Placements/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Placements/VBoxContainer/HBoxContainer2/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "x"
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 30
+text = "th"
+
+[node name="_Node3D_144036" parent="." instance=ExtResource("7_6iypd")]
+transform = Transform3D(9.95751, 0, -0.920809, 0, 10, 0, 0.920809, 0, 9.95751, 3.73764, 0, 1.08057)
+
+[node name="@Node3D@30896" type="Node3D" parent="_Node3D_144036" instance=ExtResource("9_cdqbm")]
 
 [connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/StartGame" to="GameManager" method="start_game"]
 [connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/Quit" to="GameManager" method="quit_game"]

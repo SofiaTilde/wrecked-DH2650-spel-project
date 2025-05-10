@@ -24,10 +24,10 @@ var last_platform = CollisionObject3D
 @onready var animation_tree := AnimationTree
 @onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
-@onready var Debug_label = $Debub_label
+#@onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var currItem_node = $MarginContainer/CurrItemLabel
-@onready var lastSavePosition: Vector3 = global_transform.origin
+@onready var last_saved_position: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
@@ -38,9 +38,11 @@ var last_platform = CollisionObject3D
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
 #used to spawn correct character mesh
-var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
+var player_names = {1: "Rackham_red", 2: "Yates_yellow", 3: "Gully_green", 4: "Pippi_pink"}
 var holdingItem: Item
+var last_saved_platform: Node3D
 var viewPortTexture: Texture2D
+
 #variables jump buffer
 var jump_buffered := false
 var jump_buffer_time := 110.8
@@ -51,7 +53,6 @@ var coyote_time := 3.3
 var coyote_timer := 0.0
 
 func _ready():
-
 	var name = player_names.get(player_id)
 	model = get_node(name)
 	animation_player = str(name) + "/AnimationPlayer"
@@ -78,13 +79,11 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-
 	#Uncomment this and replace variables to debug variables ingame
-	Debug_label.text = str("Coy",coyote_timer)
-
+#	Debug_label.text = str("Coy",coyote_timer)
 	var last_floor = is_on_floor()
 	#make the character snap more
-	floor_snap_length=0.05
+	floor_snap_length = 0.05
 
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
@@ -120,16 +119,16 @@ func _physics_process(delta: float) -> void:
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
 			state_machine.travel("Running")
-		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
+		player_velocity = player_velocity.lerp(direction * SPEED, ACCELERATION * delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
 
 	#Player deacceleration
 	else:
 		if player_velocity.length() <= 2.8 and is_on_floor():
 			state_machine.travel("Idle")
-		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED*DEACCELERATION)
-		velocity.z = move_toward(velocity.z, 0, SPEED*DEACCELERATION)
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED * DEACCELERATION)
+		velocity.z = move_toward(velocity.z, 0, SPEED * DEACCELERATION)
 
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
@@ -140,10 +139,17 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	if last_floor:
-		lastSavePosition = global_transform.origin
+		
+	if is_on_floor():
+		var collision = get_slide_collision(0)
+		if collision:
+			var floor_object = collision.get_collider()
+			if floor_object is not CharacterBody3D:
+				last_saved_platform = floor_object
+	
 
 	apply_floor_snap()
+
 	move_and_slide() # rörelse enligt velocity mm.
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
@@ -180,12 +186,12 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_available = true
 
 	if is_on_floor():
-		jump_available= true
+		jump_available = true
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
-	if jump_available or coyote_time >0.0:
-		if jump_pressed  and is_on_floor():
+	if jump_available or coyote_time > 0.0:
+		if jump_pressed and is_on_floor():
 			state_machine.travel("Jumping")
 			jump_available = false
 			jump_buffered = true
@@ -249,7 +255,7 @@ func _on_area_3d_visibility_changed() -> void:
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
 	state_machine.travel("Drowning")
-	respawn_manager.respawn()
+	respawn_manager.respawn(player_data.placement)
 
 
 func setItem(item: Item):
