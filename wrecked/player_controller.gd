@@ -49,46 +49,18 @@ var jump_buffer_timer := 0.0
 var coyote_time := 30.3
 var coyote_timer := 0.0
 # 
-enum {IDLE, RUN, JUMP, USEITEM,DROWNING}
+enum {IDLE, RUN,DROWNING}
 var current_anim = IDLE
-var run_val = 0.0
-var jump_val = 0.0
-var item_use_val = 0.0
-var drown_val = 0.0
-@export var BLENDSPEED = 10.0 
 
-func lerp_anim(state_value, t,delta):
-	var lerpf = lerpf(state_value,t,delta*BLENDSPEED)
-	return lerpf
-
-func handle_anim_states(delta):
+func handle_anim_states():
 	match current_anim:
 		IDLE:
-			jump_val = lerp_anim(jump_val,0.0,delta)
-			item_use_val = lerp_anim(item_use_val,0.0,delta)
-			run_val = lerp_anim(run_val,0.0,delta)
-			drown_val = lerp_anim(drown_val,0.0,delta)
+			animation_tree.set("parameters/Transition/transition_request","Idling")
 		RUN:
-			jump_val = lerp_anim(jump_val,0.0,delta)
-			item_use_val = lerp_anim(item_use_val,0.0,delta)
-			run_val = lerp_anim(run_val,1.0,delta)
-			drown_val = lerp_anim(drown_val,0.0,delta)
-		JUMP:
-			jump_val = lerp_anim(jump_val,1.0,delta)
-			item_use_val = lerp_anim(item_use_val,0.0,delta)
-			run_val = lerp_anim(run_val,0.0,delta)
-			drown_val = lerp_anim(drown_val,0.0,delta)
-		USEITEM:
-			jump_val = lerp_anim(jump_val,0.0,delta)
-			item_use_val = lerp_anim(item_use_val,1.0,delta)
-			run_val = lerp_anim(run_val,0.0,delta)
-			drown_val = lerp_anim(drown_val,0.0,delta)		
+			animation_tree.set("parameters/Transition/transition_request","Running")			
 		DROWNING:
-			jump_val = lerp_anim(jump_val,0.0,delta)
-			item_use_val = lerp_anim(item_use_val,0.0,delta)
-			run_val = lerp_anim(run_val,0.0,delta)
-			drown_val = lerp_anim(drown_val,1.0,delta)
-	update_tree()
+			animation_tree.set("parameters/Transition/transition_request","Drowning")
+		
 
 func _ready():
 	var name = player_names.get(player_id)
@@ -113,11 +85,9 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-	handle_anim_states(delta)
+	handle_anim_states()
 		
 	#Uncomment this and replace variables to debug variables ingame
-	#Debug_label.text = str("Coy",coyote_timer)
-
 	var last_floor = is_on_floor()
 	#make the character snap more
 	floor_snap_length=0.05
@@ -142,6 +112,8 @@ func _physics_process(delta: float) -> void:
 	twist_pivot.global_transform.origin = twist_pivot.global_transform.origin.lerp(smooth_target_pos, camera_smoothing_rate)
 	pitch_input += -cam_dir.y * joystick_sensitivity
 
+
+
 	#För att rotera karaktären längs riktningen hen går i
 	var player_rotation = atan2(direction.x, direction.z) # i radian, rotation angle
 	#Camera rotations
@@ -157,15 +129,16 @@ func _physics_process(delta: float) -> void:
 
 	#Player acceleration
 	if jump_pressed and is_on_floor():
-		current_anim = JUMP
+		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		#state_machine.travel("Jumping")
 
 	if direction != Vector3.ZERO:
-		if player_velocity.length() > 2.5 and is_on_floor():
+		if player_velocity.length() > 3.5 and is_on_floor():
 			current_anim = RUN
 			#state_machine.travel("Running")
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
+
 
 	#Player deacceleration
 	else:
@@ -174,8 +147,8 @@ func _physics_process(delta: float) -> void:
 				current_anim = IDLE
 
 				#state_machine.travel("Idle")
-			else:
-				current_anim = JUMP
+			#else:
+			#	current_anim = JUMP
 				#state_machine.travel("Jumping")
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED*DEACCELERATION)
@@ -208,6 +181,7 @@ func _physics_process(delta: float) -> void:
 
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
+		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		#state_machine.travel("Throw")
 		update_item_label(" ")
 
@@ -223,6 +197,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("use_item_left_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer4/SubViewport/Player4") as CharacterBody3D
 		throwItem(play)
+	Debug_label.text = str("State",current_anim)
 
 #hanterar jump logic, will adjust with button press sensitivity
 func player_jump_adv(jump_velocity: float, delta: float) -> float:
@@ -298,12 +273,7 @@ func _on_area_3d_visibility_changed() -> void:
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
 	respawn_manager.respawn()
-func update_tree():
-	print("animtree",animation_tree.get("parameters"))
-	animation_tree["parameters/Idle_running/blend_amount"] = run_val
-	animation_tree["parameters/useitem/blend_amount"] = item_use_val
-	animation_tree["parameters/Jumping/blend_amount"] = jump_val
-	animation_tree["parameters/Drown/blend_amount"] = drown_val
+
 	
 func setItem(item: Item):
 	if holdingItem != null:
