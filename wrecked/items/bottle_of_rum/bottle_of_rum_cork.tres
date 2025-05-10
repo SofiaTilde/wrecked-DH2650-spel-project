@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bgra55x0ytowg"]
+
+[ext_resource type="Texture2D" uid="uid://rwtar8fetc4n" path="res://items/bottle_of_rum/bottle_of_rum_texture.png" id="1_2jyk0"]
+[ext_resource type="Texture2D" uid="uid://bvt81y423n85i" path="res://items/bottle_of_rum/bottle_of_rum_normal.png" id="2_pp623"]
+
+[resource]
+albedo_texture = ExtResource("1_2jyk0")
+normal_enabled = true
+normal_texture = ExtResource("2_pp623")
