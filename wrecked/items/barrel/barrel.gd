@@ -28,7 +28,10 @@ func _on_body_entered(body) -> void:
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
 
-	body.setItem(item)
+	if item.labelText == "None":
+		item.activateItem()
+	else:
+		body.setItem(item)
 	self.queue_free()
 
 func barrelStart(x, z, level):

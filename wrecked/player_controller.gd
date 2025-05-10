@@ -40,6 +40,7 @@ var last_platform = CollisionObject3D
 #used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 var holdingItem: Item
+var viewPortTexture: Texture2D
 #variables jump buffer
 var jump_buffered := false
 var jump_buffer_time := 110.8
@@ -59,6 +60,11 @@ func _ready():
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
 	#coyote_timer.wait_time = coyote_amount / 60.0
+	var shaderNode = get_parent().get_parent().get_node("ShaderTexture")
+	var subViewport = get_parent().get_parent().get_node("SubViewport")
+	shaderNode.custom_minimum_size = subViewport.size
+	shaderNode.expand = true
+	viewPortTexture = get_parent().get_parent().get_node("ShaderTexture").texture
 
 
 #call this func when you pick up/use some item

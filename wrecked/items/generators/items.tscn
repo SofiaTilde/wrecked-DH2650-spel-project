@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6kx5nm2ecru"]
+[gd_scene load_steps=12 format=3 uid="uid://6kx5nm2ecru"]
 
 [ext_resource type="Script" uid="uid://bni2m50ynawa3" path="res://items/generators/items.gd" id="1_n0bbx"]
 [ext_resource type="PackedScene" uid="uid://bdvfrko7ynj1k" path="res://items/eyepatch/eyepatch.tscn" id="2_r844h"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cews6ihi6h1ne" path="res://items/bottle_of_rum/bottle_of_rum.tscn" id="8_uwies"]
 [ext_resource type="PackedScene" uid="uid://wnyat63osfmj" path="res://items/molotov_cocktail/molotov_cocktail.tscn" id="9_s7v6s"]
 [ext_resource type="PackedScene" uid="uid://dimml56vb75mf" path="res://items/shroom/shroom.tscn" id="10_1b2rd"]
+[ext_resource type="PackedScene" uid="uid://dtjwnfydet0h5" path="res://items/none/screen_change.tscn" id="11_2qnbq"]
 [ext_resource type="PackedScene" uid="uid://dfvx5j3eomvea" path="res://items/parrot/parrot.tscn" id="11_r4p4a"]
 [ext_resource type="PackedScene" uid="uid://bxraifnjhxtxy" path="res://items/sword/sword.tscn" id="12_o1g2a"]
 
@@ -22,6 +23,7 @@ molotov_cocktail = ExtResource("9_s7v6s")
 shroom = ExtResource("10_1b2rd")
 parrot = ExtResource("11_r4p4a")
 sword = ExtResource("12_o1g2a")
+screen_change = ExtResource("11_2qnbq")
 
 [node name="Eyepatch" parent="." instance=ExtResource("2_r844h")]
 visible = false
@@ -44,3 +46,6 @@ visible = false
 [node name="Parrot" parent="." instance=ExtResource("11_r4p4a")]
 
 [node name="Sword" parent="." instance=ExtResource("12_o1g2a")]
+
+[node name="ScreenChange" parent="." instance=ExtResource("11_2qnbq")]
+visible = false
