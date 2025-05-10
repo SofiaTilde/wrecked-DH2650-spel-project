@@ -5,7 +5,7 @@ const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
 const JUMPDEACCELERATION = 8.5
-const PUSH_FORCE = 10.8
+const PUSH_FORCE = 15.8
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION = 2.5
 const DEACCELERATION = 8.5
@@ -21,8 +21,8 @@ var recently_pushed = {}
 var last_platform = CollisionObject3D
 @onready var model = Node3D
 @onready var animation_player = AnimationPlayer
-@onready var animation_tree := AnimationTree
-@onready var state_machine = $"AnimationTree"["parameters/playback"]
+@onready var animation_tree := $AnimationTree
+#@onready var state_machine = $"AnimationTree"["parameters/"]
 @onready var twist_pivot = $TwistPivot
 @onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
@@ -42,18 +42,60 @@ var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pi
 var holdingItem: Item
 #variables jump buffer
 var jump_buffered := false
-var jump_buffer_time := 110.8
+var jump_buffer_time := 1.8
 var jump_buffer_timer := 0.0
 
 #How long can you coyote
 var coyote_time := 30.3
 var coyote_timer := 0.0
+# 
+enum {IDLE, RUN, JUMP, USEITEM,DROWNING}
+var current_anim = IDLE
+var run_val = 0.0
+var jump_val = 0.0
+var item_use_val = 0.0
+var drown_val = 0.0
+@export var BLENDSPEED = 10.0 
+
+func lerp_anim(state_value, t,delta):
+	var lerpf = lerpf(state_value,t,delta*BLENDSPEED)
+	return lerpf
+
+func handle_anim_states(delta):
+	match current_anim:
+		IDLE:
+			jump_val = lerp_anim(jump_val,0.0,delta)
+			item_use_val = lerp_anim(item_use_val,0.0,delta)
+			run_val = lerp_anim(run_val,0.0,delta)
+			drown_val = lerp_anim(drown_val,0.0,delta)
+		RUN:
+			jump_val = lerp_anim(jump_val,0.0,delta)
+			item_use_val = lerp_anim(item_use_val,0.0,delta)
+			run_val = lerp_anim(run_val,1.0,delta)
+			drown_val = lerp_anim(drown_val,0.0,delta)
+		JUMP:
+			jump_val = lerp_anim(jump_val,1.0,delta)
+			item_use_val = lerp_anim(item_use_val,0.0,delta)
+			run_val = lerp_anim(run_val,0.0,delta)
+			drown_val = lerp_anim(drown_val,0.0,delta)
+		USEITEM:
+			jump_val = lerp_anim(jump_val,0.0,delta)
+			item_use_val = lerp_anim(item_use_val,1.0,delta)
+			run_val = lerp_anim(run_val,0.0,delta)
+			drown_val = lerp_anim(drown_val,0.0,delta)		
+		DROWNING:
+			jump_val = lerp_anim(jump_val,0.0,delta)
+			item_use_val = lerp_anim(item_use_val,0.0,delta)
+			run_val = lerp_anim(run_val,0.0,delta)
+			drown_val = lerp_anim(drown_val,1.0,delta)
+	update_tree()
 
 func _ready():
-	
 	var name = player_names.get(player_id)
 	model = get_node(name)
 	animation_player = str(name) + "/AnimationPlayer"
+	animation_tree = $AnimationTree
+	animation_tree.active = true
 	await get_tree().process_frame
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
@@ -71,9 +113,10 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-	
+	handle_anim_states(delta)
+		
 	#Uncomment this and replace variables to debug variables ingame
-	Debug_label.text = str("Coy",coyote_timer)
+	#Debug_label.text = str("Coy",coyote_timer)
 
 	var last_floor = is_on_floor()
 	#make the character snap more
@@ -109,27 +152,42 @@ func _physics_process(delta: float) -> void:
 	twist_pivot.rotation.z = lerp_angle(clamp(twist_pivot.rotation.z, -0.5, deg_to_rad(30)), rotation.z, 0.1)
 	twist_input = lerp(twist_pivot.rotation.x, 0.0, 0.1)
 	pitch_input = lerp(pitch_pivot.rotation.z, 0.0, 0.1)
+		# Jumping
+	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
+
 	#Player acceleration
+	if jump_pressed and is_on_floor():
+		current_anim = JUMP
+		#state_machine.travel("Jumping")
+
 	if direction != Vector3.ZERO:
-		if player_velocity.length() > 2.8 and is_on_floor():
-			state_machine.travel("Running")
+		if player_velocity.length() > 2.5 and is_on_floor():
+			current_anim = RUN
+			#state_machine.travel("Running")
 		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
 
 	#Player deacceleration
 	else:
-		if player_velocity.length() <= 2.8 and is_on_floor():
-			state_machine.travel("Idle")
+		if player_velocity.length() <= 2.5 and is_on_floor():
+			if !jump_pressed:
+				current_anim = IDLE
+
+				#state_machine.travel("Idle")
+			else:
+				current_anim = JUMP
+				#state_machine.travel("Jumping")
 		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
 		velocity.x = move_toward(velocity.x, 0, SPEED*DEACCELERATION)
 		velocity.z = move_toward(velocity.z, 0, SPEED*DEACCELERATION)
 
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
-	# Jumping
 	velocity.y = jump_state_adv
+
 	if player_position.y <-5.0:
-		state_machine.travel("Drowning")
+		current_anim = DROWNING
+		#state_machine.travel("Drowning")
 
 
 	# Reset capture when closing
@@ -150,7 +208,7 @@ func _physics_process(delta: float) -> void:
 
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
-		state_machine.travel("Throw")
+		#state_machine.travel("Throw")
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
@@ -171,7 +229,6 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
 	var jump_available = true
-	state_machine.travel("Jumping")
 
 	if is_on_floor():
 		jump_available= true
@@ -180,6 +237,7 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 		coyote_timer -= delta
 	if jump_available or coyote_time >0.0:
 		if jump_pressed  and is_on_floor():
+			#state_machine.travel("Jumping")
 			jump_available = false
 			jump_buffered = true
 			jump_buffer_timer = jump_buffer_time
@@ -240,8 +298,13 @@ func _on_area_3d_visibility_changed() -> void:
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
 	respawn_manager.respawn()
-
-
+func update_tree():
+	print("animtree",animation_tree.get("parameters"))
+	animation_tree["parameters/Idle_running/blend_amount"] = run_val
+	animation_tree["parameters/useitem/blend_amount"] = item_use_val
+	animation_tree["parameters/Jumping/blend_amount"] = jump_val
+	animation_tree["parameters/Drown/blend_amount"] = drown_val
+	
 func setItem(item: Item):
 	if holdingItem != null:
 		holdingItem.queue_free()
