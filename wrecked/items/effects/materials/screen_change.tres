@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://7d7cd8xujuqh"]
+
+[ext_resource type="Shader" uid="uid://b2qteltq5v5px" path="res://items/effects/materials/screen_change.gdshader" id="1_vcn5p"]
+
+[resource]
+shader = ExtResource("1_vcn5p")
+shader_parameter/amplitude = 0.008
+shader_parameter/frequency = 80.0
+shader_parameter/speed = 20.0
