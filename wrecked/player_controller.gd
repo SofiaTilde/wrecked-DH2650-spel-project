@@ -173,11 +173,11 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
 		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
+
 		throwItem(play)
 	if Input.is_action_just_pressed("use_item_right_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D
@@ -279,6 +279,7 @@ func throwItem(play: CharacterBody3D = null):
 	if play == null:
 		holdingItem.throw()
 	else:
+		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		holdingItem.throw(play)
 	holdingItem = null
 	update_icon(null)
