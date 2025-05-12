@@ -1,8 +1,50 @@
-[gd_scene load_steps=5 format=3 uid="uid://gof5kolddo3a"]
+[gd_scene load_steps=8 format=4 uid="uid://gof5kolddo3a"]
 
-[ext_resource type="PackedScene" uid="uid://ck7aoxcqmgl1d" path="res://meshes/Platforms/plank2_1x1.glb" id="1_c5gtk"]
 [ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/generators/barrel_generator.gd" id="1_ke3i7"]
 [ext_resource type="Script" uid="uid://bb6jpqun4oyoc" path="res://scripts/platform.gd" id="2_ke3i7"]
+[ext_resource type="Material" uid="uid://cirq8oyrqki7" path="res://meshes/Platforms/plattforms.tres" id="3_ke3i7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81oql"]
+resource_name = "Wood_platform"
+cull_mode = 2
+metallic = 1.0
+metallic_texture_channel = 2
+roughness_texture_channel = 1
+normal_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nwasf"]
+_surfaces = [{
+"aabb": AABB(-0.573066, -0.119122, -0.461371, 1.05299, 0.305303, 0.89226),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("BAAIAAkABAAAAAgAAAAEAAEACAAAAAIAAAABAAIABAAKAAEACgACAAEABAAJAAoACAACAAsACgALAAIACQAIAAwADAAIAAsACQANAAoADQALAAoACQAMAA4ACQAOAA0ADAALAA8ADQAPAAsADgAMAAcABwAMAA8ADgADAA0AAwAPAA0ADgAHAAYADgAGAAMABwAPAAUABgAHAAUAAwAFAA8ABgAFAAMA"),
+"lods": [0.0862664, PackedByteArray("AAABAAIAAwACAAEABAADAAEAAAAEAAEAAwAFAAIAAAACAAUABAAGAAMABAAAAAYABgAFAAMABwAAAAUABgAAAAcABgAHAAUA")],
+"name": "Wood_platform",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("FSZ5UMH+AAAAADipUhUAAKot//8b+wAA//+yps0KAAAAAG8eUhUAADD7OKmm+QAAVf8aFXQMAAAw+28epvkAAFlnex2f+QAA4mcpEBgSAAA7aPOXahEAAK9pE6pE+QAAe7CRFQL/AABDtdyIAAAAAJO0AAB1AQAALbBylP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a1g8g"]
+resource_name = "plank2_1x1_Cube_096"
+_surfaces = [{
+"aabb": AABB(-0.573066, -0.119122, -0.461371, 1.05299, 0.305303, 0.89226),
+"attribute_data": PackedByteArray("6U4ILHk2qygGTzYlyjMILE5VcSQGTzYlUFDUCWJVAwpsYQcHdXo2CgxjdyZjewwlbDlzCAZPNiV5NqsoUFDUCcozCCxsOXMIeTarKBY3WwUWN1sFUFDUCWw5cwhVUJ4EX3qXEjpixhMcVVsc10/AHF5VcBPXT8AcxlBvExxVWxw6YsYTcnuwG2xhJh1fepcS0jaYG9dPwBzfNhUR10/AHNI2mBvGUG8T0jaYG70wDBy9MAwc3zYVEdI2mBtGMc8PxlBvE982FRFGMc8P3zYVEWxhJh1ye7AbxlBvE15VcBM="),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("CAAYABkACAAJABgAAAABAAIAAAADAAEAGgAFABsAGgAEAAUAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAANAA4AJAAlAA0AJgAnACgAJgApACcAEAAqABIAEAArACoALAAtAC4ALAAvAC0ADAAwADEADAAPADAAMgARADMAMgATABEANAALAAoANAA1AAsAFAAVABYAFAAXABUABwA2AAYABwA3ADYA"),
+"lods": [0.0862664, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABwAEAAYACAAJAAoACgAJAAsADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA")],
+"material": SubResource("StandardMaterial3D_81oql"),
+"name": "Wood_platform",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("FSZ5UMH+4LcAADipUhXTt6ot//8b++S3AABvHlIV0rcVJnlQwf4wy6ot//8b+yXJMPs4qab5mb4w+28epvnmvgAAbx5SFU/QFSZ5UMH+HtBV/xoVdAxL1TD7bx6m+UrV//+yps0K+dGqLf//G/t22gAAOKlSFSXaMPs4qab5tNIAAG8eUhUi////sqbNCgb8AAA4qVIVFf9V/xoVdAwj/FX/GhV0DBn+MPs4qab5D////7KmzQqh/TD7bx6m+Y/+WWd7HZ/5MdDiZykQGBJc0Flnex2f+ebHr2kTqkT5PsV7sJEVAv+wwa9pE6pE+dHDLbBylP//wL9ZZ3sdn/mJxeJnKRAYEtLSe7CRFQL/s9KTtAAAdQHc0llnex2f+abSO2jzl2oRPNqvaROqRPmY2kO13IgAAETWr2kTqkT5KNY7aPOXahFQ1i2wcpT//x3WO2jzl2oRQ//iZykQGBJS/+JnKRAYEj37Q7XciAAAn/s7aPOXahH7+pO0AAB1Aeb7LbBylP//fdJDtdyIAADJ0ZO0AAB1Aeb7Q7XciAAAyvuTtAAAdQFK1XuwkRUC/0nVLbBylP//Ub97sJEVAv+jv62Go/TYiUP1JYaI9IGKZPXnhD9/+YQcf1eDN3tYgz57ZSxK1kksC9YxKNTTMSjS00qrzawZsCSmfLDnpU2qQK2csV/P7DAoS7utNdPRLhtNCr6BfYcABj/MvQR9EQHDPlQsI9ZsLFzWA4UFfxuF1H5se9GDbXucg2p7AoRve3SDGCs51QYrE9UeK0bV/ioC1WCw+KXwrz2mZK0tqIatG6hVrTWok60TqMi6TcZ/vqDCjcPJwnXHLL/CwF3FQMqYvJiqHq2Nq66sTTP1SHk180YxKNPTMSjS01qDSXtcg1B7")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_nwasf")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a7fl7"]
 size = Vector3(1.10303, 0.272461, 1)
@@ -10,8 +52,13 @@ size = Vector3(1.10303, 0.272461, 1)
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ke3i7")
 
-[node name="plank2_1x1" parent="." instance=ExtResource("1_c5gtk")]
+[node name="plank2_1x1" type="Node3D" parent="."]
 script = ExtResource("2_ke3i7")
+
+[node name="PLanks_square_small_001" type="MeshInstance3D" parent="plank2_1x1"]
+mesh = SubResource("ArrayMesh_a1g8g")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_ke3i7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="plank2_1x1"]
 
