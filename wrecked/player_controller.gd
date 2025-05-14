@@ -157,18 +157,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide() # rörelse enligt velocity mm.
 	
-	
-	if is_on_floor():
-		if get_slide_collision_count() > 0:
-			var collision = get_slide_collision(0)
-			var Collision_object = collision.get_collider()
-			
-			if not Collision_object.get_parent().name== name: #avoid SwimPlatform safve
-				
-				lastSavePosition = global_position # for respawn
-			
-
-
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
 		recently_pushed[body] -= delta
@@ -225,7 +213,6 @@ func _on_swim_timer_timeout() -> void:
 
 	
 #hanterar jump logic, will adjust with button press sensitivity
-<<<<<<< HEAD
 func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
@@ -258,20 +245,7 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 			else:
 				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-=======
-func player_jump_adv(jump_velocity, delta) -> float:
-	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor() and player_data.can_jump
-	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
-	if is_jumping:
-		jump_velocity += JUMP_VELOCITY
-	elif not is_on_floor():
-		if is_releasing_jump and jump_velocity > 0:
-			jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
-		else:
-			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-	if jump_velocity>0.0:
-		state_machine.travel("Jumping")
->>>>>>> items_alvar
+
 	return jump_velocity
 
 func handle_jump_input(delta):
