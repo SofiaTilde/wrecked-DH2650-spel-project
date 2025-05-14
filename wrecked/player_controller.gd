@@ -23,7 +23,6 @@ var last_platform = CollisionObject3D
 @onready var animation_player = AnimationPlayer
 @onready var animation_tree := $AnimationTree
 @onready var twist_pivot = $TwistPivot
-@onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition: Vector3 = global_transform.origin
@@ -169,7 +168,7 @@ func _physics_process(delta: float) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 		
-	if is_on_floor():
+	if is_on_floor() and get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
@@ -186,7 +185,7 @@ func _physics_process(delta: float) -> void:
 		if recently_pushed[body] <= 0:
 			recently_pushed.erase(body)
 
-	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
+	if Input.is_action_just_pressed("use_item_%s" % [player_id]) and holdingItem:
 		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		update_item_label(" ")
 
