@@ -144,19 +144,19 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-		
+
 	if is_on_floor():
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
 			if floor_object is not CharacterBody3D:
 				last_saved_platform = floor_object
-	
+
 
 	apply_floor_snap()
 
 	move_and_slide() # rörelse enligt velocity mm.
-	
+
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
 		recently_pushed[body] -= delta
@@ -184,9 +184,9 @@ func _physics_process(delta: float) -> void:
 	if holdingItem != null:
 		holdingItem.global_position = global_position + Vector3(0, 2.3, 0)
 		holdingItem.rotation.y = model.rotation.y
-	
+
 	# for swimming movement:
-		
+
 	if(player_data.can_swim):
 		# Get the current world positions
 		var plat_pos = $SwimPlatform.global_position
@@ -195,7 +195,7 @@ func _physics_process(delta: float) -> void:
 		# Platform moves after player
 		plat_pos.x = player_pos.x
 		plat_pos.z = player_pos.z
-		
+
 		# Move both(!) toward the water surface Y = -1.0
 		var surface_y := -1.1
 		# thi formula kinda workds
@@ -204,14 +204,14 @@ func _physics_process(delta: float) -> void:
 		# Lerp the player up at 3 units/sec to sit slightly above the platform
 		player_pos.y = lerp(player_pos.y, surface_y+1 , delta * 2.0)
 		global_position = player_pos
-			
+
 
 
 func _on_swim_timer_timeout() -> void:
 	# this runs 1 second after the water‐enter event
 	player_data.can_jump = true
 
-	
+
 #hanterar jump logic, will adjust with button press sensitivity
 func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
