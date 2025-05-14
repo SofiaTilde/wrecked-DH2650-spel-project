@@ -1,25 +1,80 @@
-[gd_scene load_steps=21 format=3 uid="uid://cwjt7a54ooioq"]
+[gd_scene load_steps=17 format=3 uid="uid://cwjt7a54ooioq"]
 
 [ext_resource type="Script" uid="uid://uuv10ct6y602" path="res://player_controller.gd" id="1_rg8mx"]
 [ext_resource type="Script" uid="uid://6n2qlha5nso7" path="res://respawn_manager.gd" id="3_qi6ow"]
 [ext_resource type="PackedScene" uid="uid://lw6bygjm0w6o" path="res://transitioner.tscn" id="4_f0cno"]
-[ext_resource type="PackedScene" uid="uid://5ljspksq31ft" path="res://meshes/Characters/Gully_green.fbx" id="4_rg8mx"]
 [ext_resource type="PackedScene" uid="uid://b4t0xyhas5elu" path="res://items/effects/item_effect.tscn" id="5_g7b7a"]
+[ext_resource type="Curve" uid="uid://dkgh1n702cdyw" path="res://meshes/Characters/anim_curve.tres" id="6_f0cno"]
+[ext_resource type="PackedScene" uid="uid://d2k6wm0ysr1cv" path="res://meshes/Characters/Gully_green.fbx" id="6_qi6ow"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqtel"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g7b7a"]
+height = 1.78
+radius = 0.35
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qi6ow"]
 animation = &"Gully _rig|Drowning"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hs0m"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f0cno"]
 animation = &"Gully _rig|Idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jxqw"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqlhn"]
+animation = &"Gully _rig|Itemuse"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u26yu"]
 animation = &"Gully _rig|Jump"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sweqy"]
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cqlhn"]
+filters = ["", "Gully _rig/Skeleton3D:Ankle.L", "Gully _rig/Skeleton3D:Ankle.R", "Gully _rig/Skeleton3D:Grasp.L", "Gully _rig/Skeleton3D:Grasp.R", "Gully _rig/Skeleton3D:Head", "Gully _rig/Skeleton3D:Middlethumb.L", "Gully _rig/Skeleton3D:Middlethumb.R", "Gully _rig/Skeleton3D:Pointfinger.L", "Gully _rig/Skeleton3D:Pointfinger.R", "Gully _rig/Skeleton3D:Pointfingermiddle.L", "Gully _rig/Skeleton3D:Pointfingermiddle.R", "Gully _rig/Skeleton3D:Pointfingertip.L", "Gully _rig/Skeleton3D:Pointfingertip.R", "Gully _rig/Skeleton3D:Thumptip.L", "Gully _rig/Skeleton3D:Thumptip.R", "Gully _rig/Skeleton3D:Toes.L", "Gully _rig/Skeleton3D:Toes.R", "Gully _rig/Skeleton3D:Upperbody", "Gully _rig/Skeleton3D:Upperfeet.L", "Gully _rig/Skeleton3D:Upperfeet.R", "Gully _rig/Skeleton3D:Upperthumb.R", "Gully _rig/Skeleton3D:Wrist.L", "Gully _rig/Skeleton3D:Wrist.R", "Gully _rig/Skeleton3D:hip", "Gully _rig/Skeleton3D:middlefinger.L", "Gully _rig/Skeleton3D:middlefinger.R", "Gully _rig/Skeleton3D:middlefingermiddle.L", "Gully _rig/Skeleton3D:middlefingermiddle.R", "Gully _rig/Skeleton3D:middlefingertip.L", "Gully _rig/Skeleton3D:middlefingertip.R", "Gully _rig/Skeleton3D:pinkyfinger.L", "Gully _rig/Skeleton3D:pinkyfinger.R", "Gully _rig/Skeleton3D:pinkyfingermiddle.L", "Gully _rig/Skeleton3D:pinkyfingermiddle.R", "Gully _rig/Skeleton3D:pinkyfingertip.L", "Gully _rig/Skeleton3D:pinkyfingertip.R", "Gully _rig/Skeleton3D:stomach", "Gully _rig/Skeleton3D:thumbpalm.R"]
+sync = true
+fadein_time = 0.1
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ltk6"]
 animation = &"Gully _rig|Running"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dw050"]
-animation = &"Gully _rig|Itemuse"
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_jb71e"]
+xfade_time = 0.2
+xfade_curve = ExtResource("6_f0cno")
+input_0/name = "Idling"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Running"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Drowning"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_qi6ow"]
+filter_enabled = true
+filters = ["Gully _rig/Skeleton3D:Bodyrotation", "Gully _rig/Skeleton3D:Head", "Gully _rig/Skeleton3D:Upperbody", "Gully _rig/Skeleton3D:Wrist.L", "Gully _rig/Skeleton3D:Wrist.R"]
+sync = true
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ak1qi"]
+graph_offset = Vector2(17, 99)
+nodes/Drown/node = SubResource("AnimationNodeAnimation_qi6ow")
+nodes/Drown/position = Vector2(-440, 400)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_f0cno")
+nodes/Idle/position = Vector2(-440, 20)
+nodes/Itemuse/node = SubResource("AnimationNodeAnimation_cqlhn")
+nodes/Itemuse/position = Vector2(100, 620)
+nodes/Jump/node = SubResource("AnimationNodeAnimation_u26yu")
+nodes/Jump/position = Vector2(-200, 620)
+nodes/Jumping/node = SubResource("AnimationNodeOneShot_cqlhn")
+nodes/Jumping/position = Vector2(180, 160)
+nodes/Run/node = SubResource("AnimationNodeAnimation_4ltk6")
+nodes/Run/position = Vector2(-540, 220)
+nodes/Transition/node = SubResource("AnimationNodeTransition_jb71e")
+nodes/Transition/position = Vector2(-120, 80)
+nodes/Useitem/node = SubResource("AnimationNodeOneShot_qi6ow")
+nodes/Useitem/position = Vector2(460, 260)
+nodes/output/position = Vector2(880, 220)
+node_connections = [&"Jumping", 0, &"Transition", &"Jumping", 1, &"Jump", &"Transition", 0, &"Idle", &"Transition", 1, &"Run", &"Transition", 2, &"Drown", &"Useitem", 0, &"Jumping", &"Useitem", 1, &"Itemuse", &"output", 0, &"Useitem"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1jxqw"]
 advance_mode = 2
@@ -72,10 +127,53 @@ axis_lock_angular_z = true
 script = ExtResource("1_rg8mx")
 player_id = 3
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../Gully_green")
-tree_root = SubResource("AnimationNodeStateMachine_dw050")
-anim_player = NodePath("../Gully_green/AnimationPlayer")
+[node name="Gully_green" parent="." instance=ExtResource("6_qi6ow")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Gully_green/Gully _rig" index="0"]
+bones/1/rotation = Quaternion(-0.0521715, -1.19209e-07, -5.32711e-09, 0.998638)
+bones/2/rotation = Quaternion(-0.187889, -0.0213098, 0.0704021, 0.979432)
+bones/3/position = Vector3(1.45519e-11, 0.00316269, -3.58559e-10)
+bones/3/rotation = Quaternion(0.093528, 2.79774e-09, 3.16312e-08, 0.995617)
+bones/5/position = Vector3(0.00211761, -0.000189327, -5.83427e-05)
+bones/5/rotation = Quaternion(-0.72636, -0.290611, 0.556082, -0.280569)
+bones/8/rotation = Quaternion(0.41675, 0.0591306, 0.0865265, 0.90296)
+bones/9/rotation = Quaternion(0.451659, -0.00802728, -0.0167371, 0.891998)
+bones/10/rotation = Quaternion(0.484868, 0.026169, 0.0534539, 0.87256)
+bones/12/rotation = Quaternion(0.434601, 0.0188488, -0.00121376, 0.900425)
+bones/13/rotation = Quaternion(0.446514, 0.00187221, 0.00390542, 0.894766)
+bones/14/rotation = Quaternion(0.446089, 0.00597684, 0.00253386, 0.894965)
+bones/16/rotation = Quaternion(0.436001, 0.0190307, -0.000856241, 0.899745)
+bones/17/rotation = Quaternion(0.442636, 0.00135511, 0.00282482, 0.896696)
+bones/18/rotation = Quaternion(0.438257, 0.00625494, 0.00325024, 0.898822)
+bones/22/rotation = Quaternion(-0.248939, 0.0898901, -0.277814, 0.923455)
+bones/23/rotation = Quaternion(-0.153362, -0.0461898, -0.374681, 0.913215)
+bones/25/rotation = Quaternion(0.524277, 0.0210719, 0.00567102, 0.851268)
+bones/27/position = Vector3(-0.00310796, 0.00322732, 0.00173543)
+bones/27/rotation = Quaternion(0.47191, 0.693121, 0.133142, 0.528354)
+bones/30/rotation = Quaternion(-0.0364756, 0.170563, -0.0714187, 0.982078)
+bones/31/rotation = Quaternion(-0.0228844, 0.180936, 0.0559379, 0.981636)
+bones/32/rotation = Quaternion(0.0291273, 0.181763, -0.0138442, 0.982813)
+bones/34/rotation = Quaternion(0.00246935, -0.0175196, -0.00705687, 0.999819)
+bones/35/rotation = Quaternion(0.0156569, 4.65762e-07, -0.00433102, 0.999868)
+bones/36/rotation = Quaternion(0.0151873, -0.00429333, -0.00486944, 0.999864)
+bones/38/rotation = Quaternion(0.00402477, -0.0175293, -0.00745784, 0.99981)
+bones/39/rotation = Quaternion(0.0113259, -3.66022e-07, -0.0031331, 0.999931)
+bones/40/rotation = Quaternion(0.0064583, -0.00423405, -0.00563559, 0.999954)
+bones/42/rotation = Quaternion(-0.514421, -0.24349, 0.75701, -0.320968)
+bones/43/rotation = Quaternion(-0.293472, 0.127848, 0.559124, 0.764794)
+bones/44/rotation = Quaternion(-0.248939, -0.0898902, 0.277814, 0.923455)
+bones/45/rotation = Quaternion(-0.16697, 0.016226, 0.132857, 0.976835)
+bones/47/rotation = Quaternion(0.104584, -0.0165468, -0.0142259, 0.994277)
+bones/49/position = Vector3(0.000814851, -0.000534595, -0.000364427)
+bones/49/rotation = Quaternion(0.993785, 5.98861e-05, -3.57905e-06, 0.11132)
+bones/50/rotation = Quaternion(-0.335326, 1.54781e-05, 9.93149e-05, 0.942102)
+bones/51/rotation = Quaternion(-0.325835, -5.53092e-06, -5.72295e-05, 0.945427)
+bones/53/rotation = Quaternion(-0.238731, -0.0176079, 0.071418, 0.968296)
+bones/55/position = Vector3(-0.0012493, -0.000534595, -0.000364427)
+bones/55/rotation = Quaternion(0.960762, -0.254054, -0.0284481, 0.107624)
+bones/56/rotation = Quaternion(-0.335326, -1.54284e-05, -9.9248e-05, 0.942102)
+bones/57/rotation = Quaternion(-0.325835, 5.53409e-06, 5.72282e-05, 0.945427)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.965682, 0)
@@ -98,49 +196,29 @@ one_shot = true
 
 [node name="transitioner" parent="RespawnManager" instance=ExtResource("4_f0cno")]
 
-[node name="Gully_green" parent="." instance=ExtResource("4_rg8mx")]
-transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
-
-[node name="Skeleton3D" parent="Gully_green/Gully _rig" index="0"]
-bones/1/rotation = Quaternion(1.95854e-08, 1.07471e-09, -0.0207511, 0.999785)
-bones/2/rotation = Quaternion(-0.000819289, 0.0392783, 0.0207349, 0.999013)
-bones/3/rotation = Quaternion(-8.98262e-09, -5.75285e-09, 0.00450026, 0.99999)
-bones/5/rotation = Quaternion(-0.695508, -0.117938, 0.69697, -0.128807)
-bones/8/rotation = Quaternion(0.0886056, 0.0265667, 0.101378, 0.990538)
-bones/9/rotation = Quaternion(0.125167, -0.00192717, -0.0184622, 0.991962)
-bones/10/rotation = Quaternion(0.162981, 0.00665604, 0.0591425, 0.984832)
-bones/12/rotation = Quaternion(0.106269, 0.0181581, 0.00519958, 0.994158)
-bones/13/rotation = Quaternion(0.119391, 0.000448853, 0.00430771, 0.992838)
-bones/14/rotation = Quaternion(0.118923, 0.00477567, 0.00439735, 0.992882)
-bones/16/rotation = Quaternion(0.107816, 0.0182091, 0.00559745, 0.993988)
-bones/17/rotation = Quaternion(0.11509, 0.000325535, 0.0031161, 0.99335)
-bones/18/rotation = Quaternion(0.110251, 0.0047965, 0.00516548, 0.993879)
-bones/22/rotation = Quaternion(-0.248939, 0.0898901, -0.277814, 0.923455)
-bones/23/rotation = Quaternion(-0.16697, -0.0162259, -0.132857, 0.976835)
-bones/25/rotation = Quaternion(0.207257, 0.0179348, 0.0124309, 0.978043)
-bones/27/rotation = Quaternion(0.695554, -0.118192, 0.696927, 0.128557)
-bones/30/rotation = Quaternion(0.129221, -0.0307087, -0.100201, 0.986062)
-bones/31/rotation = Quaternion(0.165811, 0.00268396, 0.0183672, 0.985983)
-bones/32/rotation = Quaternion(0.2033, -0.00907981, -0.0588191, 0.977306)
-bones/34/rotation = Quaternion(0.147019, -0.0183559, -0.00444933, 0.988953)
-bones/35/rotation = Quaternion(0.160075, -0.000625796, -0.00428556, 0.987095)
-bones/36/rotation = Quaternion(0.15961, -0.00495232, -0.00419744, 0.987159)
-bones/38/rotation = Quaternion(0.148557, -0.0184235, -0.00484466, 0.98872)
-bones/39/rotation = Quaternion(0.155799, -0.000453408, -0.00310014, 0.987784)
-bones/40/rotation = Quaternion(0.150985, -0.00500447, -0.0049641, 0.988511)
-bones/43/rotation = Quaternion(-0.293472, 0.127848, 0.559124, 0.764794)
-bones/44/rotation = Quaternion(-0.248939, -0.0898902, 0.277814, 0.923455)
-bones/45/rotation = Quaternion(-0.16697, 0.016226, 0.132857, 0.976835)
-bones/47/rotation = Quaternion(0.247259, -0.01843, -0.0116837, 0.968704)
-bones/49/rotation = Quaternion(0.993785, 5.98861e-05, -3.57905e-06, 0.11132)
-bones/50/rotation = Quaternion(-0.335326, 1.54781e-05, 9.93149e-05, 0.942102)
-bones/51/rotation = Quaternion(-0.325835, -5.53092e-06, -5.72295e-05, 0.945427)
-bones/53/rotation = Quaternion(2.18388e-08, 0.0392868, -8.58641e-10, 0.999228)
-bones/55/rotation = Quaternion(0.993785, -5.98676e-05, 3.74437e-06, 0.11132)
-bones/56/rotation = Quaternion(-0.335326, -1.54335e-05, -9.9243e-05, 0.942102)
-bones/57/rotation = Quaternion(-0.325835, 5.53093e-06, 5.72295e-05, 0.945427)
-
 [node name="ItemEffect" parent="." instance=ExtResource("5_g7b7a")]
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+
+[node name="Debub_label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 41.0
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Gully_green")
+tree_root = SubResource("AnimationNodeBlendTree_ak1qi")
+anim_player = NodePath("../Gully_green/AnimationPlayer")
+parameters/Jumping/active = false
+parameters/Jumping/internal_active = false
+parameters/Jumping/request = 0
+parameters/Transition/current_state = "Idling"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+parameters/Useitem/active = false
+parameters/Useitem/internal_active = false
+parameters/Useitem/request = 0
+
 
 [connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]
 

@@ -1,170 +1,230 @@
-[gd_scene load_steps=21 format=3 uid="uid://g4tbrr3sfui2"]
+[gd_scene load_steps=17 format=3 uid="uid://g4tbrr3sfui2"]
 
 [ext_resource type="Script" uid="uid://uuv10ct6y602" path="res://player_controller.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://bbfcgykisxrxu" path="res://meshes/Characters/Rackham_red.fbx" id="2_sweqy"]
 [ext_resource type="PackedScene" uid="uid://lw6bygjm0w6o" path="res://transitioner.tscn" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://6n2qlha5nso7" path="res://respawn_manager.gd" id="4_hqtel"]
 [ext_resource type="PackedScene" uid="uid://b4t0xyhas5elu" path="res://items/effects/item_effect.tscn" id="5_sweqy"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqtel"]
-animation = &"rig_Rackham_the_red|Drowning"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hs0m"]
-animation = &"rig_Rackham_the_red|Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jxqw"]
-animation = &"rig_Rackham_the_red|Jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sweqy"]
-animation = &"rig_Rackham_the_red|Running"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dw050"]
-animation = &"rig_Rackham_the_red|Itemuse"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1jxqw"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2hs0m"]
-xfade_time = 0.5
-reset = false
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dw050"]
-xfade_time = 0.75
-break_loop_at_end = true
-reset = false
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b26j0"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sweqy"]
-xfade_time = 0.1
-reset = false
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n7ghd"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nvl01"]
-xfade_time = 0.7
-break_loop_at_end = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ivps1"]
-xfade_time = 0.75
-break_loop_at_end = true
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dw050"]
-states/Drowning/node = SubResource("AnimationNodeAnimation_hqtel")
-states/Drowning/position = Vector2(567, 419)
-states/Idle/node = SubResource("AnimationNodeAnimation_2hs0m")
-states/Idle/position = Vector2(499, 210)
-states/Jumping/node = SubResource("AnimationNodeAnimation_1jxqw")
-states/Jumping/position = Vector2(772, 295)
-states/Running/node = SubResource("AnimationNodeAnimation_sweqy")
-states/Running/position = Vector2(230, 329)
-states/Start/position = Vector2(231, 91)
-states/Throw/node = SubResource("AnimationNodeAnimation_dw050")
-states/Throw/position = Vector2(629, 77)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "Idle", "Jumping", SubResource("AnimationNodeStateMachineTransition_b26j0"), "Jumping", "Idle", SubResource("AnimationNodeStateMachineTransition_sweqy"), "Idle", "Drowning", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "Idle", "Throw", SubResource("AnimationNodeStateMachineTransition_nvl01"), "Throw", "Idle", SubResource("AnimationNodeStateMachineTransition_ivps1")]
-graph_offset = Vector2(-133, 234)
+[ext_resource type="Curve" uid="uid://dkgh1n702cdyw" path="res://meshes/Characters/anim_curve.tres" id="6_1jxqw"]
+[ext_resource type="PackedScene" uid="uid://b1fhyxbnosenj" path="res://meshes/Characters/Rackham_red.fbx" id="6_2hs0m"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sweqy"]
+height = 1.85
+radius = 0.35
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvl01"]
+animation = &"rig_Rackham_the_red|Drowning"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n7ghd"]
+animation = &"rig_Rackham_the_red|Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ivps1"]
+animation = &"rig_Rackham_the_red|Itemuse"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b26j0"]
+animation = &"rig_Rackham_the_red|Jump"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_2hs0m"]
+filters = ["", "rig_Rackham_the_red/Skeleton3D:Ankle.L", "rig_Rackham_the_red/Skeleton3D:Ankle.R", "rig_Rackham_the_red/Skeleton3D:Grasp.L", "rig_Rackham_the_red/Skeleton3D:Grasp.R", "rig_Rackham_the_red/Skeleton3D:Head", "rig_Rackham_the_red/Skeleton3D:Middlethumb.L", "rig_Rackham_the_red/Skeleton3D:Middlethumb.R", "rig_Rackham_the_red/Skeleton3D:Pointfinger.L", "rig_Rackham_the_red/Skeleton3D:Pointfinger.R", "rig_Rackham_the_red/Skeleton3D:Pointfingermiddle.L", "rig_Rackham_the_red/Skeleton3D:Pointfingermiddle.R", "rig_Rackham_the_red/Skeleton3D:Pointfingertip.L", "rig_Rackham_the_red/Skeleton3D:Pointfingertip.R", "rig_Rackham_the_red/Skeleton3D:Thumptip.L", "rig_Rackham_the_red/Skeleton3D:Thumptip.R", "rig_Rackham_the_red/Skeleton3D:Toes.L", "rig_Rackham_the_red/Skeleton3D:Toes.R", "rig_Rackham_the_red/Skeleton3D:Upperbody", "rig_Rackham_the_red/Skeleton3D:Upperfeet.L", "rig_Rackham_the_red/Skeleton3D:Upperfeet.R", "rig_Rackham_the_red/Skeleton3D:Upperthumb.R", "rig_Rackham_the_red/Skeleton3D:Wrist.L", "rig_Rackham_the_red/Skeleton3D:Wrist.R", "rig_Rackham_the_red/Skeleton3D:hip", "rig_Rackham_the_red/Skeleton3D:middlefinger.L", "rig_Rackham_the_red/Skeleton3D:middlefinger.R", "rig_Rackham_the_red/Skeleton3D:middlefingermiddle.L", "rig_Rackham_the_red/Skeleton3D:middlefingermiddle.R", "rig_Rackham_the_red/Skeleton3D:middlefingertip.L", "rig_Rackham_the_red/Skeleton3D:middlefingertip.R", "rig_Rackham_the_red/Skeleton3D:pinkyfinger.L", "rig_Rackham_the_red/Skeleton3D:pinkyfinger.R", "rig_Rackham_the_red/Skeleton3D:pinkyfingermiddle.L", "rig_Rackham_the_red/Skeleton3D:pinkyfingermiddle.R", "rig_Rackham_the_red/Skeleton3D:pinkyfingertip.L", "rig_Rackham_the_red/Skeleton3D:pinkyfingertip.R", "rig_Rackham_the_red/Skeleton3D:stomach", "rig_Rackham_the_red/Skeleton3D:thumbpalm.R"]
+sync = true
+fadein_time = 0.1
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_urp6f"]
+animation = &"rig_Rackham_the_red|Running"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_1jxqw"]
+xfade_time = 0.2
+xfade_curve = ExtResource("6_1jxqw")
+input_0/name = "Idling"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Running"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Drowning"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_sweqy"]
+filter_enabled = true
+filters = ["rig_Rackham_the_red/Skeleton3D:Bodyrotation", "rig_Rackham_the_red/Skeleton3D:Head", "rig_Rackham_the_red/Skeleton3D:Upperbody", "rig_Rackham_the_red/Skeleton3D:Wrist.L", "rig_Rackham_the_red/Skeleton3D:Wrist.R"]
+fadein_time = 0.1
+fadeout_time = 0.1
+break_loop_at_end = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_u1c27"]
+graph_offset = Vector2(-269.135, 73.9518)
+nodes/Drowning/node = SubResource("AnimationNodeAnimation_nvl01")
+nodes/Drowning/position = Vector2(-920, 600)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_n7ghd")
+nodes/Idle/position = Vector2(-580, 80)
+nodes/Itemuse/node = SubResource("AnimationNodeAnimation_ivps1")
+nodes/Itemuse/position = Vector2(260, 540)
+nodes/Jump/node = SubResource("AnimationNodeAnimation_b26j0")
+nodes/Jump/position = Vector2(-320, 560)
+nodes/Jumping/node = SubResource("AnimationNodeOneShot_2hs0m")
+nodes/Jumping/position = Vector2(340, 160)
+nodes/Run/node = SubResource("AnimationNodeAnimation_urp6f")
+nodes/Run/position = Vector2(-840, 320)
+nodes/Transition/node = SubResource("AnimationNodeTransition_1jxqw")
+nodes/Transition/position = Vector2(-120, 200)
+nodes/Useitem/node = SubResource("AnimationNodeOneShot_sweqy")
+nodes/Useitem/position = Vector2(740, 300)
+nodes/output/position = Vector2(1160, 340)
+node_connections = [&"Jumping", 0, &"Transition", &"Jumping", 1, &"Jump", &"Transition", 0, &"Idle", &"Transition", 1, &"Run", &"Transition", 2, &"Drowning", &"Useitem", 0, &"Jumping", &"Useitem", 1, &"Itemuse", &"output", 0, &"Useitem"]
+
 
 [node name="Player" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_4flbx")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../Rackham_red")
-tree_root = SubResource("AnimationNodeStateMachine_dw050")
-anim_player = NodePath("../Rackham_red/AnimationPlayer")
-
-[node name="Rackham_red" parent="." instance=ExtResource("2_sweqy")]
+[node name="Rackham_red" parent="." instance=ExtResource("6_2hs0m")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Rackham_red/rig_Rackham_the_red" index="0"]
-bones/0/rotation = Quaternion(0.707107, 8.42937e-08, 8.42937e-08, 0.707107)
 bones/0/scale = Vector3(1, 1, 1)
-bones/1/rotation = Quaternion(1.95896e-08, 9.95354e-10, -0.0248012, 0.999692)
-bones/1/scale = Vector3(1, 1, 1)
-bones/2/rotation = Quaternion(-0.0014022, 0.0564973, 0.0247615, 0.998095)
+bones/1/rotation = Quaternion(2.60507e-08, 1.65892e-09, 0.0216966, 0.999765)
+bones/2/position = Vector3(1.96486e-11, 0.000909785, 2.55295e-11)
+bones/2/rotation = Quaternion(-0.00163474, -0.0753265, -0.0216349, 0.996923)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/rotation = Quaternion(-8.85178e-09, -4.57238e-09, -0.00292, 0.999996)
+bones/3/position = Vector3(-0.000213512, 0.00323942, -7.67156e-11)
+bones/3/rotation = Quaternion(-8.82018e-09, -4.30113e-09, 0.023721, 0.999719)
 bones/3/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(-0.695475, -0.11775, 0.697002, -0.128989)
+bones/5/position = Vector3(0.0023083, 0.00013826, -3.91578e-05)
+bones/5/rotation = Quaternion(-0.695497, -0.117878, 0.696981, -0.128865)
+
+
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(0.0162995, -0.00123974, 0.00720274, 0.99984)
-bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(0.0860174, 0.000412291, -0.00187431, 0.996292)
+bones/6/position = Vector3(-3.72529e-11, 0.000290667, 2.7474e-10)
+bones/6/rotation = Quaternion(0.0162995, -0.00123973, 0.00720275, 0.99984)
+bones/7/position = Vector3(0, 0.000194947, 1.39698e-11)
+bones/7/rotation = Quaternion(0.0860174, 0.000412294, -0.00187432, 0.996292)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(0.0846329, 0.0261599, 0.101484, 0.990885)
+bones/8/position = Vector3(-0.000327515, 0.000173712, -2.27061e-05)
+bones/8/rotation = Quaternion(0.130103, 0.0307983, 0.100173, 0.985946)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(0.121188, -0.00185305, -0.0184697, 0.992456)
+bones/9/position = Vector3(0, 0.000217065, -1.86265e-11)
+bones/9/rotation = Quaternion(0.166734, -0.00270107, -0.0183649, 0.985827)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(0.15903, 0.00641873, 0.0591687, 0.985478)
+bones/10/position = Vector3(7.45058e-11, 0.000285384, -1.49012e-10)
+bones/10/rotation = Quaternion(0.204173, 0.00913244, 0.058811, 0.977124)
 bones/10/scale = Vector3(1, 1, 1)
-bones/12/rotation = Quaternion(0.102282, 0.018137, 0.00527239, 0.994576)
+bones/12/position = Vector3(3.72529e-11, 0.000169619, -9.31323e-12)
+bones/12/rotation = Quaternion(0.147945, 0.0183604, 0.00443212, 0.988815)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.115408, 0.000431631, 0.00430945, 0.993309)
+bones/13/position = Vector3(-1.86265e-11, 0.000239806, 4.19095e-11)
+bones/13/rotation = Quaternion(0.160999, 0.000629499, 0.00428502, 0.986945)
 bones/13/scale = Vector3(1, 1, 1)
-bones/14/rotation = Quaternion(0.114941, 0.00475804, 0.00441645, 0.993351)
+bones/14/position = Vector3(5.58794e-11, 0.000309009, -1.21072e-10)
+bones/14/rotation = Quaternion(0.160492, 0.00495607, 0.00419301, 0.987016)
 bones/14/scale = Vector3(1, 1, 1)
-bones/16/rotation = Quaternion(0.103829, 0.0181864, 0.00567052, 0.994413)
+bones/16/position = Vector3(0.000317319, 0.00020017, -1.37292e-05)
+bones/16/rotation = Quaternion(0.149435, 0.0184279, 0.00482843, 0.988588)
 bones/16/scale = Vector3(1, 1, 1)
-bones/17/rotation = Quaternion(0.111105, 0.000313022, 0.00311732, 0.993804)
-bones/18/rotation = Quaternion(0.106264, 0.00477574, 0.00518467, 0.994313)
+bones/17/position = Vector3(-3.25963e-11, 0.000245226, -9.37143e-11)
+bones/17/rotation = Quaternion(0.156723, 0.000456161, 0.0030996, 0.987638)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/position = Vector3(2.09548e-11, 0.000293911, 1.78115e-10)
+bones/18/rotation = Quaternion(0.151911, 0.00500929, 0.00495939, 0.988369)
+
+
 bones/18/scale = Vector3(1, 1, 1)
+bones/20/position = Vector3(-7.74142e-05, 0.000491004, 0.000140431)
 bones/20/rotation = Quaternion(0.514421, -0.24349, 0.757009, 0.320969)
 bones/20/scale = Vector3(1, 1, 1)
+bones/21/position = Vector3(-3.25963e-10, 0.000322647, 0)
 bones/21/rotation = Quaternion(-0.293471, -0.127848, -0.559124, 0.764794)
 bones/21/scale = Vector3(1, 1, 1)
+bones/22/position = Vector3(-3.72529e-11, 0.000264355, -1.30385e-10)
 bones/22/rotation = Quaternion(-0.248939, 0.0898902, -0.277814, 0.923455)
 bones/22/scale = Vector3(1, 1, 1)
+bones/23/position = Vector3(3.72529e-11, 0.000351419, -4.65661e-11)
 bones/23/rotation = Quaternion(-0.16697, -0.0162259, -0.132857, 0.976835)
-bones/25/rotation = Quaternion(0.203333, 0.0178848, 0.0125028, 0.978867)
+bones/23/scale = Vector3(1, 1, 1)
+bones/25/position = Vector3(-7.48878e-05, 0.00178856, 0.000456809)
+bones/25/rotation = Quaternion(0.248166, 0.0184412, 0.0116664, 0.968472)
 bones/25/scale = Vector3(1, 1, 1)
-bones/27/rotation = Quaternion(0.695589, -0.118367, 0.696898, 0.12837)
+bones/27/position = Vector3(-0.0023083, 0.000138261, -3.91588e-05)
+bones/27/rotation = Quaternion(0.695567, -0.118243, 0.696918, 0.128492)
+
 bones/27/scale = Vector3(1, 1, 1)
-bones/28/rotation = Quaternion(0.0162996, 0.00124014, -0.00720276, 0.99984)
+bones/28/position = Vector3(-3.72529e-11, 0.000290667, -2.93367e-10)
+bones/28/rotation = Quaternion(0.0162996, 0.00124015, -0.00720276, 0.99984)
 bones/28/scale = Vector3(1, 1, 1)
+bones/29/position = Vector3(0, 0.000194946, -1.02445e-10)
 bones/29/rotation = Quaternion(0.0860175, -0.000412464, 0.00187428, 0.996292)
 bones/29/scale = Vector3(1, 1, 1)
-bones/30/rotation = Quaternion(0.133175, -0.0311103, -0.100077, 0.985536)
+bones/30/position = Vector3(0.000327514, 0.000173711, -2.27071e-05)
+bones/30/rotation = Quaternion(0.0876781, -0.0264717, -0.101403, 0.990621)
 bones/30/scale = Vector3(1, 1, 1)
-bones/31/rotation = Quaternion(0.169764, 0.00275763, 0.0183565, 0.98531)
+bones/31/position = Vector3(1.86265e-11, 0.000217064, 1.17579e-10)
+bones/31/rotation = Quaternion(0.124239, 0.00190993, 0.0184639, 0.992079)
 bones/31/scale = Vector3(1, 1, 1)
-bones/32/rotation = Quaternion(0.207218, -0.00931548, -0.0587822, 0.976483)
+bones/32/position = Vector3(-3.72529e-11, 0.000285384, -2.32831e-12)
+bones/32/rotation = Quaternion(0.162101, -0.00660289, -0.0591484, 0.984978)
 bones/32/scale = Vector3(1, 1, 1)
-bones/34/rotation = Quaternion(0.150984, -0.0183735, -0.00437569, 0.988356)
+bones/34/position = Vector3(0, 0.000169619, -2.6077e-10)
+bones/34/rotation = Quaternion(0.105381, -0.0181529, -0.00521585, 0.994253)
 bones/34/scale = Vector3(1, 1, 1)
-bones/35/rotation = Quaternion(0.164033, -0.000642865, -0.00428304, 0.986445)
+bones/35/position = Vector3(0, 0.000239806, 0)
+bones/35/rotation = Quaternion(0.118461, -0.000445073, -0.00430809, 0.992949)
 bones/35/scale = Vector3(1, 1, 1)
-bones/36/rotation = Quaternion(0.163568, -0.00496917, -0.00417754, 0.986511)
+bones/36/position = Vector3(-2.79397e-11, 0.00030901, 1.81608e-10)
+bones/36/rotation = Quaternion(0.118036, -0.00477184, -0.0044016, 0.992988)
 bones/36/scale = Vector3(1, 1, 1)
-bones/38/rotation = Quaternion(0.152521, -0.0184427, -0.00477089, 0.988117)
+bones/38/position = Vector3(-0.000317319, 0.000200169, -1.37291e-05)
+bones/38/rotation = Quaternion(0.106928, -0.0182039, -0.00561382, 0.994084)
 bones/38/scale = Vector3(1, 1, 1)
-bones/39/rotation = Quaternion(0.159759, -0.000465824, -0.00309814, 0.987151)
+bones/39/position = Vector3(-3.72529e-11, 0.000245226, 1.02445e-10)
+bones/39/rotation = Quaternion(0.11416, -0.00032275, -0.0031163, 0.993458)
 bones/39/scale = Vector3(1, 1, 1)
-bones/40/rotation = Quaternion(0.154949, -0.00502428, -0.004944, 0.987897)
+bones/40/position = Vector3(-7.45058e-11, 0.00029391, 5.58794e-11)
+bones/40/rotation = Quaternion(0.109363, -0.00479165, -0.00516978, 0.993977)
+
+
 bones/40/scale = Vector3(1, 1, 1)
+bones/42/position = Vector3(7.74141e-05, 0.000491005, 0.00014043)
 bones/42/rotation = Quaternion(-0.514421, -0.24349, 0.75701, -0.320968)
 bones/42/scale = Vector3(1, 1, 1)
-bones/43/rotation = Quaternion(-0.293472, 0.127847, 0.559124, 0.764794)
+bones/43/position = Vector3(-3.91155e-10, 0.000322646, 9.31323e-11)
 bones/43/scale = Vector3(1, 1, 1)
+bones/44/position = Vector3(3.49246e-11, 0.000264355, -8.70205e-11)
 bones/44/rotation = Quaternion(-0.248939, -0.0898907, 0.277814, 0.923455)
 bones/44/scale = Vector3(1, 1, 1)
+bones/45/position = Vector3(-3.0268e-11, 0.000351419, 1.6531e-10)
 bones/45/rotation = Quaternion(-0.16697, 0.0162261, 0.132857, 0.976835)
 bones/45/scale = Vector3(1, 1, 1)
-bones/47/rotation = Quaternion(0.251142, -0.0184766, -0.0116098, 0.967704)
+bones/47/position = Vector3(7.4888e-05, 0.00178856, 0.000456808)
+bones/47/rotation = Quaternion(0.206383, -0.0179232, -0.012447, 0.978228)
+
+
 bones/47/scale = Vector3(1, 1, 1)
-bones/49/rotation = Quaternion(0.993785, 5.98821e-05, -3.61475e-06, 0.11132)
+bones/49/position = Vector3(0.000814851, -0.000534595, -0.000364427)
+bones/49/rotation = Quaternion(0.993785, 5.98821e-05, -3.61474e-06, 0.11132)
 bones/49/scale = Vector3(1, 1, 0.999998)
+bones/50/position = Vector3(4.74353e-11, 0.000539714, -5.42303e-11)
 bones/50/rotation = Quaternion(-0.335326, 1.55097e-05, 9.93278e-05, 0.942102)
 bones/50/scale = Vector3(1, 1, 1)
+bones/51/position = Vector3(6.18252e-11, 0.000596742, -6.52676e-11)
 bones/51/rotation = Quaternion(-0.325835, -5.53001e-06, -5.72282e-05, 0.945427)
-bones/53/rotation = Quaternion(2.18208e-08, 0.0565146, -1.23517e-09, 0.998402)
+bones/51/scale = Vector3(1, 1, 1)
+bones/53/rotation = Quaternion(2.17936e-08, -0.0753443, 1.6467e-09, 0.997158)
+bones/53/scale = Vector3(1, 1, 1)
+bones/55/position = Vector3(-0.000814851, -0.000534595, -6.97101e-05)
+
+
 bones/55/rotation = Quaternion(0.993785, -5.9871e-05, 3.71456e-06, 0.11132)
 bones/55/scale = Vector3(1, 1, 0.999998)
+bones/56/position = Vector3(-1.5658e-10, 0.000539714, -2.3353e-11)
 bones/56/rotation = Quaternion(-0.335326, -1.5403e-05, -9.92338e-05, 0.942102)
 bones/56/scale = Vector3(1, 1, 1)
+bones/57/position = Vector3(-9.20409e-12, 0.000596742, 1.19076e-11)
 bones/57/rotation = Quaternion(-0.325835, 5.53001e-06, 5.72282e-05, 0.945427)
+bones/57/scale = Vector3(1, 1, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00671, 0)
@@ -188,6 +248,28 @@ one_shot = true
 [node name="transitioner" parent="RespawnManager" instance=ExtResource("3_i3pqv")]
 
 [node name="ItemEffect" parent="." instance=ExtResource("5_sweqy")]
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+
+[node name="Debub_label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 41.0
+text = "Coyote: "
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Rackham_red")
+tree_root = SubResource("AnimationNodeBlendTree_u1c27")
+anim_player = NodePath("../Rackham_red/AnimationPlayer")
+parameters/Jumping/active = false
+parameters/Jumping/internal_active = false
+parameters/Jumping/request = 0
+parameters/Transition/current_state = "Idling"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0.0
+parameters/Useitem/active = false
+parameters/Useitem/internal_active = 0.0
+parameters/Useitem/request = 0
+
 
 [connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]
 
