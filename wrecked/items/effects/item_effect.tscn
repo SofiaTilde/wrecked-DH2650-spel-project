@@ -1,4 +1,41 @@
-[gd_scene format=3 uid="uid://b4t0xyhas5elu"]
+[gd_scene load_steps=4 format=3 uid="uid://b4t0xyhas5elu"]
+
+[sub_resource type="Animation" id="Animation_ekx8f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ge4xk"]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ouatn"]
+_data = {
+&"RESET": SubResource("Animation_ekx8f"),
+&"fade_out": SubResource("Animation_ge4xk")
+}
 
 [node name="ItemEffect" type="Node3D"]
 
@@ -9,3 +46,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../OverlayTexture")
+libraries = {
+&"": SubResource("AnimationLibrary_ouatn")
+}
