@@ -76,6 +76,7 @@ nodes/Useitem/position = Vector2(740, 300)
 nodes/output/position = Vector2(1160, 340)
 node_connections = [&"Jumping", 0, &"Transition", &"Jumping", 1, &"Jump", &"Transition", 0, &"Idle", &"Transition", 1, &"Run", &"Transition", 2, &"Drowning", &"Useitem", 0, &"Jumping", &"Useitem", 1, &"Itemuse", &"output", 0, &"Useitem"]
 
+
 [node name="Player" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -95,6 +96,8 @@ bones/3/rotation = Quaternion(-8.82018e-09, -4.30113e-09, 0.023721, 0.999719)
 bones/3/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(0.0023083, 0.00013826, -3.91578e-05)
 bones/5/rotation = Quaternion(-0.695497, -0.117878, 0.696981, -0.128865)
+
+
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/position = Vector3(-3.72529e-11, 0.000290667, 2.7474e-10)
 bones/6/rotation = Quaternion(0.0162995, -0.00123973, 0.00720275, 0.99984)
@@ -127,6 +130,8 @@ bones/17/rotation = Quaternion(0.156723, 0.000456161, 0.0030996, 0.987638)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/position = Vector3(2.09548e-11, 0.000293911, 1.78115e-10)
 bones/18/rotation = Quaternion(0.151911, 0.00500929, 0.00495939, 0.988369)
+
+
 bones/18/scale = Vector3(1, 1, 1)
 bones/20/position = Vector3(-7.74142e-05, 0.000491004, 0.000140431)
 bones/20/rotation = Quaternion(0.514421, -0.24349, 0.757009, 0.320969)
@@ -145,6 +150,7 @@ bones/25/rotation = Quaternion(0.248166, 0.0184412, 0.0116664, 0.968472)
 bones/25/scale = Vector3(1, 1, 1)
 bones/27/position = Vector3(-0.0023083, 0.000138261, -3.91588e-05)
 bones/27/rotation = Quaternion(0.695567, -0.118243, 0.696918, 0.128492)
+
 bones/27/scale = Vector3(1, 1, 1)
 bones/28/position = Vector3(-3.72529e-11, 0.000290667, -2.93367e-10)
 bones/28/rotation = Quaternion(0.0162996, 0.00124015, -0.00720276, 0.99984)
@@ -178,6 +184,8 @@ bones/39/rotation = Quaternion(0.11416, -0.00032275, -0.0031163, 0.993458)
 bones/39/scale = Vector3(1, 1, 1)
 bones/40/position = Vector3(-7.45058e-11, 0.00029391, 5.58794e-11)
 bones/40/rotation = Quaternion(0.109363, -0.00479165, -0.00516978, 0.993977)
+
+
 bones/40/scale = Vector3(1, 1, 1)
 bones/42/position = Vector3(7.74141e-05, 0.000491005, 0.00014043)
 bones/42/rotation = Quaternion(-0.514421, -0.24349, 0.75701, -0.320968)
@@ -192,6 +200,8 @@ bones/45/rotation = Quaternion(-0.16697, 0.0162261, 0.132857, 0.976835)
 bones/45/scale = Vector3(1, 1, 1)
 bones/47/position = Vector3(7.4888e-05, 0.00178856, 0.000456808)
 bones/47/rotation = Quaternion(0.206383, -0.0179232, -0.012447, 0.978228)
+
+
 bones/47/scale = Vector3(1, 1, 1)
 bones/49/position = Vector3(0.000814851, -0.000534595, -0.000364427)
 bones/49/rotation = Quaternion(0.993785, 5.98821e-05, -3.61474e-06, 0.11132)
@@ -205,6 +215,8 @@ bones/51/scale = Vector3(1, 1, 1)
 bones/53/rotation = Quaternion(2.17936e-08, -0.0753443, 1.6467e-09, 0.997158)
 bones/53/scale = Vector3(1, 1, 1)
 bones/55/position = Vector3(-0.000814851, -0.000534595, -6.97101e-05)
+
+
 bones/55/rotation = Quaternion(0.993785, -5.9871e-05, 3.71456e-06, 0.11132)
 bones/55/scale = Vector3(1, 1, 0.999998)
 bones/56/position = Vector3(-1.5658e-10, 0.000539714, -2.3353e-11)
@@ -215,7 +227,7 @@ bones/57/rotation = Quaternion(-0.325835, 5.53001e-06, 5.72282e-05, 0.945427)
 bones/57/scale = Vector3(1, 1, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.984, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00671, 0)
 shape = SubResource("CylinderShape3D_sweqy")
 debug_color = Color(0.894678, 0.000303416, 0.814324, 0.42)
 
@@ -257,6 +269,7 @@ parameters/Transition/current_index = 0.0
 parameters/Useitem/active = false
 parameters/Useitem/internal_active = 0.0
 parameters/Useitem/request = 0
+
 
 [connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]
 

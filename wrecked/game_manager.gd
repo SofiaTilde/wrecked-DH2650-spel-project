@@ -10,6 +10,9 @@ extends Node
 @onready var leaderboard_menu_popup: Panel = $CanvasLayer/opacity/Leaderboard2
 @onready var label: Label = $CanvasLayer/SharedLabel
 @onready var label2: Label = $CanvasLayer/SharedLabel2
+@onready var placement_labels: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
+@onready var placement_labels_th: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
+@onready var platforms: Node3D = get_node("/root/Game/_Node3D_144036")
 @onready var leaderboard_labels: Array = [
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score1st"),
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score2nd"),
@@ -35,12 +38,12 @@ var state: GameState = GameState.GET_READY # first state
 var countDownLen: int = 5
 var leaderboardMenu = false
 var starting = true
-var placements_dict = {1: "1st", 2: "2nd", 3: "3rd", 4: "4th"}
+var placements_dict
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	
 	var red = PlayerData.new("Red Rogers", Color(1, 0, 0, 1))
 	var pink = PlayerData.new("Pink Plunderer", Color(1, 0.5, 0.7, 1))
@@ -52,6 +55,10 @@ func _ready() -> void:
 	player2.player_data = yellow
 	player3.player_data = green
 	player4.player_data = pink
+	
+
+	placements_dict = Goal.placements_dict
+	await get_tree().process_frame
 
 	get_ready()
 
@@ -92,20 +99,22 @@ func start_race(): # from process
 	state = GameState.RACE
 	print("RACE STARTED")
 	
-	player1.get_node("PointsLabel").text = " "
-	player2.get_node("PointsLabel").text = " "
-	player3.get_node("PointsLabel").text = " "
-	player4.get_node("PointsLabel").text = " "
+	for p in players:
+		p.get_node("PointsLabel").text=" "
+	
 	update_label(label, "WRECKED!", Color.WHITE, 300)
 	
 	print("new race-stage loaded!")
+	#platforms.load_new_level()
 	# Load newly generated platforms
 	# var new_platforms = load("res://level/level.tscn").instantiate()
 	# $"..".add_child(new_platforms)
 	# new_platforms.name = "oldPlatformsLevel" # So we can reuse this func on next goal
-	
 	await get_tree().create_timer(1.).timeout
 	label.visible = false
+	for i in range(4):
+		placement_labels[i].visible = true
+		placement_labels_th[i].visible = true
 	
 	
 func _on_goal_race_over() -> void:
@@ -131,7 +140,7 @@ func start_count_down():
 	if player1.player_data.points >= 10 or player2.player_data.points >= 10 or player3.player_data.points >= 10 or player4.player_data.points >= 10: # activate some function in another script/ node
 		players.sort_custom(sort_by_points)
 		if players[0].player_data.points != players[1].player_data.points: # check if tie-breaker is needed!
-			start_next_game()
+			game_over()
 	else:
 		race_over()
 		
@@ -144,7 +153,7 @@ func race_over():
 	show_leaderboard()
 	
 
-func start_next_game():
+func game_over():
 	state = GameState.GAMEOVER
 	print("GAME OVER")
 	
@@ -165,7 +174,7 @@ func show_leaderboard():
 	leaderboard_popup.visible = true
 	players.sort_custom(sort_by_points)
 	for i in range(players.size()):
-		var leaderboardText = "%s" % placements_dict.get(i + 1) + "- " + str(players[i].player_data.name) + " : " + str(players[i].player_data.points)
+		var leaderboardText = str(i+1) +"%s" % placements_dict.get(i + 1)[0] + "- " + str(players[i].player_data.name) + " : " + str(players[i].player_data.points)
 		update_label(leaderboard_labels[i], leaderboardText, players[i].player_data.color, 30)
 	
 	#Show menu

@@ -76,6 +76,51 @@ nodes/Useitem/position = Vector2(460, 260)
 nodes/output/position = Vector2(880, 220)
 node_connections = [&"Jumping", 0, &"Transition", &"Jumping", 1, &"Jump", &"Transition", 0, &"Idle", &"Transition", 1, &"Run", &"Transition", 2, &"Drown", &"Useitem", 0, &"Jumping", &"Useitem", 1, &"Itemuse", &"output", 0, &"Useitem"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1jxqw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2hs0m"]
+xfade_time = 0.5
+reset = false
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dw050"]
+xfade_time = 0.75
+break_loop_at_end = true
+reset = false
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b26j0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sweqy"]
+xfade_time = 0.1
+reset = false
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n7ghd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nvl01"]
+xfade_time = 0.7
+break_loop_at_end = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ivps1"]
+xfade_time = 0.75
+break_loop_at_end = true
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dw050"]
+states/Drowning/node = SubResource("AnimationNodeAnimation_hqtel")
+states/Drowning/position = Vector2(567, 419)
+states/Idle/node = SubResource("AnimationNodeAnimation_2hs0m")
+states/Idle/position = Vector2(499, 210)
+states/Jumping/node = SubResource("AnimationNodeAnimation_1jxqw")
+states/Jumping/position = Vector2(772, 294)
+states/Running/node = SubResource("AnimationNodeAnimation_sweqy")
+states/Running/position = Vector2(230, 329)
+states/Start/position = Vector2(231, 91)
+states/Throw/node = SubResource("AnimationNodeAnimation_dw050")
+states/Throw/position = Vector2(630, 77)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "Idle", "Jumping", SubResource("AnimationNodeStateMachineTransition_b26j0"), "Jumping", "Idle", SubResource("AnimationNodeStateMachineTransition_sweqy"), "Idle", "Drowning", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "Idle", "Throw", SubResource("AnimationNodeStateMachineTransition_nvl01"), "Throw", "Idle", SubResource("AnimationNodeStateMachineTransition_ivps1")]
+graph_offset = Vector2(-67, -4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g7b7a"]
+
 [node name="Player" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -131,7 +176,7 @@ bones/56/rotation = Quaternion(-0.335326, -1.54284e-05, -9.9248e-05, 0.942102)
 bones/57/rotation = Quaternion(-0.325835, 5.53409e-06, 5.72282e-05, 0.945427)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.945439, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.965682, 0)
 shape = SubResource("CylinderShape3D_g7b7a")
 debug_color = Color(0.894678, 0.000303416, 0.814324, 0.42)
 
@@ -173,6 +218,7 @@ parameters/Transition/current_index = 0
 parameters/Useitem/active = false
 parameters/Useitem/internal_active = false
 parameters/Useitem/request = 0
+
 
 [connection signal="timeout" from="RespawnManager/ResetTimer" to="RespawnManager" method="_on_ResetTimer_timeout"]
 

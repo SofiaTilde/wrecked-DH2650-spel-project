@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://v7af5qm7lyol" path="res://meshes/Characters/Pippi_pink.fbx" id="6_ih4i3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qd3f5"]
-height = 1.6
-radius = 0.35
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nokyd"]
 animation = &"Pippi_rig|Drowning"
@@ -126,7 +124,7 @@ bones/56/rotation = Quaternion(-0.335326, -1.54336e-05, -9.9243e-05, 0.942102)
 bones/57/rotation = Quaternion(-0.325836, 5.53105e-06, 5.72296e-05, 0.945426)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.860766, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.904571, 0)
 shape = SubResource("CylinderShape3D_qd3f5")
 debug_color = Color(0.894678, 0.000303416, 0.814324, 0.42)
 

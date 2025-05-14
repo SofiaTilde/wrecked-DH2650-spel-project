@@ -6,6 +6,7 @@ var overlayTexture: Texture2D
 var tempPlayer: CharacterBody3D
 var icon: Texture2D
 var rng = RandomNumberGenerator.new()
+var shaderMaterial: ShaderMaterial
 
 func throw(play: CharacterBody3D = null):
 	if (play != null):
@@ -40,6 +41,17 @@ func applyOverlay(player: CharacterBody3D, seconds):
 	await timer(seconds)
 	#remove effect
 	textureNode.texture = null
+
+func applyShader(player: CharacterBody3D, seconds):
+	var shaderNode = player.get_parent().get_parent().get_node("ShaderTexture") as TextureRect
+	var subViewport = player.get_parent().get_parent().get_node("SubViewport") as SubViewport
+	shaderNode.material = shaderMaterial
+	shaderNode.visible = true
+	#leave effect for a while
+	await timer(seconds)
+	#remove effect
+	shaderNode.material = null
+	shaderNode.visible = false
 
 func changePlayerPos(player: CharacterBody3D):
 	#each item defines their own changePlayerPos function
