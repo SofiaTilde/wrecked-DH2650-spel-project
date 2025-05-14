@@ -7,10 +7,25 @@ extends Area3D
 
 enum BarrelLevel {Copper, Silver, Gold}
 var barrel_level = BarrelLevel.Copper
+var rng = RandomNumberGenerator.new()
 
 func _on_body_entered(body) -> void:
 	if body is not CharacterBody3D:
 		return
+
+	var parent = get_parent() as barrel_generator
+	if barrel_level == BarrelLevel.Copper:
+		if rng.randi() % 4 == 0: #25% chance to not upgrade
+			parent.createBarrel(self.global_position.x, self.global_position.z, BarrelLevel.Copper, true)
+		else:
+			parent.createBarrel(self.global_position.x, self.global_position.z, BarrelLevel.Silver, true)
+	elif barrel_level == BarrelLevel.Silver:
+		if rng.randi() % 4 == 0: #25% chance to not upgrade
+			parent.createBarrel(self.global_position.x, self.global_position.z, BarrelLevel.Silver, true)
+		else:
+			parent.createBarrel(self.global_position.x, self.global_position.z, BarrelLevel.Gold, true)
+	else:
+		parent.createBarrel(self.global_position.x, self.global_position.z, BarrelLevel.Gold, true)
 	var item_provider = itemscene.instantiate() as ItemProvider
 	var item_packed = item_provider.get_item(barrel_level)
 	var item = item_packed.instantiate() as Item

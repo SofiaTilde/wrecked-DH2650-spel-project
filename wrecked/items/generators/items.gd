@@ -31,7 +31,7 @@ func get_item(level):
 func get_copper_item():
 	if copperItemlist.is_empty():
 		copperItemlist = [screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		
+
 	return copperItemlist.pick_random()
 
 func get_silver_item():
@@ -43,5 +43,5 @@ func get_silver_item():
 func get_gold_item():
 	if goldItemlist.is_empty():
 		goldItemlist = [screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		
+
 	return goldItemlist.pick_random()
