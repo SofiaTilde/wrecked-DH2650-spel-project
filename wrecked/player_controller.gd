@@ -5,7 +5,7 @@ const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
 const JUMPDEACCELERATION = 8.5
-const PUSH_FORCE = 10.8
+const PUSH_FORCE = 15.8
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION = 2.5
 const DEACCELERATION = 8.5
@@ -21,13 +21,12 @@ var recently_pushed = {}
 var last_platform = CollisionObject3D
 @onready var model = Node3D
 @onready var animation_player = AnimationPlayer
-@onready var animation_tree := AnimationTree
-@onready var state_machine = $"AnimationTree"["parameters/playback"]
+@onready var animation_tree := $AnimationTree
 @onready var twist_pivot = $TwistPivot
-#@onready var Debug_label = $Debub_label
+@onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
 @onready var currItem_node = $MarginContainer/CurrItemLabel
-@onready var last_saved_position: Vector3 = global_transform.origin
+@onready var lastSavePosition: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
@@ -39,24 +38,43 @@ var last_platform = CollisionObject3D
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
 #used to spawn correct character mesh
-var player_names = {1: "Rackham_red", 2: "Yates_yellow", 3: "Gully_green", 4: "Pippi_pink"}
+var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
+#variables jump buffer
+var jump_buffered := false
+var jump_buffer_time := 1.8
+var jump_buffer_timer := 0.0
+
+#How long can you coyote
+var coyote_time := 30.3
+var coyote_timer := 0.0
+# states
+enum {IDLE, RUN,DROWNING}
+var current_anim = IDLE
+
+
+
 var holdingItem: Item
 var last_saved_platform: Node3D
 var viewPortTexture: Texture2D
 
-#variables jump buffer
-var jump_buffered := false
-var jump_buffer_time := 110.8
-var jump_buffer_timer := 0.0
 
-#How long can you coyote
-var coyote_time := 3.3
-var coyote_timer := 0.0
+func handle_anim_states():
+	match current_anim:
+		IDLE:
+			animation_tree.set("parameters/Transition/transition_request","Idling")
+		RUN:
+			animation_tree.set("parameters/Transition/transition_request","Running")			
+		DROWNING:
+			animation_tree.set("parameters/Transition/transition_request","Drowning")
+		
+
 
 func _ready():
 	var name = player_names.get(player_id)
 	model = get_node(name)
 	animation_player = str(name) + "/AnimationPlayer"
+	animation_tree = $AnimationTree
+	animation_tree.active = true
 	await get_tree().process_frame
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
@@ -81,8 +99,8 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-	#Uncomment this and replace variables to debug variables ingame
-	#Debug_label.text = str("Coy",coyote_timer)
+	handle_anim_states()
+
 	var last_floor = is_on_floor()
 	#make the character snap more
 	floor_snap_length = 0.05
@@ -120,25 +138,31 @@ func _physics_process(delta: float) -> void:
 	twist_pivot.rotation.z = lerp_angle(clamp(twist_pivot.rotation.z, -0.5, deg_to_rad(30)), rotation.z, 0.1)
 	twist_input = lerp(twist_pivot.rotation.x, 0.0, 0.1)
 	pitch_input = lerp(pitch_pivot.rotation.z, 0.0, 0.1)
+	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
+
 	#Player acceleration
+	if jump_pressed and is_on_floor():
+		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
-			state_machine.travel("Running")
-		player_velocity = player_velocity.lerp(direction * SPEED, ACCELERATION * delta)
+			current_anim = RUN
+		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
-
 	#Player deacceleration
 	else:
-		if player_velocity.length() <= 2.8 and is_on_floor():
-			state_machine.travel("Idle")
-		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION * delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED * DEACCELERATION)
-		velocity.z = move_toward(velocity.z, 0, SPEED * DEACCELERATION)
+		if player_velocity.length() <= 2.5 and is_on_floor():
+			if !jump_pressed:
+				current_anim = IDLE
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED*DEACCELERATION)
+		velocity.z = move_toward(velocity.z, 0, SPEED*DEACCELERATION)
 
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
-	# Jumping
 	velocity.y = jump_state_adv
+
+	if player_position.y <-5.0:
+		current_anim = DROWNING
 
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -154,9 +178,7 @@ func _physics_process(delta: float) -> void:
 	
 
 	apply_floor_snap()
-
 	move_and_slide() # rörelse enligt velocity mm.
-	
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
 		recently_pushed[body] -= delta
@@ -164,13 +186,13 @@ func _physics_process(delta: float) -> void:
 		if recently_pushed[body] <= 0:
 			recently_pushed.erase(body)
 
-
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
-		state_machine.travel("Throw")
+		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
+
 		throwItem(play)
 	if Input.is_action_just_pressed("use_item_right_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D
@@ -181,6 +203,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("use_item_left_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer4/SubViewport/Player4") as CharacterBody3D
 		throwItem(play)
+
 	if holdingItem != null:
 		holdingItem.global_position = global_position + Vector3(0, 2.3, 0)
 		holdingItem.rotation.y = model.rotation.y
@@ -219,24 +242,21 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_available = true
 
 	if is_on_floor():
-		jump_available = true
+		jump_available= true
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
-	if jump_available or coyote_time > 0.0:
-		if jump_pressed and is_on_floor():
-			state_machine.travel("Jumping")
+	if jump_available or coyote_time >0.0:
+		if jump_pressed  and is_on_floor():
 			jump_available = false
 			jump_buffered = true
 			jump_buffer_timer = jump_buffer_time
 		if !is_on_floor():
 			jump_available = false
-
 		if jump_buffered:
 			jump_buffer_timer -= delta
 			if jump_buffer_timer <= 0.0:
 				jump_buffered = false
-
 		if jump_buffered and coyote_timer > 0.0:
 			jump_velocity = JUMP_VELOCITY
 			jump_buffered = false
@@ -245,7 +265,6 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 			else:
 				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-
 	return jump_velocity
 
 func handle_jump_input(delta):
@@ -288,7 +307,6 @@ func _on_area_3d_visibility_changed() -> void:
 
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
-	state_machine.travel("Drowning")
 	respawn_manager.respawn(player_data.placement)
 
 
@@ -306,6 +324,7 @@ func throwItem(play: CharacterBody3D = null):
 	if play == null:
 		holdingItem.throw()
 	else:
+		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		holdingItem.throw(play)
 	holdingItem = null
 	update_icon(null)
