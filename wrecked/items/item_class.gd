@@ -60,8 +60,6 @@ func applyOverlayFadeOut(player: CharacterBody3D, seconds):
 func applyShader(player: CharacterBody3D, seconds):
 	var shaderNode = player.get_parent().get_parent().get_node("ShaderTexture") as TextureRect
 	var subViewport = player.get_parent().get_parent().get_node("SubViewport") as SubViewport
-	shaderNode.custom_minimum_size = subViewport.size
-	shaderNode.expand = true
 	shaderNode.material = shaderMaterial
 	shaderNode.visible = true
 	#leave effect for a while

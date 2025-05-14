@@ -13,15 +13,15 @@ enum BarrelLevel {Copper, Silver, Gold}
 
 func _ready() -> void:
 	rng.randomize()
-	
+
 	var type = randi() % 3
-	
+
 	if type == 0:
 		createBarrel(0.0, 0.0, BarrelLevel.Copper)
-		
+
 	elif type == 1:
 		createBarrel(0.0, 0.0, BarrelLevel.Silver)
-		
+
 	elif type == 2:
 		createBarrel(0.0, 0.0, BarrelLevel.Gold)
 

@@ -4,11 +4,11 @@ const SPEED = 9
 const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
-const JUMPDEACCELERATION = 0.5
-const PUSH_FORCE = 0.8
+const JUMPDEACCELERATION = 8.5
+const PUSH_FORCE = 10.8
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION = 2.5
-const DEACCELERATION = 1.5
+const DEACCELERATION = 8.5
 const FALLMULTIPLIER = 0.5
 const JUMPCUTMULTIPLIER = 0.8
 const PUSH_COOLDOWN = 0.2 # seconds
@@ -18,34 +18,42 @@ var mouse_sensitivity := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 var recently_pushed = {}
-
+var last_platform = CollisionObject3D
 @onready var model = Node3D
 @onready var animation_player = AnimationPlayer
 @onready var animation_tree := AnimationTree
 @onready var state_machine = $"AnimationTree"["parameters/playback"]
 @onready var twist_pivot = $TwistPivot
+#@onready var Debug_label = $Debub_label
 @onready var pitch_pivot = $TwistPivot/PitchPivot
-
 @onready var currItem_node = $MarginContainer/CurrItemLabel
-@onready var lastSavePosition: Vector3 = global_transform.origin
+@onready var last_saved_position: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
 @onready var icon_node: TextureRect = $IconTexture
-@onready var swim_platform: CollisionShape3D = 	$SwimPlatform/CollisionShape3D
+@onready var swim_platform: CollisionShape3D = $SwimPlatform/CollisionShape3D
 
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
-var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
+#used to spawn correct character mesh
+var player_names = {1: "Rackham_red", 2: "Yates_yellow", 3: "Gully_green", 4: "Pippi_pink"}
 var holdingItem: Item
+var last_saved_platform: Node3D
+var viewPortTexture: Texture2D
+
+#variables jump buffer
+var jump_buffered := false
+var jump_buffer_time := 110.8
+var jump_buffer_timer := 0.0
+
+#How long can you coyote
+var coyote_time := 3.3
+var coyote_timer := 0.0
 
 func _ready():
-	#@onready var model = $Rackham_red
-
-	#@onready var animation_player := $Rackham_red/AnimationPlayer
-
 	var name = player_names.get(player_id)
 	model = get_node(name)
 	animation_player = str(name) + "/AnimationPlayer"
@@ -53,9 +61,6 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
-	swim_platform.disabled = true
-	
-
 #call this func when you pick up/use some item
 func update_item_label(item: String) -> void:
 	if label_node: # avoid crashes if node is removed/changed
@@ -67,8 +72,6 @@ func update_icon(icon: Texture2D):
 
 #_physics då det är en Characterbody3d, kallas kontinuerligt.
 func _physics_process(delta: float) -> void:
-	if player_data == null:
-		return  # Skip until player_data is set
 	#Inputs
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
@@ -103,16 +106,17 @@ func _physics_process(delta: float) -> void:
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
 			state_machine.travel("Running")
-		player_velocity = player_velocity.lerp(direction*SPEED, ACCELERATION*delta)
+		player_velocity = player_velocity.lerp(direction * SPEED, ACCELERATION * delta)
 		model.rotation.y = lerp_angle(model.rotation.y, player_rotation, delta * 5.0)
 
 	#Player deacceleration
 	else:
 		if player_velocity.length() <= 2.8 and is_on_floor():
 			state_machine.travel("Idle")
-		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION*delta)
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		player_velocity = player_velocity.lerp(Vector3.ZERO, DEACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED * DEACCELERATION)
+		velocity.z = move_toward(velocity.z, 0, SPEED * DEACCELERATION)
+
 	velocity.x = player_velocity.x # update final value
 	velocity.z = player_velocity.z
 	# Jumping
@@ -122,7 +126,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-			
+	if is_on_floor():
+		lastSavePosition = global_transform.origin # for respawn
 	move_and_slide() # rörelse enligt velocity mm.
 	
 	
@@ -131,11 +136,9 @@ func _physics_process(delta: float) -> void:
 			var collision = get_slide_collision(0)
 			var Collision_object = collision.get_collider()
 			
-			if not Collision_object.get_parent().name== name: #avoid SwimPlatform safve
-				
+			if not Collision_object.get_parent().name == name: # avoid SwimPlatform safve
 				lastSavePosition = global_position # for respawn
 			
-
 
 	apply_push_to_other_players() # används för att sköta collisions
 	for body in recently_pushed.keys():
@@ -167,7 +170,7 @@ func _physics_process(delta: float) -> void:
 	
 	# for swimming movement:
 		
-	if(player_data.can_swim):
+	if (player_data.can_swim):
 		# Get the current world positions
 		var plat_pos = $SwimPlatform.global_position
 		var player_pos = global_position
@@ -182,10 +185,9 @@ func _physics_process(delta: float) -> void:
 		plat_pos.y = lerp(plat_pos.y, surface_y, delta * 1.0)
 		$SwimPlatform.global_position = plat_pos
 		# Lerp the player up at 3 units/sec to sit slightly above the platform
-		player_pos.y = lerp(player_pos.y, surface_y+1 , delta * 2.0)
+		player_pos.y = lerp(player_pos.y, surface_y + 1, delta * 2.0)
 		global_position = player_pos
 			
-
 
 func _on_swim_timer_timeout() -> void:
 	# this runs 1 second after the water‐enter event
@@ -194,7 +196,7 @@ func _on_swim_timer_timeout() -> void:
 	
 #hanterar jump logic, will adjust with button press sensitivity
 func player_jump_adv(jump_velocity, delta) -> float:
-	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor() and player_data.can_jump
+	var is_jumping = Input.is_action_just_pressed("jump_%s" % [player_id]) and is_on_floor()
 	var is_releasing_jump = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
 	if is_jumping:
 		jump_velocity += JUMP_VELOCITY
@@ -203,9 +205,14 @@ func player_jump_adv(jump_velocity, delta) -> float:
 			jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
 		else:
 			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
-	if jump_velocity>0.0:
+	if jump_velocity > 0.0:
 		state_machine.travel("Jumping")
 	return jump_velocity
+
+func handle_jump_input(delta):
+	if Input.is_action_just_pressed("jump_%s" % [player_id]):
+		jump_buffered = true
+		jump_buffer_timer = jump_buffer_time
 
 
 func apply_push_to_other_players() -> void:
@@ -239,10 +246,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_area_3d_visibility_changed() -> void:
 	pass # Replace with function body.
 
+
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
 	state_machine.travel("Drowning")
-	respawn_manager.respawn()
+	respawn_manager.respawn(player_data.placement)
 
 
 func setItem(item: Item):
