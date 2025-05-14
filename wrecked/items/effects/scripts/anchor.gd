@@ -12,4 +12,4 @@ func activateItem():
 
 func changePlayerPos(player: CharacterBody3D):
 	# sink player quickly
-	player.velocity += player.get_gravity() * 2.0
+	player.velocity += player.get_gravity() * 3.0
