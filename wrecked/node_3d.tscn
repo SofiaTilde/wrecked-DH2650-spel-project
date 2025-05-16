@@ -39,6 +39,7 @@ outline_color = Color(0, 0, 0, 1)
 bg_color = Color(7.52043e-08, 0.0590926, 0.150703, 0.411765)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_noarx"]
+ground_bottom_color = Color(0.101961, 0.301961, 0.901961, 1)
 
 [sub_resource type="Sky" id="Sky_noarx"]
 sky_material = SubResource("ProceduralSkyMaterial_noarx")

@@ -1,4 +1,5 @@
 extends Node3D
+class_name barrel_generator
 
 @onready var barrel_scene = preload("res://items/barrel/barrel.tscn")
 var rng = RandomNumberGenerator.new()
@@ -25,7 +26,15 @@ func _ready() -> void:
 	elif type == 2:
 		createBarrel(0.0, 0.0, BarrelLevel.Gold)
 
-func createBarrel(x, z, level):
+func createBarrel(x, z, level, timer = false):
 	var barrel = barrel_scene.instantiate()
+	if timer:
+		var rng = RandomNumberGenerator.new()
+		var timerNode = Timer.new()
+		add_child(timerNode)
+		timerNode.wait_time = rng.randf_range(5, 20)
+		timerNode.one_shot = true
+		timerNode.start()
+		await timerNode.timeout
 	add_child(barrel)
 	barrel.barrelStart(x, z, level)

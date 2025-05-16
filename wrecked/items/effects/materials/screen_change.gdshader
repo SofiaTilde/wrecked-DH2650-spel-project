@@ -14,7 +14,7 @@ void fragment() {
     if (dist < swirl_radius) {
         float angle = atan(offset.y, offset.x);
         float swirl_amount = (1.0 - dist / swirl_radius);
-        float rotated_angle = angle + swirl_strength * swirl_amount * swirl_amount * TIME;
+        float rotated_angle = angle + swirl_strength * swirl_amount * swirl_amount * (mod(TIME, 5)+50.0);
         vec2 rotated = vec2(cos(rotated_angle), sin(rotated_angle)) * dist;
 
         vec2 new_uv = swirl_center + rotated;
