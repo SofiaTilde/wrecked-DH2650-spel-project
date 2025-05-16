@@ -44,6 +44,13 @@ func applyOverlay(player: CharacterBody3D, seconds):
 
 	textureNode.texture = null
 
+func applyOverlayNoNull(player: CharacterBody3D, seconds):
+	var textureNode = player.get_node("ItemEffect/OverlayTexture") as TextureRect
+	textureNode.texture = overlayTexture
+	textureNode.modulate = Color(1, 1, 1, 1) # reset needed!
+	#leave effect for a while
+	await timer(seconds)
+
 	#For applying overlay which also should fade out as item effect time is running out
 func applyOverlayFadeOut(player: CharacterBody3D, seconds):
 	var textureNode = player.get_node("ItemEffect/OverlayTexture") as TextureRect

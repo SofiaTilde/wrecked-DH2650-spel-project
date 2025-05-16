@@ -21,14 +21,21 @@ func activateItem():
 	if player == null:
 		return
 	var frameLength = 0.1;
-	for i in range(10):
+	var length = rng.randi_range(10 * 10, 15 * 10) / 10;
+	for i in range(length / (frameLength * 5)):
+		if player.player_data.respawning: # fire goes out in water
+			break
+		if player.player_data.can_swim: # fire goes out when rubber duck is active
+			break
 		overlayTexture = frame1
-		await applyOverlay(player, 0.1)
+		await applyOverlayNoNull(player, frameLength)
 		overlayTexture = frame2
-		await applyOverlay(player, 0.1)
+		await applyOverlayNoNull(player, frameLength)
 		overlayTexture = frame3
-		await applyOverlay(player, 0.1)
+		await applyOverlayNoNull(player, frameLength)
 		overlayTexture = frame4
-		await applyOverlay(player, 0.1)
+		await applyOverlayNoNull(player, frameLength)
 		overlayTexture = frame5
-		await applyOverlay(player, 0.1)
+		await applyOverlayNoNull(player, frameLength)
+	overlayTexture = frame1
+	await applyOverlay(player, frameLength)
