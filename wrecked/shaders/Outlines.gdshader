@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_front;
+render_mode unshaded,diffuse_toon, cull_front;
 //depth texture
 uniform sampler2D depth_tex : hint_depth_texture, repeat_disable;
 uniform float thickness : hint_range(0.000,1.0,0.0001);
