@@ -46,7 +46,7 @@ void fragment() {
 	float outline = smoothstep(0.0, steps,clamp_depth);
 	ALBEDO = vec3(normals)*outline*line_color;
 	
-	ALPHA = outline*10.9;
+	ALPHA = outline*0.9;
 }
 
 
