@@ -8,8 +8,6 @@ uniform vec3 line_color : source_color = vec3(0.0);
 uniform sampler2D screen_texture : source_color, hint_screen_texture;
 uniform sampler2D depth_texture : hint_depth_texture;
 uniform sampler2D normal_rough_texture : hint_normal_roughness_texture;
-uniform vec3 global_light_dir;
-uniform sampler2D gradient_fallof;
 
 float Depthapply(vec2 uv, mat4 inv_proj_mat){
 	float depth = texture(depth_tex,uv).r;
@@ -48,7 +46,7 @@ void fragment() {
 	float outline = smoothstep(0.0, steps,clamp_depth);
 	ALBEDO = vec3(normals)*outline*line_color;
 	//ALBEDO = vec3(outline)*line_color;
-	ALPHA = outline;
+	ALPHA = outline*0.9;
 }
 
 

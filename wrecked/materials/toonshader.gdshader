@@ -1,10 +1,10 @@
 shader_type spatial;
-render_mode blend_mul;
+render_mode blend_mul,diffuse_toon,specular_toon;
 
 uniform float ToonRampOffset: hint_range(0.0, 1.0) = 0.5;
 uniform float ToonRampSmoothness: hint_range(0.0, 1.0) = 0.5;
 uniform float Glossiness: hint_range(0.0, 1.0) = 1.0; 
-uniform float Fresnel_amount: hint_range(0.0, 1.0) = 0.5;
+uniform float Fresnel: hint_range(0.0, 1.0) = 0.5;
 
 void light() {
 	// Diffuse Shading
@@ -20,8 +20,8 @@ void light() {
 	// Fresnel
 	float rim = 1.0- dot(NORMAL,VIEW);
 	rim = rim*toonRamp;
-	float fresnel = 1.0-Fresnel_amount;
-	float rimSmooth = smoothstep(Fresnel_amount, fresnel * 1.4, rim);
+	float fresnel_amount = 1.0-Fresnel;
+	float rimSmooth = smoothstep(Fresnel, fresnel_amount * 1.4, rim);
 
-	//toonRamp *= ATTENUATION;Fres
+	toonRamp *= ATTENUATION;
 }
