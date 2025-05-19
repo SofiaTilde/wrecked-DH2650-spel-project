@@ -17,6 +17,9 @@ void light() {
 	vec3 halfvec = normalize(LIGHT + VIEW);
 	float spec = pow(max(0.0, dot(NORMAL, halfvec)), Glossiness);
 	SPECULAR_LIGHT += vec3(spec);
+	//remove diffuse contribution to spec
+	SPECULAR_LIGHT -= ALBEDO*0.5 * DIFFUSE_LIGHT;
+
 	// Fresnel
 	float rim = 1.0- dot(NORMAL,VIEW);
 	rim = rim*toonRamp;
