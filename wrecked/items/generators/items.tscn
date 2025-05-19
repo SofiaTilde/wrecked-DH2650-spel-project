@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://6kx5nm2ecru"]
+[gd_scene load_steps=13 format=3 uid="uid://6kx5nm2ecru"]
 
 [ext_resource type="Script" uid="uid://bni2m50ynawa3" path="res://items/generators/items.gd" id="1_n0bbx"]
 [ext_resource type="PackedScene" uid="uid://bdvfrko7ynj1k" path="res://items/eyepatch/eyepatch.tscn" id="2_r844h"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dimml56vb75mf" path="res://items/shroom/shroom.tscn" id="10_1b2rd"]
 [ext_resource type="PackedScene" uid="uid://dtjwnfydet0h5" path="res://items/none/screen_change.tscn" id="11_2qnbq"]
 [ext_resource type="PackedScene" uid="uid://dfvx5j3eomvea" path="res://items/parrot/parrot.tscn" id="11_r4p4a"]
+[ext_resource type="PackedScene" uid="uid://dob0tr0efqtvl" path="res://items/cat_lava/cat_lava.tscn" id="12_7c1cb"]
 [ext_resource type="PackedScene" uid="uid://bxraifnjhxtxy" path="res://items/sword/sword.tscn" id="12_o1g2a"]
 
 [node name="Items" type="Node3D"]
@@ -52,4 +53,7 @@ visible = false
 [node name="Sword" parent="." instance=ExtResource("12_o1g2a")]
 
 [node name="ScreenChange" parent="." instance=ExtResource("11_2qnbq")]
+visible = false
+
+[node name="CatLava" parent="." instance=ExtResource("12_7c1cb")]
 visible = false
