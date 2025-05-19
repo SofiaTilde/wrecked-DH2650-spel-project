@@ -139,11 +139,14 @@ shadow_mesh = SubResource("ArrayMesh_qmds4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62r78"]
 albedo_texture = ExtResource("4_ykk0u")
+metallic_specular = 0.0
 normal_enabled = true
 normal_texture = ExtResource("5_5jval")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbw7r"]
 albedo_texture = ExtResource("6_mralt")
+metallic_specular = 1.0
+roughness = 0.75
 
 [node name="MolotovCocktail" type="Node3D"]
 script = ExtResource("1_wd7df")
