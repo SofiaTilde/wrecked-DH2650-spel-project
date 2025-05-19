@@ -40,13 +40,13 @@ void fragment() {
 	//sample right and left of border of depth:
 	float border_r = Depthapply(SCREEN_UV-vec2(thickness,0.0),INV_PROJECTION_MATRIX)-depth;
 	float border_l = Depthapply(SCREEN_UV+vec2(-thickness,0.0),INV_PROJECTION_MATRIX)-depth;
-	float border_u = Depthapply(SCREEN_UV+vec2(0.001,thickness),INV_PROJECTION_MATRIX)-depth;
-	float border_d = Depthapply(SCREEN_UV-vec2(0.001,thickness),INV_PROJECTION_MATRIX)-depth;
+	float border_u = Depthapply(SCREEN_UV+vec2(0.0,thickness),INV_PROJECTION_MATRIX)-depth;
+	float border_d = Depthapply(SCREEN_UV-vec2(0.0,thickness),INV_PROJECTION_MATRIX)-depth;
 	float clamp_depth = clamp(border_l-border_r-border_d-border_u,0.0,1.0);
 	float outline = smoothstep(0.0, steps,clamp_depth);
 	ALBEDO = vec3(normals)*outline*line_color;
-	//ALBEDO = vec3(outline)*line_color;
-	ALPHA = outline*0.9;
+	
+	ALPHA = outline*10.9;
 }
 
 
