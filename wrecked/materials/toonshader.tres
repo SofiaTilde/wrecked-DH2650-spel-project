@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cnmv5ki0q7opo"]
+
+[ext_resource type="Shader" uid="uid://bxvyyrwwr18bx" path="res://materials/toonshadertest.gdshader" id="1_dcav5"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dcav5")
+shader_parameter/ToonRampOffset = 0.415
+shader_parameter/ToonRampSmoothness = 0.4
+shader_parameter/Glossiness = 0.0
+shader_parameter/Fresnel_amount = 0.0
