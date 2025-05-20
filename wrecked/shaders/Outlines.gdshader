@@ -29,12 +29,11 @@ void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
-//void fragment() {
 
 void fragment() {
 	float depth = Depthapply(SCREEN_UV,INV_PROJECTION_MATRIX);
 	vec3 normals = texture(normal_rough_texture, SCREEN_UV).rgb;
-		
+
 	//outlines
 	float line_thickness = thickness;
 	//sample right and left of border of depth:
@@ -45,7 +44,7 @@ void fragment() {
 	float clamp_depth = clamp(border_l-border_r-border_d-border_u,0.0,1.0);
 	float outline = smoothstep(0.0, steps,clamp_depth);
 	ALBEDO = vec3(normals)*outline*line_color;
-	
+
 	ALPHA = outline*0.9;
 }
 
