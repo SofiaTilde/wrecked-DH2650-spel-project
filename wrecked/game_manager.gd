@@ -4,11 +4,17 @@ extends Node
 @onready var player3: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer3/SubViewport/Player3")
 @onready var player4: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer4/SubViewport/Player4")
 @onready var Goal: Area3D = get_node("/root/Game/Goal")
+#used to make the staring area sink
 @onready var Startingplatform: Node3D = get_node("/root/Game/Startingplatform")
 @onready var Staringplatform_pos: Vector3 = Vector3(2.897,-0.69,6.992)
 @onready var Staringplatform_pos_end: Vector3 = Vector3(2.897,100.69,6.992)
+#safe spawns incase they drown and havent touched a new platform
+@onready var default_safe_platform1: Node3D = get_node("/root/Game/Safe_spawnp1")
+@onready var default_safe_platform2: Node3D = get_node("/root/Game/Safe_spawnp2")
+@onready var default_safe_platform3: Node3D = get_node("/root/Game/Safe_spawnp3")
+@onready var default_safe_platform4: Node3D = get_node("/root/Game/Safe_spawnp4")
 
-var sinking_speed : float = 1.5
+var sinking_speed : float = 0.001
 #@onready var label_animator: AnimationPlayer = get_node("/root/Game/SharedHudNextRace/Control/LabelAnimator") What is this used for?
 
 @onready var leaderboard_popup: Panel = $CanvasLayer/opacity
@@ -101,13 +107,10 @@ func start_count_in():
 	
 	
 func _process(delta: float) -> void:
-	Startingplatform.global_position -= lerp(Staringplatform_pos,Staringplatform_pos_end,1.0)*delta*0.001
-	print(Startingplatform.global_position)		
-		
+	Startingplatform.global_position -= lerp(Staringplatform_pos,Staringplatform_pos_end,1.0)*delta*sinking_speed	
 func start_race(): # from process
 	state = GameState.RACE
 	print("RACE STARTED")
-	print(Startingplatform.global_position)		
 
 	for p in players:
 		p.get_node("PointsLabel").text=" "

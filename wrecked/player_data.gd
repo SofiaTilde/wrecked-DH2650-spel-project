@@ -11,6 +11,7 @@ var can_swim: bool = false
 var can_jump: bool=true
 var placement: int=1
 
+
 func _init(_name := "", _color := Color(1, 1, 1, 1)):
 	name = _name
 	color = _color

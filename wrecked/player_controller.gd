@@ -31,13 +31,20 @@ var last_platform = CollisionObject3D
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
 @onready var icon_node: TextureRect = $IconTexture
 @onready var swim_platform: CollisionShape3D = 	$SwimPlatform/CollisionShape3D
-
+#@onready var starting_platform: Node3D = get_node("/root/Game/Startingplatform")
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
+@onready var backup_saved_platform: Node3D = get_node("/root/Game/Safe_spawnp%d" % player_id)
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
+	#player1.global_transform.origin = Vector3(0.0, 10, 0.0)
+	#player2.global_transform.origin = Vector3(2.5, 10, 0.0)
+	#player3.global_transform.origin = Vector3(5.0, 10, 0.0)
+	#player4.global_transform.origin = Vector3(7.5, 10, 0.0)
+
 #used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
+
 #variables jump buffer
 var jump_buffered := false
 var jump_buffer_time := 1.8
@@ -78,7 +85,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	currItem_node.text = "Item: "
 	currItem_node.modulate = player_data.color
-
+	last_saved_platform = backup_saved_platform
 	var shaderNode = get_parent().get_parent().get_node("ShaderTexture")
 	var subViewport = get_parent().get_parent().get_node("SubViewport")
 	shaderNode.custom_minimum_size = subViewport.size
@@ -171,9 +178,14 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
-			if floor_object is not CharacterBody3D:
+			print("Object name", floor_object.name)
+			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform":
 				last_saved_platform = floor_object
-
+			if floor_object.get_parent().name =="Startingplatform":
+				print(floor_object)
+				last_saved_platform = backup_saved_platform
+			
+			
 
 	apply_floor_snap()
 	move_and_slide() # rörelse enligt velocity mm.
