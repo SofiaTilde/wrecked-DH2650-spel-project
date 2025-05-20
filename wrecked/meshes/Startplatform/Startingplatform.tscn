@@ -16,7 +16,6 @@ metallic_specular = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.86848, -1.017)
-visible = false
 shape = SubResource("ConcavePolygonShape3D_3tt3c")
 
 [node name="boatplatform" parent="StaticBody3D" instance=ExtResource("1_v04pa")]
