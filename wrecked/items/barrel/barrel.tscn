@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://dnrtklvqut8jx"]
+[gd_scene load_steps=13 format=4 uid="uid://dnrtklvqut8jx"]
 
 [ext_resource type="Script" uid="uid://bwg78hjbxpaod" path="res://items/barrel/barrel.gd" id="1_34ndh"]
 [ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/generators/items.tscn" id="2_uax0x"]
 [ext_resource type="Material" uid="uid://q10wk3ctjypn" path="res://items/barrel/barrel_silver.tres" id="3_q6nd0"]
+[ext_resource type="PackedScene" uid="uid://dob0tr0efqtvl" path="res://items/cat_lava/cat_lava.tscn" id="3_uax0x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7s1de"]
 
@@ -100,6 +101,7 @@ _data = {
 transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, 0, 0)
 script = ExtResource("1_34ndh")
 itemscene = ExtResource("2_uax0x")
+catscene = ExtResource("3_uax0x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(3.04, 0, 0, 0, 3.04, 0, 0, 0, 3.04, 0, 0, 0)
