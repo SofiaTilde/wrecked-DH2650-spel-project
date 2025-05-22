@@ -21,8 +21,8 @@ func activateItem():
 	velocityY = 3
 	await timer(0.2)
 	velocityY = 0
-	velocityX = rng.randf_range(-1, 1) * 10
-	velocityZ = rng.randf_range(-1, 1) * 10
+	velocityX = rng.randf_range(-1, 1) * 5
+	velocityZ = rng.randf_range(-1, 1) * 5
 	if rng.randi() % 4 == 0: #25% chance to send forward
 		velocityX = 0
 		velocityZ = -6

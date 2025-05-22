@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://5iynkps6new0"]
+[gd_scene load_steps=9 format=3 uid="uid://5iynkps6new0"]
 
 [ext_resource type="Script" uid="uid://dywce6dja077o" path="res://main_menu.gd" id="1_i26rj"]
 [ext_resource type="LabelSettings" uid="uid://b32jxxg8k3j45" path="res://custom.tres" id="2_eiy7p"]
 [ext_resource type="FontFile" uid="uid://decj3qo5pg26d" path="res://kirifont/KiriFont.otf" id="3_qoqlk"]
-[ext_resource type="Texture2D" uid="uid://6q2hh3nyws6s" path="res://meshes/wrecked_render_mainmenu.png" id="5_iwfq2"]
+[ext_resource type="Texture2D" uid="uid://dtfnreqn0a0pa" path="res://wrecked.png" id="5_7r1g0"]
+[ext_resource type="Texture2D" uid="uid://6q2hh3nyws6s" path="res://meshes/Skullisland/wrecked_render_mainmenu.png" id="5_iwfq2"]
 
 [sub_resource type="Animation" id="Animation_iwfq2"]
 length = 0.001
@@ -147,9 +148,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="WreckedRenderMainmenu" type="Sprite2D" parent="Panel"]
+visible = false
 position = Vector2(1042, 494)
 scale = Vector2(1.07682, 1.22963)
 texture = ExtResource("5_iwfq2")
+
+[node name="Wrecked" type="Sprite2D" parent="Panel"]
+position = Vector2(1029, 608.5)
+scale = Vector2(1.06771, 1.13241)
+texture = ExtResource("5_7r1g0")
 
 [connection signal="button_down" from="CanvasLayer/HBoxContainer/Options" to="." method="options"]
 [connection signal="button_down" from="CanvasLayer/HBoxContainer/StartGame" to="." method="start_game"]

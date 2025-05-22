@@ -37,21 +37,17 @@ var last_platform = CollisionObject3D
 @onready var backup_saved_platform: Node3D = get_node("/root/Game/Safe_spawnp%d" % player_id)
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
-	#player1.global_transform.origin = Vector3(0.0, 10, 0.0)
-	#player2.global_transform.origin = Vector3(2.5, 10, 0.0)
-	#player3.global_transform.origin = Vector3(5.0, 10, 0.0)
-	#player4.global_transform.origin = Vector3(7.5, 10, 0.0)
 
 #used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 
 #variables jump buffer
 var jump_buffered := false
-var jump_buffer_time := 1.8
+var jump_buffer_time := 0.3
 var jump_buffer_timer := 0.0
 
 #How long can you coyote
-var coyote_time := 30.3
+var coyote_time := 60.3
 var coyote_timer := 0.0
 # states
 enum {IDLE, RUN,DROWNING}
@@ -197,8 +193,8 @@ func _physics_process(delta: float) -> void:
 		if recently_pushed[body] <= 0:
 			recently_pushed.erase(body)
 
-	if Input.is_action_just_pressed("use_item_%s" % [player_id]) and holdingItem:
-		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
+		animation_tree.set("parameters/Transition/transition_request","Drowning")
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
@@ -249,33 +245,37 @@ func _on_swim_timer_timeout() -> void:
 #hanterar jump logic, will adjust with button press sensitivity
 func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
-	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0
-	var jump_available = true
+	var jump_released = Input.is_action_just_released("jump_%s" % [player_id]) and jump_velocity > 0.0
 
+	# Can you coyote?
 	if is_on_floor():
-		jump_available= true
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
-	if jump_available or coyote_time >0.0:
-		if jump_pressed  and is_on_floor():
-			jump_available = false
-			jump_buffered = true
-			jump_buffer_timer = jump_buffer_time
-		if !is_on_floor():
-			jump_available = false
-		if jump_buffered:
-			jump_buffer_timer -= delta
-			if jump_buffer_timer <= 0.0:
-				jump_buffered = false
-		if jump_buffered and coyote_timer > 0.0:
-			jump_velocity = JUMP_VELOCITY
+
+	# Start jump buffering
+	if jump_pressed:
+		jump_buffered = true
+		jump_buffer_timer = jump_buffer_time
+
+	if jump_buffered:
+		jump_buffer_timer -= delta
+		if jump_buffer_timer <= 0.0:
 			jump_buffered = false
-		elif not is_on_floor():
-			if jump_released:
-				jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
-			else:
-				jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
+
+	# om du gucci med jump och coyote, gör hopp
+	if jump_buffered and coyote_timer > 0.0:
+		jump_velocity = JUMP_VELOCITY
+		jump_buffered = false
+		coyote_timer = 0.0  # för att ta bort dubbel hopp
+
+	# appicera jump
+	elif not is_on_floor():
+		if jump_released:
+			jump_velocity -= GRAVITY * JUMPDEACCELERATION * delta * FALLMULTIPLIER
+		else:
+			jump_velocity += GRAVITY * JUMPACCELERATION * delta * JUMPCUTMULTIPLIER
+
 	return jump_velocity
 
 func handle_jump_input(delta):
