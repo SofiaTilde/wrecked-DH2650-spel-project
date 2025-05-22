@@ -4,6 +4,7 @@ extends Area3D
 @onready var material_copper = preload("res://items/barrel/barrel_copper.tres")
 @onready var material_silver = preload("res://items/barrel/barrel_silver.tres")
 @onready var material_gold = preload("res://items/barrel/barrel_gold.tres")
+@export var catscene: PackedScene
 
 enum BarrelLevel {Copper, Silver, Gold}
 var barrel_level = BarrelLevel.Copper
@@ -54,6 +55,9 @@ func barrelStart(x, z, level):
 	setTexture()
 	self.global_position = Vector3(x, 1.5, z)
 	self.visible = true
+	if barrel_level == BarrelLevel.Gold:
+		var cat = catscene.instantiate()
+		self.add_child(cat)
 
 func setTexture():
 	var mesh = self.find_child("BarrelMesh") as MeshInstance3D
