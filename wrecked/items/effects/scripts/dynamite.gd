@@ -17,6 +17,7 @@ func activateItem():
 	velocityX = 0
 	velocityZ = 0
 	velocityY = 0
+	activePlayer.velocity = Vector3(0, 0, 0)
 	active = true
 	velocityY = 3
 	await timer(0.2)
