@@ -2,6 +2,7 @@ extends Item
 
 var active
 var activePlayer: CharacterBody3D
+var activeTime = [6.0, 5.0, 4.0, 3.0] #player position 1, 2, 3, 4
 
 func _ready():
 	labelText = "Bottle of Rum"
@@ -14,7 +15,7 @@ func activateItem():
 	if activePlayer == null:
 		return
 	active = true
-	await applyShader(activePlayer, rng.randf_range(5, 10))
+	await applyShader(activePlayer, activeTime[activePlayer.player_data.placement - 1])
 	active = false
 
 func _physics_process(delta):
