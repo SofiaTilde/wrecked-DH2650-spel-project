@@ -4,6 +4,17 @@ extends Node
 @onready var player3: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer3/SubViewport/Player3")
 @onready var player4: CharacterBody3D = get_node("/root/Game/GridContainer/SubViewportContainer4/SubViewport/Player4")
 @onready var Goal: Area3D = get_node("/root/Game/Goal")
+#used to make the staring area sink
+@onready var Startingplatform: Node3D = get_node("/root/Game/Startingplatform")
+@onready var Staringplatform_pos: Vector3 = Vector3(2.897,-0.69,6.992)
+@onready var Staringplatform_pos_end: Vector3 = Vector3(2.897,100.69,6.992)
+#safe spawns incase they drown and havent touched a new platform
+@onready var default_safe_platform1: Node3D = get_node("/root/Game/Safe_spawnp1")
+@onready var default_safe_platform2: Node3D = get_node("/root/Game/Safe_spawnp2")
+@onready var default_safe_platform3: Node3D = get_node("/root/Game/Safe_spawnp3")
+@onready var default_safe_platform4: Node3D = get_node("/root/Game/Safe_spawnp4")
+
+var sinking_speed : float = 0.001
 #@onready var label_animator: AnimationPlayer = get_node("/root/Game/SharedHudNextRace/Control/LabelAnimator") What is this used for?
 
 @onready var leaderboard_popup: Panel = $CanvasLayer/opacity
@@ -77,10 +88,10 @@ func get_ready():
 	for p in players:
 		p.player_data.gotPoints = false
 		p.get_node("PointsLabel").text = "Points: " + str(p.player_data.points) + " /10"
-	player1.global_transform.origin = Vector3(0.0, 10, 0.0)
-	player2.global_transform.origin = Vector3(2.5, 10, 0.0)
-	player3.global_transform.origin = Vector3(5.0, 10, 0.0)
-	player4.global_transform.origin = Vector3(7.5, 10, 0.0)
+	player1.global_transform.origin = Vector3(1.175, 1.541, 5.439)
+	player2.global_transform.origin = Vector3(3.675, 1.933, 5.439)
+	player3.global_transform.origin = Vector3(6.175, 1.59, 5.439)
+	player4.global_transform.origin = Vector3(8.675, 1.0, 5.439)
 	await get_tree().create_timer(2.5).timeout
 	
 	start_count_in()
@@ -94,11 +105,13 @@ func start_count_in():
 		await get_tree().create_timer(1).timeout
 	start_race()
 	
-		
+	
+func _process(delta: float) -> void:
+	Startingplatform.global_position -= lerp(Staringplatform_pos,Staringplatform_pos_end,1.0)*delta*sinking_speed	
 func start_race(): # from process
 	state = GameState.RACE
 	print("RACE STARTED")
-	
+
 	for p in players:
 		p.get_node("PointsLabel").text=" "
 	
@@ -147,13 +160,14 @@ func start_count_down():
 func race_over():
 	state = GameState.RACEOVER
 	print("RACE OVER")
-	
+	Startingplatform.position = Staringplatform_pos
 	update_label(label, "GAME OVER", Color(1.0 / 3.0, 0.0, 0.0), 200)
 	await get_tree().create_timer(3).timeout
 	show_leaderboard()
 	
 
 func game_over():
+	Startingplatform.global_position = Staringplatform_pos
 	state = GameState.GAMEOVER
 	print("GAME OVER")
 	
