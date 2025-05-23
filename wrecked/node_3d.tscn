@@ -1815,60 +1815,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DpadLeft" type="TextureRect" parent="DpadPositions"]
+[node name="DpadTopLeft" type="TextureRect" parent="DpadPositions"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = -40.0
-offset_right = 90.0
-offset_bottom = 40.0
-grow_vertical = 2
-texture = ExtResource("9_id0nj")
-expand_mode = 1
-
-[node name="DpadRight" type="TextureRect" parent="DpadPositions"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -40.0
-offset_right = -10.0
-offset_bottom = 40.0
-grow_horizontal = 0
-grow_vertical = 2
-texture = ExtResource("9_id0nj")
-expand_mode = 1
-
-[node name="DpadTop" type="TextureRect" parent="DpadPositions"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_top = 10.0
 offset_right = 40.0
-offset_bottom = 90.0
-grow_horizontal = 2
+offset_bottom = 40.0
 texture = ExtResource("9_id0nj")
 expand_mode = 1
 
-[node name="DpadBottom" type="TextureRect" parent="DpadPositions"]
+[node name="DpadBottomRight" type="TextureRect" parent="DpadPositions"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -40.0
-offset_top = -90.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("9_id0nj")
+expand_mode = 1
+
+[node name="DpadTopRight" type="TextureRect" parent="DpadPositions"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("9_id0nj")
+expand_mode = 1
+
+[node name="DpadBottomLeft" type="TextureRect" parent="DpadPositions"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
 offset_right = 40.0
-offset_bottom = -10.0
-grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("9_id0nj")
 expand_mode = 1
