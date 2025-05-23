@@ -282,6 +282,12 @@ func handle_jump_input(delta):
 		jump_buffered = true
 		jump_buffer_timer = jump_buffer_time
 
+func force_jump():
+	jump_buffered = true
+	jump_buffer_timer = jump_buffer_time
+	coyote_timer = coyote_time
+	print('parrot time')
+
 
 func apply_push_to_other_players() -> void:
 	var collisions_amount = get_slide_collision_count()
