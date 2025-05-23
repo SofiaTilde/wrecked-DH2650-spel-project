@@ -220,7 +220,6 @@ func _physics_process(delta: float) -> void:
 		# Get the current world positions
 		var plat_pos = $SwimPlatform.global_position
 		var player_pos = global_position
-		print(player_data.can_jump)
 		# Platform moves after player
 		plat_pos.x = player_pos.x
 		plat_pos.z = player_pos.z
