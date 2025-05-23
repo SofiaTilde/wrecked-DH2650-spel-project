@@ -174,11 +174,10 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
-			print("Object name", floor_object.name)
-			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform":
-				last_saved_platform = floor_object
+			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #So that if you fall of ship -> safe_spawn and also the duck invis platform shouldnt count
+				
+					last_saved_platform = floor_object
 			if floor_object.get_parent().name =="Startingplatform":
-				print(floor_object)
 				last_saved_platform = backup_saved_platform
 			
 			
