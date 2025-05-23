@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://4ohwjxvwlf14" path="res://scripts/random_platform.gd" id="8_tereu"]
 [ext_resource type="PackedScene" uid="uid://bau54xbcyquty" path="res://goal.tscn" id="9_4arys"]
 [ext_resource type="PackedScene" uid="uid://evotmterwgic" path="res://level/1x1/0.tscn" id="9_cdqbm"]
+[ext_resource type="Texture2D" uid="uid://bljkdgnydc5qk" path="res://textures/dpad.png" id="9_id0nj"]
 [ext_resource type="PackedScene" uid="uid://bq3jgcl0fepk2" path="res://level/1x1/1.tscn" id="10_imku0"]
 [ext_resource type="PackedScene" uid="uid://bct2vsr7ymxi4" path="res://level/2x2/2x2.tscn" id="11_imku0"]
 [ext_resource type="PackedScene" uid="uid://l2l3mvvrqhsu" path="res://level/2x2/0.tscn" id="12_wlxy5"]
@@ -1805,6 +1806,72 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 5, 0)
 
 [node name="skullisland" parent="." instance=ExtResource("30_id0nj")]
 transform = Transform3D(1.77659, 0, 0, 0, 1.77659, 0, 0, 0, 1.77659, -0.0142546, 0.234, -268.627)
+
+[node name="DpadPositions" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DpadLeft" type="TextureRect" parent="DpadPositions"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -40.0
+offset_right = 90.0
+offset_bottom = 40.0
+grow_vertical = 2
+texture = ExtResource("9_id0nj")
+expand_mode = 1
+
+[node name="DpadRight" type="TextureRect" parent="DpadPositions"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -40.0
+offset_right = -10.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("9_id0nj")
+expand_mode = 1
+
+[node name="DpadTop" type="TextureRect" parent="DpadPositions"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 90.0
+grow_horizontal = 2
+texture = ExtResource("9_id0nj")
+expand_mode = 1
+
+[node name="DpadBottom" type="TextureRect" parent="DpadPositions"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -90.0
+offset_right = 40.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("9_id0nj")
+expand_mode = 1
 
 [connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/StartGame" to="GameManager" method="start_game"]
 [connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/Quit" to="GameManager" method="quit_game"]
