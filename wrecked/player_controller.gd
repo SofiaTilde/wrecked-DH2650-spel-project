@@ -143,7 +143,7 @@ func _physics_process(delta: float) -> void:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 
 	#Player acceleration
-	if jump_pressed and is_on_floor():
+	if jump_pressed and is_on_floor():		
 		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
@@ -193,7 +193,7 @@ func _physics_process(delta: float) -> void:
 			recently_pushed.erase(body)
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
-		animation_tree.set("parameters/Transition/transition_request","Drowning")
+		animation_tree.set("parameters/Emote/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
