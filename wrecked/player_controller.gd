@@ -143,7 +143,7 @@ func _physics_process(delta: float) -> void:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 
 	#Player acceleration
-	if jump_pressed and is_on_floor():
+	if jump_pressed and is_on_floor():		
 		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
@@ -174,11 +174,9 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
-			print("Object name", floor_object.name)
 			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform":
 				last_saved_platform = floor_object
 			if floor_object.get_parent().name =="Startingplatform":
-				print(floor_object)
 				last_saved_platform = backup_saved_platform
 			
 			
@@ -194,7 +192,7 @@ func _physics_process(delta: float) -> void:
 			recently_pushed.erase(body)
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
-		animation_tree.set("parameters/Transition/transition_request","Drowning")
+		animation_tree.set("parameters/Emote/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
@@ -221,7 +219,6 @@ func _physics_process(delta: float) -> void:
 		# Get the current world positions
 		var plat_pos = $SwimPlatform.global_position
 		var player_pos = global_position
-		print(player_data.can_jump)
 		# Platform moves after player
 		plat_pos.x = player_pos.x
 		plat_pos.z = player_pos.z
