@@ -31,6 +31,9 @@ var sinking_speed : float = 0.002
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score4th")
 ]
 
+@export var LevelScene: PackedScene = preload("res://level/level.tscn")
+
+
 #README! Gameflow is generally:
 #_on_goal_race_over->COUNTDOWN->RACEOVER(/GAMEOVER)->GET_READY->COUNT_IN->RACE->repeat
 enum GameState {
@@ -50,6 +53,9 @@ var countDownLen: int = 5
 var leaderboardMenu = false
 var starting = true
 var placements_dict
+var level_instance: Node3D
+var getting_ready: bool
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -84,6 +90,11 @@ func get_ready():
 	update_label(label, "GET READY FOR\nTHE NEXT RACE!", Color.WHITE, 75)
 	
 	#reset
+	var getting_ready = true #respawn at sinking ship (see player_controller)
+	if level_instance:
+		level_instance.remove_platforms()
+	Startingplatform.position = Staringplatform_pos
+
 	Goal.placement = 1
 	for p in players:
 		p.player_data.gotPoints = false
@@ -108,6 +119,7 @@ func start_count_in():
 	
 func _process(delta: float) -> void:
 	Startingplatform.global_position -= lerp(Staringplatform_pos,Staringplatform_pos_end,1.0)*delta*sinking_speed	
+
 func start_race(): # from process
 	state = GameState.RACE
 	print("RACE STARTED")
@@ -118,6 +130,10 @@ func start_race(): # from process
 	update_label(label, "WRECKED!", Color.WHITE, 300)
 	
 	print("new race-stage loaded!")
+	spawn_level()
+	getting_ready = false #respawn at safe_spawn
+
+
 	#platforms.load_new_level()
 	# Load newly generated platforms
 	# var new_platforms = load("res://level/level.tscn").instantiate()
@@ -160,7 +176,6 @@ func start_count_down():
 func race_over():
 	state = GameState.RACEOVER
 	print("RACE OVER")
-	Startingplatform.position = Staringplatform_pos
 	update_label(label, "GAME OVER", Color(1.0 / 3.0, 0.0, 0.0), 200)
 	await get_tree().create_timer(3).timeout
 	show_leaderboard()
@@ -204,6 +219,25 @@ func show_leaderboard():
 	
 	
 # === UTILITY ===
+
+
+
+func spawn_level():
+	# If there’s already a Level in the tree, remove it first:
+	if level_instance and level_instance.is_inside_tree():
+		level_instance.queue_free()
+
+	# Instantiate a fresh one:
+	level_instance = LevelScene.instantiate() as Node3D
+
+	# Add it under the same parent as the old one.
+	# Assuming GameManager is a direct child of the root “Game” node:
+	get_parent().add_child(level_instance)
+
+	# (Optional) Give it the same name so your tree looks familiar
+	level_instance.name = "Level"
+
+   
 
 func update_label(label: Label, text: String, color: Color, size: float = 200, offset: Vector2 = Vector2(0, 0)):
 	if label:

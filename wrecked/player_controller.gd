@@ -27,6 +27,8 @@ var last_platform = CollisionObject3D
 @onready var currItem_node = $MarginContainer/CurrItemLabel
 @onready var lastSavePosition: Vector3 = global_transform.origin
 @onready var respawn_manager = $RespawnManager
+@onready var GM = get_node("/root/Game/GameManager")
+
 @onready var label: Label = get_node("/root/Game/GameManager/CanvasLayer/SharedLabel")
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
 @onready var icon_node: TextureRect = $IconTexture
@@ -114,6 +116,8 @@ func _physics_process(delta: float) -> void:
 	var cam_dir = Input.get_vector("camera_move_right_%s" % [player_id], "camera_move_left_%s" % [player_id], "camera_move_down_%s" % [player_id], "camera_move_up_%s" % [player_id]) # normalized [-1,1] 2d vector
 	var input_dir := Vector2.ZERO
 	input_dir = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_forward_%s" % [player_id], "move_back_%s" % [player_id]) # vec2 (x(L/R) och zdir(forw/backw))
+	if player_data.on_fire:
+		input_dir.y = -1 + clamp(input_dir.y,-0.5,1)*1.5  # Force full forward movement
 	#Player variables
 	var player_position = position
 	var player_velocity = velocity
@@ -174,10 +178,13 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
-			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #So that if you fall of ship -> safe_spawn and also the duck invis platform shouldnt count
-				
-					last_saved_platform = floor_object
-			if floor_object.get_parent().name =="Startingplatform":
+
+			if GM.getting_ready:
+				last_saved_platform = floor_object
+			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #so we dont respawn at wreck nor rubberducky platform
+				last_saved_platform = floor_object
+
+			elif floor_object.get_parent().name =="Startingplatform" and GM.getting_ready==false:
 				last_saved_platform = backup_saved_platform
 			
 			

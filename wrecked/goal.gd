@@ -64,13 +64,13 @@ func _on_body_entered(body: Node3D) -> void:
 		body.player_data.gotPoints = true
 		match placement:
 			1:
-				body.player_data.points += 5
+				body.player_data.points += 3
 				winner(body.player_data)
 				winnerHUD(body.player_data)
 				placement += 1
 				print(body.player_data.points)
 			2:
-				body.player_data.points += 3
+				body.player_data.points += 2
 				placement += 1
 			3:
 				body.player_data.points += 2
