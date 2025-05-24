@@ -2,12 +2,22 @@ extends Node3D
 class_name Item
 
 var labelText: String
+var overlayTextureMolo: Texture2D
+var overlayTextureDynamite: Texture2D
+var overlayTextureEyepatch: Texture2D
+var overlayTextureDucky: Texture2D
 var overlayTexture: Texture2D
+
+var overlayRect = ColorRect
 var tempPlayer: CharacterBody3D
 var icon: Texture2D
 var rng = RandomNumberGenerator.new()
 var shaderMaterial: ShaderMaterial
+
+
+
 var soundEffect: AudioStream
+
 func throw(play: CharacterBody3D = null):
 	if (play != null):
 		tempPlayer = play
@@ -34,35 +44,101 @@ func timer(seconds):
 	timerNode.start()
 	await timerNode.timeout
 
-func applyOverlay(player: CharacterBody3D, seconds):
-	var textureNode = player.get_node("ItemEffect/OverlayTexture") as TextureRect
-	textureNode.texture = overlayTexture
+func applyOverlay(player: CharacterBody3D, seconds, textureNode: TextureRect,overlay):
+	
+	textureNode.texture = overlay
 	textureNode.modulate = Color(1, 1, 1, 1) # reset needed!
+	textureNode.visible = true
+
 	#leave effect for a while
 	await timer(seconds)
+	textureNode.visible = false
+
 	#remove effect
 
-	textureNode.texture = null
+	#textureNode.texture = null
 
-func applyOverlayNoNull(player: CharacterBody3D, seconds):
-	var textureNode = player.get_node("ItemEffect/OverlayTexture") as TextureRect
-	textureNode.texture = overlayTexture
-	textureNode.modulate = Color(1, 1, 1, 1) # reset needed!
+func applyOverlayFire(player: CharacterBody3D, seconds, length, i,textureNode,overlay):
+	textureNode.texture = overlay
+	textureNode.modulate = Color(1, 1, 1, (1-1/(length/i)) ) # opacity fadeout per call (interp 1->0)
+	textureNode.visible = true
+
 	#leave effect for a while
 	await timer(seconds)
+	textureNode.visible = false
 
-	#For applying overlay which also should fade out as item effect time is running out
-func applyOverlayFadeOut(player: CharacterBody3D, seconds):
-	var textureNode = player.get_node("ItemEffect/OverlayTexture") as TextureRect
-	textureNode.texture = overlayTexture
-	textureNode.modulate = Color(1, 1, 1, 1) # reset needed!
+	
+func applyOverlayNoNull(player: CharacterBody3D, seconds, textureNode: TextureRect,overlay:Texture2D):
+	textureNode.texture = overlay
+	textureNode.visible = true
+	textureNode.modulate = Color(1, 1, 1, 1 ) # opacity fadeout per call (interp 1->0)
 	#leave effect for a while
 	await timer(seconds)
-	#remove effect
-	player.get_node("ItemEffect/AnimationPlayer").play("fade_out") #is 3.0 sec long
-	await timer(3.0)
+	textureNode.visible = false
+	
+func apply_rum_effect(player: CharacterBody3D, seconds) -> void:
+	var overlay = player.get_node("ItemEffect/OverlayRectRum") as ColorRect
+	overlay.color   = Color(0.525, 0.68, 0.0, 0.663)
+	overlay.modulate = Color(1, 1, 1, 1) # reset needed!
 
-	textureNode.texture = null
+	overlay.visible = true
+	
+	# wait the effect duration
+	await timer(seconds)
+
+	#fade out
+	player.get_node("ItemEffect/AnimationPlayer").play("fade_out_rum")
+	await timer(3) #3 sec fadeout
+	#reset
+	overlay.modulate = Color(1, 1, 1, 1) # reset needed!
+	overlay.visible = false
+	
+
+func apply_shroom_effect(player: CharacterBody3D, seconds) -> void:
+	var overlay = player.get_node("ItemEffect/OverlayRectShroom") as ColorRect
+	var ani = player.get_node("ItemEffect/AnimationPlayer")  as AnimationPlayer
+
+	overlay.color   = Color(0.858, 0.339, 1.0, 0.678)
+	overlay.modulate = Color(1, 1, 1, 1) # reset needed!	
+	overlay.visible = true
+	if player.player_data.placement != 4: #4th player is to short for ani currently
+		ani.play("rainbow%s" %  player.player_data.placement) #play correct animation length
+
+	
+	# wait the effect duration
+	await timer(seconds)
+
+	#fade out
+	player.get_node("ItemEffect/AnimationPlayer").play("fade_out_shroom")
+	await timer(3) #3 sec fadeout
+	#reset
+	overlay.modulate = Color(1, 1, 1, 1) # reset needed!	
+	overlay.visible = false
+
+
+func apply_ducky_effect(player: CharacterBody3D, seconds,overlayTexture) -> void:
+	var overlay = player.get_node("ItemEffect/OverlayTextureDucky") as TextureRect
+
+	overlay.texture = overlayTextureDucky
+	overlay.modulate = Color(1, 1, 1, 1) # reset needed!	
+	overlay.visible  = true
+	#wait effect duration
+	await timer(seconds)
+	
+	#fade out
+	player.get_node("ItemEffect/AnimationPlayer").play("fade_out") #3 sec fadeout
+	await timer(3)
+	#reset
+	
+	overlay.modulate = Color(1, 1, 1, 1) # reset needed!
+	overlay.visible = false
+	overlay.texture = null
+	
+
+
+
+
+
 
 
 func applyShader(player: CharacterBody3D, seconds):

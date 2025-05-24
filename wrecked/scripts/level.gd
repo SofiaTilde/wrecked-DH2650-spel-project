@@ -26,13 +26,16 @@ func _ready() -> void:
 	
 	_spawn_platforms()
 
+func remove_platforms():
+	for child in get_children():
+		remove_child(child)
+
 func _spawn_platforms() -> void:
 	if platform_scenes.is_empty():
 		push_error("No platform scenes assigned to " + name)
 		return
 
-	for child in get_children():
-		remove_child(child)
+	remove_platforms()
 
 	randomize()
 	_spawn_first(Vector3(0.0, 0.0, 0.0))
