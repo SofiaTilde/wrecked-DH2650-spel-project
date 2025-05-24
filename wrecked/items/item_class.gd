@@ -8,7 +8,6 @@ var icon: Texture2D
 var rng = RandomNumberGenerator.new()
 var shaderMaterial: ShaderMaterial
 var soundEffect: AudioStream
-var soundEffectend:AudioStream
 func throw(play: CharacterBody3D = null):
 	if (play != null):
 		tempPlayer = play

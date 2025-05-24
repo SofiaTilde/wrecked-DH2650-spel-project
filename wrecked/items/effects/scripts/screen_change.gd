@@ -22,14 +22,23 @@ func _ready():
 	view2 = player2.viewPortTexture
 	view3 = player3.viewPortTexture
 	view4 = player4.viewPortTexture
-
+	soundEffect = preload("res://Sounds/Screenchange.wav")
 	shaderMaterial = preload("res://items/effects/materials/screen_change.tres") as ShaderMaterial
 func activateItem():
 	await changeScreen()
 	await timer(10)
 	await resetScreen()
+	
+func play_sfx(stream: AudioStream):
+	var p := AudioStreamPlayer.new()
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+
 
 func changeScreen():
+	play_sfx(soundEffect)
 	text1.visible = true
 	text2.visible = true
 	text3.visible = true

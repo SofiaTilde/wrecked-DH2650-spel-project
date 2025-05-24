@@ -47,7 +47,7 @@ var jump_buffer_time := 0.3
 var jump_buffer_timer := 0.0
 
 #How long can you coyote
-var coyote_time := 60.3
+var coyote_time := 0.3
 var coyote_timer := 0.0
 # states
 enum {IDLE, RUN,DROWNING}
@@ -250,9 +250,6 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
-	#if jump_pressed and is_on_floor():
-		#play_sfx(JUMP_SOUND)
-
 
 
 	# Start jump buffering
@@ -331,7 +328,7 @@ func respawn():
 	respawn_manager.respawn(player_data.placement)
 
 var ITEM_PICKUP_SOUND := preload("res://Sounds/mixkit-game-treasure-coin-2038_itempickup.wav")
-var JUMP_SOUND :=preload("res://Sounds/bubble-pop-283674.mp3")
+var JUMP_SOUND :=preload("res://Sounds/jump.wav")
 func play_sfx(stream: AudioStream):
 	var p := AudioStreamPlayer.new()
 	p.stream = stream
