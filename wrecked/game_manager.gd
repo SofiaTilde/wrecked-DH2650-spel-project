@@ -14,7 +14,7 @@ extends Node
 @onready var default_safe_platform3: Node3D = get_node("/root/Game/Safe_spawnp3")
 @onready var default_safe_platform4: Node3D = get_node("/root/Game/Safe_spawnp4")
 
-var sinking_speed : float = 0.001
+var sinking_speed : float = 0.002
 #@onready var label_animator: AnimationPlayer = get_node("/root/Game/SharedHudNextRace/Control/LabelAnimator") What is this used for?
 
 @onready var leaderboard_popup: Panel = $CanvasLayer/opacity
@@ -196,7 +196,6 @@ func race_over():
 	
 
 func game_over():
-	Startingplatform.global_position = Staringplatform_pos
 	state = GameState.GAMEOVER
 	print("GAME OVER")
 	
@@ -207,7 +206,8 @@ func game_over():
 	
 	leaderboardMenu = true
 	show_leaderboard()
-	
+	Startingplatform.global_position = Staringplatform_pos
+
 func show_leaderboard():
 	state = GameState.LEADERBOARD
 	print("LEADERBOARD")
@@ -224,11 +224,11 @@ func show_leaderboard():
 	if leaderboardMenu == true:
 		leaderboard_menu_popup.visible = true
 		leaderboard_popup.get_node("Leaderboard").position = Vector2(710, 150)
+		
 	#or start next race immidiatly
 	else:
 		await get_tree().create_timer(3).timeout
 		leaderboard_popup.visible = false
-		
 		get_ready()
 	
 	
@@ -253,6 +253,7 @@ func clear_label(label: Label):
 
 #==== leaderboard menu buttons =====
 func start_game(): # _on_StartGame_Button_Pressed
+	Startingplatform.global_position = Staringplatform_pos
 	leaderboardMenu = false
 	leaderboard_popup.visible = false
 	leaderboard_menu_popup.visible = false

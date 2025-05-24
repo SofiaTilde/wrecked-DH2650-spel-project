@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://5iynkps6new0"]
+[gd_scene load_steps=11 format=3 uid="uid://5iynkps6new0"]
 
 [ext_resource type="Script" uid="uid://dywce6dja077o" path="res://main_menu.gd" id="1_i26rj"]
 [ext_resource type="LabelSettings" uid="uid://b32jxxg8k3j45" path="res://custom.tres" id="2_eiy7p"]
 [ext_resource type="FontFile" uid="uid://decj3qo5pg26d" path="res://kirifont/KiriFont.otf" id="3_qoqlk"]
+[ext_resource type="Script" uid="uid://20klcgb68mas" path="res://start_game.gd" id="4_7r1g0"]
 [ext_resource type="Texture2D" uid="uid://dtfnreqn0a0pa" path="res://wrecked.png" id="5_7r1g0"]
+[ext_resource type="Script" uid="uid://edcueqtumi7q" path="res://quit.gd" id="5_cqjrg"]
 [ext_resource type="Texture2D" uid="uid://6q2hh3nyws6s" path="res://meshes/Skullisland/wrecked_render_mainmenu.png" id="5_iwfq2"]
 
 [sub_resource type="Animation" id="Animation_iwfq2"]
@@ -125,6 +127,7 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_qoqlk")
 theme_override_font_sizes/font_size = 100
 text = "Start"
+script = ExtResource("4_7r1g0")
 
 [node name="Quit" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
@@ -133,6 +136,7 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_qoqlk")
 theme_override_font_sizes/font_size = 100
 text = "quit"
+script = ExtResource("5_cqjrg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 root_node = NodePath("../VBoxContainer")

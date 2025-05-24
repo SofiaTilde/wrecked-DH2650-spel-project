@@ -36,6 +36,15 @@ func _on_intro_finished() -> void:
 	#transitioner = load("res://transitioner.tscn").instantiate()
 	#$"..".add_child(transitioner)
 	
+func play_sfx(stream: AudioStream):
+	var p := AudioStreamPlayer.new()
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+
+
+	
 func start_game():
 	play_sound_sfx(CLICK_SOUND)
 	#transitioner.set_next_animation(true)

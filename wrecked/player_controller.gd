@@ -47,7 +47,7 @@ var jump_buffer_time := 0.3
 var jump_buffer_timer := 0.0
 
 #How long can you coyote
-var coyote_time := 60.3
+var coyote_time := 0.1
 var coyote_timer := 0.0
 # states
 enum {IDLE, RUN,DROWNING}
@@ -153,7 +153,7 @@ func _physics_process(delta: float) -> void:
 	var jump_pressed = Input.is_action_just_pressed("jump_%s" % [player_id])
 
 	#Player acceleration
-	if jump_pressed and is_on_floor():
+	if jump_pressed and is_on_floor():		
 		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		play_sfx(JUMP_SOUND)
 	if direction != Vector3.ZERO:
@@ -185,11 +185,10 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
-			# print("Object name", floor_object.name)
-			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform":
-				last_saved_platform = floor_object
+			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #So that if you fall of ship -> safe_spawn and also the duck invis platform shouldnt count
+				
+					last_saved_platform = floor_object
 			if floor_object.get_parent().name =="Startingplatform":
-				# print(floor_object)
 				last_saved_platform = backup_saved_platform
 			
 			
@@ -205,7 +204,7 @@ func _physics_process(delta: float) -> void:
 			recently_pushed.erase(body)
 
 	if Input.is_action_just_pressed("use_item_%s" % [player_id]):
-		animation_tree.set("parameters/Transition/transition_request","Drowning")
+		animation_tree.set("parameters/Emote/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		update_item_label(" ")
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
@@ -232,7 +231,6 @@ func _physics_process(delta: float) -> void:
 		# Get the current world positions
 		var plat_pos = $SwimPlatform.global_position
 		var player_pos = global_position
-		print(player_data.can_jump)
 		# Platform moves after player
 		plat_pos.x = player_pos.x
 		plat_pos.z = player_pos.z
@@ -264,6 +262,7 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 	else:
 		coyote_timer -= delta
 
+
 	# Start jump buffering
 	if jump_pressed:
 		jump_buffered = true
@@ -276,6 +275,8 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 
 	# om du gucci med jump och coyote, gör hopp
 	if jump_buffered and coyote_timer > 0.0:
+		play_sfx(JUMP_SOUND)
+
 		jump_velocity = JUMP_VELOCITY
 		jump_buffered = false
 		coyote_timer = 0.0  # för att ta bort dubbel hopp
@@ -293,6 +294,12 @@ func handle_jump_input(delta):
 	if Input.is_action_just_pressed("jump_%s" % [player_id]):
 		jump_buffered = true
 		jump_buffer_timer = jump_buffer_time
+
+func force_jump():
+	jump_buffered = true
+	jump_buffer_timer = jump_buffer_time
+	coyote_timer = coyote_time
+	print('parrot time')
 
 
 func apply_push_to_other_players() -> void:
@@ -333,8 +340,17 @@ func _on_area_3d_visibility_changed() -> void:
 func respawn():
 	respawn_manager.respawn(player_data.placement)
 
+var ITEM_PICKUP_SOUND := preload("res://Sounds/Itempickup.wav")
+var JUMP_SOUND :=preload("res://Sounds/jump.wav")
+func play_sfx(stream: AudioStream):
+	var p := AudioStreamPlayer.new()
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
 
 func setItem(item: Item):
+	play_sfx(ITEM_PICKUP_SOUND)
 	if holdingItem != null:
 		holdingItem.queue_free()
 		await holdingItem.tree_exited
@@ -346,8 +362,10 @@ func throwItem(play: CharacterBody3D = null):
 	if holdingItem == null:
 		return
 	if play == null:
+		play_sfx(holdingItem.soundEffect)
 		holdingItem.throw()
 	else:
+		play_sfx(holdingItem.soundEffect)
 		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		holdingItem.throw(play)
 	holdingItem = null
