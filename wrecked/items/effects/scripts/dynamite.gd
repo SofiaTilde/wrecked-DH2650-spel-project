@@ -17,7 +17,7 @@ func _ready():
 	frame2 = preload("res://items/effects/textures/explosion/2.png") as Texture2D
 	frame3 = preload("res://items/effects/textures/explosion/3.png") as Texture2D
 	frame4 = preload("res://items/effects/textures/explosion/4.png") as Texture2D
-	soundEffect = preload("res://Sounds/musket-explosion-6383.wav") 
+	soundEffect = preload("res://Sounds/musket-explosion-6383.wav.mp3") 
 
 func activateItem():
 	activePlayer = detectHitPlayer()

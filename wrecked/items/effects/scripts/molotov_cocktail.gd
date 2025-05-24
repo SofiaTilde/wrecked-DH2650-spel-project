@@ -14,7 +14,7 @@ func _ready():
 	frame3 = preload("res://items/effects/textures/fire/3.png") as Texture2D
 	frame4 = preload("res://items/effects/textures/fire/4.png") as Texture2D
 	frame5 = preload("res://items/effects/textures/fire/5.png") as Texture2D
-	soundEffect = preload("res://Sounds/fire-swoosh-whoosh-short-139703.mp3")
+	soundEffect = preload("res://Sounds/Molotov.wav")
 	overlayTexture = frame1
 
 func activateItem():

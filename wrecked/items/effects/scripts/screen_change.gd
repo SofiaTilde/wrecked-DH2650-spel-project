@@ -62,6 +62,8 @@ func changeScreen():
 	text4.material = null
 
 func resetScreen():
+	play_sfx(soundEffect)
+
 	text1.material = shaderMaterial
 	text2.material = shaderMaterial
 	text3.material = shaderMaterial
