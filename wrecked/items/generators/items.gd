@@ -31,20 +31,20 @@ func get_item(level):
 func get_copper_item():
 	if copperItemlist.is_empty():
 
-		copperItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		#copperItemlist = [screen_change]
+		#copperItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
+		copperItemlist = [rubber_duck]
 	return copperItemlist.pick_random()
 
 func get_silver_item():
 	if silverItemlist.is_empty():
 
-		silverItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		#silverItemlist = [screen_change]
+		#silverItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
+		silverItemlist = [rubber_duck]
 	return silverItemlist.pick_random()
 
 func get_gold_item():
 	if goldItemlist.is_empty():
 
-		goldItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		#goldItemlist = [screen_change]
+		#goldItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
+		goldItemlist = [rubber_duck]
 	return goldItemlist.pick_random()

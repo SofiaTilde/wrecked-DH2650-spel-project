@@ -119,7 +119,7 @@ func apply_shroom_effect(player: CharacterBody3D, seconds) -> void:
 func apply_ducky_effect(player: CharacterBody3D, seconds,overlayTexture) -> void:
 	var overlay = player.get_node("ItemEffect/OverlayTextureDucky") as TextureRect
 
-	overlay.texture = overlayTexture
+	overlay.texture = overlayTextureDucky
 	overlay.modulate = Color(1, 1, 1, 1) # reset needed!	
 	overlay.visible  = true
 	#wait effect duration
