@@ -8,7 +8,7 @@ func _ready():
 	labelText = "Rubber Duck"
 	icon = preload("res://items/rubber_duck/rubber_duck_icon.png") as Texture2D
 	overlayTexture = load("res://items/effects/textures/bubbles.png")
-	
+	soundEffect = preload("res://Sounds/duck-quacking-37392.mp3")
 	
 func activateItem():
 	var player = detectHitPlayer()

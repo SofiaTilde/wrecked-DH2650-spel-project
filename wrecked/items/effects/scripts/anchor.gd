@@ -3,6 +3,8 @@ extends Item
 func _ready():
 	labelText = "Anchor"
 	icon = preload("res://items/anchor/anchor_icon.png") as Texture2D
+	soundEffect = preload("res://Sounds/086014_dropping-chain-36888_anchor.mp3")
+
 
 func activateItem():
 	var player = detectHitPlayer()

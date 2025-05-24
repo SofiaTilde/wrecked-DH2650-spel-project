@@ -24,7 +24,6 @@ func _ready():
 	view4 = player4.viewPortTexture
 
 	shaderMaterial = preload("res://items/effects/materials/screen_change.tres") as ShaderMaterial
-
 func activateItem():
 	await changeScreen()
 	await timer(10)

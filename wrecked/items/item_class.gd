@@ -7,7 +7,8 @@ var tempPlayer: CharacterBody3D
 var icon: Texture2D
 var rng = RandomNumberGenerator.new()
 var shaderMaterial: ShaderMaterial
-
+var soundEffect: AudioStream
+var soundEffectend:AudioStream
 func throw(play: CharacterBody3D = null):
 	if (play != null):
 		tempPlayer = play
@@ -63,6 +64,7 @@ func applyOverlayFadeOut(player: CharacterBody3D, seconds):
 	await timer(3.0)
 
 	textureNode.texture = null
+
 
 func applyShader(player: CharacterBody3D, seconds):
 	var shaderNode = player.get_parent().get_parent().get_node("ShaderTexture") as TextureRect

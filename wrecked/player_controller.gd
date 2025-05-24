@@ -250,6 +250,10 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
+	#if jump_pressed and is_on_floor():
+		#play_sfx(JUMP_SOUND)
+
+
 
 	# Start jump buffering
 	if jump_pressed:
@@ -263,6 +267,8 @@ func player_jump_adv(jump_velocity: float, delta: float) -> float:
 
 	# om du gucci med jump och coyote, gör hopp
 	if jump_buffered and coyote_timer > 0.0:
+		play_sfx(JUMP_SOUND)
+
 		jump_velocity = JUMP_VELOCITY
 		jump_buffered = false
 		coyote_timer = 0.0  # för att ta bort dubbel hopp
@@ -324,8 +330,17 @@ func _on_area_3d_visibility_changed() -> void:
 func respawn():
 	respawn_manager.respawn(player_data.placement)
 
+var ITEM_PICKUP_SOUND := preload("res://Sounds/mixkit-game-treasure-coin-2038_itempickup.wav")
+var JUMP_SOUND :=preload("res://Sounds/bubble-pop-283674.mp3")
+func play_sfx(stream: AudioStream):
+	var p := AudioStreamPlayer.new()
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
 
 func setItem(item: Item):
+	play_sfx(ITEM_PICKUP_SOUND)
 	if holdingItem != null:
 		holdingItem.queue_free()
 		await holdingItem.tree_exited
@@ -337,8 +352,10 @@ func throwItem(play: CharacterBody3D = null):
 	if holdingItem == null:
 		return
 	if play == null:
+		play_sfx(holdingItem.soundEffect)
 		holdingItem.throw()
 	else:
+		play_sfx(holdingItem.soundEffect)
 		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		holdingItem.throw(play)
 	holdingItem = null
