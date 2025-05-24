@@ -8,11 +8,10 @@ func _ready():
 	labelText = "Rubber Duck"
 	icon = preload("res://items/rubber_duck/rubber_duck_icon.png") as Texture2D
 	overlayTextureDucky = load("res://items/effects/textures/bubbles.png")
-	effect_type = EffectTypes.DUCKY
 	
 func activateItem():
 	var player = detectHitPlayer()
-	var textureNode = player.get_node("ItemEffect/OverlayTextureDucky") as TextureRect
+	#var textureNode = player.get_node("ItemEffect/OverlayTextureDucky") as TextureRect
 
 	player.player_data.can_swim=true
 	print('rubberducky time')

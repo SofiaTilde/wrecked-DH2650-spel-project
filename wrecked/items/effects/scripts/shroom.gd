@@ -8,11 +8,11 @@ var activeTime = [6.0, 5.0, 4.0, 3.0] #player position 1, 2, 3, 4
 func _ready():
 	labelText = "Shroom"
 	icon = preload("res://items/shroom/shroom_icon.png") as Texture2D
-	shaderMaterial = preload("res://items/effects/materials/shroom.tres") as ShaderMaterial
-	effect_type = EffectTypes.SHROOM
+	#shaderMaterial = preload("res://items/effects/materials/shroom.tres") as ShaderMaterial
+
 func activateItem():
 	var player = detectHitPlayer()
-	var textureNode = player.get_node("ItemEffect/OverlayRectShroom") as ColorRect
+	#var textureNode = player.get_node("ItemEffect/OverlayRectShroom") as ColorRect
 
 	if player == null:
 		return
