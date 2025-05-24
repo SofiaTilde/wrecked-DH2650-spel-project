@@ -9,6 +9,9 @@ var color: Color = Color(1, 1, 1, 1)
 var respawning: bool=false
 var can_swim: bool = false
 var can_jump: bool=true
+var on_fire: bool=false
+var is_drunk: bool=false
+var is_high: bool=false
 var placement: int=1
 
 

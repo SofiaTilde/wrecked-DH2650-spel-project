@@ -18,24 +18,36 @@ func _ready():
 
 func activateItem():
 	var player = detectHitPlayer()
+	
+	player.player_data.on_fire=true #see player_controller for effect (basically always move forward)
+	
 	if player == null:
 		return
 	var frameLength = 0.1;
 	var length = rng.randi_range(10 * 10, 15 * 10) / 10;
-	for i in range(length / (frameLength * 5)):
+	var tot_len=length / (frameLength * 5)
+	var textureNode = player.get_node("ItemEffect/OverlayTextureMolo") as TextureRect
+
+	for i in range(tot_len):
 		if player.player_data.respawning: # fire goes out in water
 			break
 		if player.player_data.can_swim: # fire goes out when rubber duck is active
 			break
-		overlayTexture = frame1
-		await applyOverlayNoNull(player, frameLength)
+
+		overlayTextureMolo = frame1
+		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
 		overlayTexture = frame2
-		await applyOverlayNoNull(player, frameLength)
+		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
 		overlayTexture = frame3
-		await applyOverlayNoNull(player, frameLength)
+		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
 		overlayTexture = frame4
-		await applyOverlayNoNull(player, frameLength)
+		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
 		overlayTexture = frame5
-		await applyOverlayNoNull(player, frameLength)
-	overlayTexture = frame1
-	await applyOverlay(player, frameLength)
+		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
+	
+	textureNode.modulate = Color(1, 1, 1, 1) # reset needed!
+	textureNode.texture = null
+	player.player_data.on_fire=false
+
+
+	

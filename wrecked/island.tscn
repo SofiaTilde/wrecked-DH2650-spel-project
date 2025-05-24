@@ -1,16 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck51bdne8ldwv"]
+[gd_scene load_steps=2 format=3 uid="uid://ck51bdne8ldwv"]
 
-[ext_resource type="PackedScene" uid="uid://c2vady34jk1gx" path="res://meshes/island/island.glb" id="1_0iamf"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_0iamf"]
-radius = 91.0302
+[ext_resource type="PackedScene" uid="uid://ch45g2v8vp0k2" path="res://Island2.tscn" id="1_0iamf"]
 
 [node name="Island" type="Node3D"]
 
 [node name="island" parent="." instance=ExtResource("1_0iamf")]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="island"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="island/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -87.7691, -27.5357)
-shape = SubResource("SphereShape3D_0iamf")

@@ -28,14 +28,15 @@ func activateItem():
 	activePlayer.velocity = Vector3(0, 0, 0)
 	active = true
 	velocityY = 3
-	overlayTexture = frame1
-	await applyOverlayNoNull(activePlayer, 0.05)
-	overlayTexture = frame2
-	await applyOverlayNoNull(activePlayer, 0.05)
-	overlayTexture = frame3
-	await applyOverlay(activePlayer, 0.05)
-	overlayTexture = frame4
-	await applyOverlay(activePlayer, 0.05)
+	var textureNode = activePlayer.get_node("ItemEffect/OverlayTextureDynamite") as TextureRect
+	overlayTextureDynamite = frame1
+	await applyOverlayNoNull(activePlayer, 0.05,textureNode,overlayTextureDynamite)
+	overlayTextureDynamite = frame2
+	await applyOverlayNoNull(activePlayer, 0.05,textureNode,overlayTextureDynamite)
+	overlayTextureDynamite = frame3
+	await applyOverlayNoNull(activePlayer, 0.05,textureNode,overlayTextureDynamite)
+	overlayTextureDynamite = frame4
+	await applyOverlay(activePlayer, 0.05,textureNode,overlayTextureDynamite)
 	#await timer(0.2)
 	velocityY = 0
 	velocityX = rng.randf_range(-1, 1) * 5
