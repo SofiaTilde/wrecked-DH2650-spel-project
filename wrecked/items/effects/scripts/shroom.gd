@@ -18,6 +18,6 @@ func activateItem():
 		return
 	player.player_data.is_high=true
 	#applyOverlayFadeOut(self, player, activeTime[player.player_data.placement-1]-3,textureNode,null) #-3 bcus fadeout
-	apply_shroom_effect(player, activeTime[player.player_data.placement-1]-3)
+	apply_shroom_effect(player, activeTime[player.player_data.placement-1]-3) #-3 bcus fadeout
 	await applyShader(player, 5)
 	player.player_data.is_high=false

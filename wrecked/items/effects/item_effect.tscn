@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4t0xyhas5elu"]
+[gd_scene load_steps=9 format=3 uid="uid://b4t0xyhas5elu"]
 
 [sub_resource type="Animation" id="Animation_ekx8f"]
 length = 0.001
@@ -67,20 +67,20 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ouatn"]
-resource_name = "rainbow1"
+[sub_resource type="Animation" id="Animation_0ylkj"]
+resource_name = "fade_out_rum"
 length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../OverlayRectShroom:color")
+tracks/0/path = NodePath("../OverlayRectRum:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2.02, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.96667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.847059, 0.92549, 0, 0.443137), Color(0.6, 0.92549, 1, 0.662745), Color(0.976471, 0.792157, 1, 0.678431), Color(1, 0.823529, 0.756863, 0.67451)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_6j5fc"]
@@ -99,20 +99,52 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_0ylkj"]
-resource_name = "fade_out_rum"
+[sub_resource type="Animation" id="Animation_ouatn"]
+resource_name = "rainbow1"
 length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../OverlayRectRum:modulate")
+tracks/0/path = NodePath("../OverlayRectShroom:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.96667),
+"times": PackedFloat32Array(0, 1, 2.02, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.881202, 0.336177, 1, 0.662745), Color(1.09738e-05, 0.665989, 0.878642, 0.662745), Color(7.46027e-07, 0.63202, 0.150432, 0.678431), Color(1, 0.076659, 0.143114, 0.67451)]
+}
+
+[sub_resource type="Animation" id="Animation_4xvv2"]
+resource_name = "rainbow2"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../OverlayRectShroom:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.96667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.858162, 0.339, 1, 0.678431), Color(0, 0.630297, 0.441376, 0.662745), Color(0.894613, 0, 0.256935, 0.678431)]
+}
+
+[sub_resource type="Animation" id="Animation_dnda0"]
+resource_name = "rainbow3"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../OverlayRectShroom:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(0.823529, 0.4, 1, 0.670588), Color(0.927171, 0, 0.292614, 0.662745)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ouatn"]
@@ -121,7 +153,9 @@ _data = {
 &"fade_out": SubResource("Animation_ge4xk"),
 &"fade_out_rum": SubResource("Animation_0ylkj"),
 &"fade_out_shroom": SubResource("Animation_6j5fc"),
-&"rainbow1": SubResource("Animation_ouatn")
+&"rainbow1": SubResource("Animation_ouatn"),
+&"rainbow2": SubResource("Animation_4xvv2"),
+&"rainbow3": SubResource("Animation_dnda0")
 }
 
 [node name="ItemEffect" type="Node3D"]

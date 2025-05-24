@@ -13,4 +13,4 @@ func activateItem():
 		return
 	
 	var textureNode = player.get_node("ItemEffect/OverlayTextureEyepatch") as TextureRect
-	await applyOverlay(player, rng.randf_range(5, 15),textureNode,overlayTextureEyepatch)
+	await applyOverlay(player, rng.randf_range(5, 10),textureNode,overlayTextureEyepatch)

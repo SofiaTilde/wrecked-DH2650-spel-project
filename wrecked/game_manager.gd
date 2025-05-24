@@ -93,6 +93,8 @@ func get_ready():
 	var getting_ready = true #respawn at sinking ship (see player_controller)
 	if level_instance:
 		level_instance.remove_platforms()
+	Startingplatform.position = Staringplatform_pos
+
 	Goal.placement = 1
 	for p in players:
 		p.player_data.gotPoints = false
@@ -174,14 +176,12 @@ func start_count_down():
 func race_over():
 	state = GameState.RACEOVER
 	print("RACE OVER")
-	Startingplatform.position = Staringplatform_pos
 	update_label(label, "GAME OVER", Color(1.0 / 3.0, 0.0, 0.0), 200)
 	await get_tree().create_timer(3).timeout
 	show_leaderboard()
 	
 
 func game_over():
-	Startingplatform.global_position = Staringplatform_pos
 	state = GameState.GAMEOVER
 	print("GAME OVER")
 	

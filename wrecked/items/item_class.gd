@@ -76,7 +76,7 @@ func applyOverlayNoNull(player: CharacterBody3D, seconds, textureNode: TextureRe
 	
 func apply_rum_effect(player: CharacterBody3D, seconds) -> void:
 	var overlay = player.get_node("ItemEffect/OverlayRectRum") as ColorRect
-	overlay.color   = Color(0.847, 0.925, 0.0, 0.443)
+	overlay.color   = Color(0.525, 0.68, 0.0, 0.663)
 	overlay.modulate = Color(1, 1, 1, 1) # reset needed!
 
 	overlay.visible = true
@@ -96,11 +96,11 @@ func apply_shroom_effect(player: CharacterBody3D, seconds) -> void:
 	var overlay = player.get_node("ItemEffect/OverlayRectShroom") as ColorRect
 	var ani = player.get_node("ItemEffect/AnimationPlayer")  as AnimationPlayer
 
-	overlay.color   = Color(0.847, 0.925, 0.0, 0.443)
+	overlay.color   = Color(0.858, 0.339, 1.0, 0.678)
 	overlay.modulate = Color(1, 1, 1, 1) # reset needed!	
 	overlay.visible = true
-	
-	ani.play("rainbow1")
+	if player.player_data.placement != 4: #4th player is to short for ani currently
+		ani.play("rainbow%s" %  player.player_data.placement) #play correct animation length
 
 	
 	# wait the effect duration
