@@ -64,6 +64,7 @@ var viewPortTexture: Texture2D
 var SPLASH_SOUND := preload("res://sounds/fall.wav")
 var JUMP_SOUND := preload("res://sounds/click.wav")
 var PUSH_SOUND := preload("res://sounds/click.wav")
+var ITEM_PICKUP_SOUND := preload("res://sounds/Itempickup.wav")
 
 func play_sfx(stream: AudioStream):
 	var p := AudioStreamPlayer.new()
@@ -347,14 +348,6 @@ func _on_area_3d_visibility_changed() -> void:
 func respawn():
 	respawn_manager.respawn(player_data.placement)
 
-var ITEM_PICKUP_SOUND := preload("res://Sounds/Itempickup.wav")
-var JUMP_SOUND :=preload("res://Sounds/jump.wav")
-func play_sfx(stream: AudioStream):
-	var p := AudioStreamPlayer.new()
-	p.stream = stream
-	add_child(p)
-	p.play()
-	p.finished.connect(p.queue_free)
 
 func setItem(item: Item):
 	play_sfx(ITEM_PICKUP_SOUND)

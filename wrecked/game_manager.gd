@@ -49,7 +49,7 @@ enum GameState {
 
 var players: Array
 var state: GameState = GameState.GET_READY # first state
-var countDownLen: int = 5
+var countDownLen: int = 30
 var leaderboardMenu = false
 var starting = true
 var placements_dict
@@ -62,7 +62,7 @@ var getting_ready: bool
 func _ready() -> void:
 	#await get_tree().process_frame
 	add_child(player)
-	player.volume_db = -6.0
+	player.volume_db = -8.0
 	
 	var red = PlayerData.new("Red Rogers", Color(1, 0, 0, 1))
 	var pink = PlayerData.new("Pink Plunderer", Color(1, 0.5, 0.7, 1))
@@ -175,8 +175,8 @@ func _on_goal_race_over() -> void:
 	print("GOAL")
 	
 	player.stream = GAME_END_SOUND
-	player.finished.connect(start_count_down)
-	player.play()   
+	player.play()
+	start_count_down()
 	
 	#await get_tree().create_timer(5.).timeout # !needed! Winner HUDlabel is printed from Goal-scene
 	#start_count_down()
