@@ -178,11 +178,13 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
+
 			if GM.getting_ready:
 				last_saved_platform = floor_object
 			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #so we dont respawn at wreck nor rubberducky platform
 				last_saved_platform = floor_object
-			if floor_object.get_parent().name =="Startingplatform":
+
+			elif floor_object.get_parent().name =="Startingplatform" and GM.getting_ready==false:
 				last_saved_platform = backup_saved_platform
 			
 			
@@ -285,6 +287,12 @@ func handle_jump_input(delta):
 	if Input.is_action_just_pressed("jump_%s" % [player_id]):
 		jump_buffered = true
 		jump_buffer_timer = jump_buffer_time
+
+func force_jump():
+	jump_buffered = true
+	jump_buffer_timer = jump_buffer_time
+	coyote_timer = coyote_time
+	print('parrot time')
 
 
 func apply_push_to_other_players() -> void:

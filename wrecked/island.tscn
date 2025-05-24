@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://ck51bdne8ldwv"]
 
-[ext_resource type="PackedScene" uid="uid://ch45g2v8vp0k2" path="res://Island2.tscn" id="1_0iamf"]
+[ext_resource type="PackedScene" uid="uid://c628ya8wang74" path="res://Island2.tscn" id="1_0iamf"]
 
 [node name="Island" type="Node3D"]
 
-[node name="island" parent="." instance=ExtResource("1_0iamf")]
+[node name="island2" parent="." instance=ExtResource("1_0iamf")]
