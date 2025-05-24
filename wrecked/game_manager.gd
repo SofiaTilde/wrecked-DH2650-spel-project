@@ -49,7 +49,7 @@ enum GameState {
 
 var players: Array
 var state: GameState = GameState.GET_READY # first state
-var countDownLen: int = 5
+var countDownLen: int = 30
 var leaderboardMenu = false
 var starting = true
 var placements_dict
@@ -61,6 +61,8 @@ var getting_ready: bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#await get_tree().process_frame
+	add_child(player)
+	player.volume_db = -8.0
 	
 	var red = PlayerData.new("Red Rogers", Color(1, 0, 0, 1))
 	var pink = PlayerData.new("Pink Plunderer", Color(1, 0.5, 0.7, 1))
@@ -106,14 +108,34 @@ func get_ready():
 	await get_tree().create_timer(2.5).timeout
 	
 	start_count_in()
+	
+var COUNTDOWN_SOUND := preload("res://sounds/countdown.wav")
+
+func play_sound_sfx(stream: AudioStream, scale):
+	var p := AudioStreamPlayer.new()
+	p.pitch_scale = scale
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+
+@onready var player := AudioStreamPlayer.new()
+
+var GAME_SOUND := preload("res://sounds/game.ogg")
+var GAME_END_SOUND := preload("res://sounds/game_end_short.ogg")
 
 func start_count_in():
 	state = GameState.COUNTIN
 	print("COUNTIN")
 	
 	for i in range(3, 0, -1):
+		play_sound_sfx(COUNTDOWN_SOUND, 1.0)
 		update_label(label, "%s" % i, Color.WHITE, 500)
 		await get_tree().create_timer(1).timeout
+	play_sound_sfx(COUNTDOWN_SOUND, 2.0)
+	
+	player.stop()
+	
 	start_race()
 	
 	
@@ -145,13 +167,20 @@ func start_race(): # from process
 		placement_labels[i].visible = true
 		placement_labels_th[i].visible = true
 	
+	player.stream = GAME_SOUND
+	player.play()    
 	
 func _on_goal_race_over() -> void:
 	state = GameState.GOAL
 	print("GOAL")
-	await get_tree().create_timer(5.).timeout # !needed! Winner HUDlabel is printed from Goal-scene
 	
+	player.stream = GAME_END_SOUND
+	player.play()
 	start_count_down()
+	
+	#await get_tree().create_timer(5.).timeout # !needed! Winner HUDlabel is printed from Goal-scene
+	#start_count_down()
+	
 
 func start_count_down():
 	state = GameState.COUNTDOWN

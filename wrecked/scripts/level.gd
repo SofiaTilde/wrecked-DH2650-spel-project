@@ -13,6 +13,10 @@ const LEVEL_LENGTH := 256.0
 const MAX_WIDTH := 12.0
 
 func _ready() -> void:
+	
+	for child in get_children():
+		remove_child(child)
+	
 	_spawn_platforms()
 
 func remove_platforms():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://3f7k8dolqfhh"]
+[gd_scene load_steps=34 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://b85s3xfg6xv8i" path="res://game_manager.gd" id="1_tereu"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bau54xbcyquty" path="res://goal.tscn" id="9_4arys"]
 [ext_resource type="Texture2D" uid="uid://bljkdgnydc5qk" path="res://textures/dpad.png" id="9_id0nj"]
 [ext_resource type="PackedScene" uid="uid://ck51bdne8ldwv" path="res://island.tscn" id="14_wlxy5"]
+[ext_resource type="AudioStream" uid="uid://cc33ua3bjgx1n" path="res://sounds/waves_loop.ogg" id="22_s0gvp"]
 [ext_resource type="Script" uid="uid://bc5fk34xn5xaf" path="res://extra_kill_zone.gd" id="23_nu31w"]
 [ext_resource type="PackedScene" uid="uid://csmc4dfieimjx" path="res://meshes/Startplatform/Startingplatform.tscn" id="24_dhlwf"]
 [ext_resource type="PackedScene" uid="uid://b5bxwo0db64jg" path="res://meshes/Chest/chest.glb" id="24_nu31w"]
@@ -271,7 +272,7 @@ texture = SubResource("ViewportTexture_nu31w")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
@@ -316,7 +317,7 @@ texture = SubResource("ViewportTexture_obt1j")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer2/SubViewport" instance=ExtResource("8_5t8nk")]
@@ -368,7 +369,7 @@ texture = SubResource("ViewportTexture_2yde8")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player3" parent="GridContainer/SubViewportContainer3/SubViewport" instance=ExtResource("7_dhlwf")]
@@ -418,7 +419,7 @@ texture = SubResource("ViewportTexture_id0nj")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player4" parent="GridContainer/SubViewportContainer4/SubViewport" instance=ExtResource("6_vxd74")]
@@ -693,6 +694,11 @@ offset_right = 40.0
 grow_vertical = 0
 texture = ExtResource("9_id0nj")
 expand_mode = 1
+
+[node name="WavesLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_s0gvp")
+volume_db = -8.433
+autoplay = true
 
 [connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/StartGame" to="GameManager" method="start_game"]
 [connection signal="button_down" from="GameManager/CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/Quit" to="GameManager" method="quit_game"]
