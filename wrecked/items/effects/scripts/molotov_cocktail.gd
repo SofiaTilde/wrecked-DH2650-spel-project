@@ -14,6 +14,7 @@ func _ready():
 	frame3 = preload("res://items/effects/textures/fire/3.png") as Texture2D
 	frame4 = preload("res://items/effects/textures/fire/4.png") as Texture2D
 	frame5 = preload("res://items/effects/textures/fire/5.png") as Texture2D
+	soundEffect = preload("res://Sounds/Molotov.wav")
 	overlayTexture = frame1
 
 func activateItem():
@@ -26,6 +27,7 @@ func activateItem():
 		if player.player_data.respawning: # fire goes out in water
 			break
 		if player.player_data.can_swim: # fire goes out when rubber duck is active
+			#play_sfx_end(soundEffectend)
 			break
 		overlayTexture = frame1
 		await applyOverlayNoNull(player, frameLength)
