@@ -59,7 +59,17 @@ var holdingItem: Item
 var last_saved_platform: Node3D
 var viewPortTexture: Texture2D
 
+var SPLASH_SOUND := preload("res://sounds/fall.wav")
+var JUMP_SOUND := preload("res://sounds/click.wav")
+var PUSH_SOUND := preload("res://sounds/click.wav")
 
+func play_sfx(stream: AudioStream):
+	var p := AudioStreamPlayer.new()
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+	
 func handle_anim_states():
 	match current_anim:
 		IDLE:
@@ -145,6 +155,7 @@ func _physics_process(delta: float) -> void:
 	#Player acceleration
 	if jump_pressed and is_on_floor():
 		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		play_sfx(JUMP_SOUND)
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
 			current_anim = RUN
@@ -174,11 +185,11 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
-			print("Object name", floor_object.name)
+			# print("Object name", floor_object.name)
 			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform":
 				last_saved_platform = floor_object
 			if floor_object.get_parent().name =="Startingplatform":
-				print(floor_object)
+				# print(floor_object)
 				last_saved_platform = backup_saved_platform
 			
 			
@@ -294,6 +305,8 @@ func apply_push_to_other_players() -> void:
 		if Collision_object is CharacterBody3D and Collision_object != self:
 			if Collision_object in recently_pushed:
 				continue # already pushed recently
+
+			play_sfx(PUSH_SOUND)
 
 			var push_normal = - collision.get_normal()
 

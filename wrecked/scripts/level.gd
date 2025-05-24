@@ -13,13 +13,24 @@ const LEVEL_LENGTH := 256.0
 const MAX_WIDTH := 12.0
 
 func _ready() -> void:
+	
+	for child in get_children():
+		remove_child(child)
+	
+	var timerNode = Timer.new()
+	add_child(timerNode)
+	timerNode.wait_time = 6.0
+	timerNode.one_shot = true
+	timerNode.start()
+	await timerNode.timeout
+	
 	_spawn_platforms()
 
 func _spawn_platforms() -> void:
 	if platform_scenes.is_empty():
 		push_error("No platform scenes assigned to " + name)
 		return
-		
+
 	for child in get_children():
 		remove_child(child)
 
