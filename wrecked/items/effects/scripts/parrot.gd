@@ -6,7 +6,7 @@ extends Item
 func _ready():
 	labelText = "Parrot"
 	icon = preload("res://items/parrot/parrot_icon.png") as Texture2D
-
+	soundEffect= preload("res://Sounds/Parrot.wav")
 func activateItem():
 	var player = detectHitPlayer()
 	

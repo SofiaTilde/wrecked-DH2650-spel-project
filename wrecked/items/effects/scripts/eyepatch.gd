@@ -4,7 +4,7 @@ func _ready():
 	labelText = "Eyepatch"
 	overlayTextureEyepatch = preload("res://items/effects/textures/eyepatch.png") as Texture2D
 	icon = preload("res://items/eyepatch/eyepatch_icon.png") as Texture2D
-
+	soundEffect = preload("res://Sounds/eyepatch.wav") as AudioStream
 func activateItem():
 	if rng.randi() % 2 == 0:
 		overlayTextureEyepatch = preload("res://items/effects/textures/eyepatch2.png") as Texture2D

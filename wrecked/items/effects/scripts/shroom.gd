@@ -8,7 +8,10 @@ var activeTime = [6.0, 5.0, 4.0, 3.0] #player position 1, 2, 3, 4
 func _ready():
 	labelText = "Shroom"
 	icon = preload("res://items/shroom/shroom_icon.png") as Texture2D
-	#shaderMaterial = preload("res://items/effects/materials/shroom.tres") as ShaderMaterial
+
+	shaderMaterial = preload("res://items/effects/materials/shroom.tres") as ShaderMaterial
+	soundEffect = preload("res://Sounds/shroom.wav") as AudioStream
+
 
 func activateItem():
 	var player = detectHitPlayer()

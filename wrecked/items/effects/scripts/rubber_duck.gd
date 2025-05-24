@@ -7,7 +7,9 @@ var swimtime=[1.0,2.0,3.0,4.0] #+3 fade out time
 func _ready():
 	labelText = "Rubber Duck"
 	icon = preload("res://items/rubber_duck/rubber_duck_icon.png") as Texture2D
-	overlayTextureDucky = load("res://items/effects/textures/bubbles.png")
+
+	overlayTexture = load("res://items/effects/textures/bubbles.png")
+	soundEffect = preload("res://Sounds/duck_quack.wav")
 	
 func activateItem():
 	var player = detectHitPlayer()

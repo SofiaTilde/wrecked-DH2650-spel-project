@@ -13,8 +13,10 @@ var tempPlayer: CharacterBody3D
 var icon: Texture2D
 var rng = RandomNumberGenerator.new()
 var shaderMaterial: ShaderMaterial
-enum EffectTypes { RUM, SHROOM, DUCKY }
-var effect_type: EffectTypes
+
+
+
+var soundEffect: AudioStream
 
 func throw(play: CharacterBody3D = null):
 	if (play != null):
@@ -132,6 +134,7 @@ func apply_ducky_effect(player: CharacterBody3D, seconds,overlayTexture) -> void
 	overlay.visible = false
 	overlay.texture = null
 	
+
 
 
 
