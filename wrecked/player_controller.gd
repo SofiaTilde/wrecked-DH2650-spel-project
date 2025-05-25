@@ -372,6 +372,7 @@ func setItem(item: Item):
 		holdingItem.queue_free()
 		await holdingItem.tree_exited
 	holdingItem = item
+	icon_node.modulate= Color(1.0,1.0,1.0,1.0)
 	update_icon(holdingItem.icon)
 	update_item_label(holdingItem.labelText)
 
@@ -386,5 +387,6 @@ func throwItem(play: CharacterBody3D = null):
 		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		holdingItem.throw(play)
 	holdingItem = null
+	icon_node.modulate= Color(1.0,1.0,1.0,0.5)
 	update_icon(NoItemIcon)
 	update_item_label("")

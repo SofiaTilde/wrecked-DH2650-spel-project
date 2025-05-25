@@ -270,7 +270,7 @@ texture = SubResource("ViewportTexture_nu31w")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
@@ -278,6 +278,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17516, 1.5415, 5.43857)
 axis_lock_angular_y = true
 
 [node name="IconTexture" type="TextureRect" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
+modulate = Color(1, 1, 1, 0.501961)
 offset_right = 150.0
 offset_bottom = 150.0
 texture = ExtResource("11_dhlwf")
@@ -316,7 +317,7 @@ texture = SubResource("ViewportTexture_obt1j")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer2/SubViewport" instance=ExtResource("8_5t8nk")]
@@ -347,6 +348,7 @@ grow_horizontal = 0
 layout_mode = 2
 
 [node name="IconTexture" type="TextureRect" parent="GridContainer/SubViewportContainer2/SubViewport/Player2"]
+modulate = Color(1, 1, 1, 0.501961)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -369,13 +371,14 @@ texture = SubResource("ViewportTexture_2yde8")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player3" parent="GridContainer/SubViewportContainer3/SubViewport" instance=ExtResource("7_dhlwf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.17516, 1.59049, 5.43857)
 
 [node name="IconTexture" type="TextureRect" parent="GridContainer/SubViewportContainer3/SubViewport/Player3"]
+modulate = Color(1, 1, 1, 0.501961)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -420,13 +423,14 @@ texture = SubResource("ViewportTexture_id0nj")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player4" parent="GridContainer/SubViewportContainer4/SubViewport" instance=ExtResource("6_vxd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.67516, 1.0001, 5.43857)
 
 [node name="IconTexture" type="TextureRect" parent="GridContainer/SubViewportContainer4/SubViewport/Player4"]
+modulate = Color(1, 1, 1, 0.501961)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

@@ -144,7 +144,7 @@ func play_sound_sfx(stream: AudioStream, scale):
 
 var GAME_SOUND := preload("res://sounds/game.ogg")
 var GAME_END_SOUND := preload("res://sounds/game_end_short.ogg")
-
+var REACH_GOAL_SOUND := preload("res://sounds/treasure_pickup.wav")
 func start_count_in():
 	state = GameState.COUNTIN
 	print("COUNTIN")
@@ -197,6 +197,7 @@ func start_race(): # from process
 	player.play()    
 	
 func _on_goal_race_over() -> void:
+	play_sound_sfx(REACH_GOAL_SOUND,1.0)
 	state = GameState.GOAL
 	print("GOAL")
 	player.stream = GAME_END_SOUND
