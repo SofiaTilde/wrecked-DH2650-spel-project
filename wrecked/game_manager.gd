@@ -53,7 +53,7 @@ enum GameState {
 
 var players: Array
 var state: GameState = GameState.GET_READY # first state
-var countDownLen: int = 30
+var countDownLen: int = 3
 var leaderboardMenu = false
 var starting = true
 var placements_dict
@@ -244,7 +244,6 @@ func show_leaderboard():
 	if leaderboardMenu == true:
 		leaderboard_menu_popup.visible = true
 		leaderboard_popup.get_node("Leaderboard").position = Vector2(710, 150)
-			
 		get_menu_input()
 
 	#or start next race immidiatly
@@ -264,13 +263,12 @@ func _on_restart_pressed():
 	get_tree().paused = false
 	start_game()
 
+
 func _on_quit_pressed():
 	quit_game()
 
 
 # === UTILITY ===
-
-
 
 func spawn_level():
 	# If there’s already a Level in the tree, remove it first:
