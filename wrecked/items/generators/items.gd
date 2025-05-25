@@ -12,12 +12,18 @@ class_name ItemProvider
 @export var sword: PackedScene
 @export var screen_change: PackedScene
 
+#@onready var GameManager = get_tree().get_current_scene().get_node("GameManager")
+#GameManager is loaded globally and can be referenced to anywhere
+@export var state: GameState2 = preload("res://GameState2.tres")
+
 var copperItemlist: Array = []
 var silverItemlist: Array = []
 var goldItemlist: Array = []
 enum BarrelLevel {Copper, Silver, Gold}
 
 func _ready():
+	 # react to changes
+	
 	randomize()
 
 func get_item(level):
@@ -30,21 +36,36 @@ func get_item(level):
 
 func get_copper_item():
 	if copperItemlist.is_empty():
-
-		#copperItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		copperItemlist = [rubber_duck]
+		if state.screen_changing: #cant get screen change (only one screen change at a time!)
+				#copperItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				copperItemlist = [rubber_duck]
+		
+		else:
+				#copperItemlist = [screen_change, molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				copperItemlist = [screen_change,rubber_duck]
+		
 	return copperItemlist.pick_random()
 
 func get_silver_item():
-	if silverItemlist.is_empty():
+	if silverItemlist.is_empty(): #cant get screen change (only one screen change at a time!)
+		if state.screen_changing:
+				#silverItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				silverItemlist = [rubber_duck]
 
-		#silverItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		silverItemlist = [rubber_duck]
+		else:
+				#silverItemlist = [screen_change, molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				silverItemlist = [screen_change,rubber_duck]
+		
 	return silverItemlist.pick_random()
 
 func get_gold_item():
-	if goldItemlist.is_empty():
+	if goldItemlist.is_empty(): #cant get screen change (only one screen change at a time!)
+		if state.screen_changing:
+				#goldItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				goldItemlist = [rubber_duck]
 
-		#goldItemlist = [molotov_cocktail, dynamite, screen_change, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck]
-		goldItemlist = [rubber_duck]
+		else:
+				#goldItemlist = [screen_change, molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				goldItemlist = [screen_change,rubber_duck]
+		
 	return goldItemlist.pick_random()
