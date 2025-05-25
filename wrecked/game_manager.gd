@@ -49,7 +49,7 @@ enum GameState {
 
 var players: Array
 var state: GameState = GameState.GET_READY # first state
-var countDownLen: int = 30
+var countDownLen: int = 28 #time in with the wait timer in on_goal for match with the music
 var leaderboardMenu = false
 var starting = true
 var placements_dict
@@ -101,10 +101,15 @@ func get_ready():
 	for p in players:
 		p.player_data.gotPoints = false
 		p.get_node("PointsLabel").text = "Points: " + str(p.player_data.points) + " /10"
-	player1.global_transform.origin = Vector3(1.175, 1.541, 5.439)
-	player2.global_transform.origin = Vector3(3.675, 1.933, 5.439)
-	player3.global_transform.origin = Vector3(6.175, 1.59, 5.439)
-	player4.global_transform.origin = Vector3(8.675, 1.0, 5.439)
+	#player1.global_transform.origin = Vector3(1.175, 1.541, 5.439)
+	#player2.global_transform.origin = Vector3(3.675, 1.933, 5.439)
+	player1.global_transform.origin = Vector3(1.175, 10, 5.439)
+	player2.global_transform.origin = Vector3(3.675, 10, 5.439)
+	#player3.global_transform.origin = Vector3(6.175, 10, 5.439)
+	player3.global_transform.origin = Vector3(6.175, 100, -270)
+	#player4.global_transform.origin = Vector3(8.675, 1.0, 5.439)
+	player4.global_transform.origin = Vector3(8.675, 10, 5.439)
+
 	await get_tree().create_timer(2.5).timeout
 	
 	start_count_in()
@@ -175,22 +180,23 @@ func _on_goal_race_over() -> void:
 	print("GOAL")
 	
 	player.stream = GAME_END_SOUND
-	player.play()
+	player.play()	
+	await get_tree().create_timer(3.).timeout # !needed! Winner HUDlabel is printed from Goal-scene
 	start_count_down()
-	
-	#await get_tree().create_timer(5.).timeout # !needed! Winner HUDlabel is printed from Goal-scene
-	#start_count_down()
 	
 
 func start_count_down():
 	state = GameState.COUNTDOWN
 	print("COUNTDOWN")
 	
-	update_label(label, " ", Color.RED, 500)
+	update_label(label, " ", Color.WHITE, 100)
 	for i in range(countDownLen, 0, -1):
-		#update_label(label,"%s" % i, Color.RED*(i/countDownLen), 500)
 		label.text = "%s" % i
-		#label.label_settings.outline_color=Color.BLUE*(i/countDownLen)
+		if(i<=10):
+			var t = float(i) / 10.0  # in [1 -> 0]
+			label.modulate = Color(1, t/2, t/2, 1) #fr White to red
+			var sz = (((11.0-i)/10.0)*500.0)+50.0
+			label.label_settings.font_size = sz
 		await get_tree().create_timer(1).timeout
 	label.label_settings.outline_color = Color.BLACK
 	
