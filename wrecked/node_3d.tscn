@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://3f7k8dolqfhh"]
+[gd_scene load_steps=33 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://b85s3xfg6xv8i" path="res://game_manager.gd" id="1_tereu"]
@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b2bdnadehay0s" path="res://items/noItem.png" id="11_dhlwf"]
 [ext_resource type="PackedScene" uid="uid://ck51bdne8ldwv" path="res://island.tscn" id="14_wlxy5"]
 [ext_resource type="Texture2D" uid="uid://b7ccwtctxxkjq" path="res://items/rubber_duck/dpad4.png" id="21_vxd74"]
-[ext_resource type="AudioStream" uid="uid://cc33ua3bjgx1n" path="res://sounds/waves_loop.ogg" id="22_s0gvp"]
+[ext_resource type="AudioStream" uid="uid://cc33ua3bjgx1n" path="res://Sounds/waves_loop.ogg" id="22_s0gvp"]
 [ext_resource type="Script" uid="uid://bc5fk34xn5xaf" path="res://extra_kill_zone.gd" id="23_nu31w"]
 [ext_resource type="PackedScene" uid="uid://csmc4dfieimjx" path="res://meshes/Startplatform/Startingplatform.tscn" id="24_dhlwf"]
 [ext_resource type="PackedScene" uid="uid://b5bxwo0db64jg" path="res://meshes/Chest/chest.glb" id="24_nu31w"]
@@ -270,7 +270,7 @@ texture = SubResource("ViewportTexture_nu31w")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
@@ -316,7 +316,7 @@ texture = SubResource("ViewportTexture_obt1j")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player2" parent="GridContainer/SubViewportContainer2/SubViewport" instance=ExtResource("8_5t8nk")]
@@ -369,7 +369,7 @@ texture = SubResource("ViewportTexture_2yde8")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player3" parent="GridContainer/SubViewportContainer3/SubViewport" instance=ExtResource("7_dhlwf")]
@@ -420,7 +420,7 @@ texture = SubResource("ViewportTexture_id0nj")
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(958, 538)
 render_target_update_mode = 4
 
 [node name="Player4" parent="GridContainer/SubViewportContainer4/SubViewport" instance=ExtResource("6_vxd74")]
@@ -657,8 +657,9 @@ grow_vertical = 2
 [node name="DpadTopLeft" type="TextureRect" parent="DpadPositions"]
 layout_mode = 1
 offset_left = 100.0
+offset_top = 10.0
 offset_right = 200.0
-offset_bottom = 100.0
+offset_bottom = 110.0
 texture = ExtResource("21_vxd74")
 expand_mode = 1
 
@@ -670,8 +671,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -200.0
-offset_top = -100.0
+offset_top = -110.0
 offset_right = -100.0
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("9_id0nj")
@@ -683,8 +685,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -200.0
+offset_top = 10.0
 offset_right = -100.0
-offset_bottom = 100.0
+offset_bottom = 110.0
 grow_horizontal = 0
 texture = ExtResource("9_id0nj")
 expand_mode = 1
@@ -695,8 +698,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 100.0
-offset_top = -100.0
+offset_top = -110.0
 offset_right = 200.0
+offset_bottom = -10.0
 grow_vertical = 0
 texture = ExtResource("9_id0nj")
 expand_mode = 1
