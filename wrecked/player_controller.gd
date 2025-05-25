@@ -66,6 +66,8 @@ var SPLASH_SOUND := preload("res://sounds/fall.wav")
 var JUMP_SOUND := preload("res://sounds/click.wav")
 var PUSH_SOUND := preload("res://sounds/click.wav")
 var ITEM_PICKUP_SOUND := preload("res://sounds/Itempickup.wav")
+var	NoItemIcon = preload("res://items/noItem.png") as Texture2D
+
 var DEATH_SOUND :=preload("res://sounds/death_short.wav")
 
 func play_sfx(stream: AudioStream):
@@ -384,5 +386,5 @@ func throwItem(play: CharacterBody3D = null):
 		animation_tree.set("parameters/Useitem/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		holdingItem.throw(play)
 	holdingItem = null
-	update_icon(null)
+	update_icon(NoItemIcon)
 	update_item_label("")
