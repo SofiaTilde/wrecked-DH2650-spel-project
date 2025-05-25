@@ -33,13 +33,14 @@ var last_platform = CollisionObject3D
 @onready var label_node: Label = $MarginContainer/CurrItemLabel
 @onready var icon_node: TextureRect = $IconTexture
 @onready var swim_platform: CollisionShape3D = 	$SwimPlatform/CollisionShape3D
-#@onready var starting_platform: Node3D = get_node("/root/Game/Startingplatform")
+@onready var Startingplatform: Node3D = get_node("/root/Game/Startingplatform")
 @onready var Camera = $TwistPivot/PitchPivot/Camera3D
 @export var player_id = 1 # p1 är default val! Ändra per spelar node i inspector!var fall_multiplier: float = 0.5var jump_cut_multiplier: float = 0.8
 @onready var backup_saved_platform: Node3D = get_node("/root/Game/Safe_spawnp%d" % player_id)
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
-
+#death anim mesh:
+@onready var death_anim_mesh = preload("res://meshes/Characters/Undead.tscn")
 #used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 
@@ -65,14 +66,21 @@ var SPLASH_SOUND := preload("res://sounds/fall.wav")
 var JUMP_SOUND := preload("res://sounds/click.wav")
 var PUSH_SOUND := preload("res://sounds/click.wav")
 var ITEM_PICKUP_SOUND := preload("res://sounds/Itempickup.wav")
+var DEATH_SOUND :=preload("res://sounds/death_short.wav")
 
 func play_sfx(stream: AudioStream):
 	var p := AudioStreamPlayer.new()
 	p.stream = stream
 	add_child(p)
+	var stream_path := stream.resource_path.get_file()
+	if stream_path == "death_short.wav":
+		p.volume_db = -10
+	if stream_path =="shroom" or stream_path =="eyepatch":
+		p.volume_db = +10
+
 	p.play()
 	p.finished.connect(p.queue_free)
-	
+
 func handle_anim_states():
 	match current_anim:
 		IDLE:
@@ -179,28 +187,28 @@ func _physics_process(delta: float) -> void:
 	velocity.z = player_velocity.z
 	velocity.y = jump_state_adv
 
-	if player_position.y <-5.0:
+	if player_position.y <-10.0:
 		current_anim = DROWNING
 
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
+		
 	if is_on_floor() and get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		if collision:
 			var floor_object = collision.get_collider()
 
 			if GM.getting_ready:
-				last_saved_platform = floor_object
+				#motverka bug ifall spelaren ramlar innan matchen börjar om
+				if floor_object.get_parent().name =="Island" or floor_object.get_parent().name =="Skullisland" and floor_object.get_parent().name != name:
+					last_saved_platform = Startingplatform 
 			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #so we dont respawn at wreck nor rubberducky platform
 				last_saved_platform = floor_object
-
+			
 			elif floor_object.get_parent().name =="Startingplatform" and GM.getting_ready==false:
 				last_saved_platform = backup_saved_platform
 			
-			
-
 	apply_floor_snap()
 	move_and_slide() # rörelse enligt velocity mm.
   
@@ -217,7 +225,6 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("use_item_up_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer/SubViewport/Player") as CharacterBody3D
-
 		throwItem(play)
 	if Input.is_action_just_pressed("use_item_right_%s" % [player_id]):
 		var play = get_tree().root.get_node("Game/GridContainer/SubViewportContainer2/SubViewport/Player2") as CharacterBody3D
@@ -230,8 +237,8 @@ func _physics_process(delta: float) -> void:
 		throwItem(play)
 
 	if holdingItem != null:
-		holdingItem.global_position = global_position + Vector3(0, 2.3, 0)
-		holdingItem.rotation.y = model.rotation.y
+		holdingItem.global_position = global_position + Vector3(0, 2.3, 0) 
+		holdingItem.rotation.y += delta*5.0
 
 	# for swimming movement:
 
@@ -346,8 +353,16 @@ func _on_area_3d_visibility_changed() -> void:
 
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
+	play_sfx(DEATH_SOUND)
+	var undead_instance = death_anim_mesh.instantiate()
+	add_child(undead_instance)
+	# Now you can get children from it
+	var death_anim_player = undead_instance.get_node("MeshInstance3D/undead/AnimationPlayer")
+	undead_instance.global_transform.origin = position-Vector3(0.0,0.5,-0.3)
 	respawn_manager.respawn(player_data.placement)
-
+	death_anim_player.play("Undead|Deaths_grab")
+	await death_anim_player.animation_finished
+	undead_instance.queue_free()
 
 func setItem(item: Item):
 	play_sfx(ITEM_PICKUP_SOUND)
