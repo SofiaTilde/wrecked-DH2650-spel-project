@@ -61,7 +61,18 @@ var holdingItem: Item
 var last_saved_platform: Node3D
 var viewPortTexture: Texture2D
 
+var SPLASH_SOUND := preload("res://sounds/fall.wav")
+var JUMP_SOUND := preload("res://sounds/click.wav")
+var PUSH_SOUND := preload("res://sounds/click.wav")
+var ITEM_PICKUP_SOUND := preload("res://sounds/Itempickup.wav")
 
+func play_sfx(stream: AudioStream):
+	var p := AudioStreamPlayer.new()
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+	
 func handle_anim_states():
 	match current_anim:
 		IDLE:
@@ -149,6 +160,7 @@ func _physics_process(delta: float) -> void:
 	#Player acceleration
 	if jump_pressed and is_on_floor():		
 		animation_tree.set("parameters/Jumping/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		play_sfx(JUMP_SOUND)
 	if direction != Vector3.ZERO:
 		if player_velocity.length() > 2.8 and is_on_floor():
 			current_anim = RUN
@@ -309,6 +321,8 @@ func apply_push_to_other_players() -> void:
 			if Collision_object in recently_pushed:
 				continue # already pushed recently
 
+			play_sfx(PUSH_SOUND)
+
 			var push_normal = - collision.get_normal()
 
 			var relative_speed = velocity.length()
@@ -334,14 +348,6 @@ func _on_area_3d_visibility_changed() -> void:
 func respawn():
 	respawn_manager.respawn(player_data.placement)
 
-var ITEM_PICKUP_SOUND := preload("res://Sounds/Itempickup.wav")
-var JUMP_SOUND :=preload("res://Sounds/jump.wav")
-func play_sfx(stream: AudioStream):
-	var p := AudioStreamPlayer.new()
-	p.stream = stream
-	add_child(p)
-	p.play()
-	p.finished.connect(p.queue_free)
 
 func setItem(item: Item):
 	play_sfx(ITEM_PICKUP_SOUND)
