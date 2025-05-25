@@ -53,7 +53,7 @@ enum GameState {
 
 var players: Array
 var state: GameState = GameState.GET_READY # first state
-var countDownLen: int = 3
+var countDownLen: int = 30
 var leaderboardMenu = false
 var starting = true
 var placements_dict
@@ -199,7 +199,7 @@ func start_count_down():
 	label.label_settings.outline_color = Color.BLACK
 	
 	#GAME or RACE over?
-	if player1.player_data.points >= 1 or player2.player_data.points >= 10 or player3.player_data.points >= 10 or player4.player_data.points >= 10: # activate some function in another script/ node
+	if player1.player_data.points >= 10 or player2.player_data.points >= 10 or player3.player_data.points >= 10 or player4.player_data.points >= 10: # activate some function in another script/ node
 		players.sort_custom(sort_by_points)
 		if players[0].player_data.points != players[1].player_data.points: # check if tie-breaker is needed!
 			game_over()
