@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://3f7k8dolqfhh"]
+[gd_scene load_steps=36 format=3 uid="uid://3f7k8dolqfhh"]
 
 [ext_resource type="PackedScene" uid="uid://g4tbrr3sfui2" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://b85s3xfg6xv8i" path="res://game_manager.gd" id="1_tereu"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://685x3hhuvr5l" path="res://player2.tscn" id="8_5t8nk"]
 [ext_resource type="PackedScene" uid="uid://bau54xbcyquty" path="res://goal.tscn" id="9_4arys"]
 [ext_resource type="Texture2D" uid="uid://bljkdgnydc5qk" path="res://textures/dpad.png" id="9_id0nj"]
+[ext_resource type="Texture2D" uid="uid://b2bdnadehay0s" path="res://items/noItem.png" id="11_dhlwf"]
 [ext_resource type="PackedScene" uid="uid://ck51bdne8ldwv" path="res://island.tscn" id="14_wlxy5"]
 [ext_resource type="Texture2D" uid="uid://b7ccwtctxxkjq" path="res://items/rubber_duck/dpad4.png" id="21_vxd74"]
 [ext_resource type="AudioStream" uid="uid://cc33ua3bjgx1n" path="res://Sounds/waves_loop.ogg" id="22_s0gvp"]
@@ -283,6 +284,7 @@ axis_lock_angular_y = true
 [node name="IconTexture" type="TextureRect" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
 offset_right = 150.0
 offset_bottom = 150.0
+texture = ExtResource("11_dhlwf")
 expand_mode = 1
 
 [node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
@@ -355,6 +357,7 @@ anchor_right = 1.0
 offset_left = -150.0
 offset_bottom = 150.0
 grow_horizontal = 0
+texture = ExtResource("11_dhlwf")
 expand_mode = 1
 
 [node name="SubViewportContainer3" type="SubViewportContainer" parent="GridContainer"]
@@ -383,6 +386,7 @@ anchor_bottom = 1.0
 offset_top = -150.0
 offset_right = 150.0
 grow_vertical = 0
+texture = ExtResource("11_dhlwf")
 expand_mode = 1
 
 [node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer3/SubViewport/Player3"]
@@ -436,6 +440,7 @@ offset_left = -150.0
 offset_top = -150.0
 grow_horizontal = 0
 grow_vertical = 0
+texture = ExtResource("11_dhlwf")
 expand_mode = 1
 
 [node name="PointsLabel" type="Label" parent="GridContainer/SubViewportContainer4/SubViewport/Player4"]

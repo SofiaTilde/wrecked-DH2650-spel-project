@@ -13,6 +13,11 @@ extends Node
 @onready var default_safe_platform2: Node3D = get_node("/root/Game/Safe_spawnp2")
 @onready var default_safe_platform3: Node3D = get_node("/root/Game/Safe_spawnp3")
 @onready var default_safe_platform4: Node3D = get_node("/root/Game/Safe_spawnp4")
+@onready var Dpad1: Control = get_node("/root/Game/DpadPositions/DpadTopLeft")
+@onready var Dpad2: Control = get_node("/root/Game/DpadPositions/DpadBottomRight")
+@onready var Dpad3: Control = get_node("/root/Game/DpadPositions/DpadTopRight")
+@onready var Dpad4: Control = get_node("/root/Game/DpadPositions/DpadBottomLeft")
+
 
 var sinking_speed : float = 0.002
 #@onready var label_animator: AnimationPlayer = get_node("/root/Game/SharedHudNextRace/Control/LabelAnimator") What is this used for?
@@ -103,6 +108,11 @@ func get_ready():
 	for p in players:
 		p.player_data.gotPoints = false
 		p.get_node("PointsLabel").text = "Points: " + str(p.player_data.points) + " /10"
+		p.get_node("IconTexture").visible=false
+	Dpad1.visible = false
+	Dpad2.visible = false
+	Dpad3.visible = false
+	Dpad4.visible = false
 	#player1.global_transform.origin = Vector3(1.175, 1.541, 5.439)
 	#player2.global_transform.origin = Vector3(3.675, 1.933, 5.439)
 	player1.global_transform.origin = Vector3(1.175, 10, 5.439)
@@ -155,6 +165,11 @@ func start_race(): # from process
 
 	for p in players:
 		p.get_node("PointsLabel").text=" "
+		p.get_node("IconTexture").visible=true
+	Dpad1.visible = true
+	Dpad2.visible = true
+	Dpad3.visible = true
+	Dpad4.visible = true
 	
 	update_label(label, "WRECKED!", Color.WHITE, 300)
 	
@@ -174,8 +189,8 @@ func start_race(): # from process
 		placement_labels[i].visible = true
 		placement_labels_th[i].visible = true
 	
-	player.stream = GAME_SOUND
-	player.play()    
+	#player.stream = GAME_SOUND
+	#player.play()    
 	
 func _on_goal_race_over() -> void:
 	state = GameState.GOAL
