@@ -5,6 +5,7 @@ extends Area3D
 @onready var GM: Node = get_node("/root/Game/GameManager")
 @onready var placement_labels: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
 @onready var placement_labels_th: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
+@export var state: GameState2 = preload("res://GameState2.tres")
 
 
 var placement = 1
@@ -25,7 +26,7 @@ func _ready() -> void:
 	"Player": [4.0, placement_labels[0],placement_labels_th[0],GM.players[0].player_data],
 	"Player2": [3.0, placement_labels[1],placement_labels_th[1],GM.players[1].player_data],
 	"Player3": [2.0, placement_labels[2],placement_labels_th[2],GM.players[2].player_data],
-	"Player4": [1.0, placement_labels[3],placement_labels_th[3],GM.players[3].player_data]
+	"Player4": [1.0, placement_labels[3],placement_labels_th[3],GM.players[3].player_data],
 }
 	
 	label.visible = false
@@ -51,8 +52,11 @@ func  update_placement_labels():
 		player_placements[key][2].text=placements_dict[i][0]
 		player_placements[key][3].placement=i #update player_data
 		i+=1 #next placement
-		
 	
+	if state.screen_changing: #change pos of placements
+		switch_placements("Player","Player4")
+		switch_placements("Player2","Player3")
+
 func _physics_process(delta: float) -> void:
 	update_placements()
 	update_placement_labels()
@@ -90,3 +94,20 @@ func winnerHUD(player_data: PlayerData):
 	for i in range(4):
 		placement_labels[i].visible = false
 		placement_labels_th[i].visible = false
+
+
+func switch_placements(pi,pj):
+	var tempPlayer = [999.0, "hello","world",Color(1,1,1,1)]
+
+	tempPlayer[1] = player_placements[pi][1].text
+	tempPlayer[2] = player_placements[pi][2].text
+	tempPlayer[3] = player_placements[pi][1].modulate	
+	player_placements[pi][1].text = player_placements[pj][1].text
+	player_placements[pi][2].text = player_placements[pj][2].text
+	player_placements[pi][1].modulate = player_placements[pj][1].modulate
+	player_placements[pj][1].text = tempPlayer[1]
+	player_placements[pj][2].text = tempPlayer[2]
+	player_placements[pj][1].modulate = tempPlayer[3]
+
+
+	
