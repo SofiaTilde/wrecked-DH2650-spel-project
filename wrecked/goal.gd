@@ -75,6 +75,9 @@ func _on_body_entered(body: Node3D) -> void:
 			3:
 				body.player_data.points += 2
 				placement += 1
+			4:
+				body.player_data.points += 0
+				GM.all_players_in_goal=true
 
 func winner(player_data: PlayerData):
 	emit_signal("race_over")

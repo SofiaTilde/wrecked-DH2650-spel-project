@@ -55,6 +55,7 @@ var starting = true
 var placements_dict
 var level_instance: Node3D
 var getting_ready: bool
+var all_players_in_goal : bool = false
 
 
 
@@ -96,6 +97,7 @@ func get_ready():
 	if level_instance:
 		level_instance.remove_platforms()
 	Startingplatform.position = Staringplatform_pos
+	all_players_in_goal=false
 
 	Goal.placement = 1
 	for p in players:
@@ -105,8 +107,8 @@ func get_ready():
 	#player2.global_transform.origin = Vector3(3.675, 1.933, 5.439)
 	player1.global_transform.origin = Vector3(1.175, 10, 5.439)
 	player2.global_transform.origin = Vector3(3.675, 10, 5.439)
-	#player3.global_transform.origin = Vector3(6.175, 10, 5.439)
-	player3.global_transform.origin = Vector3(6.175, 100, -270)
+	player3.global_transform.origin = Vector3(6.175, 10, 5.439)
+	#player3.global_transform.origin = Vector3(6.175, 100, -270)
 	#player4.global_transform.origin = Vector3(8.675, 1.0, 5.439)
 	player4.global_transform.origin = Vector3(8.675, 10, 5.439)
 
@@ -191,6 +193,8 @@ func start_count_down():
 	
 	update_label(label, " ", Color.WHITE, 100)
 	for i in range(countDownLen, 0, -1):
+		if all_players_in_goal: 	#check if evry1 passes goal
+			break #exit the loop
 		label.text = "%s" % i
 		if(i<=10):
 			var t = float(i) / 10.0  # in [1 -> 0]
@@ -199,6 +203,7 @@ func start_count_down():
 			label.label_settings.font_size = sz
 		await get_tree().create_timer(1).timeout
 	label.label_settings.outline_color = Color.BLACK
+	
 	
 	#GAME or RACE over?
 	if player1.player_data.points >= 10 or player2.player_data.points >= 10 or player3.player_data.points >= 10 or player4.player_data.points >= 10: # activate some function in another script/ node
@@ -272,7 +277,7 @@ func spawn_level():
 	# (Optional) Give it the same name so your tree looks familiar
 	level_instance.name = "Level"
 
-   
+	
 
 func update_label(label: Label, text: String, color: Color, size: float = 200, offset: Vector2 = Vector2(0, 0)):
 	if label:
