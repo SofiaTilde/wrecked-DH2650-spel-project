@@ -40,6 +40,9 @@ var last_platform = CollisionObject3D
 @export var player_data: PlayerData
 @export var camera_smoothing_rate = 0.1
 
+#death anim mesh:
+@onready var death_anim_mesh = preload("res://meshes/Characters/Undead.tscn")
+
 #used to spawn correct character mesh
 var player_names = {1:"Rackham_red",2:"Yates_yellow",3:"Gully_green",4:"Pippi_pink" }
 
@@ -347,8 +350,15 @@ func _on_area_3d_visibility_changed() -> void:
 
 #--respawning, called from Kill-zone Scene script when falling into water
 func respawn():
+	var undead_instance = death_anim_mesh.instantiate()
+	add_child(undead_instance)
+	# Now you can get children from it
+	var death_anim_player = undead_instance.get_node("MeshInstance3D/undead/AnimationPlayer")
+	undead_instance.global_transform.origin = position-Vector3(0.0,0.5,-0.3)
 	respawn_manager.respawn(player_data.placement)
-
+	death_anim_player.play("Undead|Deaths_grab")
+	await death_anim_player.animation_finished
+	undead_instance.queue_free()
 
 func setItem(item: Item):
 	play_sfx(ITEM_PICKUP_SOUND)

@@ -4,9 +4,11 @@
 
 [node name="Undead" type="Node3D"]
 
-[node name="undead" parent="." instance=ExtResource("1_pqrbo")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
-[node name="Skeleton3D" parent="undead/Undead" index="0"]
+[node name="undead" parent="MeshInstance3D" instance=ExtResource("1_pqrbo")]
+
+[node name="Skeleton3D" parent="MeshInstance3D/undead/Undead" index="0"]
 bones/0/position = Vector3(2.15515e-05, 0.00587884, 0.00605177)
 bones/1/rotation = Quaternion(6.71794e-08, -1.19209e-07, 8.00841e-15, 1)
 bones/2/rotation = Quaternion(-6.7025e-08, 1.43126e-07, -0.14089, 0.990025)
@@ -51,4 +53,7 @@ bones/55/rotation = Quaternion(0.965409, -0.235783, -0.0264016, 0.108144)
 bones/56/rotation = Quaternion(0.0159482, -1.84299e-05, -0.000114451, 0.999873)
 bones/57/rotation = Quaternion(-0.0417436, 2.22435e-05, 5.48867e-05, 0.999128)
 
-[editable path="undead"]
+[node name="Undead_mesh" parent="MeshInstance3D/undead/Undead/Skeleton3D" index="0"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[editable path="MeshInstance3D/undead"]
