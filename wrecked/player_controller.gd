@@ -193,7 +193,7 @@ func _physics_process(delta: float) -> void:
 	# Reset capture when closing
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
+		
 	if is_on_floor() and get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		if collision:
@@ -201,7 +201,7 @@ func _physics_process(delta: float) -> void:
 
 			if GM.getting_ready:
 				#motverka bug ifall spelaren ramlar innan matchen börjar om
-				if floor_object.get_parent().name =="Island" or floor_object.get_parent().name =="Skullisland":
+				if floor_object.get_parent().name =="Island" or floor_object.get_parent().name =="Skullisland" and floor_object.get_parent().name != name:
 					last_saved_platform = Startingplatform 
 			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #so we dont respawn at wreck nor rubberducky platform
 				last_saved_platform = floor_object
@@ -209,8 +209,6 @@ func _physics_process(delta: float) -> void:
 			elif floor_object.get_parent().name =="Startingplatform" and GM.getting_ready==false:
 				last_saved_platform = backup_saved_platform
 			
-			
-
 	apply_floor_snap()
 	move_and_slide() # rörelse enligt velocity mm.
   
@@ -240,7 +238,6 @@ func _physics_process(delta: float) -> void:
 
 	if holdingItem != null:
 		holdingItem.global_position = global_position + Vector3(0, 2.3, 0) 
-		holdingItem.global_position.y += 5.0*sin(1.1*delta)
 		holdingItem.rotation.y += delta*5.0
 
 	# for swimming movement:
