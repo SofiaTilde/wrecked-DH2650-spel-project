@@ -4,6 +4,6 @@
 
 [resource]
 shader = ExtResource("1_vcn5p")
-shader_parameter/amplitude = 0.008
-shader_parameter/frequency = 80.0
-shader_parameter/speed = 20.0
+shader_parameter/swirl_center = Vector2(0.425, 0.425)
+shader_parameter/swirl_strength = 0.8
+shader_parameter/swirl_radius = 1.5
