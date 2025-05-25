@@ -171,13 +171,12 @@ func start_race(): # from process
 		placement_labels[i].visible = true
 		placement_labels_th[i].visible = true
 	
-	player.stream = GAME_SOUND
-	player.play()    
+	#player.stream = GAME_SOUND
+	#player.play()    
 	
 func _on_goal_race_over() -> void:
 	state = GameState.GOAL
 	print("GOAL")
-	
 	player.stream = GAME_END_SOUND
 	player.play()
 	start_count_down()
