@@ -257,7 +257,6 @@ func get_menu_input():
 	get_tree().paused = true
 	button_restart.grab_focus()
 
-	#button_quit.grab_focus()
 
 func _on_restart_pressed():
 	get_tree().paused = false

@@ -274,6 +274,8 @@ render_target_update_mode = 4
 [node name="Player" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17516, 1.5415, 5.43857)
 axis_lock_angular_y = true
+player_id = 1
+camera_smoothing_rate = 0.1
 
 [node name="IconTexture" type="TextureRect" parent="GridContainer/SubViewportContainer/SubViewport/Player"]
 offset_right = 150.0
