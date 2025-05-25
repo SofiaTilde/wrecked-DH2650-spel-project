@@ -24,6 +24,10 @@ var sinking_speed : float = 0.002
 @onready var placement_labels: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
 @onready var placement_labels_th: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
 @onready var platforms: Node3D = get_node("/root/Game/_Node3D_144036")
+#input for menu
+@onready var button_restart: Button = $CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/StartGame
+@onready var button_quit: Button = $CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/Quit
+
 @onready var leaderboard_labels: Array = [
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score1st"),
 	leaderboard_popup.get_node("Leaderboard/VBoxContainer/Score2nd"),
@@ -56,10 +60,10 @@ var placements_dict
 var level_instance: Node3D
 var getting_ready: bool
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	button_restart.pressed.connect(start_game)
+	button_quit.pressed.connect(quit_game)
 	#await get_tree().process_frame
 	add_child(player)
 	player.volume_db = -8.0
@@ -195,7 +199,7 @@ func start_count_down():
 	label.label_settings.outline_color = Color.BLACK
 	
 	#GAME or RACE over?
-	if player1.player_data.points >= 10 or player2.player_data.points >= 10 or player3.player_data.points >= 10 or player4.player_data.points >= 10: # activate some function in another script/ node
+	if player1.player_data.points >= 1 or player2.player_data.points >= 10 or player3.player_data.points >= 10 or player4.player_data.points >= 10: # activate some function in another script/ node
 		players.sort_custom(sort_by_points)
 		if players[0].player_data.points != players[1].player_data.points: # check if tie-breaker is needed!
 			game_over()
@@ -222,6 +226,7 @@ func game_over():
 	leaderboardMenu = true
 	show_leaderboard()
 	Startingplatform.global_position = Staringplatform_pos
+	get_menu_input()
 
 func show_leaderboard():
 	state = GameState.LEADERBOARD
@@ -239,14 +244,30 @@ func show_leaderboard():
 	if leaderboardMenu == true:
 		leaderboard_menu_popup.visible = true
 		leaderboard_popup.get_node("Leaderboard").position = Vector2(710, 150)
-		
+			
+		get_menu_input()
+
 	#or start next race immidiatly
 	else:
+		get_tree().paused = false	
 		await get_tree().create_timer(3).timeout
 		leaderboard_popup.visible = false
 		get_ready()
 	
-	
+func get_menu_input():
+	get_tree().paused = true
+	button_restart.grab_focus()
+
+	#button_quit.grab_focus()
+
+func _on_restart_pressed():
+	get_tree().paused = false
+	start_game()
+
+func _on_quit_pressed():
+	quit_game()
+
+
 # === UTILITY ===
 
 
@@ -287,6 +308,7 @@ func clear_label(label: Label):
 
 #==== leaderboard menu buttons =====
 func start_game(): # _on_StartGame_Button_Pressed
+	get_tree().paused = false
 	Startingplatform.global_position = Staringplatform_pos
 	leaderboardMenu = false
 	leaderboard_popup.visible = false
