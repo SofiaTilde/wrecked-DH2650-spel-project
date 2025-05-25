@@ -14,7 +14,6 @@ var is_drunk: bool=false
 var is_high: bool=false
 var placement: int=1
 
-
 func _init(_name := "", _color := Color(1, 1, 1, 1)):
 	name = _name
 	color = _color

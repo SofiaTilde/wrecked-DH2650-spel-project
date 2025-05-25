@@ -61,14 +61,16 @@ func _spawn_first(start):
 
 			var shift = Vector3(sin(deg_to_rad(angle)) * distance, 0.0, -cos(deg_to_rad(angle)) * distance)
 			var next_position = current + shift
-			
 			if next_position.z > -LEVEL_LENGTH / 2.0:
-				if next_position.x < -MAX_WIDTH || next_position.x > MAX_WIDTH:
+				if next_position.x < -MAX_WIDTH + 3.75 || next_position.x > MAX_WIDTH + 3.75:
 					shift.x = - shift.x
 					next_position = current + shift
-					
-				stack.push_back(next_position)
 
+				if next_position.x < -MAX_WIDTH + 3.75 || next_position.x > MAX_WIDTH + 3.75:
+					shift.x = 0.0
+					next_position = current + shift
+
+				stack.push_back(next_position)
 		i = i + 1
 
 # First half of the level (from goal)
@@ -97,8 +99,12 @@ func _spawn_second():
 			var next_position = current + shift
 			
 			if next_position.z < -LEVEL_LENGTH / 2.0:
-				if next_position.x < -MAX_WIDTH || next_position.x > MAX_WIDTH:
+				if next_position.x < -MAX_WIDTH + 3.75 || next_position.x > MAX_WIDTH + 3.75:
 					shift.x = - shift.x
+					next_position = current + shift
+
+				if next_position.x < -MAX_WIDTH + 3.75 || next_position.x > MAX_WIDTH + 3.75:
+					shift.x = 0.0
 					next_position = current + shift
 					
 				stack.push_back(next_position)
