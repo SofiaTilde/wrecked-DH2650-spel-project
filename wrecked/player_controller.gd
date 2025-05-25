@@ -179,7 +179,7 @@ func _physics_process(delta: float) -> void:
 	velocity.z = player_velocity.z
 	velocity.y = jump_state_adv
 
-	if player_position.y <-5.0:
+	if player_position.y <-10.0:
 		current_anim = DROWNING
 
 	# Reset capture when closing
@@ -230,8 +230,9 @@ func _physics_process(delta: float) -> void:
 		throwItem(play)
 
 	if holdingItem != null:
-		holdingItem.global_position = global_position + Vector3(0, 2.3, 0)
-		holdingItem.rotation.y = model.rotation.y
+		holdingItem.global_position = global_position + Vector3(0, 2.3, 0) 
+		holdingItem.global_position.y += 5.0*sin(1.1*delta)
+		holdingItem.rotation.y += delta*5.0
 
 	# for swimming movement:
 
