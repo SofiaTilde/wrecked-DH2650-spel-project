@@ -10,7 +10,7 @@ extends Node3D
 @export var max_angle := 45.0
 
 const LEVEL_LENGTH := 256.0
-const MAX_WIDTH := 12.0
+const MAX_WIDTH := 8.0
 
 func _ready() -> void:
 	

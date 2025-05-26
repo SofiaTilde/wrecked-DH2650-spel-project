@@ -28,7 +28,7 @@ var sinking_speed : float = 0.002
 @onready var label2: Label = $CanvasLayer/SharedLabel2
 @onready var placement_labels: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label")]
 @onready var placement_labels_th: Array = [get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer2/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2"),get_node("/root/Game/Placements/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer2/Label2")]
-@onready var platforms: Node3D = get_node("/root/Game/_Node3D_144036")
+#@onready var platforms: Node3D = get_node("/root/Game/_Node3D_144036")
 #input for menu
 @onready var button_restart: Button = $CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/StartGame
 @onready var button_quit: Button = $CanvasLayer/opacity/Leaderboard2/MarginContainer/HBoxContainer/Quit
@@ -144,7 +144,6 @@ func play_sound_sfx(stream: AudioStream, scale):
 
 var GAME_SOUND := preload("res://sounds/game.ogg")
 var GAME_END_SOUND := preload("res://sounds/game_end_short.ogg")
-var REACH_GOAL_SOUND := preload("res://sounds/treasure_pickup.wav")
 func start_count_in():
 	state = GameState.COUNTIN
 	print("COUNTIN")
@@ -197,7 +196,6 @@ func start_race(): # from process
 	player.play()    
 	
 func _on_goal_race_over() -> void:
-	play_sound_sfx(REACH_GOAL_SOUND,1.0)
 	state = GameState.GOAL
 	print("GOAL")
 	player.stream = GAME_END_SOUND

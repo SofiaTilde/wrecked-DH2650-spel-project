@@ -62,25 +62,37 @@ func _physics_process(delta: float) -> void:
 	update_placement_labels()
 	
 	
+func play_sound_sfx(stream: AudioStream, scale):
+	var p := AudioStreamPlayer.new()
+	p.pitch_scale = scale
+	p.stream = stream
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+	
+var REACH_GOAL_SOUND := preload("res://sounds/treasure_pickup.wav")
+
 #enter goal
 func _on_body_entered(body: Node3D) -> void:
+	
 	if body is CharacterBody3D and not body.player_data.gotPoints and (GM.state == GM.GameState.RACE or GM.state == GM.GameState.GOAL or GM.state == GM.GameState.COUNTDOWN):
 		body.player_data.gotPoints = true
+		play_sound_sfx(REACH_GOAL_SOUND,1.0)
 		match placement:
 			1:
-				body.player_data.points += 3
+				body.player_data.points += 4
 				winner(body.player_data)
 				winnerHUD(body.player_data)
 				placement += 1
 				print(body.player_data.points)
 			2:
-				body.player_data.points += 2
+				body.player_data.points += 3
 				placement += 1
 			3:
 				body.player_data.points += 2
 				placement += 1
 			4:
-				body.player_data.points += 0
+				body.player_data.points += 1
 				GM.all_players_in_goal=true
 
 func winner(player_data: PlayerData):
