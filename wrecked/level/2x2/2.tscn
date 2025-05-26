@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://bsmlem37lo4th"]
+[gd_scene load_steps=8 format=4 uid="uid://bsmlem37lo4th"]
 
+[ext_resource type="Script" uid="uid://d4bj501dyxm1u" path="res://items/generators/barrel_generator.gd" id="1_6ko2w"]
 [ext_resource type="Material" uid="uid://cirq8oyrqki7" path="res://meshes/Platforms/plattforms.tres" id="2_1my5s"]
 [ext_resource type="Script" uid="uid://bb6jpqun4oyoc" path="res://scripts/platform.gd" id="2_6ko2w"]
 
@@ -49,6 +50,7 @@ shadow_mesh = SubResource("ArrayMesh_7xaqx")
 size = Vector3(2.1646, 0.316467, 2.19672)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_6ko2w")
 
 [node name="plank4_2x2" type="Node3D" parent="."]
 script = ExtResource("2_6ko2w")

@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://decj3qo5pg26d" path="res://kirifont/KiriFont.otf" id="2_cdqbm"]
 [ext_resource type="LabelSettings" uid="uid://b32jxxg8k3j45" path="res://custom.tres" id="2_tereu"]
 [ext_resource type="LabelSettings" uid="uid://c2fbmgdggtmr8" path="res://leaderboard.tres" id="4_imku0"]
+[ext_resource type="Texture2D" uid="uid://djmym10xixv75" path="res://sky_40_2k.png" id="5_lggff"]
 [ext_resource type="PackedScene" uid="uid://berc3ktdu00jq" path="res://water_grid.tscn" id="6_jsk3o"]
 [ext_resource type="PackedScene" uid="uid://cloxm7yrf3dau" path="res://player4.tscn" id="6_vxd74"]
 [ext_resource type="PackedScene" uid="uid://6kx5nm2ecru" path="res://items/generators/items.tscn" id="6_wc5p8"]
@@ -12,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://oa4gk1w85htb" path="res://kill_zone.tscn" id="7_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://685x3hhuvr5l" path="res://player2.tscn" id="8_5t8nk"]
 [ext_resource type="PackedScene" uid="uid://bau54xbcyquty" path="res://goal.tscn" id="9_4arys"]
-[ext_resource type="Texture2D" uid="uid://bljkdgnydc5qk" path="res://textures/dpad.png" id="9_id0nj"]
 [ext_resource type="Texture2D" uid="uid://b2bdnadehay0s" path="res://items/noItem.png" id="11_dhlwf"]
 [ext_resource type="PackedScene" uid="uid://ck51bdne8ldwv" path="res://island.tscn" id="14_wlxy5"]
 [ext_resource type="Texture2D" uid="uid://b7ccwtctxxkjq" path="res://items/rubber_duck/dpad4.png" id="21_vxd74"]
@@ -31,15 +31,15 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdqbm"]
 bg_color = Color(7.52043e-08, 0.0590926, 0.150703, 0.411765)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_noarx"]
-ground_bottom_color = Color(0.101961, 0.301961, 0.901961, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s0gvp"]
+panorama = ExtResource("5_lggff")
 
 [sub_resource type="Sky" id="Sky_noarx"]
-sky_material = SubResource("ProceduralSkyMaterial_noarx")
+sky_material = SubResource("PanoramaSkyMaterial_s0gvp")
 
 [sub_resource type="Environment" id="Environment_a0tk4"]
 background_mode = 2
-background_energy_multiplier = 2.5
+background_energy_multiplier = 1.5
 sky = SubResource("Sky_noarx")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_noarx"]
@@ -489,12 +489,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.104, -28, -167.694)
 shape = SubResource("BoxShape3D_aceia")
 
 [node name="Goal" parent="." instance=ExtResource("9_4arys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.855567, 1.808, -265.921)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.855567, 1.56513, -266.052)
 
 [node name="chest" parent="Goal" instance=ExtResource("24_nu31w")]
+transform = Transform3D(-1.61732e-08, 0, -0.37, 0, 0.37, 0, 0.37, 0, -1.61732e-08, 0, -0.0482236, 0)
 
 [node name="Island" parent="." instance=ExtResource("14_wlxy5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -256)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.711457, -257.972)
 
 [node name="Startingplatform" parent="." instance=ExtResource("24_dhlwf")]
 transform = Transform3D(-0.984808, 0.17101, -0.0301537, -0.00599061, 0.140087, 0.990121, 0.173545, 0.975259, -0.136934, 2.89704, -0.690242, 6.81609)
@@ -648,7 +649,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 5, 0)
 
 [node name="Skullisland" parent="." instance=ExtResource("29_2yde8")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0.16152, -267.002)
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -2.15358, -272.444)
 
 [node name="DpadPositions" type="Control" parent="."]
 layout_mode = 3
@@ -680,7 +681,7 @@ offset_right = -100.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("9_id0nj")
+texture = ExtResource("21_vxd74")
 expand_mode = 1
 
 [node name="DpadTopRight" type="TextureRect" parent="DpadPositions"]
@@ -693,7 +694,7 @@ offset_top = 10.0
 offset_right = -100.0
 offset_bottom = 110.0
 grow_horizontal = 0
-texture = ExtResource("9_id0nj")
+texture = ExtResource("21_vxd74")
 expand_mode = 1
 
 [node name="DpadBottomLeft" type="TextureRect" parent="DpadPositions"]
@@ -706,7 +707,7 @@ offset_top = -110.0
 offset_right = 200.0
 offset_bottom = -10.0
 grow_vertical = 0
-texture = ExtResource("9_id0nj")
+texture = ExtResource("21_vxd74")
 expand_mode = 1
 
 [node name="WavesLoop" type="AudioStreamPlayer" parent="."]

@@ -38,11 +38,11 @@ func get_copper_item():
 	if copperItemlist.is_empty():
 
 		if state.screen_changing: #cant get screen change (only one screen change at a time!)
-				copperItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				copperItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor,parrot]
 				#copperItemlist = [rubber_duck]
 		
 		else:
-				copperItemlist = [screen_change, molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				copperItemlist = [ molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor,parrot]
 				#copperItemlist = [screen_change,rubber_duck]
 		
 	return copperItemlist.pick_random()
@@ -50,11 +50,11 @@ func get_copper_item():
 func get_silver_item():
 	if silverItemlist.is_empty(): #cant get screen change (only one screen change at a time!)
 		if state.screen_changing:
-				silverItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				silverItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor,parrot]
 				#silverItemlist = [rubber_duck]
 
 		else:
-				silverItemlist = [screen_change, molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				silverItemlist = [ molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor,parrot]
 				#silverItemlist = [screen_change,rubber_duck]
 		
 	return silverItemlist.pick_random()
@@ -62,11 +62,11 @@ func get_silver_item():
 func get_gold_item():
 	if goldItemlist.is_empty(): #cant get screen change (only one screen change at a time!)
 		if state.screen_changing:
-				goldItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				goldItemlist = [molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor,parrot]
 				#goldItemlist = [rubber_duck]
 
 
 		else:
-				goldItemlist = [screen_change, molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor, rubber_duck,parrot]
+				goldItemlist = [ molotov_cocktail, dynamite, bottle_of_rum, shroom, eyepatch, anchor,parrot]
 				#goldItemlist = [screen_change,rubber_duck]
 	return goldItemlist.pick_random()

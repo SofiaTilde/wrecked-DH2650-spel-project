@@ -5,7 +5,7 @@ const GRAVITY = -9.8
 const JUMP_VELOCITY = 9.5
 const JUMPACCELERATION = 2.5
 const JUMPDEACCELERATION = 8.5
-const PUSH_FORCE = 15.8
+const PUSH_FORCE = 20.8
 const CAMERA_DEADZONE := 0.1
 const ACCELERATION = 2.5
 const DEACCELERATION = 8.5
@@ -203,10 +203,13 @@ func _physics_process(delta: float) -> void:
 
 			if GM.getting_ready:
 				#motverka bug ifall spelaren ramlar innan matchen börjar om
-				if floor_object.get_parent().name =="Island" or floor_object.get_parent().name =="Skullisland" and floor_object.get_parent().name != name:
+				if floor_object.get_parent().get_parent().name =="island2" or floor_object.get_parent().name =="Skullisland" and floor_object.get_parent().name != name:
 					last_saved_platform = Startingplatform 
-			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name: #so we dont respawn at wreck nor rubberducky platform
+
+			if floor_object is not CharacterBody3D and floor_object.get_parent().name !="Startingplatform" and floor_object.get_parent().name != name and !floor_object.get_parent().get_parent().name =="island2" and !floor_object.get_parent().name =="Skullisland": #so we dont respawn at wreck nor rubberducky platform
 				last_saved_platform = floor_object
+
+
 			
 			elif floor_object.get_parent().name =="Startingplatform" and GM.getting_ready==false:
 				last_saved_platform = backup_saved_platform
