@@ -28,7 +28,7 @@ func activateItem():
 	velocityY = 0
 	activePlayer.velocity = Vector3(0, 0, 0)
 	active = true
-	velocityY = 3
+	velocityY = 1.8
 	var textureNode = activePlayer.get_node("ItemEffect/OverlayTextureDynamite") as TextureRect
 	overlayTextureDynamite = frame1
 	await applyOverlayNoNull(activePlayer, 0.05,textureNode,overlayTextureDynamite)
@@ -40,16 +40,20 @@ func activateItem():
 	await applyOverlay(activePlayer, 0.05,textureNode,overlayTextureDynamite)
 	#await timer(0.2)
 	velocityY = 0
-	velocityX = rng.randf_range(-1, 1) * 5
-	velocityZ = rng.randf_range(-1, 1) * 5
-	if rng.randi() % 4 == 0: #25% chance to send forward
-		velocityX = 0
-		velocityZ = -6
-		velocityY = 0.1
+	velocityX = rng.randf_range(-1, 1) * 1 #L/R should be more easily to decide
+	velocityZ = rng.randf_range(-1, 1) * 2
+	if rng.randi() % 2 == 0: #50% chance to send forward
+		#velocityX = 0
+		velocityZ *= -1
+		velocityY = 0
+	elif rng.randi() % 2 == 1: #50% chance to send forward
+		#velocityX = 0
+		velocityZ *= 1
+		velocityY = 0
 	await timer(0.3)
 	velocityX = 0
 	velocityZ = 0
-	velocityY = -3
+	velocityY = -1
 	await timer(0.2)
 	active = false
 	velocityX = 0
