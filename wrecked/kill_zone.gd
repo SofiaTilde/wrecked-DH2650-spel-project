@@ -21,6 +21,8 @@ func _on_body_entered(body: Node3D) -> void:
 			var swim_timer = get_tree().create_timer(0.4) #needed if we dont want to gain much momentum from boyancy
 			swim_timer.connect("timeout", Callable(body, "_on_swim_timer_timeout"))
 		else:
-			body.velocity = body.velocity * 0.3 # lose speed when entering water
+			body.velocity = body.velocity * 0.1 # lose speed when entering water
+
+
 			play_splash_sfx()
 			body.respawn()

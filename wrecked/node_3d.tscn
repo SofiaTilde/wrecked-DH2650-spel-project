@@ -57,7 +57,7 @@ viewport_path = NodePath("GridContainer/SubViewportContainer3/SubViewport")
 viewport_path = NodePath("GridContainer/SubViewportContainer4/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aceia"]
-size = Vector3(125.445, 14.3992, 742.51)
+size = Vector3(175.122, 14.3992, 742.51)
 
 [node name="Game" type="Node3D"]
 process_mode = 1
@@ -485,7 +485,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.104, -10, -167.694)
 script = ExtResource("23_nu31w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Extra Kill Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.104, -28, -167.694)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.217, -170, -167.694)
 shape = SubResource("BoxShape3D_aceia")
 
 [node name="Goal" parent="." instance=ExtResource("9_4arys")]
