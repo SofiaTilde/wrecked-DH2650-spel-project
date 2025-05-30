@@ -38,13 +38,13 @@ func activateItem():
 
 		overlayTextureMolo = frame1
 		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
-		overlayTexture = frame2
+		overlayTextureMolo = frame2
 		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
-		overlayTexture = frame3
+		overlayTextureMolo = frame3
 		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
-		overlayTexture = frame4
+		overlayTextureMolo = frame4
 		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
-		overlayTexture = frame5
+		overlayTextureMolo = frame5
 		await applyOverlayFire(player, frameLength, tot_len, (i+1),textureNode,overlayTextureMolo)
 	
 	textureNode.modulate = Color(1, 1, 1, 1) # reset needed!
